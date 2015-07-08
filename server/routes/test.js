@@ -15,4 +15,12 @@ router.get('/user', function(req, res, next) {
 //輸入url : http://localhost:3333/API/user/login
 //回答我 { login : true }
 
+router.get('/login', function(req, res, next) {
+
+    res.send({
+        login : true
+    });
+
+});
+
 module.exports = router;
