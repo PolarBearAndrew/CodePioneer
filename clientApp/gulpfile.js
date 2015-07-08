@@ -4,15 +4,15 @@ var source = require('vinyl-source-stream');
 var minifyCSS = require('gulp-minify-css');
 var livereload = require('gulp-livereload');
 var notify = require('gulp-notify');
+var sass = require('gulp-sass');
 var fs = require('fs');
 
-// 環境變數
-var env = 'prod'; // dev||prod
+var env = 'prod'; // dev || prod
 
 var live = livereload();
-livereload.listen();
+		livereload.listen();
 
-// 路徑變數
+
 var paths = {
     main: './app/js/boot.js',
     css: './app/assets/css/*.css',
@@ -21,11 +21,9 @@ var paths = {
 };
 
 /**
- *
+ * tasks
  */
 gulp.task('bundle-js', function() {
-
-    // console.log( '\nbundle-js 跑' );
 
     return browserify({
         entries:[ paths.main ]
@@ -48,10 +46,15 @@ gulp.task('bundle-js', function() {
 
     // 接著就回到 gulp 系統做剩下事
     // 這裏是直接存檔到硬碟
-    .pipe( gulp.dest('./build') )
+    .pipe( gulp.dest('./build/assets') )
 
 });
 
+gulp.task('sass', function () {
+    gulp.src('./app/assets/sass/*.sass')
+        .pipe(sass({indentedSyntax: true}))
+        .pipe(gulp.dest('./app/assets/css'));
+})
 /**
  * 縮短 app.css
  */
@@ -83,7 +86,7 @@ gulp.task('copy', function(){
 gulp.task('watch', function() {
     // console.log( 'watch 跑' );
 
-    gulp.watch( 'app/**/*', ['bundle-js', 'minify-css', 'copy', 'refresh'] );
+    gulp.watch( 'app/**/*', ['bundle-js', 'minify-css', 'copy', 'refresh', 'sass'] );
 });
 
 /**
@@ -96,6 +99,7 @@ gulp.task( 'refresh', function(){
       live.changed('');
     }, 500)
 })
+
 
 
 //========================================================================
@@ -113,4 +117,4 @@ gulp.task('default', ['dev']);
  * 廣播 livereload 事件
  * 啟動 8000 server 供本地跑
  */
-gulp.task('dev', ['bundle-js', 'minify-css', 'copy', 'watch'] );
+gulp.task('dev', ['bundle-js', 'minify-css', 'copy', 'watch', 'sass'] );

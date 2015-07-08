@@ -1,8 +1,8 @@
 /**
  *
  */
-
-
+// var Footer = React.createFactory( require('./Footer.jsx') );
+// var ListContainer = React.createFactory( require('./List/ListContainer.jsx') );
 
 
 var MainApp = React.createClass({
@@ -17,23 +17,15 @@ var MainApp = React.createClass({
         return true;
     },
 
-
     render: function() {
 
-        var mui = require('material-ui'),
-          ThemeManager = new mui.Styles.ThemeManager(),
-          RaisedButton = mui.RaisedButton;
-
+        // console.log( '\tMainApp > render' );
 
         return (
 			<div className="wrapper">
-                 <RaisedButton label="Default" />
             </div>
         )
     },
 });
-
-
-
 
 module.exports = MainApp;

@@ -1,10 +1,10 @@
 /*
  * Views
  */
-// var List = React.createFactory( require('./List.jsx') );
-// var Selector = React.createFactory( require('./Selector.jsx') );
-// var LogInForm = React.createFactory( require('./LogInForm.jsx') );
-// var ListHeader = React.createFactory( require('./ListHeader.jsx') );
+var List = React.createFactory( require('./List.jsx') );
+var Selector = React.createFactory( require('./Selector.jsx') );
+var LogInForm = React.createFactory( require('./LogInForm.jsx') );
+var ListHeader = React.createFactory( require('./ListHeader.jsx') );
 
 /*
  * Store
@@ -61,6 +61,35 @@ var ListContainer = React.createClass({
      */
     componentWillMount: function() {
 
+        LogStore.addListener( AppConstants.CHANGE_EVENT, this._onChange );
+
+        var IPaddress = 'localhost:8080';
+        //var IPaddress = '120.96.75.142:8080';
+
+
+        var socket = io.connect('http://' + IPaddress);
+
+        // socket.emit('notify', { name : 'Andrew' });
+
+        socket.on('newLog', function (data) {
+
+            actions.socketNew(data.log);
+        });
+
+        socket.on('update', function (data) {
+
+            actions.socketUpdate(data.log);
+        });
+
+        socket.on('checkout', function (data) {
+
+            actions.socketCheckOut(data.log);
+        });
+
+        socket.on('remove', function (data) {
+
+            actions.socketRemove(data.log);
+        });
     },
 
     // 重要：root view 建立後第一件事，就是偵聽 store 的 change 事件
@@ -113,10 +142,42 @@ var ListContainer = React.createClass({
 
     render: function() {
 
+				var form = function(ctrl) {
+					if(ctrl.isShow){
+						return ( <LogInForm
+									out={actions.switchLogInBox}
+									loginPost = { actions.logIn }
+									fail= { ctrl.isFail } /> );
+					}else{
+						return null;
+					}
+				}( this.state.loginBoxCtrl );
 
         return (
 				<div className="ListContainer">
-										/>
+					{ form }
+					<ListHeader
+                        ID = { this.state.selectedRoomID }
+                        login = { actions.switchLogInBox }
+                        logout = { actions.logOut }
+                        refresh = { actions.load }
+                        manager = { this.state.manager }
+						roomInfo = { this.state.roomInfo }
+                        selectRoomID = { actions.selectRoomID }
+                        />
+					<List
+                        join = { actions.askForJoin }
+                        truth = { this.state }
+						inputID = { this.state.selectedInputID }
+                        checkOut = {actions.askForLeave}
+                        roomInfo = { this.state.roomInfo }
+                        changeInputID = { actions.changeInputID }
+
+                        checkInAssent = { actions.checkIn }
+                        checkInIgnore = { actions.checkInIgnore }
+                        checkOutAssent = { actions.checkOut }
+                        checkOutIgnore = { actions.checkOutIgnore }
+					/>
 				</div>
         )
     },
@@ -151,6 +212,15 @@ var ListContainer = React.createClass({
 
         // 是從 TodoStore 取資料(as the single source of truth)
         return {
+
+            arrLog: LogStore.getLog(),
+
+			selectedRoomID: LogStore.getSelectedRoomID(),
+			selectedInputID: LogStore.getSelectedRoomIDinput(),
+
+			manager: LogStore.getIsManager(),
+            roomInfo: LogStore.getRoomInfo(),
+			loginBoxCtrl: LogStore.getLoginBoxShowCtrl(),
          };
     }
 
