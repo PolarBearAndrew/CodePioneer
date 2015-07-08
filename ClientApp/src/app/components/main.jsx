@@ -1,67 +1,82 @@
 /** In this file, we create a React component which incorporates components provided by material-ui */
 
 let React = require('react');
+
 let mui = require('material-ui');
-let RaisedButton = mui.RaisedButton;
-let Dialog = mui.Dialog
-let ThemeManager = new mui.Styles.ThemeManager();
 let Colors = mui.Styles.Colors;
-let DatePicker = mui.DatePicker;
+let ThemeManager = new mui.Styles.ThemeManager();
+
+let Dialog = mui.Dialog;
+let AppBar = mui.AppBar;
+let TimePicker = mui.TimePicker;
+let RaisedButton = mui.RaisedButton;
+
+let MyCard = require('./myCard.jsx');
+//let MyCard = React.createFactory( require('./myCard.jsx') );
 
 let Main = React.createClass({
 
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
+	childContextTypes: {
+		muiTheme: React.PropTypes.object
+	},
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  },
+	getChildContext() {
+		return {
+			muiTheme: ThemeManager.getCurrentTheme()
+		};
+	},
 
-  componentWillMount() {
-    ThemeManager.setPalette({
-      accent1Color: Colors.deepOrange500
-    });
-  },
+	componentWillMount() {
+		ThemeManager.setPalette({
+			accent1Color: Colors.lime600
+		});
+	},
 
-  render() {
+	render() {
 
-    let containerStyle = {
-      textAlign: 'center',
-      paddingTop: '200px'
-    };
+	    let containerStyle = {
+	    	textAlign: 'center',
+	    	padding: '0px',
+	    	margin: '0px'
+	    };
 
-    let standardActions = [
-      { text: 'Okay' }
-    ];
+	    let standardActions = [
+	    	{ text: 'sure' },
+	    	{ text: 'submit' }
+	    ];
 
-    return (
-      <div style={containerStyle}>
+	    return (
+	    	<div style={containerStyle}>
 
-        <Dialog
-          title="Super Secret Password"
-          actions={standardActions}
-          ref="superSecretPasswordDialog">
-          1-2-3-4-5
-        </Dialog>
+	    		<AppBar title='CodePioneer' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
 
-        <h1>material-ui</h1>
-        <h2>example project</h2>
+		        <Dialog
+			        title="Message box"
+			        actions={standardActions}
+			        ref="myDialog">
+			        You can type any thing you want to say at here
+		        </Dialog>
 
-        <RaisedButton label="Super Secret Password" primary={true} onTouchTap={this._handleTouchTap} />
+		        <h2>material-ui demo</h2>
 
-       <DatePicker
-          hintText="Landscape Dialog"
-          mode="landscape"/>
-      </div>
-    );
-  },
+		        <MyCard id={1} />
+		        <MyCard id={2} />
+		        <MyCard id={3} />
 
-  _handleTouchTap() {
-    this.refs.superSecretPasswordDialog.show();
-  }
+				<TimePicker
+				  format="ampm"
+				  hintText="12hr Format" />
+
+		        <RaisedButton label="Show Msg" primary={true} onTouchTap={this._handleTouchTap} />
+
+	     	</div>
+	    );
+	},
+
+	_handleTouchTap() {
+		this.refs.myDialog.show();
+
+	}
 
 });
 
