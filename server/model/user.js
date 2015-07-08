@@ -1,4 +1,4 @@
-var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/CodePioneerTestDB_User'),
+var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/CP_user'),
     db = mongoose.connection;
 
 /*
