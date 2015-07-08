@@ -1,4 +1,4 @@
-var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/user'),
+var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/CodePioneer'),
     db = mongoose.connection;
 
 /*
@@ -18,5 +18,5 @@ var User = new mongoose.Schema({
 
 //exports model
 module.exports = {
-    user: db.model('user', User)
+    User: db.model('user', User)
 };
