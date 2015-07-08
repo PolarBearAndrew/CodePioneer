@@ -1,7 +1,7 @@
 {
   "name": "CodePioneer",
   "version": "0.0.1",
-  "description": "Lab Manager for OIT",
+  "description": "CodePioneer for OIT",
   "main": "js/app.js",
   "dependencies": {
     "debug": "^2.0.0",
@@ -10,8 +10,9 @@
     "gulp-livereload": "^2.1.1",
     "gulp-minify-css": "^0.3.11",
     "gulp-notify": "^2.0.0",
+    "material-ui": "^0.9.2",
     "object-assign": "^1.0.0",
-    "react": "^0.12",
+    "react": "~0.13.3",
     "vinyl-source-stream": "^1.0.0"
   },
   "devDependencies": {
@@ -30,10 +31,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:PolarBearAndrew/LabManager.git"
+    "url": "git@github.com:PolarBearAndrew/CodePioneer.git"
   },
   "bugs": {
-    "url": "https://github.com/PolarBearAndrew/LabManager/issues"
+    "url": "https://github.com/PolarBearAndrew/CodePioneer/issues"
   },
-  "homepage": "https://github.com/PolarBearAndrew/LabManager"
+  "homepage": "https://github.com/PolarBearAndrew/LabCodePioneerManager"
 }
