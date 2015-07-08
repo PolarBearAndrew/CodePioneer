@@ -4,7 +4,7 @@ var source = require('vinyl-source-stream');
 var minifyCSS = require('gulp-minify-css');
 var livereload = require('gulp-livereload');
 var notify = require('gulp-notify');
-var sass = require('gulp-sass');
+//var sass = require('gulp-sass');
 var fs = require('fs');
 
 var env = 'prod'; // dev || prod
@@ -50,11 +50,11 @@ gulp.task('bundle-js', function() {
 
 });
 
-gulp.task('sass', function () {
-    gulp.src('./app/assets/sass/*.sass')
-        .pipe(sass({indentedSyntax: true}))
-        .pipe(gulp.dest('./app/assets/css'));
-})
+// gulp.task('sass', function () {
+//     gulp.src('./app/assets/sass/*.sass')
+//         .pipe(sass({indentedSyntax: true}))
+//         .pipe(gulp.dest('./app/assets/css'));
+// })
 /**
  * 縮短 app.css
  */
@@ -86,7 +86,7 @@ gulp.task('copy', function(){
 gulp.task('watch', function() {
     // console.log( 'watch 跑' );
 
-    gulp.watch( 'app/**/*', ['bundle-js', 'minify-css', 'copy', 'refresh', 'sass'] );
+    gulp.watch( 'app/**/*', ['bundle-js', 'minify-css', 'copy', 'refresh'] );//, 'sass'
 });
 
 /**
