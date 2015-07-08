@@ -8,8 +8,9 @@ var models = require('../models/user.js');
 router.get('/test', function(req, res, next) {
 
     var user = new models.user({
-        id: '101111212',
-        name: 'AndrewChen'
+    	email : 'chenpoanandrew@gmail.com',
+        name : 'AndrewChen',
+        pwd : '123'
     });
 
     user.save(function(err, result) {

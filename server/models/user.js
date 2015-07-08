@@ -5,10 +5,13 @@ var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/user'),
  *  Schema of User
  */
 var User = new mongoose.Schema({
-    id: {
+    email: {
         type: String
     },
     name: {
+        type: String
+    },
+    pwd: {
         type: String
     }
 });
