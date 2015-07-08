@@ -56,5 +56,11 @@ app.use(function(err, req, res, next) {
     });
 });
 
+var port = 3333;
+
+app.listen(port, function(){
+    console.log('[Server] started, port = ', port);
+})
+
 
 module.exports = app;
