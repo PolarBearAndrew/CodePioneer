@@ -1,19 +1,19 @@
-var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/CP_user'),
+var mongoose = require('mongoose').connect('mongodb://127.0.0.1:27017/user'),
     db = mongoose.connection;
 
 /*
  *  Schema of User
  */
 var User = new mongoose.Schema({
-    name: {
+    id: {
         type: String
     },
-    id: {
+    name: {
         type: String
     }
 });
 
 //exports model
 module.exports = {
-    User: db.model('team', User)
+    user: db.model('user', User)
 };
