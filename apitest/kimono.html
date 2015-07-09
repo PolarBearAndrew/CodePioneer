@@ -18,7 +18,6 @@
         dataType: "jsonp",
         success: function(response) {
             //Do something with the response
-            $('body').append(response.results[1]);
 
             response.results.collection1.forEach(function( data ){
             	document.getElementById("show").innerHTML += data.Title.text + '<br/>';
