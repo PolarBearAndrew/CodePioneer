@@ -18,13 +18,13 @@
         dataType: "jsonp",
         success: function(response) {
             //Do something with the response
-            $('body').append(response.results[1]);
+            console.log('data', response);
 
             response.results.collection1.forEach(function( data ){
-            	document.getElementById("show").innerHTML += data.Title.text + '<br/>';
+            	document.getElementById("show").innerHTML += data.Title.text+ '<br/>';
+                document.getElementById("show").innerHTML += data.Comments.text+ '<br/>';
             });
 
-            console.log('data', response);
         },
         error: function(xhr, status) {
             //handle errors
