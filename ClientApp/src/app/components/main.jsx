@@ -97,7 +97,9 @@ let Main = React.createClass({
 		        <h2>material-ui demo</h2>
 
 		        <MyCard id={1} />
+
 		        <MyCard id={2} />
+
 		        <MyCard id={3} />
 
 				<TimePicker
@@ -105,11 +107,13 @@ let Main = React.createClass({
 				  hintText="12hr Format" />
 
 		        <RaisedButton label="Show Msg" primary={true} onTouchTap={this._handleTouchTap} />
-				<LeftNav docked={true} menuItems={menuItems} />
+
 
 	     	</div>
 	    );
 	},
+
+	// <LeftNav docked={true} menuItems={menuItems} />
 
 	_handleTouchTap() {
 		this.refs.myDialog.show();
