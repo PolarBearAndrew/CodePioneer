@@ -34,8 +34,8 @@ let myCard = React.createClass({
 
 	render() {
 
-		console.log('使用元件增加一個東西');
-// <h1 id={this.props.id}> this is a card </h1>
+		//console.log('使用元件增加一個card');
+
 	    return (
 
 	    	<Card id={this.props.id} >
@@ -70,35 +70,8 @@ let myCard = React.createClass({
 
 	_handleTouchTap() {
 
-
 	}
 
 });
 
 module.exports = myCard;
-
-
-// <Card>
-	     //    	<CardHeader
-		    //         title="Title"
-		    //         subtitle="Subtitle"
-		    //         avatar={<Avatar>A</Avatar>}/>
-	     //     	<CardHeader
-		    //         title="Demo Url Based Avatar"
-		    //         subtitle="Subtitle"
-		    //         avatar="http://lorempixel.com/100/100/nature/"/>
-	     //      	<CardMedia overlay={<CardTitle title="Title" subtitle="Subtitle"/>}>
-	     //        	<img src="http://lorempixel.com/600/337/nature/"/>
-	     //      	</CardMedia>
-	     //      	<CardTitle title="Title" subtitle="Subtitle"/>
-	     //      	<CardActions>
-		    //         <FlatButton label="Action1"/>
-		    //         <FlatButton label="Action2"/>
-	     //      	</CardActions>
-		    //     <CardText>
-		    //         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-		    //         Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-		    //         Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-		    //         Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-		    //     </CardText>
-	     //    </Card>

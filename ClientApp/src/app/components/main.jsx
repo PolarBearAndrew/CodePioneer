@@ -1,13 +1,13 @@
 
-//react init
+//react 初始化
 let React = require('react');
 
-//mui init
+//material 初始化(套件引入)
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
-//mui元件
+//mui 元件
 let Dialog = mui.Dialog;
 let AppBar = mui.AppBar;
 let TimePicker = mui.TimePicker;
@@ -16,16 +16,16 @@ let LeftNav = mui.LeftNav;
 let MenuItem = mui.MenuItem;
 
 
-//react元件
+//react 自製元件
 let MyCard = require('./myCard.jsx');
-//let MyCard = React.createFactory( require('./myCard.jsx') );
 
-//flux
-let UserStore = require('../stores/UserStore');
-let AppConstants = require('../constants/AppConstants.js');
+//flux 資料相關
 let Actions = require('../actions/AppActions_User.jsx');
+let AppConstants = require('../constants/AppConstants.js');
+let UserStore = require('../stores/UserStore');
 
 
+//main是這個元件暫時使用的名字
 let Main = React.createClass({
 
 	childContextTypes: {
@@ -44,21 +44,26 @@ let Main = React.createClass({
 		});
 	},
 
+	//顯示畫面的func
 	render() {
 
+		//取得使用者資料
 		let user = UserStore.getUser();
 
+		//css
 	    let containerStyle = {
 	    	textAlign: 'center',
 	    	padding: '0px',
 	    	margin: '0px'
 	    };
 
+	    //mui dialog的按鈕設定資料
 	    let standardActions = [
 	    	{ text: 'sure' },
 	    	{ text: 'submit' }
 	    ];
 
+	    //mui left menu 的設定資料
 	    var menuItems = [
 		  { route: 'get-started', text: 'Get Started' },
 		  { route: 'customization', text: 'Customization' },
@@ -85,14 +90,9 @@ let Main = React.createClass({
 	    return (
 	    	<div style={containerStyle}>
 
-	    		<AppBar title='CodePioneer' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
-
-		        <Dialog
-			        title="HI PANDA"
-			        actions={standardActions}
-			        ref="myDialog">
-			        You can type any thing you want to say at here
-		        </Dialog>
+	    		<AppBar title='CodePioneer'
+	    			iconClassNameRight="muidocs-icon-navigation-expand-more"
+	    			onLeftIconButtonTouchTap={this._togleLeftNav} />
 
 		        <h2>material-ui demo</h2>
 
@@ -108,16 +108,29 @@ let Main = React.createClass({
 
 		        <RaisedButton label="Show Msg" primary={true} onTouchTap={this._handleTouchTap} />
 
+		        <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
+
+		        <Dialog
+			        title="HI PANDA"
+			        actions={standardActions}
+			        ref="myDialog">
+			        You can type any thing you want to say at here
+		        </Dialog>
+
 
 	     	</div>
 	    );
 	},
 
-	// <LeftNav docked={true} menuItems={menuItems} />
-
+	//觸碰或點擊按鈕的事件 掛載在RaisedButton上面
 	_handleTouchTap() {
 		this.refs.myDialog.show();
 		Actions.load();
+	},
+
+	//觸碰或點擊left menu的左側icon事件
+	_togleLeftNav(){
+		this.refs.leftNav.toggle();
 	}
 
 });
