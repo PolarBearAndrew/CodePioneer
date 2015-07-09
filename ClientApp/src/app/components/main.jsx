@@ -12,8 +12,11 @@ let Dialog = mui.Dialog;
 let AppBar = mui.AppBar;
 let TimePicker = mui.TimePicker;
 let RaisedButton = mui.RaisedButton;
+let LeftNav = mui.LeftNav;
+let MenuItem = mui.MenuItem;
 
-//元件
+
+//react元件
 let MyCard = require('./myCard.jsx');
 //let MyCard = React.createFactory( require('./myCard.jsx') );
 
@@ -37,7 +40,7 @@ let Main = React.createClass({
 
 	componentWillMount() {
 		ThemeManager.setPalette({
-			accent1Color: Colors.lime600
+			accent1Color: Colors.purple800
 		});
 	},
 
@@ -56,13 +59,36 @@ let Main = React.createClass({
 	    	{ text: 'submit' }
 	    ];
 
+	    var menuItems = [
+		  { route: 'get-started', text: 'Get Started' },
+		  { route: 'customization', text: 'Customization' },
+		  { route: 'components', text: 'Components' },
+		  { type: MenuItem.Types.SUBHEADER, text: 'Resources' },
+		  {
+		     type: MenuItem.Types.LINK,
+		     payload: 'https://github.com/callemall/material-ui',
+		     text: 'GitHub'
+		  },
+		  {
+		     text: 'Disabled',
+		     disabled: true
+		  },
+		  {
+		     type: MenuItem.Types.LINK,
+		     payload: 'https://www.google.com',
+		     text: 'Disabled Link',
+		     disabled: true
+		  },
+		];
+
+
 	    return (
 	    	<div style={containerStyle}>
 
 	    		<AppBar title='CodePioneer' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
 
 		        <Dialog
-			        title="Message box"
+			        title="HI PANDA"
 			        actions={standardActions}
 			        ref="myDialog">
 			        You can type any thing you want to say at here
@@ -79,6 +105,7 @@ let Main = React.createClass({
 				  hintText="12hr Format" />
 
 		        <RaisedButton label="Show Msg" primary={true} onTouchTap={this._handleTouchTap} />
+				<LeftNav docked={true} menuItems={menuItems} />
 
 	     	</div>
 	    );

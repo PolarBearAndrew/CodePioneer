@@ -18,12 +18,16 @@
         dataType: "jsonp",
         success: function(response) {
             //Do something with the response
+<<<<<<< HEAD
+=======
+            console.log('data', response);
+>>>>>>> 2e6a51bf3c56c94f7e708774419148c6a56a4211
 
             response.results.collection1.forEach(function( data ){
-            	document.getElementById("show").innerHTML += data.Title.text + '<br/>';
+            	document.getElementById("show").innerHTML += data.Title.text+ '<br/>';
+                document.getElementById("show").innerHTML += data.Comments.text+ '<br/>';
             });
 
-            console.log('data', response);
         },
         error: function(xhr, status) {
             //handle errors
