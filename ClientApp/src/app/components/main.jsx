@@ -1,16 +1,20 @@
 /** In this file, we create a React component which incorporates components provided by material-ui */
 
+
 let React = require('react');
 
+//mui
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
+//mui 元件
 let Dialog = mui.Dialog;
 let AppBar = mui.AppBar;
 let TimePicker = mui.TimePicker;
 let RaisedButton = mui.RaisedButton;
 
+//react 元件
 let MyCard = require('./myCard.jsx');
 //let MyCard = React.createFactory( require('./myCard.jsx') );
 
