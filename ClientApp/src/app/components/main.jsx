@@ -11,7 +11,7 @@ let AppBar = mui.AppBar;
 let TimePicker = mui.TimePicker;
 let RaisedButton = mui.RaisedButton;
 
-let MyCard = require('./myCard.jsx');
+let MyCard = require('./MyCard.jsx');
 //let MyCard = React.createFactory( require('./myCard.jsx') );
 
 let Main = React.createClass({
