@@ -71,7 +71,7 @@ let Main = React.createClass({
 		  { type: MenuItem.Types.SUBHEADER, text: 'Resources' },
 		  {
 		     type: MenuItem.Types.LINK,
-		     payload: 'https://github.com/callemall/material-ui',
+		     payload: 'https://github.com/PolarBearAndrew/CodePioneer',
 		     text: 'GitHub'
 		  },
 		  {
