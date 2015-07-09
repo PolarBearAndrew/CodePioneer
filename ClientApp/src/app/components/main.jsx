@@ -14,12 +14,13 @@ let TimePicker = mui.TimePicker;
 let RaisedButton = mui.RaisedButton;
 
 //元件
-let MyCard = require('./MyCard.jsx');
+let MyCard = require('./myCard.jsx');
 //let MyCard = React.createFactory( require('./myCard.jsx') );
 
 //flux
 let UserStore = require('../stores/UserStore');
 let AppConstants = require('../constants/AppConstants.js');
+let Actions = require('../actions/AppActions_User.jsx');
 
 
 let Main = React.createClass({
@@ -41,6 +42,8 @@ let Main = React.createClass({
 	},
 
 	render() {
+
+		let user = UserStore.getUser();
 
 	    let containerStyle = {
 	    	textAlign: 'center',
@@ -83,7 +86,7 @@ let Main = React.createClass({
 
 	_handleTouchTap() {
 		this.refs.myDialog.show();
-
+		Actions.load();
 	}
 
 });

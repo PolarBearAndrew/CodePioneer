@@ -16,6 +16,8 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 //========================================================================
 //
 
+var Store = {};
+
 var user = {
     name: 'AndrewChen',
     email: 'chenpoanandrew@gmail.com',
@@ -32,7 +34,7 @@ objectAssign( Store, EventEmitter.prototype, {
      * Public API
      * 供外界取得 store 內部資料
      */
-    getUer: function(){
+    getUser: function(){
         return user;
     },
 
@@ -60,6 +62,8 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             isLogin = true;
 
             Store.emit( AppConstants.CHANGE_EVENT );
+
+            console.log('login store');
 
             break;
 
