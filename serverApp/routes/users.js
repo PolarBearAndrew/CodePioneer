@@ -44,6 +44,10 @@ router.post('/', function(req, res, next) {
  */
 router.put('/', function(req, res, next) {
 
+    if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
+        res.json( { err : '資料不完全' } );
+    }
+    
     var info = {
         name : req.body.name,
         email : req.body.email,
@@ -66,6 +70,10 @@ router.put('/', function(req, res, next) {
  * respone : name, email, pwd
  */
 router.get('/', function(req, res, next) {
+    
+    if(!req.query._id){
+        res.json( { err : '資料不完全' } );
+    }
 
     models.User.find({ _id : req.query._id }, function(err, result) {
         if(err){
@@ -77,6 +85,26 @@ router.get('/', function(req, res, next) {
     });
 });
 
+/*
+ * [DELETE] 刪除使用者
+ * request : _id
+ * respone : db result
+ */
+router.delete('/', function(req, res, next) {
+    
+    if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
+        res.json( { err : '資料不完全' } );
+    }
+
+    models.User.delete({ _id : req.query._id }, function(err, result) {
+        if(err){
+            console.log('delete user FAIL, err ->', err);
+            res.json({ err: err });
+        }else{
+            res.json(result);
+        }
+    });
+});
 
 /*
  * [POST] 登入檢查
