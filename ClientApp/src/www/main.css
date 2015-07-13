@@ -1,10 +1,17 @@
 html {
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
-  font-size: 13px;
-  line-height: 20px;
-  margin: 0px;
-  padding: 0px;
+    font-size: 13px;
+/*    line-height: 20px;*/
+/*    margin: 0px;*/
+    padding: 0px;
+    
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    padding-top: calc( 50% - 150px);
 }
