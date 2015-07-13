@@ -77,8 +77,8 @@ let Main = React.createClass({
                     <input type="password" />
                     </TextField>
                 <br/><br/>
-                <RaisedButton label="Login" primary={true} />
-                <h4 onTouchTap={this._handleTouchTap}>Forger your password</h4>
+                <RaisedButton label="Login" primary={true} onTouchTap={this._handleTouchTap} />
+                <h4>Forger your password</h4>
 
                 <Dialog
 			        title="your e-mail"
@@ -91,6 +91,9 @@ let Main = React.createClass({
 	},
 
     _handleTouchTap(){
+
+
+
         this.refs.myDialog.show();
 		Actions.load();
     },
