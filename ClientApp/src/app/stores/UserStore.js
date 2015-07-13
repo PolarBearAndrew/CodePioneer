@@ -27,8 +27,6 @@ var user = {
 
 var isLogin = false;
 
-var isInit = true;
-
 /**
  * 建立 Store class，並且繼承 EventEMitter 以擁有廣播功能
  */
@@ -45,11 +43,6 @@ objectAssign( Store, EventEmitter.prototype, {
     getIsLogin(){
         return isLogin;
     },
-
-    getIsInit(){
-        return isInit;
-    },
-
     //
     noop: function(){}
 });
@@ -71,14 +64,8 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          *
          */
         case AppConstants.USER_LOGIN:
-
             isLogin = data;
-            isInit = false;
-
             Store.emit( AppConstants.CHANGE_EVENT );
-
-            // console.log('login', isLogin);
-
             break;
 
 
