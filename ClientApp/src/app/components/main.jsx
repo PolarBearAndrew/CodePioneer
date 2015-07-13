@@ -67,10 +67,12 @@ let Main = React.createClass({
 	    return (
 	    	<div className="loginTab" style={containerStyle}>
                 <TextField
+                		id="email"
                         hintText="input your Account"
                         multiLine={true} />
 
                 <TextField
+                	id="pwd"
                     hintText="input your password"
                     defaultValue="Custom Child input (e.g. password)"
                     floatingLabelText="">
@@ -92,10 +94,13 @@ let Main = React.createClass({
 
     _handleTouchTap(){
 
+    	let email = $('#email').val();
+    	let pwd = $('#pwd').val();
+    	Actions.login({ email, pwd });
 
-
-        this.refs.myDialog.show();
-		Actions.load();
+    	// if(!UserStore.login){
+    	// 	this.refs.myDialog.show();
+    	// }
     },
 
 });

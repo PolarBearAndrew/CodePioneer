@@ -16,23 +16,29 @@ let AppActions_User = {
 		// });
 	},
 
-	login(){
+	login( data ){
 		$.ajax({
-			url: address + 'login',
+			url: address + '/login',
 			type: 'POST',
+			data: data,
 
 			success: function(result){
-				// alert(result);
+
+				let login = false;
+
+				if( result.login === true )
+					login = true;
 
 				AppDispatcher.handleViewAction({
-					actionType: AppConstants.USER_LOGIN
+					actionType: AppConstants.USER_LOGIN,
+					data: login
 				});
 			},
 			error: function(err){
-				//alert(err);
 
 				AppDispatcher.handleViewAction({
-					actionType: AppConstants.USER_LOGIN
+					actionType: AppConstants.USER_LOGIN,
+					data: false
 				});
 			}
 

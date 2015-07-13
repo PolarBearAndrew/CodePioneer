@@ -19,8 +19,9 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 var Store = {};
 
 var user = {
-    name: 'AndrewChen',
-    email: 'chenpoanandrew@gmail.com',
+    id:'',
+    name: '',
+    email: '',
 }
 
 var isLogin = false;
@@ -55,6 +56,7 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
     // evt .action 就是 view 當時廣播出來的整包物件
     // 它內含 actionType
     var action = evt.action;
+    var data = action.data;
 
     switch (action.actionType) {
 
@@ -63,11 +65,11 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          */
         case AppConstants.USER_LOGIN:
 
-            isLogin = true;
+            isLogin = data;
 
             Store.emit( AppConstants.CHANGE_EVENT );
 
-            console.log('login store');
+            console.log('login', isLogin);
 
             break;
 

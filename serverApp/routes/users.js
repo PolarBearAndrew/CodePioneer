@@ -49,7 +49,7 @@ router.put('/', function(req, res, next) {
     if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
     }
-    
+
     var info = {
         name : req.body.name,
         email : req.body.email,
@@ -72,7 +72,7 @@ router.put('/', function(req, res, next) {
  * respone : name, email, pwd
  */
 router.get('/', function(req, res, next) {
-    
+
     if(!req.query._id){
         res.json( { err : '資料不完全' } );
     }
@@ -93,7 +93,7 @@ router.get('/', function(req, res, next) {
  * respone : db result
  */
 router.delete('/', function(req, res, next) {
-    
+
     if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
     }
@@ -115,10 +115,12 @@ router.delete('/', function(req, res, next) {
  */
 router.post('/login', function(req, res, next) {
 
+
     var info = {
         email : req.body.email,
         pwd : req.body.pwd
     }
+    console.log(info);
 
     models.User.findOne( info, function(err, result) {
 
