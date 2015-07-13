@@ -32,9 +32,7 @@ router.post('/', function(req, res, next) {
         if (err) {
             console.log('[TEST] create test user FAIL, err ->', err);
             res.json(err);
-
         } else {
-            //console.log('[TEST] create test user success, result ->', result);
             res.json(result);
         }
     });
@@ -43,7 +41,7 @@ router.post('/', function(req, res, next) {
 /*
  * [POST] 登入檢查
  * request : email, pwd
- * respone : { login : true || false  }
+ * respone : { login : true || false, _id : _id  }
  */
 router.post('/login', function(req, res, next) {
 
@@ -58,19 +56,16 @@ router.post('/login', function(req, res, next) {
             console.log('[POST] login FAIL, err ->', err);
             res.json({ login : false });
 
-        } else {
-
+        }else{
             if ( result ){
                 res.json({
                     login : true,
                     _id : result._id
                 });
-                //console.log('[POST] login success', result);
+
             }else{
                 res.json({ login : false });
             }
-
-
         }
     });
 });
@@ -80,8 +75,6 @@ router.post('/login', function(req, res, next) {
  * request : _id, name, email ,pwd
  * respone : db result
  */
-
-//models.user.update( {條件}, {更新的資料}, callback(err, result) )
 router.put('/', function(req, res, next) {
 
     var info = {
@@ -93,10 +86,11 @@ router.put('/', function(req, res, next) {
     models.User.update({_id : req.body._id}, info, function(err, result) {
         if(err){
             console.log('update user FAIL, err ->', err);
-        }
-        else{
+            res.json({ err: err });
+
+        }else{
             if (result) {
-                res.json(result);      
+                res.json(result);
             }
             else{
                 res.json({ update : false });
