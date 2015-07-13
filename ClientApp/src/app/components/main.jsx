@@ -16,6 +16,12 @@ let LeftNav = mui.LeftNav;
 let MenuItem = mui.MenuItem;
 
 
+
+
+
+
+
+
 //react 自製元件
 let MyCard = require('./myCard.jsx');
 
@@ -84,6 +90,8 @@ let Main = React.createClass({
 		     text: 'Disabled Link',
 		     disabled: true
 		  },
+            
+          
 		];
 
 
@@ -116,8 +124,10 @@ let Main = React.createClass({
 			        ref="myDialog">
 			        You can type any thing you want to say at here
 		        </Dialog>
+                 
 
-
+                 
+                 
 	     	</div>
 	    );
 	},
