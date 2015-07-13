@@ -94,12 +94,12 @@ router.get('/', function(req, res, next) {
  */
 router.delete('/', function(req, res, next) {
 
-    
+
     if(!req.body._id){
         res.json( { err : '資料不完全' } );
     }
 
-    models.User.delete({ _id : req.body._id }, function(err, result) {
+    models.User.remove({ _id : req.body._id }, function(err, result) {
         if(err){
             console.log('delete user FAIL, err ->', err);
             res.json({ err: err });
