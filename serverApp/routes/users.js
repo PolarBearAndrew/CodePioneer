@@ -113,7 +113,7 @@ router.post('/login', function(req, res, next) {
 
 
 /*
- * [GET] 取回密碼e
+ * [GET] 取回密碼
  * request : email
  * respone : { sendMail : true || false }
  */
