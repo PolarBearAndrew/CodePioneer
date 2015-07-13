@@ -39,6 +39,29 @@ router.post('/', function(req, res, next) {
 });
 
 /*
+ * [PUT] 修改使用者
+ * request : _id, name, email ,pwd
+ * respone : db result
+ */
+router.put('/', function(req, res, next) {
+
+    var info = {
+        name : req.body.name,
+        email : req.body.email,
+        pwd : req.body.pwd
+    }
+
+    models.User.update({_id : req.body._id}, info, function(err, result) {
+        if(err){
+            console.log('update user FAIL, err ->', err);
+            res.json({ err: err });
+        }else{
+            res.json(info);
+        }
+    });
+});
+
+/*
  * [POST] 登入檢查
  * request : email, pwd
  * respone : { login : true || false, _id : _id  }
@@ -62,7 +85,6 @@ router.post('/login', function(req, res, next) {
                     login : true,
                     _id : result._id
                 });
-
             }else{
                 res.json({ login : false });
             }
@@ -70,33 +92,5 @@ router.post('/login', function(req, res, next) {
     });
 });
 
-/*
- * [PUT] 更新使用者資料
- * request : _id, name, email ,pwd
- * respone : db result
- */
-router.put('/', function(req, res, next) {
-
-    var info = {
-        name : req.body.name,
-        email : req.body.email,
-        pwd : req.body.pwd
-    }
-
-    models.User.update({_id : req.body._id}, info, function(err, result) {
-        if(err){
-            console.log('update user FAIL, err ->', err);
-            res.json({ err: err });
-
-        }else{
-            if (result) {
-                res.json(result);
-            }
-            else{
-                res.json({ update : false });
-            }
-        }
-    });
-});
 
 module.exports = router;
