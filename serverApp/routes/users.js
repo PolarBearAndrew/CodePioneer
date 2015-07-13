@@ -62,6 +62,24 @@ router.put('/', function(req, res, next) {
 });
 
 /*
+ * [GET] 查詢使用者
+ * request : _id
+ * respone : name, email, pwd
+ */
+router.get('/', function(req, res, next) {
+    
+    models.User.find({ _id : req.query._id }, function(err, result) {
+        if(err){
+            console.log('find user FAIL, err ->', err);
+            res.json({ err: err });
+        }else{
+            res.json(result);
+        }
+    });
+});
+
+
+/*
  * [POST] 登入檢查
  * request : email, pwd
  * respone : { login : true || false, _id : _id  }
