@@ -1,47 +1,24 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models/user.js');
-
-/*
- * [POST] create test user
- */
-router.post('/test', function(req, res, next) {
-
-    var user = new models.User({
-        email: 'chenpoanandrew@gmail.com',
-        name: 'AndrewChen',
-        pwd: '123'
-    });
-
-    user.save(function(err, result) {
-        if (err) {
-            console.log('[TEST] create test user FAIL, err ->', err);
-            //res.json( err );
-
-        } else {
-            //console.log('[TEST] create test user success, result ->', result);
-            res.json(result);
-        }
-    });
-});
-
+//req  request 請求
+//res  respone 回應
+//post過來的參數 用req.body.xxx去找
+//get的參數 用req.query.xxx去找
+//=============================================
 
 /*
  * [POST] 新增使用者
+ * request : name, email, pwd
+ * respone : db result
  */
-
-//req  request 請求
-//res  respone 回應
-
-//post過來的參數 用req.body.xxx去找
-//get的參數 用req.query.xxx去找
 
 router.post('/', function(req, res, next) {
 
     //先將傳過來的資料做成資料庫物件
     var user = new models.User({
-        email: req.body.email,
         name: req.body.name,
+        email: req.body.email,
         pwd: req.body.pwd
     });
 
@@ -65,8 +42,8 @@ router.post('/', function(req, res, next) {
 
 /*
  * [POST] 登入檢查
- * input : email , pwd
- * return : { login : true || false  }
+ * request : email, pwd
+ * respone : { login : true || false  }
  */
 router.post('/login', function(req, res, next) {
 
@@ -75,7 +52,7 @@ router.post('/login', function(req, res, next) {
         pwd : req.body.pwd
     }
 
-    models.User.find( info, function(err, result) {
+    models.User.findOne( info, function(err, result) {
 
         if (err) {
             console.log('[POST] login FAIL, err ->', err);
@@ -83,8 +60,11 @@ router.post('/login', function(req, res, next) {
 
         } else {
 
-            if ( result.length === 1 ){
-                res.json({ login : true });
+            if ( result ){
+                res.json({
+                    login : true,
+                    _id : result._id
+                });
                 //console.log('[POST] login success', result);
             }else{
                 res.json({ login : false });
@@ -94,5 +74,13 @@ router.post('/login', function(req, res, next) {
         }
     });
 });
+
+/*
+ * [PUT] 更新使用者資料
+ * request : _id, name, email ,pwd
+ * respone : db result
+ */
+
+//models.user.update( {條件}, {更新的資酪}, callback(err, result) )
 
 module.exports = router;
