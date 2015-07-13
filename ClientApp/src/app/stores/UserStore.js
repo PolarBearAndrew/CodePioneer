@@ -34,8 +34,12 @@ objectAssign( Store, EventEmitter.prototype, {
      * Public API
      * 供外界取得 store 內部資料
      */
-    getUser: function(){
+    getUser(){
         return user;
+    },
+
+    getIsLogin(){
+        return isLogin;
     },
 
     //

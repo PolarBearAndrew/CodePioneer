@@ -42,6 +42,7 @@ let Main = React.createClass({
 
 	//顯示畫面的func
 	render() {
+
         //css
 	    let containerStyle = {
 	    	padding: '0px',
@@ -51,11 +52,11 @@ let Main = React.createClass({
             display:'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexDirection: 'column'
+            flexDirection: 'column',
 	    };
 
 	    return (
-	    	<div style={containerStyle}>
+	    	<div className="loginTab" style={containerStyle}>
                 <TextField
                         hintText="input your Account"
                         multiLine={true} />
