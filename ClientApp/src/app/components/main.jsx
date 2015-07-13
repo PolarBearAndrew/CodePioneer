@@ -36,8 +36,9 @@ let Main = React.createClass({
 
 	componentWillMount() {
 		ThemeManager.setPalette({
-			accent1Color: Colors.purple800
+			accent1Color: Colors.deepOrange500
 		});
+        ThemeManager.setTheme(ThemeManager.types.DARK);
 	},
 
 	//顯示畫面的func
@@ -54,11 +55,14 @@ let Main = React.createClass({
             justifyContent: 'center',
             flexDirection: 'column',
 	    };
-
-        let h4 = {
-            cursor:'pointer'
+        
+        //Login 和 SignUp的按鈕設定
+        let btn={
+            display:'flex',
+            justifyContent:'space-between',
+            width : '200px'
         };
-
+        
         //mui dialog的按鈕設定資料
 	    let standardActions = [
 	    	{ text: 'sure' },
@@ -67,6 +71,7 @@ let Main = React.createClass({
 
 	    return (
 	    	<div className="loginTab" style={containerStyle}>
+            
                 <TextField
                 		id="email"
                         hintText="input your Account"
@@ -79,18 +84,23 @@ let Main = React.createClass({
                     floatingLabelText="">
                     <input type="password" />
                     </TextField>
+            
                 <br/><br/>
-
-                <RaisedButton label="Login" primary={true} onTouchTap={this._handleTouchTap} />
-
+            
+                <div style={btn}>
+                    <RaisedButton label="Sign up" primary={false}/>
+                    <RaisedButton label="Login" primary={true} onTouchTap={this._handleTouchTap} />
+                </div>
+            
                 <h4>Forger your password</h4>
-
+            
                 <Dialog
 			        title="your e-mail"
 			        actions={standardActions}
 			        ref="myDialog">
 			        You can type any thing you want to say at here
 		        </Dialog>
+            
             </div>
 	    );
 	},
