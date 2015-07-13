@@ -1,11 +1,23 @@
 var express = require('express');
 var router = express.Router();
+
 var models = require('../models/user.js');
+var postMan = require('./mail.js')
 //req  request 請求
 //res  respone 回應
 //post過來的參數 用req.body.xxx去找
 //get的參數 用req.query.xxx去找
 //=============================================
+
+//testing
+router.get('/mail', function(req, res, next){
+
+    var mailer = new postMan();
+    mailer.sendTo('chenpoanandrew@gmail.com', '123');
+
+    res.json({ mailSended: true });
+});
+
 
 /*
  * [POST] 新增使用者
