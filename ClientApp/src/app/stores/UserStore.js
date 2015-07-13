@@ -19,11 +19,14 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 var Store = {};
 
 var user = {
-    name: 'AndrewChen',
-    email: 'chenpoanandrew@gmail.com',
+    id:'',
+    name: '',
+    email: '',
 }
 
 var isLogin = false;
+
+var isInit = true;
 
 /**
  * 建立 Store class，並且繼承 EventEMitter 以擁有廣播功能
@@ -34,8 +37,16 @@ objectAssign( Store, EventEmitter.prototype, {
      * Public API
      * 供外界取得 store 內部資料
      */
-    getUser: function(){
+    getUser(){
         return user;
+    },
+
+    getIsLogin(){
+        return isLogin;
+    },
+
+    getIsInit(){
+        return isInit;
     },
 
     //
@@ -51,6 +62,7 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
     // evt .action 就是 view 當時廣播出來的整包物件
     // 它內含 actionType
     var action = evt.action;
+    var data = action.data;
 
     switch (action.actionType) {
 
@@ -59,11 +71,12 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          */
         case AppConstants.USER_LOGIN:
 
-            isLogin = true;
+            isLogin = data;
+            isInit = false;
 
             Store.emit( AppConstants.CHANGE_EVENT );
 
-            console.log('login store');
+            console.log('login', isLogin);
 
             break;
 

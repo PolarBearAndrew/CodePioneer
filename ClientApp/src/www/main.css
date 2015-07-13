@@ -3,15 +3,18 @@ html {
 }
 
 body {
+
     font-size: 13px;
-/*    line-height: 20px;*/
-/*    margin: 0px;*/
     padding: 0px;
-    
-    display: -webkit-flex;
+
+    /*display: -webkit-flex;
     display: flex;
     align-items: center;
-    justify-content: center;
-    
-    padding-top: calc( 50% - 150px);
+    justify-content: center;*/
+}
+
+.loginTab{
+	position: absolute;
+	top :calc(50% - 150px);
+	left:calc(50% - 150px);
 }
