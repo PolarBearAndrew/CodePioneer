@@ -10,7 +10,7 @@ let ThemeManager = new mui.Styles.ThemeManager();
 //mui 元件
 let TextField=mui.TextField;
 let RaisedButton=mui.RaisedButton;
-
+let Dialog = mui.Dialog;
 
 //react 自製元件
 
@@ -55,6 +55,15 @@ let Main = React.createClass({
             flexDirection: 'column',
 	    };
 
+        let h4 = {
+            cursor:'pointer'
+        };
+
+        //mui dialog的按鈕設定資料
+	    let standardActions = [
+	    	{ text: 'sure' },
+	    	{ text: 'submit' }
+	    ];
 	    return (
 	    	<div className="loginTab" style={containerStyle}>
                 <TextField
@@ -69,15 +78,22 @@ let Main = React.createClass({
                     </TextField>
                 <br/><br/>
                 <RaisedButton label="Login" primary={true} />
-                <h4>Forger your password</h4>
+                <h4 onTouchTap={this._handleTouchTap}>Forger your password</h4>
+
+                <Dialog
+			        title="your e-mail"
+			        actions={standardActions}
+			        ref="myDialog">
+			        You can type any thing you want to say at here
+		        </Dialog>
             </div>
 	    );
 	},
 
-    _handleErrorInputChange(){
-
+    _handleTouchTap(){
+        this.refs.myDialog.show();
+		Actions.load();
     },
-
 
 });
 

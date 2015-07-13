@@ -20,6 +20,7 @@ let AppActions_User = {
 		$.ajax({
 			url: address + 'login',
 			type: 'POST',
+
 			success: function(result){
 				// alert(result);
 
