@@ -16,7 +16,7 @@ let AppActions_User = {
 		// });
 	},
 
-	login( data ){
+	login( data, showDialog ){
 		$.ajax({
 			url: address + '/login',
 			type: 'POST',
@@ -28,6 +28,8 @@ let AppActions_User = {
 
 				if( result.login === true )
 					login = true;
+				else
+					showDialog();
 
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.USER_LOGIN,
@@ -35,6 +37,8 @@ let AppActions_User = {
 				});
 			},
 			error: function(err){
+
+				showDialog();
 
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.USER_LOGIN,

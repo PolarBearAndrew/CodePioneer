@@ -64,6 +64,7 @@ let Main = React.createClass({
 	    	{ text: 'sure' },
 	    	{ text: 'submit' }
 	    ];
+
 	    return (
 	    	<div className="loginTab" style={containerStyle}>
                 <TextField
@@ -79,7 +80,9 @@ let Main = React.createClass({
                     <input type="password" />
                     </TextField>
                 <br/><br/>
+
                 <RaisedButton label="Login" primary={true} onTouchTap={this._handleTouchTap} />
+
                 <h4>Forger your password</h4>
 
                 <Dialog
@@ -94,13 +97,12 @@ let Main = React.createClass({
 
     _handleTouchTap(){
 
+   		let showDialog = this.refs.myDialog.show;
+
     	let email = $('#email').val();
     	let pwd = $('#pwd').val();
-    	Actions.login({ email, pwd });
 
-    	// if(!UserStore.login){
-    	// 	this.refs.myDialog.show();
-    	// }
+    	Actions.login({ email, pwd }, showDialog);
     },
 
 });
