@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
  * request : _id, name, email ,pwd
  * respone : db result
  */
-router.put('/', function(req, res, next) {
+router.put('/',  function(req, res, next) {
 
     if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
@@ -94,11 +94,11 @@ router.get('/', function(req, res, next) {
  */
 router.delete('/', function(req, res, next) {
     
-    if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
+    if(!req.body._id){
         res.json( { err : '資料不完全' } );
     }
 
-    models.User.delete({ _id : req.query._id }, function(err, result) {
+    models.User.delete({ _id : req.body._id }, function(err, result) {
         if(err){
             console.log('delete user FAIL, err ->', err);
             res.json({ err: err });
