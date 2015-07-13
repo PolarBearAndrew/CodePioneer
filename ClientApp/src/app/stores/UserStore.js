@@ -16,6 +16,7 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 //========================================================================
 //
 
+//data
 var Store = {};
 
 var user = {
@@ -76,7 +77,7 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
 
             Store.emit( AppConstants.CHANGE_EVENT );
 
-            console.log('login', isLogin);
+            // console.log('login', isLogin);
 
             break;
 

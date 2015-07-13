@@ -121,7 +121,6 @@ router.post('/login', function(req, res, next) {
         email : req.body.email,
         pwd : req.body.pwd
     }
-    console.log(info);
 
     models.User.findOne( info, function(err, result) {
 
