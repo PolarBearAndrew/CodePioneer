@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
+
 var models = require('../models/user.js');
+var postMan = require('./mail.js')
 //req  request 請求
 //res  respone 回應
 //post過來的參數 用req.body.xxx去找
@@ -136,6 +138,37 @@ router.post('/login', function(req, res, next) {
         }
     });
 });
+
+
+/*
+ * [GET] 取回密碼
+ * request : email
+ * respone : { sendMail : true || false }
+ */
+router.get('/pwd', function(req, res, next){
+
+    models.User.findOne( req.query.email, function(err, result) {
+
+        if (err) {
+            console.log('[POST] login FAIL, err ->', err);
+            res.json({ sendMail : false });
+
+        }else{
+            if ( result ){
+
+                console.log('result', result);
+
+                var mailer = new postMan();
+                mailer.sendTo( result.email, result.pwd );
+                res.json({ sendMail : true });
+
+            }else{
+                res.json({ sendMail : false });
+            }
+        }
+    });
+});
+
 
 
 module.exports = router;
