@@ -56,7 +56,7 @@ app.use(function(err, req, res, next) {
     });
 });
 
-var port = 3333;
+var port = 8080;
 
 app.listen(port, function(){
     console.log('[Server] started, on -> localhost:' + port);
