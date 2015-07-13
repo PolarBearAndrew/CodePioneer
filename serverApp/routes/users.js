@@ -81,6 +81,28 @@ router.post('/login', function(req, res, next) {
  * respone : db result
  */
 
-//models.user.update( {條件}, {更新的資酪}, callback(err, result) )
+//models.user.update( {條件}, {更新的資料}, callback(err, result) )
+router.put('/', function(req, res, next) {
+
+    var info = {
+        name : req.body.name,
+        email : req.body.email,
+        pwd : req.body.pwd
+    }
+
+    models.User.update({_id : req.body._id}, info, function(err, result) {
+        if(err){
+            console.log('update user FAIL, err ->', err);
+        }
+        else{
+            if (result) {
+                res.json(result);      
+            }
+            else{
+                res.json({ update : false });
+            }
+        }
+    });
+});
 
 module.exports = router;
