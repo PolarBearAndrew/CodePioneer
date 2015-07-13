@@ -79,6 +79,7 @@ app.listen(port, function(){
     console.log('init test data...');
 
     var data = [
+        { name: 'Test', email: '123', pwd: '123' },
         { name: 'AndrewChen', email: 'chenpoanandrew@gmail.com', pwd: '123' },
         { name: 'Ray', email: 'q3856245@gmail.com', pwd: '123' },
         { name: 'Doro', email: 'rilakkuma0330k@gmail.com', pwd: '123' },
