@@ -56,11 +56,41 @@ app.use(function(err, req, res, next) {
     });
 });
 
-var port = 3333;
+
+
+
+var port = 8080;
 
 app.listen(port, function(){
-    console.log('[Server] started, on -> localhost:' + port);
-})
 
+    console.log('[Server] started, on -> localhost:' + port);
+
+    // test data init
+    //==========================================
+    var models = require('./models/user.js');
+
+    console.log('init test data...');
+
+    var data = [
+        { name: 'AndrewChen', email: 'chenpoanandrew@gmail.com', pwd: '123' },
+        { name: 'Ray', email: 'q3856245@gmail.com', pwd: '123' },
+        { name: 'Doro', email: 'rilakkuma0330k@gmail.com', pwd: '123' },
+        { name: 'Husan', email: 'keami326@gmail.com', pwd: '123' }
+    ];
+
+    models.User.remove({}, function( err, result ){
+
+        data.forEach(function( info ){
+            var user = new models.User( info );
+
+            //儲存到資料庫
+            user.save(function(err, result) {
+                // console.log('create test user : ' + result);
+            });
+        });
+    });
+
+    //==========================================
+});
 
 module.exports = app;
