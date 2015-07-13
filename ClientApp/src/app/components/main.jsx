@@ -10,7 +10,7 @@ let ThemeManager = new mui.Styles.ThemeManager();
 //mui 元件
 let TextField=mui.TextField;
 let RaisedButton=mui.RaisedButton;
-
+let Dialog = mui.Dialog;
 
 //react 自製元件
 
@@ -44,19 +44,30 @@ let Main = React.createClass({
 	render() {
         //css
 	    let containerStyle = {
+	    	
 	    	padding: '0px',
             height : '300px',
             width : '300px',
             display: '-webkit-flex',
             display:'flex',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'center', 
+            
             flexDirection: 'column'
 	    };
-
+        
+        let h4={
+            cursor='pointer'
+        };
+        
+        //mui dialog的按鈕設定資料
+	    let standardActions = [
+	    	{ text: 'sure' },
+	    	{ text: 'submit' }
+	    ];
 	    return (
 	    	<div style={containerStyle}>
-                <TextField
+                <TextField 
                         hintText="input your Account"
                         multiLine={true} />
 
@@ -66,17 +77,24 @@ let Main = React.createClass({
                     floatingLabelText="">
                     <input type="password" />
                     </TextField>
-                <br/><br/>
-                <RaisedButton label="Login" primary={true} />
-                <h4>Forger your password</h4>
+                <br/><br/> 
+                <RaisedButton label="Login" primary={true} />   
+                <h4 onTouchTap={this._handleTouchTap}>Forger your password</h4>
+            
+                <Dialog
+			        title="your e-mail"
+			        actions={standardActions}
+			        ref="myDialog">
+			        You can type any thing you want to say at here
+		        </Dialog>
             </div>
 	    );
 	},
-
-    _handleErrorInputChange(){
-
+    
+    _handleTouchTap(){
+        this.refs.myDialog.show();
+		Actions.load();
     },
-
 
 });
 
