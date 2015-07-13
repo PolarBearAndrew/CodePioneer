@@ -9,16 +9,6 @@ var postMan = require('./mail.js')
 //get的參數 用req.query.xxx去找
 //=============================================
 
-//testing
-router.get('/mail', function(req, res, next){
-
-    var mailer = new postMan();
-    mailer.sendTo('chenpoanandrew@gmail.com', '123');
-
-    res.json({ mailSended: true });
-});
-
-
 /*
  * [POST] 新增使用者
  * request : name, email, pwd
@@ -120,6 +110,37 @@ router.post('/login', function(req, res, next) {
         }
     });
 });
+
+
+/*
+ * [GET] 取回密碼e
+ * request : email
+ * respone : { sendMail : true || false }
+ */
+router.get('/pwd', function(req, res, next){
+
+    models.User.findOne( req.query.email, function(err, result) {
+
+        if (err) {
+            console.log('[POST] login FAIL, err ->', err);
+            res.json({ sendMail : false });
+
+        }else{
+            if ( result ){
+
+                console.log('result', result);
+
+                var mailer = new postMan();
+                mailer.sendTo( result.email, result.pwd );
+                res.json({ sendMail : true });
+
+            }else{
+                res.json({ sendMail : false });
+            }
+        }
+    });
+});
+
 
 
 module.exports = router;
