@@ -12,8 +12,11 @@ var models = require('../models/user.js');
  * request : name, email, pwd
  * respone : db result
  */
-
 router.post('/', function(req, res, next) {
+
+    if(!req.body.email || !req.body.name || !req.body.pwd){
+        res.json( { err : '資料不完全' } );
+    }
 
     //先將傳過來的資料做成資料庫物件
     var user = new models.User({
@@ -21,10 +24,6 @@ router.post('/', function(req, res, next) {
         email: req.body.email,
         pwd: req.body.pwd
     });
-
-    if(!req.body.email || !req.body.name || !req.body.pwd){
-        res.json( { err : '資料不完全' } );
-    }
 
     //儲存到資料庫
     user.save(function(err, result) {
@@ -67,7 +66,7 @@ router.put('/', function(req, res, next) {
  * respone : name, email, pwd
  */
 router.get('/', function(req, res, next) {
-    
+
     models.User.find({ _id : req.query._id }, function(err, result) {
         if(err){
             console.log('find user FAIL, err ->', err);
