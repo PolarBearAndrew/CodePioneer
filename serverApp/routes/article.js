@@ -65,4 +65,47 @@ router.post('/?uid', function(req, res, next) {
     // });
 });
 
+/*
+ * [GET] 查詢收藏文章
+ * request :
+ * respone :
+ */
+router.get('/', function(req, res, next) {
+    
+    var info = { _id: req.body.uid };
+
+    models.User.findOne( info, function(err, result) {
+
+        if (err) {
+            console.log('[ERROR] user find fail, err ->', err);
+            res.json(err);
+        }else{
+        	if(result){
+                var infolink = { link: result.body.link };
+                models.User.findOne(infolink, function(err, result){
+                    if (err) {
+			            console.log('[ERROR] user like link fail, err ->', err);
+			            res.json(err);
+			        } else {
+			            res.json(result);
+			        }
+                })
+        	}else{
+        		//no result
+        		res.json({ link: false });
+        	}
+
+        }
+    });
+});
+
+/*
+ * [DELETE] 刪除收藏文章
+ * request : aid
+ * respone :
+ */
+router.delete('/', function(req, res, next) {
+    
+});
+
 module.exports = router;
