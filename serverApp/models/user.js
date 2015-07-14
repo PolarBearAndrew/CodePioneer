@@ -15,13 +15,24 @@ var User = new mongoose.Schema({
     pwd: {
         type: String
     },
-    likeArticle: {
-        type: Array
+    lastLoginTime: {
+        type: Date,
+        default: Date.now
     },
-    whoLikeMe: {
-        type: Array
-    },
+    likeArticle: [{
+        aid: String,
+        likeTime: Date
+    }],
+    whoLikeMe: [{
+        uid: String
+    }],
 });
+
+//likeArticle
+//{ aid: '#$%^UHBVFGHJ', likeTime: '' }
+
+//whoLikeMe
+//{ uid: '101111212'}
 
 //exports model
 module.exports = db.model('user', User);

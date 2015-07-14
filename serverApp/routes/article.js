@@ -23,8 +23,8 @@ router.post('/', function(req, res, next) {
         	if(result){
 
         		//處理需要更新的資料
-	        	var updateData = { like: result.like };
-	        	updateData.like.push( req.body.aid );
+	        	var updateData = { likeArticle: result.likeArticle };
+	        	updateData.likeArticle.push( req.body.aid );
 
 	        	models.User.update( info, updateData, function(err, result) {
 
