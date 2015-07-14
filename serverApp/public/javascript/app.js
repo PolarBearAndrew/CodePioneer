@@ -1,0 +1,1 @@
+../../../ClientApp/build/app.js
