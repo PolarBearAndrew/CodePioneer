@@ -1,5 +1,5 @@
 var request = require("request");
-var models = require('../models/user.js');
+var models = require('../models/article.js');
 
 function crawl(){
 
