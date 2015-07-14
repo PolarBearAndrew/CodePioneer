@@ -10,12 +10,12 @@ var models = {
 }
 /*
  * [POST] 新增收藏文章
- * request : uid, aid
+ * request : myid, aid
  * respone :
  */
 router.post('/', function(req, res, next) {
 
-	var info = { _id: req.body.uid };
+	var info = { _id: req.body.myid };
 
     models.User.findOne( info, function(err, result) {
 
@@ -48,21 +48,12 @@ router.post('/', function(req, res, next) {
 });
 
 /* [POST] 查詢別人(uid)收藏的
- * request : uid, aid
+ * request : uid, myid
  * respone : db result
  */
 router.post('/?uid', function(req, res, next) {
 
-    // var info = req.body.uid;
 
-    // models.Article.find( info, function(err, result) {
-    //     if (err) {
-    //         console.log('[ERROR] user find fail, err ->', err);
-    //         res.json(err);
-    //     } else {
-    //         res.json(result);
-    //     }
-    // });
 });
 
 /*
