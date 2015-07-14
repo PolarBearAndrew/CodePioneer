@@ -15,35 +15,24 @@ var User = new mongoose.Schema({
     pwd: {
         type: String
     },
-    like: {
-        type: Array
-    }
+    lastLoginTime: {
+        type: Date,
+        default: Date.now
+    },
+    likeArticle: [{
+        aid: String,
+        likeTime: Date
+    }],
+    whoLikeMe: [{
+        uid: String
+    }],
 });
 
-// /*
-//  *  Schema of Aricle
-//  */
-// var Article = new mongoose.Schema({
-//     title: {
-//         type: String
-//     },
-//     url: {
-//         type: String
-//     },
-//     author: {
-//         type: String
-//     },
-//     describe: {
-//         type: String
-//     },
-//     rank: {
-//         type: Number
-//     },
-//     info: {
-//         type: Array
-//     },
-// });
+//likeArticle
+//{ aid: '#$%^UHBVFGHJ', likeTime: '' }
 
+//whoLikeMe
+//{ uid: '101111212'}
 
 //exports model
-module.exports = { User: db.model('user', User) };
+module.exports = db.model('user', User);
