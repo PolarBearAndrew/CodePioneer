@@ -27,4 +27,4 @@ var Article = new mongoose.Schema({
 });
 
 //exports model
-module.exports = { Article: db.model('article', Article) };
+module.exports =  db.model('article', Article);
