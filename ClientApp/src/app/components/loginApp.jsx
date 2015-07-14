@@ -90,10 +90,10 @@ let loginApp = React.createClass({
 
                 <div style={btn}>
                     <RaisedButton label="Sign up" primary={false}/>
-                    <RaisedButton label="Login" primary={true} onTouchTap={this._handleTouchTap} />
+                    <RaisedButton label="Login" primary={true} onTouchTap={this._Login} />
                 </div>
 
-                <h4>Forger your password</h4>
+                <h4 onTouchTap={this._Forget}> Forget your password</h4>
 
                 <Dialog
 			        title="Login Fail"
@@ -101,12 +101,22 @@ let loginApp = React.createClass({
 			        ref="loginFailDialog">
 			        Login fail, please try again or use email to retrieve your password.
 		        </Dialog>
+            
+                <Dialog
+			        title="Login Forget"
+			        actions={ [{ text: 'sure' }] }
+			        ref="ForgetDialog">
+			        <TextField
+                		id="email"
+                        hintText="e-mail address"
+                        multiLine={true} />
+		        </Dialog>
 
             </div>
 	    );
 	},
 
-    _handleTouchTap(){
+    _Login(){
 
    		let loginFail = this.refs.loginFailDialog.show;
 
@@ -114,6 +124,13 @@ let loginApp = React.createClass({
     	let pwd = $('#pwd').val();
 
     	Actions.login({ email, pwd }, loginFail);
+    },
+    
+    _Forget(){
+
+   	    this.refs.ForgetDialog.show();
+
+    	Actions.load();
     },
 
 });
