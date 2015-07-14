@@ -88,7 +88,7 @@ app.listen(port, function(){
 
     // test data init
     //==========================================
-    var models = require('./models/user.js');
+    var User = require('./models/user.js');
 
     console.log('init test data...');
 
@@ -100,10 +100,10 @@ app.listen(port, function(){
         { name: 'Husan', email: 'keami326@gmail.com', pwd: '123' }
     ];
 
-    models.User.remove({}, function( err, result ){
+    User.remove({}, function( err, result ){
 
         data.forEach(function( info ){
-            var user = new models.User( info );
+            var user = new User( info );
 
             //儲存到資料庫
             user.save(function(err, result) {

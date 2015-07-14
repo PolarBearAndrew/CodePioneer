@@ -18,10 +18,11 @@ let Main = React.createClass({
 
 	//顯示畫面的func
 	render() {
-            // <LoginApp />
 
+// <Container />
 	    return (
-            <Container />
+	    	  <LoginApp />
+
 	    );
 	},
 

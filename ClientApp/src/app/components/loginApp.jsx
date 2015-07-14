@@ -41,7 +41,7 @@ let loginApp = React.createClass({
 		});
         // ThemeManager.setTheme(ThemeManager.types.DARK);
 	},
-    
+
     //將 SignUp 兩個TextField，區分
     getInitialState() {
     return {
@@ -52,8 +52,6 @@ let loginApp = React.createClass({
 
 	//顯示畫面的func
 	render() {
-
-        console.log('login app');
 
         //container
 	    let containerStyle = {
@@ -79,7 +77,7 @@ let loginApp = React.createClass({
 	    	{ text: 'Cancel' },
 	    	{ text: 'Submit' }
 	    ];
-        
+
 	    return (
 	    	<div className="loginTab" style={containerStyle}>
 
@@ -99,14 +97,14 @@ let loginApp = React.createClass({
                 <br/><br/>
 
                 <div style={btn}>
-                    <RaisedButton label="SignUp" primary={false} onTouchTap={this._SignUp}/>  
+                    <RaisedButton label="SignUp" primary={false} onTouchTap={this._SignUp}/>
                     <RaisedButton label="Login" primary={true} onTouchTap={this._Login} />
                 </div>
-            
+
                 <br/>
-            
+
                 <FlatButton label="Forget your password" primary={true} onTouchTap={this._Forget}/>
-            
+
                 <Dialog
 			        title="Forget your password ?"
                     actions={emailPwdActions}
@@ -131,28 +129,28 @@ let loginApp = React.createClass({
                         errorText={this.state.errorpassword}
                         onChange={this._SignUppassword} />
 		        </Dialog>
-            
+
                 <Snackbar
                       ref="loginFailSnackbar"
                       message="Login fail, please try again or use email to retrieve your password"
                       action=""
                       autoHideDuration={this.state.autoHideDuration}
                       onActionTouchTap={this._handleAction}/>
-            
+
             </div>
 	    );
 	},
 
     //Login按鈕
     _Login(){
-        
+
     	let email = $('#email').val();
     	let pwd = $('#pwd').val();
-        
+
         //錯誤會有 Snackbar
         let loginFail = this.refs.loginFailSnackbar.show;
         Actions.login({ email, pwd }, loginFail);
-        
+
 //        //判斷是否有輸入E-mail和password (用長度判斷)
 //        if(email.length==0 && pwd.length==0){
 //            let snackbar = this.refs.snackbar.show();
@@ -161,35 +159,35 @@ let loginApp = React.createClass({
 //            Actions.login({ email, pwd }, loginFail);
 //            console.log("login success");
 //        }
-    	
+
     },
-    
+
     _Forget(){
 
    	    this.refs.ForgetDialog.show();
 
     	Actions.load();
     },
-    
+
     _SignUp(){
 
    	    this.refs.SignUpDialog.show();
 
     	Actions.load();
     },
-    
+
     _SignUpmail(e) {
         this.setState({
           errormail: e.target.value ? '' : 'This field is required.'
         });
     },
-    
+
     _SignUppassword(e) {
         this.setState({
           errorpassword: e.target.value ? '' : 'This field is required.'
         });
     },
-        
+
 });
 
 module.exports = loginApp;

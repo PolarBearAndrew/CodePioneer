@@ -1,5 +1,5 @@
 var request = require("request");
-var models = require('../models/article.js');
+var Article = require('../models/article.js');
 
 function crawl(){
 
@@ -16,7 +16,7 @@ function crawl(){
 
                 data.results.collection1.forEach(function( item ){
 
-			        var article = new models.Article({
+			        var article = new Article({
 				        title: item.title.text,
 					    url: item.title.href,
 					    author: item.users.text,

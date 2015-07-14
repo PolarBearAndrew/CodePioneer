@@ -15,35 +15,13 @@ var User = new mongoose.Schema({
     pwd: {
         type: String
     },
-    like: {
+    likeArticle: {
         type: Array
-    }
+    },
+    whoLikeMe: {
+        type: Array
+    },
 });
 
-// /*
-//  *  Schema of Aricle
-//  */
-// var Article = new mongoose.Schema({
-//     title: {
-//         type: String
-//     },
-//     url: {
-//         type: String
-//     },
-//     author: {
-//         type: String
-//     },
-//     describe: {
-//         type: String
-//     },
-//     rank: {
-//         type: Number
-//     },
-//     info: {
-//         type: Array
-//     },
-// });
-
-
 //exports model
-module.exports = { User: db.model('user', User) };
+module.exports = db.model('user', User);

@@ -1,12 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-var user = require('../models/user.js').User;
-var article = require('../models/article.js').Article;
-
 var models = {
-	User: user,
-	Article: article
+	User: require('../models/user.js'),
+	Article: require('../models/article.js')
 }
 /*
  * [POST] 新增收藏文章
@@ -62,7 +59,7 @@ router.post('/?uid', function(req, res, next) {
  * respone :
  */
 router.get('/', function(req, res, next) {
-    
+
     var info = { _id: req.body.uid };
 
     models.User.findOne( info, function(err, result) {
@@ -97,7 +94,7 @@ router.get('/', function(req, res, next) {
  * respone :
  */
 router.delete('/', function(req, res, next) {
-    
+
 });
 
 module.exports = router;
