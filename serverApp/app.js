@@ -8,12 +8,21 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+//===
+var crawl = require('./routes/crawl.js');
+//===
+
 var app = express();
+
+//our plugin
+var testCrawlAPI = require('./routes/testCrawlAPI.js');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+//set haeder
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Headers', 'Content-Type');
@@ -31,6 +40,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/api/users', users);
+app.use('/api/testCrawlAPI', testCrawlAPI);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -62,7 +74,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 
 
@@ -98,7 +109,13 @@ app.listen(port, function(){
         });
     });
 
+    //crawl api
     //==========================================
+
+    var crawltick = new crawl();
+
+    crawltick.start();
+
 });
 
 module.exports = app;

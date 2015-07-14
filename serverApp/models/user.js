@@ -16,7 +16,33 @@ var User = new mongoose.Schema({
     }
 });
 
+/*
+ *  Schema of Aricle
+ */
+var Article = new mongoose.Schema({
+    title: {
+        type: String
+    },
+    url: {
+        type: String
+    },
+    author: {
+        type: String
+    },
+    describe: {
+        type: String
+    },
+    rank: {
+        type: Number
+    },
+    info: {
+        type: Array
+    },
+});
+
+
 //exports model
 module.exports = {
-    User: db.model('user', User)
+    User: db.model('user', User),
+    Article: db.model('article', Article)
 };
