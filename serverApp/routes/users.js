@@ -49,18 +49,14 @@ router.post('/', function(req, res, next) {
  */
 router.get('/', function(req, res, next) {
 
-    // console.log('done');
-    // console.log('_id', req.body._id)
-
     if(!req.body._id){
         res.json( { err : '資料不完全' } );
         return;
     }
 
-    User.find({ _id : req.body._id }, function(err, result) {
+    User.findOne({ _id : req.body._id }, function(err, result) {
         if(err){
-            console.log('find user FAIL, err ->', err);
-            res.json({ err: err });
+            res.json({ result: null });
         }else{
             res.json(result);
         }
