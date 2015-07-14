@@ -4,10 +4,6 @@ var router = express.Router();
 var models = require('../models/article.js');
 
 
-
-
-
-
 /*
  * [POST] 查詢別人(uid)收藏的
  * request : uid, aid
