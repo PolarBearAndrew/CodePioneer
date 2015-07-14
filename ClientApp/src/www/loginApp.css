@@ -7,13 +7,11 @@ body {
     font-size: 13px;
     padding: 0px;
     background-color: rgb(159, 189, 255);
-    /*display: -webkit-flex;
-    display: flex;
-    align-items: center;
-    justify-content: center;*/
 }
 
 .loginTab{
+
+    /* dirty */
 	position: absolute;
 	top :calc(50% - 150px);
 	left:calc(50% - 150px);
