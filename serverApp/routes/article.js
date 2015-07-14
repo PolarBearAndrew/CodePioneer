@@ -1,54 +1,68 @@
 var express = require('express');
 var router = express.Router();
 
-var models = require('../models/article.js');
+var user = require('../models/user.js').User;
+var article = require('../models/article.js').Article;
 
-
+var models = {
+	User: user,
+	Article: article
+}
 /*
-<<<<<<< HEAD
  * [POST] 新增收藏文章
- * request : aid
- * respone : 
+ * request : uid, aid
+ * respone :
  */
 router.post('/', function(req, res, next) {
-    
-    if(!req.body.aid){
-        res.json( { err : '資料不完全' } );
-    }
 
-    //先將傳過來的資料做成資料庫物件
-     var user = new models.User({
-        link : req.body.aid
-     });
+	var info = { _id: req.body.uid };
 
-    //儲存到資料庫
-     user.save(function(err, result) {
-         if (err) {
-             console.log('[TEST] create test user FAIL, err ->', err);
-             res.json(err);
-         } else {
-             res.json(result);
-         }
-     });
-=======
- * [POST] 查詢別人(uid)收藏的
+    models.User.findOne( info, function(err, result) {
+
+        if (err) {
+            console.log('[ERROR] user find fail, err ->', err);
+            res.json(err);
+        }else{
+        	if(result){
+
+        		//處理需要更新的資料
+	        	var updateData = { like: result.like };
+	        	updateData.like.push( req.body.aid );
+
+	        	models.User.update( info, updateData, function(err, result) {
+
+	    		    if (err) {
+			            console.log('[ERROR] user like update fail, err ->', err);
+			            res.json(err);
+			        } else {
+			            res.json(result);
+			        }
+	        	});
+        	}else{
+        		//no result
+        		res.json({ like: false });
+        	}
+
+        }
+    });
+});
+
+/* [POST] 查詢別人(uid)收藏的
  * request : uid, aid
  * respone : db result
  */
 router.post('/?uid', function(req, res, next) {
 
-    var info = req.body.uid;
+    // var info = req.body.uid;
 
-    models.Article.find( info, function(err, result) {
-        if (err) {
-            console.log('[ERROR] user find fail, err ->', err);
-            res.json(err);
-        } else {
-            res.json(result);
-        }
-    });
->>>>>>> a947f66756f0bb8f261cc7e0efa3ac5c6a913c57
+    // models.Article.find( info, function(err, result) {
+    //     if (err) {
+    //         console.log('[ERROR] user find fail, err ->', err);
+    //         res.json(err);
+    //     } else {
+    //         res.json(result);
+    //     }
+    // });
 });
-
 
 module.exports = router;
