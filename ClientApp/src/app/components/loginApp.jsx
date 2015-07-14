@@ -103,7 +103,7 @@ let loginApp = React.createClass({
 
                 <br/>
 
-                <FlatButton label="Forget your password" primary={true} onTouchTap={this._Forget}/>
+                <FlatButton label="Forget password" primary={true} onTouchTap={this._Forget}/>
 
                 <Dialog
 			        title="Forget your password ?"
@@ -111,20 +111,22 @@ let loginApp = React.createClass({
 			        ref="ForgetDialog">
 			        <TextField
                 		id="email"
-                        hintText="e-mail address"
-                        />
+                        hintText="e-mail address" />
 		        </Dialog>
 
                 <Dialog
 			        title="SignUp"
-			        actions={ [{ text: 'sure' }] }
+			        actions={[
+                        { text: 'sure', onTouchTap: this._onSingupSubmit, ref: 'submit' } ]}
 			        ref="SignUpDialog">
 			        <TextField
-                        hintText="e-mail address"
+                        id="signUpEmail"
+                        hintText="email address"
                         errorText={this.state.errormail}
                         onChange={this._SignUpmail} />
                     <br/>
                     <TextField
+                        id="signUpPwd"
                         hintText="password"
                         errorText={this.state.errorpassword}
                         onChange={this._SignUppassword} />
@@ -132,10 +134,12 @@ let loginApp = React.createClass({
 
                 <Snackbar
                       ref="loginFailSnackbar"
-                      message="Login fail, please try again or use email to retrieve your password"
-                      action=""
-                      autoHideDuration={this.state.autoHideDuration}
-                      onActionTouchTap={this._handleAction}/>
+                      message="Login fail, please try again or use email to retrieve your password." />
+
+                <Snackbar
+                      ref="singUpSuccessSnackbar"
+                      message="Sign up success, please login in."
+                      autoHideDuration={this.state.autoHideDuration} />
 
             </div>
 	    );
@@ -143,40 +147,24 @@ let loginApp = React.createClass({
 
     //Login按鈕
     _Login(){
-
     	let email = $('#email').val();
     	let pwd = $('#pwd').val();
-
-        //錯誤會有 Snackbar
-        let loginFail = this.refs.loginFailSnackbar.show;
+        let loginFail = this.refs.loginFailSnackbar.show; //錯誤會有 Snackbar
         Actions.login({ email, pwd }, loginFail);
-
-//        //判斷是否有輸入E-mail和password (用長度判斷)
-//        if(email.length==0 && pwd.length==0){
-//            let snackbar = this.refs.snackbar.show();
-//        }else if(email.length>0 && pwd.length>0){
-//            let loginFail = this.refs.loginFailDialog.dismiss;
-//            Actions.login({ email, pwd }, loginFail);
-//            console.log("login success");
-//        }
-
     },
 
     _Forget(){
-
    	    this.refs.ForgetDialog.show();
-
-    	Actions.load();
     },
 
     _SignUp(){
-
    	    this.refs.SignUpDialog.show();
-
-    	Actions.load();
     },
 
     _SignUpmail(e) {
+
+        //這邊可以塞email正規演算
+
         this.setState({
           errormail: e.target.value ? '' : 'This field is required.'
         });
@@ -187,6 +175,18 @@ let loginApp = React.createClass({
           errorpassword: e.target.value ? '' : 'This field is required.'
         });
     },
+
+    _onSingupSubmit(e){
+
+        let email = $('#signUpEmail').val();
+        let pwd = $('#signUpPwd').val();
+
+        let signupSuccess = ()=>{
+            this.refs.singUpSuccessSnackbar.show;
+            this.refs.SignUpDialog.dismiss;
+        }
+        Actions.signUp({ email, pwd }, signupSuccess);
+    }
 
 });
 

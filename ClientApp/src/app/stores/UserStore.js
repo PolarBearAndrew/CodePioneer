@@ -63,6 +63,9 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
         /**
          *
          */
+        case AppConstants.noop:
+            console.log('[EVENT] noop');
+            break;
         case AppConstants.USER_LOGIN:
             isLogin = data;
             Store.emit( AppConstants.CHANGE_EVENT );

@@ -5,17 +5,6 @@ let address = 'http://localhost:8080/api/users';
 
 let AppActions_User = {
 
-
-
-
-	load(){
-		// console.log('load data');
-
-		// AppDispatcher.handleViewAction({
-		// 	actionType: AppConstants.USER_LOGIN
-		// });
-	},
-
 	login( data, loginFail ){
 		$.ajax({
 			url: address + '/login',
@@ -47,7 +36,32 @@ let AppActions_User = {
 			}
 
 		});
-	}
+	},
+
+	signUp( data, loginSuccess ){
+		$.ajax({
+			url: address + '/',
+			type: 'POST',
+			data: data,
+
+			success: function(result){
+
+				loginSuccess();
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			},
+			error: function(err){
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+
+		});
+	},
 
 }
 
