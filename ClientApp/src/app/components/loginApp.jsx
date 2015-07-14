@@ -39,6 +39,14 @@ let loginApp = React.createClass({
 		});
         // ThemeManager.setTheme(ThemeManager.types.DARK);
 	},
+    
+    //errorText
+    getInitialState() {
+    return {
+      errormail: 'This field is required.',
+         errorpassword: 'This field is required.',
+         };
+    },
 
 	//顯示畫面的func
 	render() {
@@ -69,6 +77,20 @@ let loginApp = React.createClass({
 	    	{ text: 'Cancel' },
 	    	{ text: 'Submit' }
 	    ];
+        
+        let componentInfo = [
+            {
+                name: 'Props',
+                infoArray: [
+                {
+                    name: 'errorText',
+                    type: 'string',
+                    header: 'optional',
+                    desc: 'The error text string to display.'
+                },
+                ]
+            },
+        ]
 
 	    return (
 	    	<div className="loginTab" style={containerStyle}>
@@ -89,7 +111,7 @@ let loginApp = React.createClass({
                 <br/><br/>
 
                 <div style={btn}>
-                    <RaisedButton label="Sign up" primary={false}/>
+                    <RaisedButton label="SignUp" primary={false} onTouchTap={this._SignUp}/>
                     <RaisedButton label="Login" primary={true} onTouchTap={this._Login} />
                 </div>
 
@@ -104,7 +126,8 @@ let loginApp = React.createClass({
             
                 <Dialog
 			        title="Login Forget"
-			        actions={ [{ text: 'sure' }] }
+                    actions={emailPwdActions}
+//			        actions={ [{ text: 'sure' }] }
 			        ref="ForgetDialog">
 			        <TextField
                 		id="email"
@@ -112,6 +135,22 @@ let loginApp = React.createClass({
                         multiLine={true} />
 		        </Dialog>
 
+                <Dialog
+			        title="SignUp"
+			        actions={ [{ text: 'sure' }] }
+			        ref="SignUpDialog">
+			        <TextField
+                        multiLine={true}
+                        hintText="e-mail address"
+                        errorText={this.state.errormail}
+                        onChange={this._SignUpmail} />
+                    <br/>
+                    <TextField
+                        hintText="password"
+                        errorText={this.state.errorpassword}
+                        onChange={this._SignUppassword} />
+		        </Dialog>
+            
             </div>
 	    );
 	},
@@ -131,6 +170,25 @@ let loginApp = React.createClass({
    	    this.refs.ForgetDialog.show();
 
     	Actions.load();
+    },
+    
+    _SignUp(){
+
+   	    this.refs.SignUpDialog.show();
+
+    	Actions.load();
+    },
+    
+    _SignUpmail(e) {
+        this.setState({
+          errormail: e.target.value ? '' : 'This field is required.'
+        });
+    },
+    
+    _SignUppassword(e) {
+        this.setState({
+          errorpassword: e.target.value ? '' : 'This field is required.'
+        });
     },
 
 });
