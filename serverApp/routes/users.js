@@ -1,14 +1,12 @@
+//express
 var express = require('express');
 var router = express.Router();
 
+//models
 var User = require('../models/user.js');
-var postMan = require('./mail.js');
 
-//req  request 請求
-//res  respone 回應
-//post過來的參數 用req.body.xxx去找
-//get的參數 用req.query.xxx去找
-//=============================================
+//mail server
+var postMan = require('./mail.js');
 
 /*
  * [POST] 新增使用者
@@ -25,7 +23,10 @@ router.post('/', function(req, res, next) {
     var user = new User({
         name: req.body.name,
         email: req.body.email,
-        pwd: req.body.pwd
+        pwd: req.body.pwd,
+        likeArticle: [],
+        whoLikeMe: []
+
     });
 
     //儲存到資料庫
@@ -36,33 +37,6 @@ router.post('/', function(req, res, next) {
             res.json(err);
         } else {
             res.json(result);
-        }
-    });
-});
-
-/*
- * [PUT] 修改使用者
- * request : _id, name, email ,pwd
- * respone : db result
- */
-router.put('/',  function(req, res, next) {
-
-    if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
-        res.json( { err : '資料不完全' } );
-    }
-
-    var info = {
-        name : req.body.name,
-        email : req.body.email,
-        pwd : req.body.pwd
-    }
-
-    User.update({_id : req.body._id}, info, function(err, result) {
-        if(err){
-            console.log('update user FAIL, err ->', err);
-            res.json({ err: err });
-        }else{
-            res.json(info);
         }
     });
 });
@@ -87,6 +61,34 @@ router.get('/', function(req, res, next) {
         }
     });
 });
+
+/*
+ * [PUT] 修改使用者
+ * request : _id, name, email ,pwd
+ * respone : db result
+ */
+router.put('/',  function(req, res, next) {
+
+    if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
+        res.json( { err : '資料不完全' } );
+    }
+
+    var info = {
+        name: req.body.name,
+        email: req.body.email,
+        pwd: req.body.pwd
+    }
+
+    User.update({_id : req.body._id}, info, function(err, result) {
+        if(err){
+            console.log('update user FAIL, err ->', err);
+            res.json({ err: err });
+        }else{
+            res.json(info);
+        }
+    });
+});
+
 
 /*
  * [DELETE] 刪除使用者
@@ -171,7 +173,5 @@ router.get('/pwd', function(req, res, next){
         }
     });
 });
-
-
 
 module.exports = router;

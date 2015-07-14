@@ -1,3 +1,4 @@
+//mongoose db
 var link = require('./link.js');
 var mongoose = link.mongoose;
 var db = link.db;
@@ -27,12 +28,6 @@ var User = new mongoose.Schema({
         uid: String
     }],
 });
-
-//likeArticle
-//{ aid: '#$%^UHBVFGHJ', likeTime: '' }
-
-//whoLikeMe
-//{ uid: '101111212'}
 
 //exports model
 module.exports = db.model('user', User);
