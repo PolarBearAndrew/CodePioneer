@@ -36,7 +36,7 @@ let loginApp = React.createClass({
 
 	componentWillMount() {
 		ThemeManager.setPalette({
-			accent1Color: Colors.deepOrange500
+//			accent1Color: Colors.deepOrange500
 		});
         // ThemeManager.setTheme(ThemeManager.types.DARK);
 	},
@@ -118,8 +118,7 @@ let loginApp = React.createClass({
             
                 <br/>
             
-                <FlatButton label="Forget your password" primary={true} onTouchTap={this._Forget} 
-                    hoverColor="rgb(96, 255, 163)" />
+                <FlatButton label="Forget your password" primary={true} onTouchTap={this._Forget}/>
 
                 <Dialog
 			        title="Login Fail"
@@ -131,7 +130,6 @@ let loginApp = React.createClass({
                 <Dialog
 			        title="Forget your password ?"
                     actions={emailPwdActions}
-//			        actions={ [{ text: 'sure' }] }
 			        ref="ForgetDialog">
 			        <TextField
                 		id="email"
@@ -144,7 +142,6 @@ let loginApp = React.createClass({
 			        actions={ [{ text: 'sure' }] }
 			        ref="SignUpDialog">
 			        <TextField
-                        multiLine={true}
                         hintText="e-mail address"
                         errorText={this.state.errormail}
                         onChange={this._SignUpmail} />
