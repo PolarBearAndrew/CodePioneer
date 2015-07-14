@@ -1,4 +1,4 @@
-//mongoose db
+//mongoose
 var link = require('./link.js');
 var mongoose = link.mongoose;
 var db = link.db;

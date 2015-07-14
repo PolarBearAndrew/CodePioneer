@@ -48,11 +48,14 @@ router.post('/', function(req, res, next) {
  */
 router.get('/', function(req, res, next) {
 
-    if(!req.query._id){
+    // console.log('done');
+    console.log('_id', req.body._id)
+
+    if(!req.body._id){
         res.json( { err : '資料不完全' } );
     }
 
-    User.find({ _id : req.query._id }, function(err, result) {
+    User.find({ _id : req.body._id }, function(err, result) {
         if(err){
             console.log('find user FAIL, err ->', err);
             res.json({ err: err });

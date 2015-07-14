@@ -31,8 +31,8 @@ function crawl(){
 
 				    //儲存到資料庫
 				    article.save(function(err, result) {
-
-				        if (err) console.log('[TEST] create article FAIL, err ->', err);
+				        if (err)
+				        	console.log('[TEST] create article FAIL, err ->', err);
 				    });
                 });
 
