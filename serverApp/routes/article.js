@@ -72,7 +72,8 @@ router.get('/', function(req, res, next) {
             res.json(err);
         }else{
         	if(result){
-                var infolink = { link: result.body.link };
+                var infolink = { link: result.query
+                                .link };
                 models.User.findOne(infolink, function(err, result){
                     if (err) {
 			            console.log('[ERROR] user like link fail, err ->', err);
