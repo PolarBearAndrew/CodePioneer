@@ -17,6 +17,8 @@ var app = express();
 //our plugin
 var testCrawlAPI = require('./routes/testCrawlAPI.js');
 
+var article = require('/routes/article');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api/users', users);
 app.use('/api/testCrawlAPI', testCrawlAPI);
+app.use('/api/article', article);
 
 
 
