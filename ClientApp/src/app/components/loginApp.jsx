@@ -11,6 +11,7 @@ let ThemeManager = new mui.Styles.ThemeManager();
 let TextField=mui.TextField;
 let RaisedButton=mui.RaisedButton;
 let Dialog = mui.Dialog;
+let FlatButton=mui.FlatButton;
 
 //react 自製元件
 
@@ -98,7 +99,7 @@ let loginApp = React.createClass({
                 <TextField
                 		id="email"
                         hintText="e-mail address"
-                        multiLine={true} />
+                        />
 
                 <TextField
                 	id="pwd"
@@ -114,8 +115,11 @@ let loginApp = React.createClass({
                     <RaisedButton label="SignUp" primary={false} onTouchTap={this._SignUp}/>
                     <RaisedButton label="Login" primary={true} onTouchTap={this._Login} />
                 </div>
-
-                <h4 onTouchTap={this._Forget}> Forget your password</h4>
+            
+                <br/>
+            
+                <FlatButton label="Forget your password" primary={true} onTouchTap={this._Forget} 
+                    hoverColor="rgb(96, 255, 163)" />
 
                 <Dialog
 			        title="Login Fail"
@@ -125,14 +129,14 @@ let loginApp = React.createClass({
 		        </Dialog>
             
                 <Dialog
-			        title="Login Forget"
+			        title="Forget your password ?"
                     actions={emailPwdActions}
 //			        actions={ [{ text: 'sure' }] }
 			        ref="ForgetDialog">
 			        <TextField
                 		id="email"
                         hintText="e-mail address"
-                        multiLine={true} />
+                        />
 		        </Dialog>
 
                 <Dialog
