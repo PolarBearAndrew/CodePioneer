@@ -17,6 +17,7 @@ router.post('/', function(req, res, next) {
 
     if(!req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
+        return;
     }
 
     //先將傳過來的資料做成資料庫物件
@@ -49,10 +50,11 @@ router.post('/', function(req, res, next) {
 router.get('/', function(req, res, next) {
 
     // console.log('done');
-    console.log('_id', req.body._id)
+    // console.log('_id', req.body._id)
 
     if(!req.body._id){
         res.json( { err : '資料不完全' } );
+        return;
     }
 
     User.find({ _id : req.body._id }, function(err, result) {
@@ -74,6 +76,7 @@ router.put('/',  function(req, res, next) {
 
     if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
+        return;
     }
 
     var info = {
@@ -103,6 +106,7 @@ router.delete('/', function(req, res, next) {
 
     if(!req.body._id){
         res.json( { err : '資料不完全' } );
+        return;
     }
 
     User.remove({ _id : req.body._id }, function(err, result) {
