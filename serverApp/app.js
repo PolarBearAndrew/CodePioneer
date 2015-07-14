@@ -5,18 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//api
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var article = require('./routes/article');
 
-//===
+//plugin
 var crawl = require('./routes/crawl.js');
-//===
 
 var app = express();
 
 //our plugin
 var testCrawlAPI = require('./routes/testCrawlAPI.js');
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,6 +40,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/api/users', users);
+app.use('/api/articles', article);
+
+//test need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);
 
 
