@@ -3,26 +3,28 @@ var router = express.Router();
 
 var models = require('../models/article.js');
 
+
+
+
+
+
 /*
- * [POST] 新增使用者
- * request : name, email, pwd
+ * [POST] 查詢別人(uid)收藏的
+ * request : uid, aid
  * respone : db result
  */
-router.post('/', function(req, res, next) {
+router.post('/?uid', function(req, res, next) {
 
-    //先將傳過來的資料做成資料庫物件
-    // var user = new models.User({ });
+    var info = req.body.uid;
 
-    //儲存到資料庫
-    // user.save(function(err, result) {
-
-    //     if (err) {
-    //         console.log('[TEST] create test user FAIL, err ->', err);
-    //         res.json(err);
-    //     } else {
-    //         res.json(result);
-    //     }
-    // });
+    models.Article.find( info, function(err, result) {
+        if (err) {
+            console.log('[ERROR] user find fail, err ->', err);
+            res.json(err);
+        } else {
+            res.json(result);
+        }
+    });
 });
 
 
