@@ -13,6 +13,9 @@ var User = new mongoose.Schema({
     },
     pwd: {
         type: String
+    },
+    like: {
+        type: Array
     }
 });
 
