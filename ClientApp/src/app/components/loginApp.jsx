@@ -8,10 +8,11 @@ let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
 //mui 元件
-let TextField=mui.TextField;
-let RaisedButton=mui.RaisedButton;
+let TextField = mui.TextField;
+let RaisedButton = mui.RaisedButton;
 let Dialog = mui.Dialog;
-let FlatButton=mui.FlatButton;
+let FlatButton = mui.FlatButton;
+let Snackbar = mui.Snackbar;
 
 //react 自製元件
 
@@ -36,15 +37,15 @@ let loginApp = React.createClass({
 
 	componentWillMount() {
 		ThemeManager.setPalette({
-//			accent1Color: Colors.deepOrange500
+        // accent1Color: Colors.deepOrange500 按鈕顏色
 		});
         // ThemeManager.setTheme(ThemeManager.types.DARK);
 	},
     
-    //errorText
+    //將 SignUp 兩個TextField，區分
     getInitialState() {
     return {
-      errormail: 'This field is required.',
+         errormail: 'This field is required.',
          errorpassword: 'This field is required.',
          };
     },
@@ -79,20 +80,6 @@ let loginApp = React.createClass({
 	    	{ text: 'Submit' }
 	    ];
         
-        let componentInfo = [
-            {
-                name: 'Props',
-                infoArray: [
-                {
-                    name: 'errorText',
-                    type: 'string',
-                    header: 'optional',
-                    desc: 'The error text string to display.'
-                },
-                ]
-            },
-        ]
-
 	    return (
 	    	<div className="loginTab" style={containerStyle}>
 
@@ -112,20 +99,13 @@ let loginApp = React.createClass({
                 <br/><br/>
 
                 <div style={btn}>
-                    <RaisedButton label="SignUp" primary={false} onTouchTap={this._SignUp}/>
+                    <RaisedButton label="SignUp" primary={false} onTouchTap={this._SignUp}/>  
                     <RaisedButton label="Login" primary={true} onTouchTap={this._Login} />
                 </div>
             
                 <br/>
             
                 <FlatButton label="Forget your password" primary={true} onTouchTap={this._Forget}/>
-
-                <Dialog
-			        title="Login Fail"
-			        actions={ [{ text: 'sure' }] }
-			        ref="loginFailDialog">
-			        Login fail, please try again or use email to retrieve your password.
-		        </Dialog>
             
                 <Dialog
 			        title="Forget your password ?"
@@ -152,18 +132,36 @@ let loginApp = React.createClass({
                         onChange={this._SignUppassword} />
 		        </Dialog>
             
+                <Snackbar
+                      ref="loginFailSnackbar"
+                      message="Login fail, please try again or use email to retrieve your password"
+                      action=""
+                      autoHideDuration={this.state.autoHideDuration}
+                      onActionTouchTap={this._handleAction}/>
+            
             </div>
 	    );
 	},
 
+    //Login按鈕
     _Login(){
-
-   		let loginFail = this.refs.loginFailDialog.show;
-
+        
     	let email = $('#email').val();
     	let pwd = $('#pwd').val();
-
-    	Actions.login({ email, pwd }, loginFail);
+        
+        //錯誤會有 Snackbar
+        let loginFail = this.refs.loginFailSnackbar.show;
+        Actions.login({ email, pwd }, loginFail);
+        
+//        //判斷是否有輸入E-mail和password (用長度判斷)
+//        if(email.length==0 && pwd.length==0){
+//            let snackbar = this.refs.snackbar.show();
+//        }else if(email.length>0 && pwd.length>0){
+//            let loginFail = this.refs.loginFailDialog.dismiss;
+//            Actions.login({ email, pwd }, loginFail);
+//            console.log("login success");
+//        }
+    	
     },
     
     _Forget(){
@@ -191,7 +189,7 @@ let loginApp = React.createClass({
           errorpassword: e.target.value ? '' : 'This field is required.'
         });
     },
-
+        
 });
 
 module.exports = loginApp;
