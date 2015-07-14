@@ -7,6 +7,9 @@ let React = require('react');
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
+let MenuItem=mui.MenuItem;
+let AppBar=mui.AppBar;
+let LeftNav=mui.LeftNav;
 
 //mui元件
 //範例:
@@ -32,13 +35,47 @@ let container = React.createClass({
 
 	render() {
 
-		console.log('here is container');
+		let containerStyle = {
+	    	textAlign: 'center',
+	    	padding: '0px',
+	    	margin: '0px'
+	    };
+        
+        var menuItems = [
+              { route: 'latest news', text: 'Latest news' },
+              { route: 'search', text: 'Search' },
+              { route: 'components', text: 'Components' },
+              { 
+                 type: MenuItem.Types.LINK, 
+                 payload: 'https://www.facebook.com/', 
+                 text: 'FaceBook' 
+              },
+              { 
+                 text: 'Disabled', 
+                 disabled: false 
+              },
+              { 
+                 type: MenuItem.Types.LINK, 
+                 payload: 'https://www.google.com', 
+                 text: 'Disabled Link', 
+                 disabled: true 
+              },
+            ];
 
 	    return (
-    		<h1>this is container </h1>
+    		<div  style={containerStyle}>
+                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
+                        //右邊出現灰色底
+                        iconClassNameRight="muidocs-icon-navigation-expand-more"
+           />
+                <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
+            </div>
 	    );
 
 	},
+    _leftmenu(){
+    this.refs.leftNav.toggle();
+  },
 });
 
 module.exports = container;
