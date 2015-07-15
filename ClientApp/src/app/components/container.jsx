@@ -7,9 +7,16 @@ let React = require('react');
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
-let MenuItem=mui.MenuItem;
-let AppBar=mui.AppBar;
-let LeftNav=mui.LeftNav;
+let MenuItem = mui.MenuItem;
+let AppBar = mui.AppBar;
+let LeftNav = mui.LeftNav;
+
+let Paper = mui.Paper;
+let FlatButton = mui.FlatButton;
+let Avatar = mui.Avatar;
+let CardHeader = mui.CardHeader;
+let CardText = mui.CardText;
+let IconButton = mui.IconButton;
 
 //mui元件
 //範例:
@@ -61,21 +68,56 @@ let container = React.createClass({
                  disabled: true 
               },
             ];
-
+        
+        let article = {
+            display:'flex',
+            justifyContent:'flex-start',
+            alignItems:'center'
+        };
+        
+        // iconClassNameRight="muidocs-icon-navigation-expand-more"
+        //<i className="material-icons">home</i>
+        
 	    return (
     		<div  style={containerStyle}>
-                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
+            
+                <AppBar onRigthIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
                         //右邊出現灰色底
-                        iconClassNameRight="muidocs-icon-navigation-expand-more"
-           />
+                        iconElementRight={ <IconButton iconClassName="material-icons"> home </IconButton> }
+                        />
+              
+                <br/>
+            
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
+            
+                <Paper zDepth={2}>
+                    <div style={article}>
+                      <FlatButton 
+                        linkButton={true} 
+                        href="https://github.com/callemall/material-ui" 
+                        secondary={true} 
+                        label="title_New Horizons phones home">                
+                      </FlatButton>
+            
+                      <CardText>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+                      </CardText>
+                      <CardHeader
+                        title="Panda"
+                        subtitle="author"
+                        avatar="http://lorempixel.com/100/100/nature/"/>
+                    </div>
+                    
+                </Paper>
+            
             </div>
 	    );
 
 	},
     _leftmenu(){
-    this.refs.leftNav.toggle();
-  },
+        this.refs.leftNav.toggle();
+      },
 });
 
 module.exports = container;
