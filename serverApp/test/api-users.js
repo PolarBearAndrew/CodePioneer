@@ -21,16 +21,17 @@ describe('[ API unit test ]', function() {
         return  User.remove({}, (err, result) => {
 
             //init data
-            // var user = new User(initData);
-            // user.save((err, result) => {
-            //     uid = result._id;
-            // });
+            var user = new User(initData);
+            user.save((err, result) => {
+                uid = result._id;
+                expectData.uid = uid;
+            });
         });
     });
 
-    describe('正常操作測試', function() {
+    describe('正常操作測試', () => {
 
-        it('[POST] 新增使用者', function() {
+        it('[POST] 新增使用者', ( done ) => {
 
             request({
                 url: 'http://localhost:8080/api/users/',
@@ -41,56 +42,57 @@ describe('[ API unit test ]', function() {
                 //test api exist
                 res.statusCode.should.equal(200);
 
-                initData.name = '123';
-
                 //test data
                 data = JSON.parse( data );
                 data.should.equal( initData );
 
                 //set uid for next test
-                uid = result._id;
-                expectData.uid = uid;
+                // uid = result._id;
+                // expectData.uid = uid;
 
                 return done();
             });
         });
 
-        // it('[GET] 查詢使用者', function() {
+        it('[GET] 查詢使用者', ( done ) => {
 
-        //     request({
-        //         url: 'http://localhost:8080/api/users/',
-        //         method: 'GET',
-        //         form: { _id: uid }
-        //     }, (err, res, data) => {
+            request({
+                url: 'http://localhost:8080/api/users/',
+                method: 'GET',
+                form: { _id: uid }
+            }, (err, res, data) => {
 
-        //         //test api exist
-        //         res.statusCode.should.equal(200);
+                //test api exist
+                res.statusCode.should.equal(200);
 
-        //         //test data
-        //         data = JSON.parse( data );
-        //         data.should.equal( expectData );
-        //     });
-        // });
+                //test data
+                data = JSON.parse( data );
+                data.should.equal( expectData );
 
-        // it('[PUT] 修改使用者', function() {
+                return done();
+            });
+        });
 
-        //     expectData.pwd = 456;
+        it('[PUT] 修改使用者', ( done ) => {
 
-        //     request({
-        //         url: 'http://localhost:8080/api/users/',
-        //         method: 'PUT',
-        //         form: expectData
-        //     }, (err, res, data) => {
+            expectData.pwd = 456;
 
-        //         //test api exist
-        //         res.statusCode.should.equal(200);
+            request({
+                url: 'http://localhost:8080/api/users/',
+                method: 'PUT',
+                form: expectData
+            }, (err, res, data) => {
 
-        //         //test data
-        //         data = JSON.parse( data );
-        //         data.should.equal( initData );
+                //test api exist
+                res.statusCode.should.equal(200);
 
-        //     });
-        // });
+                //test data
+                data = JSON.parse( data );
+                data.should.equal( initData );
+
+                return done();
+            });
+        });
     });
 
     after(function() {
