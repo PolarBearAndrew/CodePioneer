@@ -1,3 +1,2 @@
 --recursive
---compilers coffee:coffee-script
--r test/init.js
+-r entry.js
