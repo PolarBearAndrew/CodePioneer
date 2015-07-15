@@ -34,7 +34,6 @@ let AppActions_User = {
 					data: false
 				});
 			}
-
 		});
 	},
 
@@ -61,9 +60,30 @@ let AppActions_User = {
 					data: null
 				});
 			}
-
 		});
 	},
+
+	forgetPwd( data ) {
+		$.ajax({
+			url: address + '/pwd?email=' + data.email,
+			type: 'GET',
+
+			success: function(result){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			},
+			error: function(err){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
+	}
 
 }
 
