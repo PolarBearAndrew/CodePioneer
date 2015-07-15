@@ -48,6 +48,8 @@ let AppActions_User = {
 
 				loginSuccess();
 
+				console.log('result', result);
+
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.noop,
 					data: null
