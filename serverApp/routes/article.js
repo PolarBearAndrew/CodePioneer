@@ -11,6 +11,11 @@ var models = {
  * respone :
  */
 router.post('/', function(req, res, next) {
+    
+    if(!req.body.myid || !req.body.aid){
+        res.json( { err : '資料不完全' } );
+        return;
+    }
 
 	var info = { _id: req.body.myid };
 
@@ -20,12 +25,11 @@ router.post('/', function(req, res, next) {
             console.log('[ERROR] user find fail, err ->', err);
             res.json(err);
         }else{
+            
         	if(result){
-
         		//處理需要更新的資料
 	        	var updateData = { likeArticle: result.likeArticle };
 	        	updateData.likeArticle.push( req.body.aid );
-
 	        	models.User.update( info, updateData, function(err, result) {
 
 	    		    if (err) {
@@ -37,31 +41,22 @@ router.post('/', function(req, res, next) {
 	        	});
         	}else{
         		//no result
-        		res.json({ like: false });
+        		res.json({ err: 'user connot found' });
         	}
 
         }
     });
 });
 
-/* [POST] 查詢別人(uid)收藏的
- * request : uid, myid
- * respone : db result
- */
-router.post('/?uid', function(req, res, next) {
-
-
-});
-
 /*
  * [GET] 查詢收藏文章
- * request :
+ * request : uid
  * respone :
  */
 router.get('/', function(req, res, next) {
 
-    var info = { _id: req.body.uid };
-
+    var info = { _id: req.query.uid };
+    
     models.User.findOne( info, function(err, result) {
 
         if (err) {
@@ -69,16 +64,7 @@ router.get('/', function(req, res, next) {
             res.json(err);
         }else{
         	if(result){
-                var infolink = { link: result.query
-                                .link };
-                models.User.findOne(infolink, function(err, result){
-                    if (err) {
-			            console.log('[ERROR] user like link fail, err ->', err);
-			            res.json(err);
-			        } else {
-			            res.json(result);
-			        }
-                })
+                res.json({likeArticle: result.likeArticle});
         	}else{
         		//no result
         		res.json({ link: false });
@@ -95,6 +81,35 @@ router.get('/', function(req, res, next) {
  */
 router.delete('/', function(req, res, next) {
 
+//	var info = { _id: req.body.myid };
+//
+//    models.User.findOne( info, function(err, result) {
+//
+//        if (err) {
+//            console.log('[ERROR] user find fail, err ->', err);
+//            res.json(err);
+//        }else{
+//            
+//        	if(result){
+//        		//處理需要更新的資料
+//	        	var updateData = { likeArticle: result.likeArticle };
+//	        	updateData.likeArticle.push( req.body.aid );
+//	        	models.User.update( info, updateData, function(err, result) {
+//
+//	    		    if (err) {
+//			            console.log('[ERROR] user like update fail, err ->', err);
+//			            res.json(err);
+//			        } else {
+//			            res.json(result);
+//			        }
+//	        	});
+//        	}else{
+//        		//no result
+//        		res.json({ err: 'user connot found' });
+//        	}
+//
+//        }
+//    });
 });
 
 module.exports = router;
