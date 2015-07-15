@@ -17,12 +17,19 @@ function crawl(){
                 data.results.collection1.forEach(function( item ){
 
 			        var article = new Article({
+                        //title
 				        title: item.title.text,
+                        //文章的url
 					    url: item.title.href,
+                        //作者
 					    author: item.users.text,
+                        //來源
                         from: 'Hakcer News',
-					    describe: item.comments.href,
+                        //
+					    describe: '',
 					    info: [
+                            item.comments.text,
+                            item.comments.href,
 					    	item.points
 					    ]
 				    });

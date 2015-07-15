@@ -102,6 +102,7 @@ router.post('/:uid', function(req, res, next) {
 router.get('/', function(req, res, next) {
 
     var info = { _id: req.body.uid };
+    
     models.User.findOne( info, function(err, result) {
 
         if (err) {
