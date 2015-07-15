@@ -33,9 +33,49 @@ describe('product[@test](/user/test)', function() {
 });
 
 /*
- * [GET] 查詢使用者
+ * [POST] 新增使用者
+ * request : name, email, pwd
+ * respone : db result
+ */
+describe('product[@test](/user/test)', function() {
+
+    return;
+});
+
+/*
+ * [PUT] 修改使用者
+ * request : _id, name, email ,pwd
+ * respone : db result
+ */
+describe('product[@test](/user/test)', function() {
+
+    return;
+});
+
+/*
+ * [DELETE] 刪除使用者
  * request : _id
- * respone : name, email, pwd
+ * respone : db result
+ */
+describe('product[@test](/user/test)', function() {
+
+    return;
+});
+
+/*
+ * [POST] 登入檢查
+ * request : email, pwd
+ * respone : { login : true || false, _id : _id  }
+ */
+describe('product[@test](/user/test)', function() {
+
+    return;
+});
+
+/*
+ * [GET] 取回密碼
+ * request : email
+ * respone : { sendMail : true || false }
  */
 describe('product[@test](/user/test)', function() {
 
