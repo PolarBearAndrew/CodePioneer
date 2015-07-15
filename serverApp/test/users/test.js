@@ -1,5 +1,12 @@
 var request = require('request');
 
+
+
+/*
+ * [GET] 查詢使用者
+ * request : _id
+ * respone : name, email, pwd
+ */
 describe('product[@test](/user/test)', function() {
 
     //test start
@@ -10,11 +17,12 @@ describe('product[@test](/user/test)', function() {
         request({
             url: 'http://localhost:8080/api/users/',
             method: 'GET',
-            form: { _id: '123' }
+            form: { _id: null }
+
         }, function(err, res, data){
 
             //test api exist
-            res.statusCode.should.equal(200);
+            // res.statusCode.should.equal(200);
 
             //test data
             data = JSON.parse(data);
@@ -22,4 +30,14 @@ describe('product[@test](/user/test)', function() {
             return done();
         });
     });
+});
+
+/*
+ * [GET] 查詢使用者
+ * request : _id
+ * respone : name, email, pwd
+ */
+describe('product[@test](/user/test)', function() {
+
+    return;
 });

@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "flux": "^2.0.3",
+    "material-design-icons": "^2.0.0",
     "material-ui": ">=0.8",
     "object-assign": "^3.0.0",
     "react": ">=0.13",
