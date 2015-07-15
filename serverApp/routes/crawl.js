@@ -20,12 +20,10 @@ function crawl(){
 				        title: item.title.text,
 					    url: item.title.href,
 					    author: item.users.text,
+                        from: 'Hakcer News',
 					    describe: item.comments.href,
-	                    //rank命名錯誤　命危pank
-					    rank: item.pank,
 					    info: [
-					    	item.title.text,
-					    	item.title.href
+					    	item.points
 					    ]
 				    });
 

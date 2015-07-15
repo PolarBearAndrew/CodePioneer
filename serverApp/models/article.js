@@ -15,6 +15,9 @@ var Article = new mongoose.Schema({
     author: {
         type: String
     },
+    from: {
+        type: String
+    },
     describe: {
         type: String
     },
