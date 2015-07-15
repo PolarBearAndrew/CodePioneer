@@ -75,7 +75,7 @@ let loginApp = React.createClass({
         //寄送email取回密碼的dialog的按鈕設定資料
 	    let emailPwdActions = [
 	    	{ text: 'Cancel' },
-	    	{ text: 'Submit' }
+	    	{ text: 'Submit', onTouchTap: this._forgetPwd }
 	    ];
 
 	    return (
@@ -110,7 +110,7 @@ let loginApp = React.createClass({
                     actions={emailPwdActions}
 			        ref="ForgetDialog">
 			        <TextField
-                		id="email"
+                		id="forgetPwdEmail"
                         hintText="e-mail address" />
 		        </Dialog>
 
@@ -119,7 +119,14 @@ let loginApp = React.createClass({
 			        actions={[
                         { text: 'sure', onTouchTap: this._onSingupSubmit, ref: 'submit' } ]}
 			        ref="SignUpDialog">
+
 			        <TextField
+                        id="signUpName"
+                        hintText="name"
+                        errorText={this.state.errormail}
+                        onChange={this._SignUpmail} />
+                    <br/>
+                    <TextField
                         id="signUpEmail"
                         hintText="email address"
                         errorText={this.state.errormail}
@@ -180,12 +187,23 @@ let loginApp = React.createClass({
 
         let email = $('#signUpEmail').val();
         let pwd = $('#signUpPwd').val();
+        let name = $('#signUpName').val();
 
         let signupSuccess = ()=>{
-            this.refs.singUpSuccessSnackbar.show;
-            this.refs.SignUpDialog.dismiss;
+            this.refs.singUpSuccessSnackbar.show();
+            this.refs.SignUpDialog.dismiss();
         }
-        Actions.signUp({ email, pwd }, signupSuccess);
+        Actions.signUp({ name, email, pwd }, signupSuccess);
+    },
+
+    _forgetPwd(){
+
+        let email = $('#forgetPwdEmail').val();
+
+        this.refs.ForgetDialog.dismiss();
+
+        Actions.forgetPwd({ email });
+
     }
 
 });

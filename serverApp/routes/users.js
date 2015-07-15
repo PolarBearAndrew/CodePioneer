@@ -155,7 +155,9 @@ router.post('/login', function(req, res, next) {
  */
 router.get('/pwd', function(req, res, next){
 
-    User.findOne( req.query.email, function(err, result) {
+    var email = { email: req.query.email };
+
+    User.findOne( email, function(err, result) {
 
         if (err) {
             console.log('[POST] login FAIL, err ->', err);
@@ -164,7 +166,7 @@ router.get('/pwd', function(req, res, next){
         }else{
             if ( result ){
 
-                console.log('result', result);
+                console.log(result);
 
                 var mailer = new postMan();
                 mailer.sendTo( result.email, result.pwd );

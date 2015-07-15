@@ -28,6 +28,7 @@ function postMan (){
         this.transporter.sendMail(this.mailOptions, function(error, info) {
 
             if (error) { return console.log(error); }
+            else { console.log('send email to:', address) }
         });
 
     }.bind(this)
