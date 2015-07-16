@@ -10,6 +10,9 @@ function crawl(){
 		// 	console.log('tick');
 		// }, (1000) ); //5 min
 
+		/*
+		 * Hacker News
+		 */
 		request("https://www.kimonolabs.com/api/2ydhrtbc?apikey=YTFXE6bo643qztfqtgMJxbTghxkihceB",
 		    function(err, res, data) {
 
@@ -41,9 +44,11 @@ function crawl(){
 				        	console.log('[TEST] create article FAIL, err ->', err);
 				    });
                 });
-
-
 		});
+
+		/*
+		 * Github top 100
+		 */
 	};
 }
 
