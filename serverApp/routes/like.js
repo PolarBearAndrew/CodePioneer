@@ -8,7 +8,7 @@ var models = {
 /*
  * [POST] 新增收藏文章
  * request : uid, aid
- * respone :
+ * respone : { err: false }
  */
 router.post('/', function(req, res, next) {
 
@@ -51,7 +51,7 @@ router.post('/', function(req, res, next) {
 /*
  * [GET] 查詢收藏文章
  * request : uid
- * respone : likeArticle
+ * respone : { likeArticle: null }
  */
 router.get('/', function(req, res, next) {
     
@@ -82,7 +82,7 @@ router.get('/', function(req, res, next) {
 /*
  * [DELETE] 刪除收藏文章
  * request : aid
- * respone :
+ * respone : { err: false }
  */
 router.delete('/', function(req, res, next) {
 
