@@ -53,7 +53,7 @@ describe('[ API unit test - articles ]', function() {
             });
         });
 
-        it('[GET] 查詢文章', ( done ) => {
+        it('[GET] 查詢文章(aid)', ( done ) => {
 
             request({
                 url: 'http://localhost:8080/api/articles/',
@@ -71,6 +71,48 @@ describe('[ API unit test - articles ]', function() {
                 Object.keys(initData).map(( key, index ) => {
                     data.should.have.property( key, initData[key] );
                 });
+
+                return done();
+            });
+        });
+
+        it('[GET] 查詢最新文章(10)', ( done ) => {
+
+            request({
+                url: 'http://localhost:8080/api/articles/news/',
+                method: 'GET'
+            }, (err, res, data) => {
+
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+
+                // //test data
+                data = JSON.parse( data );
+                data.should.with.lengthOf(10);
+
+                return done();
+            });
+        });
+
+        it('[GET] 查詢最新文章(n)', ( done ) => {
+
+            let count = 5;
+
+            request({
+                url: 'http://localhost:8080/api/articles/news/' + count,
+                method: 'GET'
+            }, (err, res, data) => {
+
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+
+                // //test data
+                data = JSON.parse( data );
+                data.should.with.lengthOf(5);
 
                 return done();
             });

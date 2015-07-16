@@ -71,7 +71,7 @@ describe('[ API unit test - like ]', function() {
 
                 //test data
                 data = JSON.parse( data );
-                data.should.have.property('likeArticle').with.length(1);
+                data.should.have.property('likeArticle').with.lengthOf(1);
 
                 return done();
             });
