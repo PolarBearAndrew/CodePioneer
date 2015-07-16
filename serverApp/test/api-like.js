@@ -41,12 +41,13 @@ describe('[ API unit test - like ]', function() {
                 }
             }, (err, res, data) => {
 
-                data = JSON.parse( data );
-
                 //test api exist
+                should.exist(data);
+                should.not.exist(err);
                 res.statusCode.should.equal(200);
 
                 //test data
+                data = JSON.parse( data );
                 data.should.have.property('ok', 1);
                 data.should.have.property('nModified', 1);
 
@@ -62,13 +63,15 @@ describe('[ API unit test - like ]', function() {
                 form: { uid: uid }
             }, (err, res, data) => {
 
-                data = JSON.parse( data );
 
                 //test api exist
+                should.exist(data);
+                should.not.exist(err);
                 res.statusCode.should.equal(200);
 
                 //test data
-                data.should.have.property('likeArticle').with.length(1);
+                data = JSON.parse( data );
+                data.should.have.property('likeArticle').with.lengthOf(1);
 
                 return done();
             });
@@ -86,11 +89,12 @@ describe('[ API unit test - like ]', function() {
             }, (err, res, data) => {
 
                 //test api exist
+                should.exist(data);
+                should.not.exist(err);
                 res.statusCode.should.equal(200);
 
                 //test data
                 data = JSON.parse( data );
-                // data._id.should.equal( uid );
                 data.should.have.property('ok', 1);
 
                 return done();
@@ -102,5 +106,8 @@ describe('[ API unit test - like ]', function() {
 
         // 任何需要在測試後刪除的資料
         //console.log('after');
+        return User.remove({}, (err, result) => {
+
+        });
     });
 });
