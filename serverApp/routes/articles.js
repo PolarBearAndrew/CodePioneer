@@ -11,14 +11,25 @@ var models = {
  * request :
  * respone :
  */
-router.get('/', function(req, res, next) {
-    var article = new Article({
-        title: req.body.title,
-        author: models.User.name,
-        pwd: req.body.pwd,
-        likeArticle: [],
-        whoLikeMe: []
-	});
+router.post('/', function(req, res, next) {
+    
+        var article = new models.Article({
+            title: req.body.title,
+            url: req.body.url,
+            author: req.body.author,
+            from: req.body.from,
+            describe: req.body.describe,
+            info: req.body.info
+        });
+    
+        article.save(function(err, result) {
+        if (err) {
+            console.log('[TEST] create test user FAIL, err ->', err);
+            res.json(err);
+        } else {
+            res.json(result);
+        }
+    });
 });
 
 /*
