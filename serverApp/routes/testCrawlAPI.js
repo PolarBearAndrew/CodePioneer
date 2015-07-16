@@ -8,7 +8,14 @@ router.get('/', function(req, res, next) {
 
 	console.log('i am here');
 
+    //Hacker News
 	request("https://www.kimonolabs.com/api/2ydhrtbc?apikey=YTFXE6bo643qztfqtgMJxbTghxkihceB",
+	    function(err, respone, result) {
+	        res.json(result);
+	});
+    
+    //TOP10
+    request("https://www.kimonolabs.com/api/dbtomjx4?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
 	    function(err, respone, result) {
 	        res.json(result);
 	});
