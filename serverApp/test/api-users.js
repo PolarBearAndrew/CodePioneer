@@ -12,7 +12,7 @@ var uid = null;
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - users ]', function() {
+describe('[ API unit test - users ]', () => {
 
     before(function() {
 
@@ -45,7 +45,7 @@ describe('[ API unit test - users ]', function() {
                 data = JSON.parse( data );
 
                 Object.keys(initData).map(( key, index ) => {
-                    data.should.have.property( key, data[key] );
+                    data.should.have.property( key, initData[key] );
                 })
 
                 uid = data._id.toString();
@@ -72,8 +72,8 @@ describe('[ API unit test - users ]', function() {
                 data = JSON.parse( data );
 
                 Object.keys(initData).map(( key, index ) => {
-                    data.should.have.property( key, data[key] );
-                })
+                    data.should.have.property( key, initData[key] );
+                });
 
                 return done();
             });
@@ -102,8 +102,9 @@ describe('[ API unit test - users ]', function() {
                 //test data
                 data = JSON.parse( data );
 
-                Object.keys(initData).map(( key, index ) => {
-                    data.should.have.property( key, data[key] );
+                Object.keys(expectData).map(( key, index ) => {
+                    if( key !== '_id' ) //為何沒有回傳id???
+                        data.should.have.property( key, expectData[key] );
                 })
 
                 return done();

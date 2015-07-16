@@ -96,7 +96,6 @@ describe('[ API unit test - like ]', function() {
                 //test data
                 data = JSON.parse( data );
                 data.should.have.property('ok', 1);
-                // data._id.should.equal( uid );
 
                 return done();
             });
