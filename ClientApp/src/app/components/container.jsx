@@ -120,15 +120,7 @@ let container = React.createClass({
         
 	    return (
     		<div  style={containerStyle}>
-<<<<<<< HEAD
-            
-                <AppBar onRigthIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
-                        //右邊出現灰色底
-                        iconElementRight={ <IconButton iconClassName="material-icons"> home </IconButton> }
-                        />
-                <br/>
-            
-=======
+
                 
                 <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
                         iconElementRight={ <IconMenu iconButtonElement={<IconButton 
@@ -154,8 +146,6 @@ let container = React.createClass({
                         </List>
                                             </IconMenu> }
                 />
-
->>>>>>> 293f410c4dd31743d2a07c17feef7868b7a1f07f
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
                 
                 <Paper zDepth={2}>
