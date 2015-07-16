@@ -41,7 +41,7 @@ router.post('/', function(req, res, next) {
 	        	});
         	}else{
         		//no result
-        		res.json({ err: 'user connot found' });
+        		res.json({ err: 'false' });
         	}
 
         }
@@ -54,6 +54,11 @@ router.post('/', function(req, res, next) {
  * respone : likeArticle
  */
 router.get('/', function(req, res, next) {
+    
+    if(!req.body.uid){
+        res.json( { err : '資料不完全' } );
+        return;
+    }
 
     var info = { _id: req.query.uid };
 
@@ -110,7 +115,7 @@ router.delete('/', function(req, res, next) {
 	        	});
         	}else{
         		//no result
-        		res.json({ err: 'user connot found' });
+        		res.json({ err: false });
         	}
 
         }
