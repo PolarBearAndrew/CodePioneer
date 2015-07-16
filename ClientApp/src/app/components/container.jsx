@@ -58,29 +58,12 @@ let container = React.createClass({
 	    	margin: '0px'
 	    };
         
-        let containerStyle1 = {
-	    	textAlign: 'center',
-	    	padding: '0px',
-	    	margin: '0px',
-	    };
         
-        let containerStyle2 = {
-	    	textAlign: 'right',
-	    	padding: '0px',
-	    	margin: '10px',
-            float:'right',
-           
-            
-	    };
-        
-        let containerStyle3 = {
-	    	textAlign: 'right',
-	    	padding: '0px',
-	    	marginTop: '10px',
-            float:'right',
-	    };
         
         var menuItems = [
+              { route: 'user', 
+                text: <IconButton iconClassName="material-icons" >account_circle</IconButton> 
+              },
               { route: 'latest news', text: 'Latest news' },
               { route: 'search', text: 'Search' },
               { route: 'components', text: 'Components' },
@@ -99,7 +82,9 @@ let container = React.createClass({
                  text: 'Disabled Link', 
                  disabled: true 
               },
-              { type: MenuItem.Types.SUBHEADER, text: <TextField hintText="Search" fullWidth={true}/> },
+              { type: MenuItem.Types.SUBHEADER, 
+                text: <TextField hintText="Search" fullWidth={true}/> 
+              },
             ];
         
         let article = {
@@ -113,16 +98,8 @@ let container = React.createClass({
         
 	    return (
     		<div  style={containerStyle}>
-                <div  style={containerStyle1}>
-                        <div  style={containerStyle2}>
-                            <IconButton iconClassName="material-icons" >search</IconButton>
-                        </div>
-                        <div  style={containerStyle3}>
-                            <TextField hintText="Search" fullWidth={true}/>
-                        </div>
-                </div>
                 
-                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='' 
+                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
                         iconElementRight={ <IconMenu iconButtonElement={<IconButton 
                         iconClassName="material-icons" >expand_more</IconButton>}  >
                         
