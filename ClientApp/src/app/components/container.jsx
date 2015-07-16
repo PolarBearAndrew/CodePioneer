@@ -63,31 +63,31 @@ let container = React.createClass({
 
 
         var menuItems = [
-              { route: 'user',
-                text: <IconButton iconClassName="material-icons" >account_circle</IconButton>
-              },
-              { route: 'latest news', text: 'Latest news' },
-              { route: 'search', text: 'Search' },
-              { route: 'components', text: 'Components' },
-              {
-                 type: MenuItem.Types.LINK,
-                 payload: 'https://www.facebook.com/',
-                 text: 'FaceBook'
-              },
-              {
-                 text: 'Disabled',
-                 disabled: false
-              },
-              {
-                 type: MenuItem.Types.LINK,
-                 payload: 'https://www.google.com',
-                 text: 'Disabled Link',
-                 disabled: true
-              },
-              { type: MenuItem.Types.SUBHEADER,
-                text: <TextField hintText="Search" fullWidth={true}/>
-              },
-            ];
+            { route: 'user',
+            text: <IconButton iconClassName="material-icons" >account_circle</IconButton>
+            },
+            { route: 'latest news', text: 'Latest news' },
+            { route: 'search', text: 'Search' },
+            { route: 'components', text: 'Components' },
+            {
+                type: MenuItem.Types.LINK,
+                payload: 'https://www.facebook.com/',
+text: 'FaceBook'
+            },
+            {
+             text: 'Disabled',
+             disabled: false
+            },
+            {
+             type: MenuItem.Types.LINK,
+             payload: 'https://www.google.com',
+             text: 'Disabled Link',
+             disabled: true
+            },
+            { type: MenuItem.Types.SUBHEADER,
+            text: <TextField hintText="Search" fullWidth={true}/>
+            }
+        ];
 
         let article = {
             display:'flex',
