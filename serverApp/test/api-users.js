@@ -122,8 +122,7 @@ describe('[ API unit test ]', function() {
 
                 //test data
                 data = JSON.parse( data );
-                // data._id.should.equal( uid );
-                data.login.should.equal(true);
+                data.should.have.property( 'login', true );
 
                 return done();
             });
@@ -143,7 +142,7 @@ describe('[ API unit test ]', function() {
                 //test data
                 data = JSON.parse( data );
                 // data._id.should.equal( uid );
-                data.ok.should.equal(1);
+
                 data.should.have.property( 'ok', 1 );
 
                 return done();
