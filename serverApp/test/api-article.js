@@ -18,7 +18,7 @@ describe('[ API unit test - articles ]', function() {
 
     before(function() {
 
-        return Article.remove({}, (err, result) => {
+        return Article.remove({ author: 'AndrewChen' }, (err, result) => {
 
             //init data
             var article = new Article(initData);
