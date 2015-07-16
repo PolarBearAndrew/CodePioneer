@@ -74,25 +74,28 @@ describe('[ API unit test - articles ]', function() {
             });
         });
 
-        // it('[DELETE] 刪除使用者', ( done ) => {
+        it('[DELETE] 刪除收藏文章', ( done ) => {
 
-        //     request({
-        //         url: 'http://localhost:8080/api/users/',
-        //         method: 'DELETE',
-        //         form: { uid: uid }
-        //     }, (err, res, data) => {
+            request({
+                url: 'http://localhost:8080/api/articles/',
+                method: 'DELETE',
+                form: {
+                    uid: uid,
+                    aid: aid
+                }
+            }, (err, res, data) => {
 
-        //         //test api exist
-        //         res.statusCode.should.equal(200);
+                //test api exist
+                res.statusCode.should.equal(200);
 
-        //         //test data
-        //         data = JSON.parse( data );
-        //         // data._id.should.equal( uid );
-        //         data.ok.should.equal(1);
+                //test data
+                data = JSON.parse( data );
+                // data._id.should.equal( uid );
+                data.should.have.property('ok', 1);
 
-        //         return done();
-        //     });
-        // });
+                return done();
+            });
+        });
     });
 
     after(function(){
