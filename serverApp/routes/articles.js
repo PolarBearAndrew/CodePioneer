@@ -13,12 +13,11 @@ var models = {
  */
 router.get('/', function(req, res, next) {
     var article = new Article({
-        title: req.body.name,
-        author: req.body.email,
+        title: req.body.title,
+        author: models.User.name,
         pwd: req.body.pwd,
         likeArticle: [],
         whoLikeMe: []
-
 });
 
 /*
@@ -50,3 +49,4 @@ router.get('/', function(req, res, next) {
  * request : 
  * respone : 
  */
+module.exports = router;
