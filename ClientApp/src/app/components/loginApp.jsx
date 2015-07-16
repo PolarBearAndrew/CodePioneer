@@ -21,7 +21,6 @@ let Actions = require('../actions/AppActions_User.jsx');
 let AppConstants = require('../constants/AppConstants.js');
 let UserStore = require('../stores/UserStore');
 
-
 //main是這個元件暫時使用的名字
 let loginApp = React.createClass({
 

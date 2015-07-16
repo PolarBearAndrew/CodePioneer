@@ -29,7 +29,6 @@ let ListItem=mui.ListItem;
 let ListDivider=mui.ListDivider;
 
 let Checkbox = mui.Checkbox;
-let ListItem = mui.ListItem;
 
 //mui元件
 //範例:
@@ -60,116 +59,115 @@ let container = React.createClass({
 	    	padding: '0px',
 	    	margin: '0px'
 	    };
-        
-        
-        
+
+
+
         var menuItems = [
-              { route: 'user', 
-                text: <IconButton iconClassName="material-icons" >account_circle</IconButton> 
+              { route: 'user',
+                text: <IconButton iconClassName="material-icons" >account_circle</IconButton>
               },
               { route: 'latest news', text: 'Latest news' },
               { route: 'search', text: 'Search' },
               { route: 'components', text: 'Components' },
-              { 
-                 type: MenuItem.Types.LINK, 
-                 payload: 'https://www.facebook.com/', 
-                 text: 'FaceBook' 
+              {
+                 type: MenuItem.Types.LINK,
+                 payload: 'https://www.facebook.com/',
+                 text: 'FaceBook'
               },
-              { 
-                 text: 'Disabled', 
-                 disabled: false 
+              {
+                 text: 'Disabled',
+                 disabled: false
               },
-              { 
-                 type: MenuItem.Types.LINK, 
-                 payload: 'https://www.google.com', 
-                 text: 'Disabled Link', 
-                 disabled: true 
+              {
+                 type: MenuItem.Types.LINK,
+                 payload: 'https://www.google.com',
+                 text: 'Disabled Link',
+                 disabled: true
               },
-              { type: MenuItem.Types.SUBHEADER, 
-                text: <TextField hintText="Search" fullWidth={true}/> 
+              { type: MenuItem.Types.SUBHEADER,
+                text: <TextField hintText="Search" fullWidth={true}/>
               },
             ];
-        
+
         let article = {
             display:'flex',
             justifyContent:'flex-start',
             alignItems:'center',
             color:"#696969",
             padding:5
-            
+
         };
-        
+
         let title = {
             fontSize:30,
             padding:0,
             margin:0
         };
-        
+
         let starBtn = {
             width:0,
             display:'flex',
             alignItems:'flex-end'
-            
+
         };
-        
+
         let contents = {
             padding:5
         };
         // iconClassNameRight="muidocs-icon-navigation-expand-more"
         //<i className="material-icons">home</i>
-        
+
 	    return (
     		<div  style={containerStyle}>
 
-                
-                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
-                        iconElementRight={ <IconMenu iconButtonElement={<IconButton 
+
+                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
+                        iconElementRight={ <IconMenu iconButtonElement={<IconButton
                         iconClassName="material-icons" >expand_more</IconButton>}  >
-                        
+
                         <List >
-                            
+
                             <ListItem
-                              
-                              leftAvatar={<Avatar  className="material-icons">stars</Avatar>}   
+
+                              leftAvatar={<Avatar  className="material-icons">stars</Avatar>}
                               primaryText="Latest news"
                                />
                             <ListDivider inset={true} />
                             <ListItem
-                              leftAvatar={<Avatar  className="material-icons">favorite</Avatar>}    
+                              leftAvatar={<Avatar  className="material-icons">favorite</Avatar>}
                               primaryText="Search"
                                />
                             <ListDivider inset={true} />
                             <ListItem
-                              leftAvatar={<Avatar  className="material-icons">loyalty</Avatar>}     
+                              leftAvatar={<Avatar  className="material-icons">loyalty</Avatar>}
                               primaryText="be bo"
                                />
                         </List>
                                             </IconMenu> }
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
-                
+
                 <Paper zDepth={2}>
-                    <ListItem 
-                        style={title} 
+                    <ListItem
+                        style={title}
                         onMouseOver = {this._onTitleOver}
-                        className="title" 
-                        primaryText="New JavaScript in 2015 !!" 
+                        className="title"
+                        primaryText="New JavaScript in 2015 !!"
                         href=""
                     />
                     <div style={article}>
                       <CardText style={contents}>
-                        by AndrewChen 
-                <br/> In FaceBook
+                        by AndrewChen <br/> In FaceBook
                       </CardText>
-                      
+
                       <CardText style={contents}>
                         this is the world future...
                       </CardText>
-            
+
                       <CardText className="comments" style={contents}>
                         999 likes
                       </CardText>
-            
+
                       <Checkbox
                         style={starBtn}
                         name="checkboxName4"
@@ -186,7 +184,7 @@ let container = React.createClass({
     _leftmenu(){
         this.refs.leftNav.toggle();
       },
-    
+
     _onTitleOver(){
     },
 });

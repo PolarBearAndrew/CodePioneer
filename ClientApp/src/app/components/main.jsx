@@ -6,6 +6,7 @@ let React = require('react');
 let LoginApp = require('./loginApp.jsx');
 let Container = require('./container.jsx');
 
+
 //flux 資料相關
 // let Actions = require('../actions/AppActions_User.jsx');
 // let AppConstants = require('../constants/AppConstants.js');
@@ -18,10 +19,10 @@ let Main = React.createClass({
 
 	//顯示畫面的func
 	render() {
-        //<Container /><LoginApp />
-
+        //<Container />
+        //<LoginApp />
 	    return (
-	    	  <Container />
+	    	<Container />
 	    );
 	},
 
