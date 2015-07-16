@@ -11,7 +11,7 @@ var models = {
  * respone :
  */
 router.post('/', function(req, res, next) {
-    
+
     if(!req.body.myid || !req.body.aid){
         res.json( { err : '資料不完全' } );
         return;
@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
             console.log('[ERROR] user find fail, err ->', err);
             res.json(err);
         }else{
-            
+
         	if(result){
         		//處理需要更新的資料
 	        	var updateData = { likeArticle: result.likeArticle };
@@ -56,7 +56,7 @@ router.post('/', function(req, res, next) {
 router.get('/', function(req, res, next) {
 
     var info = { _id: req.query.uid };
-    
+
     models.User.findOne( info, function(err, result) {
 
         if (err) {
@@ -89,7 +89,7 @@ router.delete('/', function(req, res, next) {
 //            console.log('[ERROR] user find fail, err ->', err);
 //            res.json(err);
 //        }else{
-//            
+//
 //        	if(result){
 //        		//處理需要更新的資料
 //	        	var updateData = { likeArticle: result.likeArticle };

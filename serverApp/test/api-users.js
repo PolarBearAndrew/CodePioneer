@@ -45,10 +45,10 @@ describe('[ API unit test ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data._id.should.equal( uid );
-                data.name.should.equal( initData.name );
-                data.email.should.equal( initData.email );
-                data.pwd.should.equal( initData.pwd );
+                data.should.have.property( '_id', uid );
+                data.should.have.property( 'name', initData.name );
+                data.should.have.property( 'email', initData.email );
+                data.should.have.property( 'pwd', initData.pwd );
 
                 return done();
             });
@@ -68,10 +68,10 @@ describe('[ API unit test ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data._id.should.equal( uid );
-                data.name.should.equal( initData.name );
-                data.email.should.equal( initData.email );
-                data.pwd.should.equal( initData.pwd );
+                data.should.have.property( '_id', uid );
+                data.should.have.property( 'name', initData.name );
+                data.should.have.property( 'email', initData.email );
+                data.should.have.property( 'pwd', initData.pwd );
 
                 return done();
             });
@@ -97,10 +97,10 @@ describe('[ API unit test ]', function() {
 
                 //test data
                 data = JSON.parse( data );
-                // data._id.should.equal( uid );
-                data.name.should.equal( expectData.name );
-                data.email.should.equal( expectData.email );
-                data.pwd.should.equal( expectData.pwd );
+                // data.should.have.property( '_id', uid );
+                data.should.have.property( 'name', initData.name );
+                data.should.have.property( 'email', initData.email );
+                data.should.have.property( 'pwd', expectData.pwd );
 
                 return done();
             });
@@ -144,6 +144,7 @@ describe('[ API unit test ]', function() {
                 data = JSON.parse( data );
                 // data._id.should.equal( uid );
                 data.ok.should.equal(1);
+                data.should.have.property( 'ok', 1 );
 
                 return done();
             });
