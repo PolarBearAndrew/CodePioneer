@@ -40,26 +40,19 @@ describe('[ API unit test ]', function() {
                 form: initData
             }, (err, res, data) => {
 
-                let expectData = {
-                    name: 'AndrewChen',
-                    email: 'chenpoanandrew@gmail.com',
-                    pwd: '123'
-                };;
-
                 data = JSON.parse( data );
 
                 //set uid for next test
                 uid = data._id.toString();
-                expectData._id = uid;
 
                 //test api exist
                 res.statusCode.should.equal(200);
 
                 //test data
-                data._id.should.equal( expectData._id );
-                data.name.should.equal( expectData.name );
-                data.email.should.equal( expectData.email );
-                data.pwd.should.equal( expectData.pwd );
+                data._id.should.equal( uid );
+                data.name.should.equal( initData.name );
+                data.email.should.equal( initData.email );
+                data.pwd.should.equal( initData.pwd );
 
                 return done();
             });
@@ -73,12 +66,6 @@ describe('[ API unit test ]', function() {
                 form: { uid: uid }
             }, (err, res, data) => {
 
-                let expectData = {
-                    name: 'AndrewChen',
-                    email: 'chenpoanandrew@gmail.com',
-                    pwd: '123'
-                };;
-
                 data = JSON.parse( data );
 
                 //test api exist
@@ -86,9 +73,9 @@ describe('[ API unit test ]', function() {
 
                 //test data
                 data._id.should.equal( uid );
-                data.name.should.equal( expectData.name );
-                data.email.should.equal( expectData.email );
-                data.pwd.should.equal( expectData.pwd );
+                data.name.should.equal( initData.name );
+                data.email.should.equal( initData.email );
+                data.pwd.should.equal( initData.pwd );
 
                 return done();
             });
@@ -100,7 +87,7 @@ describe('[ API unit test ]', function() {
                 _id: uid,
                 name: 'AndrewChen',
                 email: 'chenpoanandrew@gmail.com',
-                pwd: '456'
+                pwd: '456' //<- new pwd
             };;
 
             request({
@@ -114,6 +101,7 @@ describe('[ API unit test ]', function() {
 
                 //test data
                 data = JSON.parse( data );
+                // data._id.should.equal( uid );
                 data.name.should.equal( expectData.name );
                 data.email.should.equal( expectData.email );
                 data.pwd.should.equal( expectData.pwd );
