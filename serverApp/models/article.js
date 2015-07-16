@@ -22,7 +22,8 @@ var Article = new mongoose.Schema({
         type: String
     },
     rank: {
-        type: Number
+        type: Number,
+        default: null
     },
     info: {
         type: Array

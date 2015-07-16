@@ -7,56 +7,12 @@ var models = {
 }
 /*
  * [POST] 新增收藏文章
- * request : myid, aid
+ * request : uid, aid
  * respone :
  */
 router.post('/', function(req, res, next) {
-    
-    if(!req.body.myid || !req.body.aid){
-        res.json( { err : '資料不完全' } );
-        return;
-    }
 
-	var info = { _id: req.body.myid };
-
-    models.User.findOne( info, function(err, result) {
-
-        if (err) {
-            console.log('[ERROR] user find fail, err ->', err);
-            res.json(err);
-        }else{
-            
-        	if(result){
-        		//處理需要更新的資料
-	        	var updateData = { likeArticle: result.likeArticle };
-	        	updateData.likeArticle.push( req.body.aid );
-
-	        	models.User.update( info, updateData, function(err, result) {
-
-	    		    if (err) {
-			            console.log('[ERROR] user like update fail, err ->', err);
-			            res.json(err);
-			        } else {
-			            res.json(result);
-			        }
-	        	});
-        	}else{
-        		//no result
-        		res.json({ err: 'user connot found' });
-        	}
-
-        }
-    });
-});
-
-/* [POST] 查詢別人(uid)收藏的
- * request : uid
- * respone : db result
- */
-router.post('/:uid', function(req, res, next) {
-    
-    
-    if(!req.body.uid){
+    if( !req.body.uid || !req.body.aid ){
         res.json( { err : '資料不完全' } );
         return;
     }
@@ -69,12 +25,11 @@ router.post('/:uid', function(req, res, next) {
             console.log('[ERROR] user find fail, err ->', err);
             res.json(err);
         }else{
-            
+
         	if(result){
         		//處理需要更新的資料
 	        	var updateData = { likeArticle: result.likeArticle };
 	        	updateData.likeArticle.push( req.body.aid );
-
 	        	models.User.update( info, updateData, function(err, result) {
 
 	    		    if (err) {
@@ -86,22 +41,27 @@ router.post('/:uid', function(req, res, next) {
 	        	});
         	}else{
         		//no result
-        		res.json({ err: 'user connot found' });
+        		res.json({ err: 'false' });
         	}
 
         }
     });
-
 });
 
 /*
  * [GET] 查詢收藏文章
  * request : uid
- * respone :
+ * respone : likeArticle
  */
 router.get('/', function(req, res, next) {
+    
+    if(!req.body.uid){
+        res.json( { err : '資料不完全' } );
+        return;
+    }
 
     var info = { _id: req.body.uid };
+
     models.User.findOne( info, function(err, result) {
 
         if (err) {
@@ -109,18 +69,10 @@ router.get('/', function(req, res, next) {
             res.json(err);
         }else{
         	if(result){
-                var infolink = { link: result.query.link };
-                models.User.findOne(infolink, function(err, result){
-                    if (err) {
-			            console.log('[ERROR] user like link fail, err ->', err);
-			            res.json(err);
-			        } else {
-			            res.json(result);
-			        }
-                })
+                res.json({ likeArticle: result.likeArticle });
         	}else{
         		//no result
-        		res.json({ link: false });
+        		res.json({ likeArticle: null });
         	}
 
         }
@@ -134,6 +86,40 @@ router.get('/', function(req, res, next) {
  */
 router.delete('/', function(req, res, next) {
 
+	    if(!req.body.uid || !req.body.aid){
+        res.json( { err : '資料不完全' } );
+        return;
+    }
+
+	var info = { _id: req.body.uid };
+
+    models.User.findOne( info, function(err, result) {
+
+        if (err) {
+            console.log('[ERROR] user find fail, err ->', err);
+            res.json(err);
+        }else{
+
+        	if(result){
+        		//處理需要更新的資料
+	        	var updateData = { likeArticle: result.likeArticle };
+	        	updateData.likeArticle.remove( req.body.aid );
+                models.User.update( info, updateData, function(err, result) {
+
+	    		    if (err) {
+			            console.log('[ERROR] user like update fail, err ->', err);
+			            res.json(err);
+			        } else {
+			            res.json(result);
+			        }
+	        	});
+        	}else{
+        		//no result
+        		res.json({ err: false });
+        	}
+
+        }
+    });
 });
 
 module.exports = router;

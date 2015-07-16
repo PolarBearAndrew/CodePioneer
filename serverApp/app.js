@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //api
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var article = require('./routes/article');
+var article = require('./routes/like');
 
 //plugin
 var crawl = require('./routes/crawl.js');
@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/api/users', users);
-app.use('/api/articles', article);
+app.use('/api/like', article);
 
 //test need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);
@@ -88,36 +88,35 @@ app.listen(port, function(){
 
     // test data init
     //==========================================
-    var User = require('./models/user.js');
+    // var User = require('./models/user.js');
 
-    console.log('init test data...');
+    // console.log('init test data...');
 
-    var data = [
-        { name: 'Test', email: '123', pwd: '123' },
-        { name: 'AndrewChen', email: 'chenpoanandrew@gmail.com', pwd: '123' },
-        { name: 'Ray', email: 'q3856245@gmail.com', pwd: '123' },
-        { name: 'Doro', email: 'rilakkuma0330k@gmail.com', pwd: '123' },
-        { name: 'Husan', email: 'keami326@gmail.com', pwd: '123' }
-    ];
+    // var data = [
+    //     { name: 'Test', email: '123', pwd: '123' },
+    //     { name: 'AndrewChen', email: 'chenpoanandrew@gmail.com', pwd: '123' },
+    //     { name: 'Ray', email: 'q3856245@gmail.com', pwd: '123' },
+    //     { name: 'Doro', email: 'rilakkuma0330k@gmail.com', pwd: '123' },
+    //     { name: 'Husan', email: 'keami326@gmail.com', pwd: '123' }
+    // ];
 
-    User.remove({}, function( err, result ){
+    // User.remove({}, function( err, result ){
 
-        data.forEach(function( info ){
-            var user = new User( info );
+    //     data.forEach(function( info ){
+    //         var user = new User( info );
 
-            //儲存到資料庫
-            user.save(function(err, result) {
-                // console.log('create test user : ' + result);
-            });
-        });
-    });
+    //         //儲存到資料庫
+    //         user.save(function(err, result) {
+    //             // console.log('create test user : ' + result);
+    //         });
+    //     });
+    // });
 
     //crawl api
     //==========================================
 
-    var crawltick = new crawl();
-
-    crawltick.start();
+    // var crawltick = new crawl();
+    // crawltick.start();
 
 });
 
