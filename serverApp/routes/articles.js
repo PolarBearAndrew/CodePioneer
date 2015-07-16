@@ -12,7 +12,9 @@ var models = {
  * respone :
  */
 router.post('/', function(req, res, next) {
-    
+
+        console.log('info', req.body.info)
+
         var article = new models.Article({
             title: req.body.title,
             url: req.body.url,
@@ -21,12 +23,14 @@ router.post('/', function(req, res, next) {
             describe: req.body.describe,
             info: req.body.info
         });
-    
+
         article.save(function(err, result) {
         if (err) {
             console.log('[TEST] create test user FAIL, err ->', err);
             res.json(err);
         } else {
+
+            console.log('data', result);
             res.json(result);
         }
     });

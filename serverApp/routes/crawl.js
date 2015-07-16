@@ -52,14 +52,16 @@ function crawl(){
 
 		/*
 		 * Github top 10
-		 */        
+		 */
             request("https://www.kimonolabs.com/api/2wne1unk?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
 		    function(err, res, data) {
 
                 data = JSON.parse(data);
+            	console.log('data', data.results.collection1 )
 
                 data.results.collection1.forEach(function( item ){
-                    
+
+
 			        var article = new Article({
                         //title
 				        title: item.title.text,
