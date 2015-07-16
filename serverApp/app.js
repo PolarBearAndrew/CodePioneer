@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //api
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var article = require('./routes/article');
+var article = require('./routes/like');
 
 //plugin
 var crawl = require('./routes/crawl.js');
@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/api/users', users);
-app.use('/api/articles', article);
+app.use('/api/like', article);
 
 //test need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);

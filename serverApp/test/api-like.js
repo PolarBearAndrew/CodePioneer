@@ -14,7 +14,7 @@ var aid = 'test-article-id';
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - articles ]', function() {
+describe('[ API unit test - like ]', function() {
 
     before(function() {
 
@@ -33,7 +33,7 @@ describe('[ API unit test - articles ]', function() {
         it('[POST] 新增收藏', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/like/',
                 method: 'POST',
                 form: {
                     uid: uid,
@@ -57,7 +57,7 @@ describe('[ API unit test - articles ]', function() {
         it('[GET] 查詢收藏文章', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/like/',
                 method: 'GET',
                 form: { uid: uid }
             }, (err, res, data) => {
@@ -77,7 +77,7 @@ describe('[ API unit test - articles ]', function() {
         it('[DELETE] 刪除收藏文章', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/like/',
                 method: 'DELETE',
                 form: {
                     uid: uid,
