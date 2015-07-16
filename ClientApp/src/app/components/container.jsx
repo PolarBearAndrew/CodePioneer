@@ -7,16 +7,26 @@ let React = require('react');
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
+
+let TextField=mui.TextField;
+
 let MenuItem = mui.MenuItem;
 let AppBar = mui.AppBar;
 let LeftNav = mui.LeftNav;
 
+let IconButton = mui.IconButton;
 let Paper = mui.Paper;
 let FlatButton = mui.FlatButton;
 let Avatar = mui.Avatar;
 let CardHeader = mui.CardHeader;
 let CardText = mui.CardText;
-let IconButton = mui.IconButton;
+
+
+
+let IconMenu=mui.IconMenu;
+let List=mui.List;
+let ListItem=mui.ListItem;
+let ListDivider=mui.ListDivider;
 
 //mui元件
 //範例:
@@ -48,6 +58,28 @@ let container = React.createClass({
 	    	margin: '0px'
 	    };
         
+        let containerStyle1 = {
+	    	textAlign: 'center',
+	    	padding: '0px',
+	    	margin: '0px',
+	    };
+        
+        let containerStyle2 = {
+	    	textAlign: 'right',
+	    	padding: '0px',
+	    	margin: '10px',
+            float:'right',
+           
+            
+	    };
+        
+        let containerStyle3 = {
+	    	textAlign: 'right',
+	    	padding: '0px',
+	    	marginTop: '10px',
+            float:'right',
+	    };
+        
         var menuItems = [
               { route: 'latest news', text: 'Latest news' },
               { route: 'search', text: 'Search' },
@@ -67,6 +99,7 @@ let container = React.createClass({
                  text: 'Disabled Link', 
                  disabled: true 
               },
+              { type: MenuItem.Types.SUBHEADER, text: <TextField hintText="Search" fullWidth={true}/> },
             ];
         
         let article = {
@@ -80,16 +113,40 @@ let container = React.createClass({
         
 	    return (
     		<div  style={containerStyle}>
-            
-                <AppBar onRigthIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
-                        //右邊出現灰色底
-                        iconElementRight={ <IconButton iconClassName="material-icons"> home </IconButton> }
-                        />
-              
-                <br/>
-            
+                <div  style={containerStyle1}>
+                        <div  style={containerStyle2}>
+                            <IconButton iconClassName="material-icons" >search</IconButton>
+                        </div>
+                        <div  style={containerStyle3}>
+                            <TextField hintText="Search" fullWidth={true}/>
+                        </div>
+                </div>
+                
+                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='' 
+                        iconElementRight={ <IconMenu iconButtonElement={<IconButton 
+                        iconClassName="material-icons" >expand_more</IconButton>}  >
+                        
+                        <List subheader="Menu">
+                            <ListItem
+                              leftAvatar={<Avatar  className="material-icons">stars</Avatar>}   
+                              primaryText="Latest news"
+                               />
+                            <ListDivider inset={true} />
+                            <ListItem
+                              leftAvatar={<Avatar  className="material-icons">favorite</Avatar>}    
+                              primaryText="Search"
+                               />
+                            <ListDivider inset={true} />
+                            <ListItem
+                              leftAvatar={<Avatar  className="material-icons">loyalty</Avatar>}     
+                              primaryText="be bo"
+                               />
+                        </List>
+                                            </IconMenu> }
+                />
+
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
-            
+                
                 <Paper zDepth={2}>
                     <div style={article}>
                       <FlatButton 
@@ -110,7 +167,6 @@ let container = React.createClass({
                     </div>
                     
                 </Paper>
-            
             </div>
 	    );
 
