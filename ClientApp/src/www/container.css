@@ -1,13 +1,8 @@
 @media screen and (max-width: 420px) {
     .comments{
-display: none;
+        display: none;
     }
-    
-    .cardSize{
-        font-size: 13px;
-    }
-    
-    #card{
-        color: "#ff3f3f";
+    .title{
+        font-size: 25;
     }
 }

@@ -18,6 +18,9 @@ let CardHeader = mui.CardHeader;
 let CardText = mui.CardText;
 let IconButton = mui.IconButton;
 
+let Checkbox = mui.Checkbox;
+let ListItem = mui.ListItem;
+
 //mui元件
 //範例:
 //let AppBar = mui.AppBar;
@@ -72,9 +75,28 @@ let container = React.createClass({
         let article = {
             display:'flex',
             justifyContent:'flex-start',
-            alignItems:'center'
+            alignItems:'center',
+            color:"#696969",
+            padding:5
+            
         };
         
+        let title = {
+            fontSize:30,
+            padding:0,
+            margin:0
+        };
+        
+        let starBtn = {
+            width:0,
+            display:'flex',
+            alignItems:'flex-end'
+            
+        };
+        
+        let contents = {
+            padding:5
+        };
         // iconClassNameRight="muidocs-icon-navigation-expand-more"
         //<i className="material-icons">home</i>
         
@@ -85,30 +107,40 @@ let container = React.createClass({
                         //右邊出現灰色底
                         iconElementRight={ <IconButton iconClassName="material-icons"> home </IconButton> }
                         />
-              
                 <br/>
             
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
             
                 <Paper zDepth={2}>
+                    <ListItem 
+                        style={title} 
+                        onMouseOver = {this._onTitleOver}
+                        className="title" 
+                        primaryText="New JavaScript in 2015 !!" 
+                        href=""
+                    />
                     <div style={article}>
-                      <FlatButton 
-                        linkButton={true} 
-                        href="https://github.com/callemall/material-ui" 
-                        secondary={true} 
-                        label="title_New Horizons phones home">                
-                      </FlatButton>
-            
-                      <CardText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+                      <CardText style={contents}>
+                        by AndrewChen 
+                <br/> In FaceBook
                       </CardText>
-                      <CardHeader
-                        title="Panda"
-                        subtitle="author"
-                        avatar="http://lorempixel.com/100/100/nature/"/>
+                      
+                      <CardText style={contents}>
+                        this is the world future...
+                      </CardText>
+            
+                      <CardText className="comments" style={contents}>
+                        999 likes
+                      </CardText>
+            
+                      <Checkbox
+                        style={starBtn}
+                        name="checkboxName4"
+                        value="checkboxValue4"
+                        checkedIcon={<i className="material-icons">star</i>}
+                        unCheckedIcon={<i className="material-icons">star_border</i>}
+                        />
                     </div>
-                    
                 </Paper>
             
             </div>
@@ -118,6 +150,9 @@ let container = React.createClass({
     _leftmenu(){
         this.refs.leftNav.toggle();
       },
+    
+    _onTitleOver(){
+    },
 });
 
 module.exports = container;
