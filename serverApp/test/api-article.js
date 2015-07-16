@@ -43,19 +43,21 @@ describe('[ API unit test - articles ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                // //test data
+                //test data
                 data = JSON.parse( data );
-
-                // data.should.equal({});
-
                 Object.keys(initData).map(( key, index ) => {
-                    data.should.have.property( key, initData[key] );
+                    if( index !== 5 )
+                        data.should.have.property( key, initData[key] );
                 });
+
+                data.should.have.property('info').with.lengthOf(2);
+                data.info[0].should.equal( initData.info[0] );
+                data.info[1].should.equal( initData.info[1] );
 
                 return done();
             });
         });
-
+        /*
         it('[GET] 查詢文章(aid)', ( done ) => {
 
             request({
@@ -172,7 +174,7 @@ describe('[ API unit test - articles ]', function() {
 
                 return done();
             });
-        });
+        });*/
     });
 
 
