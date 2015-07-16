@@ -36,20 +36,21 @@ describe('[ API unit test - users ]', function() {
                 form: initData
             }, (err, res, data) => {
 
-                data = JSON.parse( data );
-
-                //set uid for next test
-                uid = data._id.toString();
-
                 //test api exist
+                should.exist(data);
+                should.not.exist(err);
                 res.statusCode.should.equal(200);
 
                 //test data
-                data.should.have.property( '_id', uid );
-                data.should.have.property( 'name', initData.name );
-                data.should.have.property( 'email', initData.email );
-                data.should.have.property( 'pwd', initData.pwd );
+                data = JSON.parse( data );
 
+                Object.keys(initData).map(( key, index ) => {
+                    data.should.have.property( key, data[key] );
+                })
+
+                uid = data._id.toString();
+
+                //set uid for next test
                 return done();
             });
         });
@@ -62,16 +63,17 @@ describe('[ API unit test - users ]', function() {
                 form: { uid: uid }
             }, (err, res, data) => {
 
-                data = JSON.parse( data );
-
                 //test api exist
+                should.exist(data);
+                should.not.exist(err);
                 res.statusCode.should.equal(200);
 
                 //test data
-                data.should.have.property( '_id', uid );
-                data.should.have.property( 'name', initData.name );
-                data.should.have.property( 'email', initData.email );
-                data.should.have.property( 'pwd', initData.pwd );
+                data = JSON.parse( data );
+
+                Object.keys(initData).map(( key, index ) => {
+                    data.should.have.property( key, data[key] );
+                })
 
                 return done();
             });
@@ -93,14 +95,16 @@ describe('[ API unit test - users ]', function() {
             }, (err, res, data) => {
 
                 //test api exist
+                should.exist(data);
+                should.not.exist(err);
                 res.statusCode.should.equal(200);
 
                 //test data
                 data = JSON.parse( data );
-                // data.should.have.property( '_id', uid );
-                data.should.have.property( 'name', initData.name );
-                data.should.have.property( 'email', initData.email );
-                data.should.have.property( 'pwd', expectData.pwd );
+
+                Object.keys(initData).map(( key, index ) => {
+                    data.should.have.property( key, data[key] );
+                })
 
                 return done();
             });
@@ -118,6 +122,8 @@ describe('[ API unit test - users ]', function() {
             }, (err, res, data) => {
 
                 //test api exist
+                should.exist(data);
+                should.not.exist(err);
                 res.statusCode.should.equal(200);
 
                 //test data
@@ -137,12 +143,13 @@ describe('[ API unit test - users ]', function() {
             }, (err, res, data) => {
 
                 //test api exist
+                should.exist(data);
+                should.not.exist(err);
                 res.statusCode.should.equal(200);
 
                 //test data
                 data = JSON.parse( data );
                 // data._id.should.equal( uid );
-
                 data.should.have.property( 'ok', 1 );
 
                 return done();

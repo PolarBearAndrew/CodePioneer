@@ -38,13 +38,18 @@ describe('[ API unit test - articles ]', function() {
                 form: initData
             }, (err, res, data) => {
 
-                data = JSON.parse( data );
-
-                // //test api exist
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
                 res.statusCode.should.equal(200);
 
                 // //test data
+                data = JSON.parse( data );
                 data.should.have.property('_id');
+                data.should.have.property('title', initData.title);
+                data.should.have.property('title', initData.title);
+                data.should.have.property('title', initData.title);
+                data.should.have.property('title', initData.title);
                 data.should.have.property('title', initData.title);
 
                 return done();
