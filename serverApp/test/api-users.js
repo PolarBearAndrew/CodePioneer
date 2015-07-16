@@ -8,8 +8,6 @@ var initData = {
     pwd: '123'
 };
 
-var expectData = initData;
-
 var uid = null;
 
 var User = require('../models/user.js');
@@ -18,7 +16,7 @@ describe('[ API unit test ]', function() {
 
     before(function() {
 
-        return  User.remove({}, (err, result) => {
+        return User.remove({}, (err, result) => {
 
             //init data
             // var user = new User(initData);
@@ -42,6 +40,12 @@ describe('[ API unit test ]', function() {
                 form: initData
             }, (err, res, data) => {
 
+                let expectData = {
+                    name: 'AndrewChen',
+                    email: 'chenpoanandrew@gmail.com',
+                    pwd: '123'
+                };;
+
                 data = JSON.parse( data );
 
                 //set uid for next test
@@ -52,10 +56,10 @@ describe('[ API unit test ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data._id.should.equal( initData._id );
-                data.name.should.equal( initData.name );
-                data.email.should.equal( initData.email );
-                data.pwd.should.equal( initData.pwd );
+                data._id.should.equal( expectData._id );
+                data.name.should.equal( expectData.name );
+                data.email.should.equal( expectData.email );
+                data.pwd.should.equal( expectData.pwd );
 
                 return done();
             });
@@ -69,42 +73,54 @@ describe('[ API unit test ]', function() {
                 form: { uid: uid }
             }, (err, res, data) => {
 
+                let expectData = {
+                    name: 'AndrewChen',
+                    email: 'chenpoanandrew@gmail.com',
+                    pwd: '123'
+                };;
+
                 data = JSON.parse( data );
 
                 //test api exist
                 res.statusCode.should.equal(200);
 
                 //test data
-                data._id.should.equal( initData._id );
-                data.name.should.equal( initData.name );
-                data.email.should.equal( initData.email );
-                data.pwd.should.equal( initData.pwd );
+                data._id.should.equal( uid );
+                data.name.should.equal( expectData.name );
+                data.email.should.equal( expectData.email );
+                data.pwd.should.equal( expectData.pwd );
 
                 return done();
             });
         });
 
-        // it('[PUT] 修改使用者', ( done ) => {
+        it('[PUT] 修改使用者', ( done ) => {
 
-        //     expectDataTmp = expectData;
-        //     expectDataTmp.pwd = '456';
+            let expectData = {
+                _id: uid,
+                name: 'AndrewChen',
+                email: 'chenpoanandrew@gmail.com',
+                pwd: '456'
+            };;
 
-        //     request({
-        //         url: 'http://localhost:8080/api/users/',
-        //         method: 'PUT',
-        //         form: expectData
-        //     }, (err, res, data) => {
+            request({
+                url: 'http://localhost:8080/api/users/',
+                method: 'PUT',
+                form: expectData
+            }, (err, res, data) => {
 
-        //         //test api exist
-        //         res.statusCode.should.equal(200);
+                //test api exist
+                res.statusCode.should.equal(200);
 
-        //         //test data
-        //         data = JSON.parse( data );
-        //         data.should.equal( expectDataTmp );
+                //test data
+                data = JSON.parse( data );
+                data.name.should.equal( expectData.name );
+                data.email.should.equal( expectData.email );
+                data.pwd.should.equal( expectData.pwd );
 
-        //         return done();
-        //     });
-        // });
+                return done();
+            });
+        });
     });
 
     after(function() {
