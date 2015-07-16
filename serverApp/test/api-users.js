@@ -12,7 +12,7 @@ var uid = null;
 
 var User = require('../models/user.js');
 
-describe('[ API unit test ]', function() {
+describe('[ API unit test - users ]', function() {
 
     before(function() {
 

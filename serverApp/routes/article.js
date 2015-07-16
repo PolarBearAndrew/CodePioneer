@@ -12,7 +12,7 @@ var models = {
  */
 router.post('/', function(req, res, next) {
 
-    if(!req.body.uid || !req.body.aid){
+    if( !req.body.uid || !req.body.aid ){
         res.json( { err : '資料不完全' } );
         return;
     }
@@ -55,7 +55,7 @@ router.post('/', function(req, res, next) {
  */
 router.get('/', function(req, res, next) {
 
-    var info = { _id: req.query.uid };
+    var info = { _id: req.body.uid };
 
     models.User.findOne( info, function(err, result) {
 
@@ -64,10 +64,10 @@ router.get('/', function(req, res, next) {
             res.json(err);
         }else{
         	if(result){
-                res.json({likeArticle: result.likeArticle});
+                res.json({ likeArticle: result.likeArticle });
         	}else{
         		//no result
-        		res.json({ link: false });
+        		res.json({ likeArticle: null });
         	}
 
         }

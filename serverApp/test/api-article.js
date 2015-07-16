@@ -14,7 +14,7 @@ var aid = 'test-article-id';
 
 var User = require('../models/user.js');
 
-describe('[ API unit test ]', function() {
+describe('[ API unit test - articles ]', function() {
 
     before(function() {
 
@@ -23,58 +23,56 @@ describe('[ API unit test ]', function() {
             //init data
             var user = new User(initData);
             user.save((err, result) => {
-                uid = result._id;
+                uid = result._id.toString();
             });
         });
     });
 
     describe('正常操作測試', () => {
 
-        // it('[POST] 新增收藏', ( done ) => {
+        it('[POST] 新增收藏', ( done ) => {
 
-        //     request({
-        //         url: 'http://localhost:8080/api/articles/',
-        //         method: 'POST',
-        //         form: {
-        //             uid: uid,
-        //             aid: aid
-        //         }
-        //     }, (err, res, data) => {
+            request({
+                url: 'http://localhost:8080/api/articles/',
+                method: 'POST',
+                form: {
+                    uid: uid,
+                    aid: aid
+                }
+            }, (err, res, data) => {
 
-        //         data = JSON.parse( data );
+                data = JSON.parse( data );
 
-        //         //test api exist
-        //         res.statusCode.should.equal(200);
+                //test api exist
+                res.statusCode.should.equal(200);
 
-        //         //test data
-        //         data
+                //test data
+                data.should.have.property('ok', 1);
+                data.should.have.property('nModified', 1);
 
-        //         return done();
-        //     });
-        // });
+                return done();
+            });
+        });
 
-        // it('[GET] 查詢使用者', ( done ) => {
+        it('[GET] 查詢收藏文章', ( done ) => {
 
-        //     request({
-        //         url: 'http://localhost:8080/api/articles/',
-        //         method: 'GET',
-        //         form: { uid: uid }
-        //     }, (err, res, data) => {
+            request({
+                url: 'http://localhost:8080/api/articles/',
+                method: 'GET',
+                form: { uid: uid }
+            }, (err, res, data) => {
 
-        //         data = JSON.parse( data );
+                data = JSON.parse( data );
 
-        //         //test api exist
-        //         res.statusCode.should.equal(200);
+                //test api exist
+                res.statusCode.should.equal(200);
 
-        //         //test data
-        //         data._id.should.equal( uid );
-        //         data.name.should.equal( initData.name );
-        //         data.email.should.equal( initData.email );
-        //         data.pwd.should.equal( initData.pwd );
+                //test data
+                data.should.have.property('likeArticle').with.length(1);
 
-        //         return done();
-        //     });
-        // });
+                return done();
+            });
+        });
 
         // it('[DELETE] 刪除使用者', ( done ) => {
 
