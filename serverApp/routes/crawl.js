@@ -5,10 +5,11 @@ function crawl(){
 
 
 	this.start = function(){
+
 		// setInterval(function(){
 		// 	console.log('tick');
 		// }, (1000) ); //5 min
-		//
+
 		request("https://www.kimonolabs.com/api/2ydhrtbc?apikey=YTFXE6bo643qztfqtgMJxbTghxkihceB",
 		    function(err, res, data) {
 
