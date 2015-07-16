@@ -8,8 +8,8 @@ var models = {
 
 /*
  * [POST] 新增文章
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
 router.get('/', function(req, res, next) {
     var article = new Article({
@@ -18,35 +18,37 @@ router.get('/', function(req, res, next) {
         pwd: req.body.pwd,
         likeArticle: [],
         whoLikeMe: []
+	});
 });
 
 /*
  * [GET] 查詢文章
  * request : aid
- * respone : 
+ * respone :
  */
 
 /*
  * [GET] 查詢最新文章(10)
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
 
 /*
  * [GET] 查詢最新文章(n)
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
 
 /*
  * [PUT] 修改文章
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
 
 /*
  * [DELETE] 刪除文章
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
+
 module.exports = router;
