@@ -100,12 +100,12 @@ router.put('/',  function(req, res, next) {
 router.delete('/', function(req, res, next) {
 
 
-    if(!req.body._id){
+    if(!req.body.uid){
         res.json( { err : '資料不完全' } );
         return;
     }
 
-    User.remove({ _id : req.body._id }, function(err, result) {
+    User.remove({ _id : req.body.uid }, function(err, result) {
         if(err){
             console.log('delete user FAIL, err ->', err);
             res.json({ err: err });
