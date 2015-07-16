@@ -19,7 +19,11 @@ let Main = React.createClass({
 	//顯示畫面的func
 	render() {
 
+<<<<<<< HEAD
 // <LoginApp />
+=======
+// <Container /><LoginApp />
+>>>>>>> 293f410c4dd31743d2a07c17feef7868b7a1f07f
 	    return (
 	    	  <Container />
 

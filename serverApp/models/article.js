@@ -26,7 +26,8 @@ var Article = new mongoose.Schema({
         default: null
     },
     info: {
-        type: Array
+        type: Array,
+        default: null
     },
 });
 

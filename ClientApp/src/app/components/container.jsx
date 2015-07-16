@@ -7,16 +7,26 @@ let React = require('react');
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
+
+let TextField=mui.TextField;
+
 let MenuItem = mui.MenuItem;
 let AppBar = mui.AppBar;
 let LeftNav = mui.LeftNav;
 
+let IconButton = mui.IconButton;
 let Paper = mui.Paper;
 let FlatButton = mui.FlatButton;
 let Avatar = mui.Avatar;
 let CardHeader = mui.CardHeader;
 let CardText = mui.CardText;
-let IconButton = mui.IconButton;
+
+
+
+let IconMenu=mui.IconMenu;
+let List=mui.List;
+let ListItem=mui.ListItem;
+let ListDivider=mui.ListDivider;
 
 let Checkbox = mui.Checkbox;
 let ListItem = mui.ListItem;
@@ -51,7 +61,12 @@ let container = React.createClass({
 	    	margin: '0px'
 	    };
         
+        
+        
         var menuItems = [
+              { route: 'user', 
+                text: <IconButton iconClassName="material-icons" >account_circle</IconButton> 
+              },
               { route: 'latest news', text: 'Latest news' },
               { route: 'search', text: 'Search' },
               { route: 'components', text: 'Components' },
@@ -69,6 +84,9 @@ let container = React.createClass({
                  payload: 'https://www.google.com', 
                  text: 'Disabled Link', 
                  disabled: true 
+              },
+              { type: MenuItem.Types.SUBHEADER, 
+                text: <TextField hintText="Search" fullWidth={true}/> 
               },
             ];
         
@@ -102,6 +120,7 @@ let container = React.createClass({
         
 	    return (
     		<div  style={containerStyle}>
+<<<<<<< HEAD
             
                 <AppBar onRigthIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
                         //右邊出現灰色底
@@ -109,8 +128,36 @@ let container = React.createClass({
                         />
                 <br/>
             
+=======
+                
+                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer' 
+                        iconElementRight={ <IconMenu iconButtonElement={<IconButton 
+                        iconClassName="material-icons" >expand_more</IconButton>}  >
+                        
+                        <List >
+                            
+                            <ListItem
+                              
+                              leftAvatar={<Avatar  className="material-icons">stars</Avatar>}   
+                              primaryText="Latest news"
+                               />
+                            <ListDivider inset={true} />
+                            <ListItem
+                              leftAvatar={<Avatar  className="material-icons">favorite</Avatar>}    
+                              primaryText="Search"
+                               />
+                            <ListDivider inset={true} />
+                            <ListItem
+                              leftAvatar={<Avatar  className="material-icons">loyalty</Avatar>}     
+                              primaryText="be bo"
+                               />
+                        </List>
+                                            </IconMenu> }
+                />
+
+>>>>>>> 293f410c4dd31743d2a07c17feef7868b7a1f07f
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
-            
+                
                 <Paper zDepth={2}>
                     <ListItem 
                         style={title} 
@@ -142,7 +189,6 @@ let container = React.createClass({
                         />
                     </div>
                 </Paper>
-            
             </div>
 	    );
 

@@ -7,7 +7,7 @@ var initData = {
     author: 'AndrewChen',
     from: 'FaceBook',
     describe: 'this is the world future...',
-    info: ['200 comments', '999 likes']
+    info: ["200 comments", "999 likes"]
 };
 
 var aid = null;
@@ -45,6 +45,9 @@ describe('[ API unit test - articles ]', function() {
 
                 // //test data
                 data = JSON.parse( data );
+
+                // data.should.equal({});
+
                 Object.keys(initData).map(( key, index ) => {
                     data.should.have.property( key, initData[key] );
                 });

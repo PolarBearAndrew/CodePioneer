@@ -8,45 +8,62 @@ var models = {
 
 /*
  * [POST] 新增文章
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
-router.get('/', function(req, res, next) {
-    var article = new Article({
-        title: req.body.name,
-        author: req.body.email,
-        pwd: req.body.pwd,
-        likeArticle: [],
-        whoLikeMe: []
+router.post('/', function(req, res, next) {
 
+        console.log('info', req.body.info)
+
+        var article = new models.Article({
+            title: req.body.title,
+            url: req.body.url,
+            author: req.body.author,
+            from: req.body.from,
+            describe: req.body.describe,
+            info: req.body.info
+        });
+
+        article.save(function(err, result) {
+        if (err) {
+            console.log('[TEST] create test user FAIL, err ->', err);
+            res.json(err);
+        } else {
+
+            console.log('data', result);
+            res.json(result);
+        }
+    });
 });
 
 /*
  * [GET] 查詢文章
  * request : aid
- * respone : 
+ * respone :
  */
 
 /*
  * [GET] 查詢最新文章(10)
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
 
 /*
  * [GET] 查詢最新文章(n)
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
 
 /*
  * [PUT] 修改文章
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
 
 /*
  * [DELETE] 刪除文章
- * request : 
- * respone : 
+ * request :
+ * respone :
  */
+
+module.exports = router;
