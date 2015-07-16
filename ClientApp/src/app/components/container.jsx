@@ -103,8 +103,10 @@ let container = React.createClass({
                         iconElementRight={ <IconMenu iconButtonElement={<IconButton 
                         iconClassName="material-icons" >expand_more</IconButton>}  >
                         
-                        <List subheader="Menu">
+                        <List >
+                            
                             <ListItem
+                              
                               leftAvatar={<Avatar  className="material-icons">stars</Avatar>}   
                               primaryText="Latest news"
                                />
