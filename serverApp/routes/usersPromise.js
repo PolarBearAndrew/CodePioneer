@@ -79,7 +79,7 @@ router.put('/',  function(req, res, next) {
 
     debug('[PUT] 修改使用者', 'req.body->', req.body );
 
-    if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
+    if(!req.body.uid || !req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
         return;
     }
@@ -90,20 +90,10 @@ router.put('/',  function(req, res, next) {
         pwd: req.body.pwd
     }
 
-    // User.update({_id : req.body._id}, info, function(err, result) {
-    //     if(err){
-    //         console.log('update user FAIL, err ->', err);
-    //         res.json({ err: err });
-    //     }else{
-    //         res.json(info);
-    //     }
-    // });
-
-//.where('_id').equals( req.body._id )
-    User.update({_id: req.body._id }, info)
-        .setOptions({ multi: false })
-        .execAsync()
+    User.findOneAndUpdate( {_id: req.body.uid }, info)
+        .update()
         .then( (result) => {
+            debug('[PUT] 修改使用者 success', result);
             res.json(result);
         })
         .catch( (err) => {
@@ -111,7 +101,6 @@ router.put('/',  function(req, res, next) {
             res.json({err});
         });
 });
-
 
 /*
  * [DELETE] 刪除使用者
