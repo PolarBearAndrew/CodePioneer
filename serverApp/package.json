@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon app.js",
+    "debug": "DEBUG=* node entry.js",
+    "debug-api": "DEBUG=* node entry.js",
     "test": "mocha"
   },
   "dependencies": {

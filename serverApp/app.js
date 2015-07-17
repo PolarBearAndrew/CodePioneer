@@ -36,7 +36,6 @@ app.use(function (req, res, next) {
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: true })); //讓req.body可以在JSON內傳送Array
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -119,8 +118,6 @@ app.listen(port, function(){
 
     //crawl api
     //==========================================
-
-    debug('booting crawl API %s', port);
 
     var crawltick = new crawl();
     crawltick.start();

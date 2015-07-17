@@ -2,11 +2,11 @@
 var express = require('express');
 var router = express.Router();
 
-//models
 var User = require('../models/user.js');
-
-//mail server
 var postMan = require('./mail.js');
+var debug = require('debug')('API');
+//=================================================
+
 
 /*
  * [POST] 新增使用者
@@ -14,6 +14,8 @@ var postMan = require('./mail.js');
  * respone : db result
  */
 router.post('/', function(req, res, next) {
+
+    debug('[POST] 新增使用者', 'req.body->', req.body );
 
     if(!req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
@@ -49,6 +51,8 @@ router.post('/', function(req, res, next) {
  */
 router.get('/', function(req, res, next) {
 
+    debug('[GET] 查詢使用者', 'req.body->', req.body );
+
     if(!req.body.uid){
         res.json( { err : '資料不完全' } );
         return;
@@ -69,6 +73,8 @@ router.get('/', function(req, res, next) {
  * respone : db result
  */
 router.put('/',  function(req, res, next) {
+
+    debug('[PUT] 修改使用者', 'req.body->', req.body );
 
     if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
@@ -99,6 +105,7 @@ router.put('/',  function(req, res, next) {
  */
 router.delete('/', function(req, res, next) {
 
+    debug('[DELETE] 刪除使用者', 'req.body->', req.body );
 
     if(!req.body.uid){
         res.json( { err : '資料不完全' } );
@@ -122,6 +129,7 @@ router.delete('/', function(req, res, next) {
  */
 router.post('/login', function(req, res, next) {
 
+    debug('[POST] 登入檢查', 'req.body->', req.body );
 
     var info = {
         email : req.body.email,
@@ -154,6 +162,8 @@ router.post('/login', function(req, res, next) {
  * respone : { sendMail : true || false }
  */
 router.get('/pwd', function(req, res, next){
+
+    debug('[GET] 取回密碼', 'req.body->', req.body );
 
     var email = { email: req.query.email };
 
