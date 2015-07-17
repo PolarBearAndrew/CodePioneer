@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var debug = require('debug')('API');
 
 var models = {
 	User: require('../models/user.js'),
@@ -13,16 +14,18 @@ var models = {
  */
 router.post('/', function(req, res, next) {
 
-        var article = new models.Article({
-            title: req.body.title,
-            url: req.body.url,
-            author: req.body.author,
-            from: req.body.from,
-            describe: req.body.describe,
-            info: req.body.info
-        });
+    debug('[POST] 新增文章', 'req.body->', req.body );
 
-        article.save(function(err, result) {
+    var article = new models.Article({
+        title: req.body.title,
+        url: req.body.url,
+        author: req.body.author,
+        from: req.body.from,
+        describe: req.body.describe,
+        info: req.body.info
+    });
+
+    article.save(function(err, result) {
         if (err) {
             console.log('[TEST] create test user FAIL, err ->', err);
             res.json(err);
