@@ -57,7 +57,7 @@ describe('[ API unit test - articles ]', function() {
                 return done();
             });
         });
-        /*
+
         it('[GET] 查詢文章(aid)', ( done ) => {
 
             request({
@@ -174,7 +174,7 @@ describe('[ API unit test - articles ]', function() {
 
                 return done();
             });
-        });*/
+        });
     });
 
 

@@ -4,30 +4,25 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-
+var debug = require('debug')('app.js');
 
 //api
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var article = require('./routes/like');
 var articles = require('./routes/articles');
-
+//our plugin
+var testCrawlAPI = require('./routes/testCrawlAPI.js');
 //plugin
 var crawl = require('./routes/crawl.js');
 
+
 var app = express();
 
-//our plugin
-var testCrawlAPI = require('./routes/testCrawlAPI.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
-//set body parser
-app.use(bodyParser.urlencoded({ extended: true }));
-
 
 //set haeder
 app.use(function (req, res, next) {
@@ -42,15 +37,17 @@ app.use(function (req, res, next) {
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true })); //讓req.body可以在JSON內傳送Array
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//router
 app.use('/', routes);
 app.use('/api/users', users);
 app.use('/api/like', article);
 app.use('/api/articles', articles);
 
-//test need to remove
+//test, need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);
 
 
@@ -122,6 +119,8 @@ app.listen(port, function(){
 
     //crawl api
     //==========================================
+
+    debug('booting crawl API %s', port);
 
     var crawltick = new crawl();
     crawltick.start();
