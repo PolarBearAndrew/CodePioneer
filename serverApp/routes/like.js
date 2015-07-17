@@ -12,6 +12,8 @@ var models = {
  */
 router.post('/', function(req, res, next) {
 
+    debug('[POST] 新增收藏文章', 'req.body->', req.body );
+
     if( !req.body.uid || !req.body.aid ){
         res.json( { err : '資料不完全' } );
         return;
@@ -54,7 +56,9 @@ router.post('/', function(req, res, next) {
  * respone : { likeArticle: null }
  */
 router.get('/', function(req, res, next) {
-    
+
+    debug('[GET] 查詢收藏文章', 'req.body->', req.body );
+
     if(!req.body.uid){
         res.json( { err : '資料不完全' } );
         return;
@@ -86,7 +90,9 @@ router.get('/', function(req, res, next) {
  */
 router.delete('/', function(req, res, next) {
 
-	    if(!req.body.uid || !req.body.aid){
+    debug('[DELETE] 刪除收藏文章', 'req.body->', req.body );
+
+	if(!req.body.uid || !req.body.aid){
         res.json( { err : '資料不完全' } );
         return;
     }
