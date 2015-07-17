@@ -1,22 +1,22 @@
 var express = require('express');
 var router = express.Router();
-var debug = require('debug')('API:');
+var debug = require('debug')('API:article');
 
-var models = {
-	User: require('../models/user.js'),
-	Article: require('../models/article.js')
-}
+
+//models
+var User = require('../models/user.js');
+var	Article = require('../models/article.js');
 
 /*
  * [POST] 新增文章
  * request :
  * respone :
  */
-router.post('/', function(req, res, next) {
+router.post('/', (req, res, next) => {
 
     debug('[POST] 新增文章', 'req.body->', req.body );
 
-    var article = new models.Article({
+    var article = new Article({
         title: req.body.title,
         url: req.body.url,
         author: req.body.author,
@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
         info: req.body.info
     });
 
-    article.save(function(err, result) {
+    article.save( (err, result) => {
         if (err) {
             console.log('[TEST] create test user FAIL, err ->', err);
             res.json(err);
@@ -40,6 +40,21 @@ router.post('/', function(req, res, next) {
  * request : aid
  * respone :
  */
+router.get('/', (req, res, next) => {
+
+    debug('[GET] 查詢文章', 'req.body->', req.body );
+
+    Article.findOne()
+            .where('_id').equals( req.body.aid )
+            .execAsync()
+            .then( (result) => {
+                res.json( result );
+            })
+            .catch( (err) =>{
+                console.log('err', err);
+            })
+
+});
 
 /*
  * [GET] 查詢最新文章(10)

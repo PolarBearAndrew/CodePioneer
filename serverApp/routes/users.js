@@ -4,7 +4,8 @@ var router = express.Router();
 
 var User = require('../models/user.js');
 var postMan = require('./mail.js');
-var debug = require('debug')('API:');
+var debug = require('debug')('API:user');
+// debug.log = console.error.bind(console);
 //=================================================
 
 
