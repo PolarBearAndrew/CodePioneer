@@ -30,19 +30,18 @@ router.post('/', function(req, res, next) {
         pwd: req.body.pwd,
         likeArticle: [],
         whoLikeMe: []
-
     });
 
     //儲存到資料庫
-    user.save(function(err, result) {
-
-        if (err) {
+    user.saveAsync()
+        .then( (result) => {
+            debug('result', result);
+            res.json(result[0]);
+        })
+        .catch( (err) => {
             console.log('[TEST] create test user FAIL, err ->', err);
             res.json(err);
-        } else {
-            res.json(result);
-        }
-    });
+        });
 });
 
 /*
@@ -59,13 +58,16 @@ router.get('/', function(req, res, next) {
         return;
     }
 
-    User.findOne({ _id : req.body.uid }, function(err, result) {
-        if(err){
-            res.json({ result: null });
-        }else{
+    User.findOne()
+        .where('_id').equals( req.body.uid )
+        .execAsync()
+        .then( (result) => {
             res.json(result);
-        }
-    });
+        })
+        .catch( (err) => {
+            debug('[GET] 查詢使用者 FAIL, err ->', err);
+            res.json(err);
+        });
 });
 
 /*
@@ -77,7 +79,7 @@ router.put('/',  function(req, res, next) {
 
     debug('[PUT] 修改使用者', 'req.body->', req.body );
 
-    if(!req.body._id || !req.body.email || !req.body.name || !req.body.pwd){
+    if(!req.body.uid || !req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
         return;
     }
@@ -88,16 +90,17 @@ router.put('/',  function(req, res, next) {
         pwd: req.body.pwd
     }
 
-    User.update({_id : req.body._id}, info, function(err, result) {
-        if(err){
-            console.log('update user FAIL, err ->', err);
-            res.json({ err: err });
-        }else{
-            res.json(info);
-        }
-    });
+    User.findOneAndUpdate( {_id: req.body.uid }, info)
+        .update()
+        .then( (result) => {
+            debug('[PUT] 修改使用者 success', result);
+            res.json(result);
+        })
+        .catch( (err) => {
+            debug('[PUT] 修改使用者 FAIL, err ->', err);
+            res.json({err});
+        });
 });
-
 
 /*
  * [DELETE] 刪除使用者
@@ -113,14 +116,16 @@ router.delete('/', function(req, res, next) {
         return;
     }
 
-    User.remove({ _id : req.body.uid }, function(err, result) {
-        if(err){
-            console.log('delete user FAIL, err ->', err);
-            res.json({ err: err });
-        }else{
+    User.findOneAndRemove( {_id: req.body.uid } )
+        .remove()
+        .then( (result) => {
             res.json(result);
-        }
-    });
+        })
+        .catch( (err) => {
+            debug('[DELETE] 刪除使用者 FAIL, err ->', err);
+            res.json({err});
+        });
+
 });
 
 /*
@@ -132,19 +137,13 @@ router.post('/login', function(req, res, next) {
 
     debug('[POST] 登入檢查', 'req.body->', req.body );
 
-    var info = {
-        email : req.body.email,
-        pwd : req.body.pwd
-    }
+    User.findOne()
+        .where('email').equals( req.body.email )
+        .where('pwd').equals( req.body.pwd )
+        .execAsync()
+        .then( (result) => {
 
-    User.findOne( info, function(err, result) {
-
-        if (err) {
-            console.log('[POST] login FAIL, err ->', err);
-            res.json({ login : false });
-
-        }else{
-            if ( result ){
+            if(result){
                 res.json({
                     login : true,
                     _id : result._id
@@ -152,8 +151,11 @@ router.post('/login', function(req, res, next) {
             }else{
                 res.json({ login : false });
             }
-        }
-    });
+        })
+        .catch( (err) => {
+            debug('[POST] 登入檢查 FAIL, err ->', err);
+            res.json({ login : false });
+        });
 });
 
 
@@ -166,28 +168,24 @@ router.get('/pwd', function(req, res, next){
 
     debug('[GET] 取回密碼', 'req.body->', req.body );
 
-    var email = { email: req.query.email };
+    User.findOne()
+        .where('email').equals( req.query.email )
+        .execAsync()
+        .then( (result) => {
 
-    User.findOne( email, function(err, result) {
-
-        if (err) {
-            console.log('[POST] login FAIL, err ->', err);
-            res.json({ sendMail : false });
-
-        }else{
-            if ( result ){
-
-                console.log(result);
-
+            if(result){
                 var mailer = new postMan();
                 mailer.sendTo( result.email, result.pwd );
                 res.json({ sendMail : true });
-
             }else{
                 res.json({ sendMail : false });
             }
-        }
-    });
+        })
+        .catch( (err) => {
+            debug('[GET] 查詢使用者 FAIL, err ->', err);
+            // res.json(err);
+            res.json({ sendMail : false });
+        });
 });
 
 module.exports = router;

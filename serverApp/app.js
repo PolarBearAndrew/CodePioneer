@@ -9,7 +9,7 @@ var debug = require('debug')('app.js');
 //api
 var routes = require('./routes/index');
 // var users = require('./routes/users');
-var users = require('./routes/usersPromise');
+var users = require('./routes/users');
 var article = require('./routes/like');
 var articles = require('./routes/articles');
 //our plugin
