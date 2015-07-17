@@ -30,19 +30,18 @@ router.post('/', function(req, res, next) {
         pwd: req.body.pwd,
         likeArticle: [],
         whoLikeMe: []
-
     });
 
     //儲存到資料庫
-    user.save(function(err, result) {
-
-        if (err) {
+    user.saveAsync()
+        .then( (result) => {
+            debug('result', result);
+            res.json(result[0]);
+        })
+        .catch( (err) => {
             console.log('[TEST] create test user FAIL, err ->', err);
             res.json(err);
-        } else {
-            res.json(result);
-        }
-    });
+        });
 });
 
 /*
@@ -59,13 +58,16 @@ router.get('/', function(req, res, next) {
         return;
     }
 
-    User.findOne({ _id : req.body.uid }, function(err, result) {
-        if(err){
-            res.json({ result: null });
-        }else{
+    User.findOne()
+        .where('_id').equals( req.body.uid )
+        .execAsync()
+        .then( (result) => {
             res.json(result);
-        }
-    });
+        })
+        .catch( (err) => {
+            debug('[GET] 查詢使用者 FAIL, err ->', err);
+            res.json(err);
+        });
 });
 
 /*
@@ -88,14 +90,26 @@ router.put('/',  function(req, res, next) {
         pwd: req.body.pwd
     }
 
-    User.update({_id : req.body._id}, info, function(err, result) {
-        if(err){
-            console.log('update user FAIL, err ->', err);
-            res.json({ err: err });
-        }else{
-            res.json(info);
-        }
-    });
+    // User.update({_id : req.body._id}, info, function(err, result) {
+    //     if(err){
+    //         console.log('update user FAIL, err ->', err);
+    //         res.json({ err: err });
+    //     }else{
+    //         res.json(info);
+    //     }
+    // });
+
+//.where('_id').equals( req.body._id )
+    User.update({_id: req.body._id }, info)
+        .setOptions({ multi: false })
+        .execAsync()
+        .then( (result) => {
+            res.json(result);
+        })
+        .catch( (err) => {
+            debug('[PUT] 修改使用者 FAIL, err ->', err);
+            res.json({err});
+        });
 });
 
 
