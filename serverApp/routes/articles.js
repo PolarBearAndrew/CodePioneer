@@ -61,6 +61,20 @@ router.get('/', (req, res, next) => {
  * request :
  * respone :
  */
+router.get('/', (req, res, next) => {
+
+    debug('[GET] 查詢文章', 'req.body->', req.body );
+
+    Article.find()
+            .execAsync()
+            .then( (result) => {
+                res.json( result );
+            })
+            .catch( (err) =>{
+                console.log('err', err);
+                res.json({err });
+            });
+});
 
 /*
  * [GET] 查詢最新文章(n)

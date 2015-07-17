@@ -116,10 +116,9 @@ router.delete('/', function(req, res, next) {
         return;
     }
 
-    User.findOneAndRemove( {_id: req.body.uid }, info)
+    User.findOneAndRemove( {_id: req.body.uid } )
         .remove()
         .then( (result) => {
-            debug('[DELETE] 刪除使用者 success', result);
             res.json(result);
         })
         .catch( (err) => {
