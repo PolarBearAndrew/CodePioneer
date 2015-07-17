@@ -169,31 +169,8 @@ router.get('/pwd', function(req, res, next){
 
     debug('[GET] 取回密碼', 'req.body->', req.body );
 
-    var email = { email: req.query.email };
-
-    // User.findOne( email, function(err, result) {
-
-    //     if (err) {
-    //         console.log('[POST] login FAIL, err ->', err);
-    //         res.json({ sendMail : false });
-
-    //     }else{
-    //         if ( result ){
-
-    //             console.log(result);
-
-    //             var mailer = new postMan();
-    //             mailer.sendTo( result.email, result.pwd );
-    //             res.json({ sendMail : true });
-
-    //         }else{
-    //             res.json({ sendMail : false });
-    //         }
-    //     }
-    // });
-
     User.findOne()
-        .where('_id').equals( req.body.email )
+        .where('email').equals( req.query.email )
         .execAsync()
         .then( (result) => {
 

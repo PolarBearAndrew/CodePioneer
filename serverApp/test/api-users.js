@@ -136,27 +136,27 @@ describe('[ API unit test - users ]', () => {
             });
         });
 
-        // it('[DELETE] 刪除使用者', ( done ) => {
+        it('[DELETE] 刪除使用者', ( done ) => {
 
-        //     request({
-        //         url: 'http://localhost:8080/api/users/',
-        //         method: 'DELETE',
-        //         form: { uid: uid }
-        //     }, (err, res, data) => {
+            request({
+                url: 'http://localhost:8080/api/users/',
+                method: 'DELETE',
+                form: { uid: uid }
+            }, (err, res, data) => {
 
-        //         //test api exist
-        //         should.exist(data);
-        //         should.not.exist(err);
-        //         res.statusCode.should.equal(200);
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
 
-        //         //test data
-        //         data = JSON.parse( data );
-        //         // data._id.should.equal( uid );
-        //         data.should.have.property( 'ok', 1 );
+                //test data
+                data = JSON.parse( data );
+                // data._id.should.equal( uid );
+                data.should.have.property( 'ok', 1 );
 
-        //         return done();
-        //     });
-        // });
+                return done();
+            });
+        });
     });
 
     after(function(){
