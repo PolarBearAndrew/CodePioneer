@@ -116,14 +116,17 @@ router.delete('/', function(req, res, next) {
         return;
     }
 
-    User.remove({ _id : req.body.uid }, function(err, result) {
-        if(err){
-            console.log('delete user FAIL, err ->', err);
-            res.json({ err: err });
-        }else{
+    User.findOneAndRemove( {_id: req.body.uid }, info)
+        .remove()
+        .then( (result) => {
+            debug('[DELETE] 刪除使用者 success', result);
             res.json(result);
-        }
-    });
+        })
+        .catch( (err) => {
+            debug('[DELETE] 刪除使用者 FAIL, err ->', err);
+            res.json({err});
+        });
+
 });
 
 /*
@@ -135,19 +138,13 @@ router.post('/login', function(req, res, next) {
 
     debug('[POST] 登入檢查', 'req.body->', req.body );
 
-    var info = {
-        email : req.body.email,
-        pwd : req.body.pwd
-    }
+    User.findOne()
+        .where('email').equals( req.body.email )
+        .where('pwd').equals( req.body.pwd )
+        .execAsync()
+        .then( (result) => {
 
-    User.findOne( info, function(err, result) {
-
-        if (err) {
-            console.log('[POST] login FAIL, err ->', err);
-            res.json({ login : false });
-
-        }else{
-            if ( result ){
+            if(result){
                 res.json({
                     login : true,
                     _id : result._id
@@ -155,8 +152,11 @@ router.post('/login', function(req, res, next) {
             }else{
                 res.json({ login : false });
             }
-        }
-    });
+        })
+        .catch( (err) => {
+            debug('[POST] 登入檢查 FAIL, err ->', err);
+            res.json({ login : false });
+        });
 });
 
 
@@ -171,26 +171,45 @@ router.get('/pwd', function(req, res, next){
 
     var email = { email: req.query.email };
 
-    User.findOne( email, function(err, result) {
+    // User.findOne( email, function(err, result) {
 
-        if (err) {
-            console.log('[POST] login FAIL, err ->', err);
-            res.json({ sendMail : false });
+    //     if (err) {
+    //         console.log('[POST] login FAIL, err ->', err);
+    //         res.json({ sendMail : false });
 
-        }else{
-            if ( result ){
+    //     }else{
+    //         if ( result ){
 
-                console.log(result);
+    //             console.log(result);
 
+    //             var mailer = new postMan();
+    //             mailer.sendTo( result.email, result.pwd );
+    //             res.json({ sendMail : true });
+
+    //         }else{
+    //             res.json({ sendMail : false });
+    //         }
+    //     }
+    // });
+
+    User.findOne()
+        .where('_id').equals( req.body.email )
+        .execAsync()
+        .then( (result) => {
+
+            if(result){
                 var mailer = new postMan();
                 mailer.sendTo( result.email, result.pwd );
                 res.json({ sendMail : true });
-
             }else{
                 res.json({ sendMail : false });
             }
-        }
-    });
+        })
+        .catch( (err) => {
+            debug('[GET] 查詢使用者 FAIL, err ->', err);
+            // res.json(err);
+            res.json({ sendMail : false });
+        });
 });
 
 module.exports = router;

@@ -55,6 +55,32 @@ describe('[ API unit test - users ]', () => {
             });
         });
 
+        it('[POST] 登入檢查*', ( done ) => {
+
+            request({
+                url: 'http://localhost:8080/api/users/login',
+                method: 'POST',
+                form: {
+                    email: initData.email,
+                    pwd: initData.pwd
+                }
+            }, (err, res, data) => {
+
+
+
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+
+                //test data
+                data = JSON.parse( data );
+                data.should.have.property( 'login', true );
+
+                return done();
+            });
+        });
+
         it('[GET] 查詢使用者', ( done ) => {
 
             request({
@@ -105,32 +131,6 @@ describe('[ API unit test - users ]', () => {
                 data.should.have.property('ok', 1);
                 data.should.have.property('n', 1);
                 data.should.have.property('nModified', 1);
-
-                return done();
-            });
-        });
-
-        it('[POST] 登入檢查*', ( done ) => {
-
-            request({
-                url: 'http://localhost:8080/api/users/login',
-                method: 'POST',
-                form: {
-                    email: initData.email,
-                    pwd: initData.pwd
-                }
-            }, (err, res, data) => {
-
-
-
-                //test api exist
-                should.exist(data);
-                should.not.exist(err);
-                res.statusCode.should.equal(200);
-
-                //test data
-                data = JSON.parse( data );
-                data.should.have.property( 'login', true );
 
                 return done();
             });
