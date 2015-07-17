@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var debug = require('debug')('API');
+var debug = require('debug')('API:');
 
 var models = {
 	User: require('../models/user.js'),
