@@ -11,12 +11,12 @@ var debug = require('debug')('API:user');
 
 /*
  * [POST] 新增使用者
- * request : name, email, pwd
+ * request : body.name, body.email, body.pwd
  * respone : db result
  */
 router.post('/', (req, res, next) => {
 
-    debug('[POST] 新增使用者', 'req.body->', req.body );
+    debug('[POST] 新增使用者 req.body ->', req.body );
 
     if(!req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
@@ -33,23 +33,23 @@ router.post('/', (req, res, next) => {
 
     user.saveAsync()
         .spread( (result) => {
-            debug('result', result);
+            debug('[POST] 新增使用者 success ->', result);
             res.json(result);
         })
         .catch( (err) => {
-            debug('[POST] 新增使用者, err ->', err);
+            debug('[POST] 新增使用者 fail ->', err);
             next(err);
         });
 });
 
 /*
  * [GET] 查詢使用者
- * request : _id
+ * request : body.uid
  * respone : name, email, pwd
  */
 router.get('/', function(req, res, next) {
 
-    debug('[GET] 查詢使用者', 'req.body->', req.body );
+    debug('[GET] 查詢使用者 req.body ->', req.body );
 
     if(!req.body.uid){
         res.json( { err : '資料不完全' } );
@@ -60,23 +60,23 @@ router.get('/', function(req, res, next) {
         .where('_id').equals( req.body.uid )
         .execAsync()
         .then( (result) => {
+            debug('[GET] 查詢使用者 success ->', result);
             res.json(result);
-            return;
         })
         .catch( (err) => {
-            debug('[GET] 查詢使用者 FAIL, err ->', err);
+            debug('[GET] 查詢使用者 fail ->', err);
             next(err);
     })
 });
 
 /*
  * [PUT] 修改使用者
- * request : _id, name, email ,pwd
+ * request : body.uid, body.name, body.email, body.pwd
  * respone : db result
  */
 router.put('/',  function(req, res, next) {
 
-    debug('[PUT] 修改使用者', 'req.body->', req.body );
+    debug('[PUT] 修改使用者 req.body ->', req.body );
 
     if(!req.body.uid || !req.body.email || !req.body.name || !req.body.pwd){
         res.json( { err : '資料不完全' } );
@@ -92,23 +92,23 @@ router.put('/',  function(req, res, next) {
     User.findOneAndUpdate( { _id: req.body.uid }, info)
         .execAsync()
         .then( (result) => {
-            debug('[PUT] 修改使用者 success', result);
+            debug('[PUT] 修改使用者 success ->', result);
             res.json(result);
         })
         .catch( (err) => {
-            debug('[PUT] 修改使用者 FAIL, err ->', err);
-            res.json({err});
+            debug('[PUT] 修改使用者 fail ->', err);
+            next(err);
         });
 });
 
 /*
  * [DELETE] 刪除使用者
- * request : _id
+ * request : body.uid
  * respone : db result
  */
 router.delete('/', function(req, res, next) {
 
-    debug('[DELETE] 刪除使用者', 'req.body->', req.body );
+    debug('[DELETE] 刪除使用者 req.body ->', req.body );
 
     if(!req.body.uid){
         res.json( { err : '資料不完全' } );
@@ -118,18 +118,19 @@ router.delete('/', function(req, res, next) {
     User.findOneAndRemove( {_id: req.body.uid } )
         .remove()
         .then( (result) => {
+            debug('[DELETE] 刪除使用者 success ->', result);
             res.json(result);
         })
         .catch( (err) => {
-            debug('[DELETE] 刪除使用者 FAIL, err ->', err);
-            res.json({err});
+            debug('[DELETE] 刪除使用者 fail ->', err);
+            next(err)
         });
 });
 
 /*
  * [POST] 登入檢查
- * request : email, pwd
- * respone : { login : true || false, _id : _id  }
+ * request : body.email, body.pwd
+ * respone : login : true || false, _id : _id
  */
 router.post('/login', (req, res, next) => {
 
@@ -142,16 +143,18 @@ router.post('/login', (req, res, next) => {
         .then( (result) => {
 
             if(result){
+                debug('[POST] 登入檢查 success', result);
                 res.json({
                     login : true,
                     _id : result._id
                 });
             }else{
+                debug('[POST] 登入檢查 fail', result);
                 res.json({ login : false });
             }
         })
         .catch( (err) => {
-            debug('[POST] 登入檢查 FAIL, err ->', err);
+            debug('[POST] 登入檢查 fail', err);
             res.json({ login : false });
         });
 });
@@ -159,12 +162,12 @@ router.post('/login', (req, res, next) => {
 
 /*
  * [GET] 取回密碼
- * request : email
- * respone : { sendMail : true || false }
+ * request : body.email
+ * respone : sendMail : true || false
  */
 router.get('/pwd', function(req, res, next){
 
-    debug('[GET] 取回密碼', 'req.body->', req.body );
+    debug('[GET] 取回密碼 req.body ->', req.body );
 
     User.findOne()
         .where('email').equals( req.query.email )
@@ -172,16 +175,19 @@ router.get('/pwd', function(req, res, next){
         .then( (result) => {
 
             if(result){
+                //send mail
                 var mailer = new postMan();
                 mailer.sendTo( result.email, result.pwd );
+
+                debug('[GET] 查詢使用者 success ->', result);
                 res.json({ sendMail : true });
+
             }else{
                 res.json({ sendMail : false });
             }
         })
         .catch( (err) => {
-            debug('[GET] 查詢使用者 FAIL, err ->', err);
-            // res.json(err);
+            debug('[GET] 查詢使用者 fail ->', err);
             res.json({ sendMail : false });
         });
 });
