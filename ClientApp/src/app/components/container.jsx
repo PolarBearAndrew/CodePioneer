@@ -16,19 +16,12 @@ let LeftNav = mui.LeftNav;
 
 let IconButton = mui.IconButton;
 let Paper = mui.Paper;
-let FlatButton = mui.FlatButton;
 let Avatar = mui.Avatar;
-let CardHeader = mui.CardHeader;
-let CardText = mui.CardText;
 
-
-
-let IconMenu=mui.IconMenu;
-let List=mui.List;
-let ListItem=mui.ListItem;
+let IconMenu = mui.IconMenu;
+let List = mui.List;
+let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
-
-let Checkbox = mui.Checkbox;
 
 //mui元件
 //範例:
@@ -60,8 +53,6 @@ let container = React.createClass({
 	    	margin: '0px'
 	    };
 
-
-
         var menuItems = [
               { route: 'user',
                 text: <IconButton iconClassName="material-icons" >account_circle</IconButton>
@@ -89,30 +80,78 @@ let container = React.createClass({
               },
             ];
 
-        let article = {
-            display:'flex',
-            justifyContent:'flex-start',
-            alignItems:'center',
-            color:"#696969",
-            padding:5
-
+        
+        
+    
+        let header={
+            paddingLeft:7,
+            paddingTop: 7,
+            margin:5,
+            fontSize:15,
+            textAlign:'left',
+            color:'#ff7017',
+            letterSpacing:1.5,
         };
 
         let title = {
-            fontSize:30,
             padding:0,
-            margin:0
+            paddingLeft:7,
+            margin:5,
+            fontSize:25,
+            textAlign:'left',
+            letterSpacing:1.5,
+            cursor:'point',
         };
 
         let starBtn = {
-            width:0,
+            width:1,
             display:'flex',
             alignItems:'flex-end'
-
         };
 
-        let contents = {
-            padding:5
+        let article = {
+            display:'flex',
+            alignItems:'center',
+            margin:0,
+            padding:0,
+            fontSize:13,
+            letterSpacing:1.5,
+            color:'#656565',
+        };
+        
+        let contents1={
+            paddingRight:7,
+            paddingLeft:7,
+            margin:0,
+            marginRight:7,
+            marginLeft:7,
+            lineHeight:1.5,
+            textAlign:'left'
+        };
+        
+        let contents2 = {
+            paddingRight:7,
+            paddingbottom:4,
+            paddingLeft:7,
+            paddingTop:4, 
+            margin:0,
+            borderRight: 1,
+            borderRightColor:'#656565',
+            borderRightStyle:'solid',
+            borderLeft: 1,
+            borderLeftColor:'#656565',
+            borderLeftStyle:'solid',
+            lineHeight:1.5,
+        };
+        
+        let contents3 = {
+            paddingRight:7,
+            paddingLeft:7,
+            margin:0,
+            borderRight: 1,
+            borderRightColor:'#656565',
+            borderRightStyle:'solid',
+            lineHeight:1.5,
         };
         // iconClassNameRight="muidocs-icon-navigation-expand-more"
         //<i className="material-icons">home</i>
@@ -128,7 +167,7 @@ let container = React.createClass({
                         <List >
 
                             <ListItem
-
+            
                               leftAvatar={<Avatar  className="material-icons">stars</Avatar>}
                               primaryText="Latest news"
                                />
@@ -147,36 +186,47 @@ let container = React.createClass({
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
+            
                 <Paper zDepth={2}>
-                    <ListItem
-                        style={title}
-                        onMouseOver = {this._onTitleOver}
-                        className="title"
-                        primaryText="New JavaScript in 2015 !!"
-                        href=""
-                    />
-                    <div style={article}>
-                      <CardText style={contents}>
-                        by AndrewChen <br/> In FaceBook
-                      </CardText>
-
-                      <CardText style={contents}>
-                        this is the world future...
-                      </CardText>
-
-                      <CardText className="comments" style={contents}>
-                        999 likes
-                      </CardText>
-
-                      <Checkbox
-                        style={starBtn}
-                        name="checkboxName4"
-                        value="checkboxValue4"
-                        checkedIcon={<i className="material-icons">star</i>}
-                        unCheckedIcon={<i className="material-icons">star_border</i>}
-                        />
-                    </div>
+                        <p style={header} className="article">Latest news</p>
+                        <p
+                            style={title}
+                            className="title"
+                            >
+                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
+                        </p>
+                        <div style={article} className="article">
+                          <p style={contents1}>
+                            by AndrewChen <br/> In FaceBook
+                          </p>
+                          <p style={contents2}>
+                            this is the world future...
+                          </p>
+                          <p style={contents3} className="comments">
+                            999 likes
+                          </p>
+                        </div>
+            
+                        <p
+                            style={title}
+                            className="title"
+                            >
+                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
+                        </p>
+                        <div style={article} className="article">
+                          <p style={contents1}>
+                            by AndrewChen <br/> In FaceBook
+                          </p>
+                          <p style={contents2}>
+                            this is the world future...
+                          </p>
+                          <p style={contents3} className="comments">
+                            999 likes
+                          </p>
+                        </div>
+                    
                 </Paper>
+            
             </div>
 	    );
 
@@ -184,9 +234,6 @@ let container = React.createClass({
     _leftmenu(){
         this.refs.leftNav.toggle();
       },
-
-    _onTitleOver(){
-    },
 });
 
 module.exports = container;
