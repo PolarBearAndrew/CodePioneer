@@ -9,13 +9,13 @@ var debug = require('debug')('app.js');
 //api
 var routes = require('./routes/index');
 // var users = require('./routes/users');
-var users = require('./routes/user');
-var article = require('./routes/like');
-var articles = require('./routes/article');
+var users = require('./routes/api-user');
+var article = require('./routes/api-like');
+var articles = require('./routes/api-article');
 //our plugin
-var testCrawlAPI = require('./routes/testCrawlAPI.js');
+var testCrawlAPI = require('./routes/test-CrawlAPI.js');
 //plugin
-var crawl = require('./routes/crawl.js');
+var crawl = require('./routes/feature-crawl.js');
 
 
 var app = express();

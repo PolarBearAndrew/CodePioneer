@@ -9,7 +9,7 @@ var debug = require('debug')('API:user');
 var User = require('../models/user.js');
 
 //mail sender
-var postMan = require('./mail.js');
+var postMan = require('./feature-mail.js');
 
 //=======================================================
 

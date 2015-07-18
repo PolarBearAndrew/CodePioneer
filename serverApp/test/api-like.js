@@ -47,9 +47,9 @@ describe('[ API unit test - like ]', function() {
 
                 //test data
                 data = JSON.parse( data );
-                Object.keys(initData).map(( key, index ) => {
-                    data.should.have.property( key, initData[key]);
-                });
+                data.should.have.property('ok', 1);
+                data.should.have.property('nModified', 1);
+                data.should.have.property('n', 1);
 
                 return done();
             });

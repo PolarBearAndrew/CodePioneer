@@ -1,7 +1,9 @@
+//express
 var express = require('express');
 var router = express.Router();
 var debug = require('debug')('API:like');
 
+//models
 var models = {
 	User: require('../models/user.js'),
 	Article: require('../models/article.js')
