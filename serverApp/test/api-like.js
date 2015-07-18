@@ -5,8 +5,7 @@ var request = require('request');
 var initData = {
     name: 'AndrewChen(I like article)',
     email: 'chenpoanandrew@gmail.com',
-    pwd: '999',
-    likeArticle: []
+    pwd: '999'
 };
 
 var uid = null;
@@ -48,8 +47,9 @@ describe('[ API unit test - like ]', function() {
 
                 //test data
                 data = JSON.parse( data );
-                data.should.have.property('ok', 1);
-                data.should.have.property('nModified', 1);
+                Object.keys(initData).map(( key, index ) => {
+                    data.should.have.property( key, initData[key]);
+                });
 
                 return done();
             });

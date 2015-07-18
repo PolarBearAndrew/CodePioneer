@@ -9,9 +9,9 @@ var debug = require('debug')('app.js');
 //api
 var routes = require('./routes/index');
 // var users = require('./routes/users');
-var users = require('./routes/users');
+var users = require('./routes/user');
 var article = require('./routes/like');
-var articles = require('./routes/articles');
+var articles = require('./routes/article');
 //our plugin
 var testCrawlAPI = require('./routes/testCrawlAPI.js');
 //plugin
@@ -61,8 +61,6 @@ app.use(function(req, res, next) {
 
 // error handlers
 
-// development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);

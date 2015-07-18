@@ -23,7 +23,6 @@ router.post('/', (req, res, next) => {
         return;
     }
 
-    //先將傳過來的資料做成資料庫物件
     var user = new User({
         name: req.body.name,
         email: req.body.email,
@@ -32,15 +31,14 @@ router.post('/', (req, res, next) => {
         whoLikeMe: []
     });
 
-    //儲存到資料庫
     user.saveAsync()
         .spread( (result) => {
             debug('result', result);
             res.json(result);
         })
         .catch( (err) => {
-            console.log('[TEST] create test user FAIL, err ->', err);
-            res.json(err);
+            debug('[POST] 新增使用者, err ->', err);
+            next(err);
         });
 });
 
@@ -63,11 +61,12 @@ router.get('/', function(req, res, next) {
         .execAsync()
         .then( (result) => {
             res.json(result);
+            return;
         })
         .catch( (err) => {
             debug('[GET] 查詢使用者 FAIL, err ->', err);
-            res.json(err);
-        });
+            next(err);
+    })
 });
 
 /*

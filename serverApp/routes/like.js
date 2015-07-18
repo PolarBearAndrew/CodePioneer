@@ -30,24 +30,28 @@ router.post('/', function(req, res, next) {
     User.findOne(info)
         .execAsync()
         .then( (result) => {
+            // bluebird.reject( new Error('xxxxxx') ); //reject : 直接讓promise物件thorw err到catch中
+            // return bluebird.resolve(data); //resolve包裝一個promise物件,return到下一個then
 
             if(result){
                 likeAry = result.like;
                 likeAry.push( { aid: req.body.aid });
             }
-        })
-        .then( () => {
 
-            User.findOneAndUpdate( info, { like: likeAry } )
-                .update()
-                .then( (result) => {
-
-                    res.json(result);
-                });
+            return(
+                User.findOneAndUpdate( info, { like: likeAry } )
+                    .execAsync()
+            );
         })
+        .then( (result) => {
+            res.json(result);
+        })
+        .catch(next) //<- thorw err
         .catch( (err) => {
             debug('[POST] 新增收藏文章 FAIL, err ->', err);
             res.json({err});
+
+            next(err);
         });
 });
 
