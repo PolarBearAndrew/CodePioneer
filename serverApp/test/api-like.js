@@ -3,9 +3,9 @@ var request = require('request');
 
 //init data
 var initData = {
-    name: 'AndrewChen',
+    name: 'AndrewChen(I like article)',
     email: 'chenpoanandrew@gmail.com',
-    pwd: '123',
+    pwd: '999',
     likeArticle: []
 };
 
@@ -71,7 +71,7 @@ describe('[ API unit test - like ]', function() {
 
                 //test data
                 data = JSON.parse( data );
-                data.should.have.property('likeArticle').with.lengthOf(1);
+                data.should.have.property('like').with.lengthOf(1);
 
                 return done();
             });

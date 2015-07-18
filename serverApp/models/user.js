@@ -20,12 +20,12 @@ var User = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    likeArticle: [{
+    like: [{
         aid: String,
         likeTime: {
-        type: Date,
-        default: Date.now
-    }
+            type: Date,
+            default: Date.now
+        }
     }],
     whoLikeMe: [{
         uid: String
