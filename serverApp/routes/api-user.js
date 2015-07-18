@@ -1,15 +1,16 @@
 //express
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
 //debug
-var debug = require('debug')('API:user');
+let debug = require('debug')('API:user');
 
 //model
-var User = require('../models/user.js');
+let User = require('../models/user.js');
 
-//mail sender
-var postMan = require('../feature/mail.js');
+//feature
+let postMan = require('../feature/mail.js');
+let check = require('../feature/checkPorperty.js');
 
 //=======================================================
 
@@ -22,10 +23,7 @@ router.post('/', (req, res, next) => {
 
     debug('[POST] 新增使用者 req.body ->', req.body );
 
-    if(!req.body.email || !req.body.name || !req.body.pwd){
-        res.json( { err : '資料不完全' } );
-        return;
-    }
+    check( req.body, ['email', 'name', 'pwd', 'id' ] );
 
     var user = new User({
         name: req.body.name,
