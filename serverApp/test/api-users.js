@@ -1,6 +1,7 @@
 // var should = require('should');
 var request = require('request');
 
+
 //init data
 var initData = {
     name: 'AndrewChen',
@@ -33,6 +34,7 @@ describe('[ API unit test - users ]', () => {
             request({
                 url: 'http://localhost:8080/api/users/',
                 method: 'POST',
+                json: true,
                 form: initData
             }, (err, res, data) => {
 
@@ -42,8 +44,6 @@ describe('[ API unit test - users ]', () => {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
-
                 Object.keys(initData).map(( key, index ) => {
                     data.should.have.property( key, initData[key] );
                 });
@@ -127,10 +127,10 @@ describe('[ API unit test - users ]', () => {
 
                 //test data
                 data = JSON.parse( data );
+                Object.keys(initData).map(( key, index ) => {
+                    data.should.have.property( key, initData[key] );
+                });
 
-                data.should.have.property('ok', 1);
-                data.should.have.property('n', 1);
-                data.should.have.property('nModified', 1);
 
                 return done();
             });

@@ -30,6 +30,7 @@ router.post('/', (req, res, next) => {
                 res.json(result[0]);
             })
             .catch( (err) => {
+                debug('[POST] 新增文章, err ->', err);
                 res.json(err);
             });
 });
@@ -50,7 +51,7 @@ router.get('/', (req, res, next) => {
                 res.json( result );
             })
             .catch( (err) =>{
-                console.log('err', err);
+                debug('[GET] 查詢文章, err ->', err);
                 res.json({err });
             });
 });
@@ -68,10 +69,11 @@ router.get('/news', (req, res, next) => {
             .limit(10)
             .execAsync()
             .then( (result) => {
+                // debug('[GET] 查詢最新文章(10) success, result ->', result);
                 res.json( result );
             })
             .catch( (err) =>{
-                console.log('err', err);
+                debug('[GET] 查詢最新文章(10), err ->', err);
                 res.json({err });
             });
 });
@@ -89,10 +91,11 @@ router.get('/news/:count', (req, res, next) => {
             .limit(req.params.count)
             .execAsync()
             .then( (result) => {
+                // debug('[GET] 查詢最新文章(n) success, result ->', result);
                 res.json( result );
             })
             .catch( (err) =>{
-                console.log('err', err);
+                debug('[GET] 查詢最新文章(n), err ->', err);
                 res.json({err });
             });
 });
@@ -125,7 +128,6 @@ router.put('/',  function(req, res, next) {
     Article.findOneAndUpdate( {_id: req.body.aid }, info)
             .update()
             .then( (result) => {
-                debug('[PUT] 修改文章資訊 success', result);
                 res.json(result);
             })
             .catch( (err) => {

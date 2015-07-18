@@ -14,7 +14,7 @@ var debug = require('debug')('API:user');
  * request : name, email, pwd
  * respone : db result
  */
-router.post('/', function(req, res, next) {
+router.post('/', (req, res, next) => {
 
     debug('[POST] 新增使用者', 'req.body->', req.body );
 
@@ -34,9 +34,9 @@ router.post('/', function(req, res, next) {
 
     //儲存到資料庫
     user.saveAsync()
-        .then( (result) => {
+        .spread( (result) => {
             debug('result', result);
-            res.json(result[0]);
+            res.json(result);
         })
         .catch( (err) => {
             console.log('[TEST] create test user FAIL, err ->', err);
@@ -84,14 +84,14 @@ router.put('/',  function(req, res, next) {
         return;
     }
 
-    var info = {
+    let info = {
         name: req.body.name,
         email: req.body.email,
         pwd: req.body.pwd
     }
 
-    User.findOneAndUpdate( {_id: req.body.uid }, info)
-        .update()
+    User.findOneAndUpdate( { _id: req.body.uid }, info)
+        .execAsync()
         .then( (result) => {
             debug('[PUT] 修改使用者 success', result);
             res.json(result);
@@ -132,7 +132,7 @@ router.delete('/', function(req, res, next) {
  * request : email, pwd
  * respone : { login : true || false, _id : _id  }
  */
-router.post('/login', function(req, res, next) {
+router.post('/login', (req, res, next) => {
 
     debug('[POST] 登入檢查', 'req.body->', req.body );
 
