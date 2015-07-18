@@ -132,7 +132,7 @@ router.put('/',  function(req, res, next) {
     };
 
     Article.findOneAndUpdate( { _id: req.body.aid }, info )
-            .update()
+            .updateAsync()
             .then( (result) => {
                 debug('[PUT] 修改文章資訊 success ->', result);
                 res.json(result);

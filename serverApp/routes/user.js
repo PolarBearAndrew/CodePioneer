@@ -94,7 +94,7 @@ router.put('/',  function(req, res, next) {
     }
 
     User.findOneAndUpdate( { _id: req.body.uid }, info)
-        .update()
+        .updateAsync()
         .then( (result) => {
             debug('[PUT] 修改使用者 success ->', result);
             res.json(result);
