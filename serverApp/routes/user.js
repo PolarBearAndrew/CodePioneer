@@ -2,12 +2,10 @@
 var express = require('express');
 var router = express.Router();
 
-var User = require('../models/user.js');
 var postMan = require('./mail.js');
+var User = require('../models/user.js');
 var debug = require('debug')('API:user');
-// debug.log = console.error.bind(console);
 //=================================================
-
 
 /*
  * [POST] 新增使用者
