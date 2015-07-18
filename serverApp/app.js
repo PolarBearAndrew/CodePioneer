@@ -4,22 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+//debug
 var debug = require('debug')('app.js');
 
-//api
+//entry
 var routes = require('./routes/index');
-// var users = require('./routes/users');
+
+//API
 var users = require('./routes/api-user');
 var article = require('./routes/api-like');
 var articles = require('./routes/api-article');
-//our plugin
-var testCrawlAPI = require('./routes/test-CrawlAPI.js');
-//plugin
-var crawl = require('./routes/feature-crawl.js');
 
+//feature modules
+var crawl = require('./feature/crawl.js');
+var testCrawlAPI = require('./feature/test-CrawlAPI.js');
 
 var app = express();
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,8 +50,6 @@ app.use('/api/articles', articles);
 
 //test, need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -87,33 +86,7 @@ var port = 8080;
 
 app.listen(port, function(){
 
-    console.log('[Server] started, on -> localhost:' + port);
-
-    // test data init
-    //==========================================
-    // var User = require('./models/user.js');
-
-    // console.log('init test data...');
-
-    // var data = [
-    //     { name: 'Test', email: '123', pwd: '123' },
-    //     { name: 'AndrewChen', email: 'chenpoanandrew@gmail.com', pwd: '123' },
-    //     { name: 'Ray', email: 'q3856245@gmail.com', pwd: '123' },
-    //     { name: 'Doro', email: 'rilakkuma0330k@gmail.com', pwd: '123' },
-    //     { name: 'Husan', email: 'keami326@gmail.com', pwd: '123' }
-    // ];
-
-    // User.remove({}, function( err, result ){
-
-    //     data.forEach(function( info ){
-    //         var user = new User( info );
-
-    //         //儲存到資料庫
-    //         user.save(function(err, result) {
-    //             // console.log('create test user : ' + result);
-    //         });
-    //     });
-    // });
+    console.log('[Server] started -> http://localhost:' + port);
 
     //crawl api
     //==========================================
