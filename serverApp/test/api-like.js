@@ -3,10 +3,9 @@ var request = require('request');
 
 //init data
 var initData = {
-    name: 'AndrewChen',
+    name: 'AndrewChen(I like article)',
     email: 'chenpoanandrew@gmail.com',
-    pwd: '123',
-    likeArticle: []
+    pwd: '999'
 };
 
 var uid = null;
@@ -50,6 +49,7 @@ describe('[ API unit test - like ]', function() {
                 data = JSON.parse( data );
                 data.should.have.property('ok', 1);
                 data.should.have.property('nModified', 1);
+                data.should.have.property('n', 1);
 
                 return done();
             });
@@ -71,7 +71,7 @@ describe('[ API unit test - like ]', function() {
 
                 //test data
                 data = JSON.parse( data );
-                data.should.have.property('likeArticle').with.lengthOf(1);
+                data.should.have.property('like').with.lengthOf(1);
 
                 return done();
             });

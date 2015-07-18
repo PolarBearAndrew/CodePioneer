@@ -43,14 +43,16 @@ describe('[ API unit test - articles ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                // //test data
+                //test data
                 data = JSON.parse( data );
-
-                // data.should.equal({});
-
                 Object.keys(initData).map(( key, index ) => {
-                    data.should.have.property( key, initData[key] );
+                    if( index !== 5 )
+                        data.should.have.property( key, initData[key] );
                 });
+
+                data.should.have.property('info').with.lengthOf(2);
+                data.info[0].should.equal( initData.info[0] );
+                data.info[1].should.equal( initData.info[1] );
 
                 return done();
             });
@@ -61,7 +63,7 @@ describe('[ API unit test - articles ]', function() {
             request({
                 url: 'http://localhost:8080/api/articles/',
                 method: 'GET',
-                form: aid
+                form: { aid }
             }, (err, res, data) => {
 
                 //test api exist
@@ -69,11 +71,17 @@ describe('[ API unit test - articles ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                // //test data
+                //test data
                 data = JSON.parse( data );
                 Object.keys(initData).map(( key, index ) => {
-                    data.should.have.property( key, initData[key] );
+                    if( index !== 5 )
+                        data.should.have.property( key, initData[key] );
                 });
+
+                data.should.have.property('info').with.lengthOf(2);
+                data.info[0].should.equal( initData.info[0] );
+                data.info[1].should.equal( initData.info[1] );
+
 
                 return done();
             });
@@ -115,15 +123,16 @@ describe('[ API unit test - articles ]', function() {
 
                 // //test data
                 data = JSON.parse( data );
-                data.should.with.lengthOf(5);
+                data.should.with.lengthOf(count);
 
                 return done();
             });
         });
 
-        it('[PUT] 修改文章', ( done ) => {
+        it('[PUT] 修改文章資訊', ( done ) => {
 
             let expectData = {
+                aid: aid,
                 title: 'New JavaScript in 2099 !!',
                 url: 'https://www.google.com.tw',
                 author: 'Doro',
@@ -143,11 +152,13 @@ describe('[ API unit test - articles ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                // //test data
+                delete expectData.aid;
+
+                //test data
                 data = JSON.parse( data );
-                Object.keys(expectData).map(( key, index ) => {
-                    data.should.have.property( key, expectData[key] );
-                });
+                data.should.have.property('ok', 1);
+                data.should.have.property('nModified', 1);
+                data.should.have.property('n', 1);
 
                 return done();
             });
@@ -158,7 +169,7 @@ describe('[ API unit test - articles ]', function() {
             request({
                 url: 'http://localhost:8080/api/articles/',
                 method: 'DELETE',
-                form: aid
+                form: { aid }
             }, (err, res, data) => {
 
                 //test api exist
@@ -169,6 +180,7 @@ describe('[ API unit test - articles ]', function() {
                 // //test data
                 data = JSON.parse( data );
                 data.should.have.property('ok', 1);
+                data.should.have.property('n', 1);
 
                 return done();
             });

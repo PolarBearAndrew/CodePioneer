@@ -5,19 +5,22 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//api
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var article = require('./routes/like');
-var articles = require('./routes/articles');
+//debug
+var debug = require('debug')('app.js');
 
-//plugin
-var crawl = require('./routes/crawl.js');
+//entry
+var routes = require('./routes/index');
+
+//API
+var users = require('./routes/api-user');
+var article = require('./routes/api-like');
+var articles = require('./routes/api-article');
+
+//feature modules
+var crawl = require('./feature/crawl.js');
+var testCrawlAPI = require('./feature/test-CrawlAPI.js');
 
 var app = express();
-
-//our plugin
-var testCrawlAPI = require('./routes/testCrawlAPI.js');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,19 +38,18 @@ app.use(function (req, res, next) {
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true })); //讓req.body可以在JSON內傳送Array
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//router
 app.use('/', routes);
 app.use('/api/users', users);
 app.use('/api/like', article);
 app.use('/api/articles', articles);
 
-//test need to remove
+//test, need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,8 +60,6 @@ app.use(function(req, res, next) {
 
 // error handlers
 
-// development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -86,39 +86,13 @@ var port = 8080;
 
 app.listen(port, function(){
 
-    console.log('[Server] started, on -> localhost:' + port);
-
-    // test data init
-    //==========================================
-    // var User = require('./models/user.js');
-
-    // console.log('init test data...');
-
-    // var data = [
-    //     { name: 'Test', email: '123', pwd: '123' },
-    //     { name: 'AndrewChen', email: 'chenpoanandrew@gmail.com', pwd: '123' },
-    //     { name: 'Ray', email: 'q3856245@gmail.com', pwd: '123' },
-    //     { name: 'Doro', email: 'rilakkuma0330k@gmail.com', pwd: '123' },
-    //     { name: 'Husan', email: 'keami326@gmail.com', pwd: '123' }
-    // ];
-
-    // User.remove({}, function( err, result ){
-
-    //     data.forEach(function( info ){
-    //         var user = new User( info );
-
-    //         //儲存到資料庫
-    //         user.save(function(err, result) {
-    //             // console.log('create test user : ' + result);
-    //         });
-    //     });
-    // });
+    console.log('[Server] started -> http://localhost:' + port);
 
     //crawl api
     //==========================================
 
-    var crawltick = new crawl();
-    crawltick.start();
+    // var crawltick = new crawl();
+    // crawltick.start();
 
 });
 

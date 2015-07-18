@@ -57,36 +57,29 @@ function crawl(){
 		    function(err, res, data) {
 
                 data = JSON.parse(data);
-            	console.log('data', data.results.collection1 )
+//            	console.log('data', data.results.collection1 );
 
                 data.results.collection1.forEach(function( item ){
 
-
 			        var article = new Article({
                         //title
-				        title: item.title.text,
+				        title: item.property2.text,
                         //文章的url
-					    url: item.title.href,
+					    url: item.property2.href,
                         //作者
-					    author: item.users.text,
+					    users: item.property4.text,
                         //來源
                         from: 'TOP10',
                         //描述
-					    describe: item.describe,
+					    describe: item.property5,
                         //一些小資訊
 					    info: [
                             //收藏的人數
-                            item['follow-branch'][0].text,
+                            item.property8.text,
                             //收藏連接網址
-                            item['follow-branch'][0].href,
-                            //branch的數量
-					    	item['follow-branch'][1].text,
-                            //branch的連接網址
-                            item['follow-branch'][2].href,
-                            //誰的branch名稱
-                            item.branch.text,
-                            //誰的branch的連接網址
-                            item.branch.href
+                            item.property8.href,
+                            //發布的日期
+                            item.property3
 					    ]
 				    });
 

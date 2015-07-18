@@ -1,2 +1,4 @@
+--slow 0
 --recursive
 -r entry.js
+--require test/init.js

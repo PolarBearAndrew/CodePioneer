@@ -1,6 +1,7 @@
 // var should = require('should');
 var request = require('request');
 
+
 //init data
 var initData = {
     name: 'AndrewChen',
@@ -33,6 +34,7 @@ describe('[ API unit test - users ]', () => {
             request({
                 url: 'http://localhost:8080/api/users/',
                 method: 'POST',
+                json: true,
                 form: initData
             }, (err, res, data) => {
 
@@ -42,15 +44,39 @@ describe('[ API unit test - users ]', () => {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
-
                 Object.keys(initData).map(( key, index ) => {
                     data.should.have.property( key, initData[key] );
-                })
+                });
 
                 uid = data._id.toString();
 
                 //set uid for next test
+                return done();
+            });
+        });
+
+        it('[POST] 登入檢查*', ( done ) => {
+
+            request({
+                url: 'http://localhost:8080/api/users/login',
+                method: 'POST',
+                form: {
+                    email: initData.email,
+                    pwd: initData.pwd
+                }
+            }, (err, res, data) => {
+
+
+
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+
+                //test data
+                data = JSON.parse( data );
+                data.should.have.property( 'login', true );
+
                 return done();
             });
         });
@@ -82,7 +108,7 @@ describe('[ API unit test - users ]', () => {
         it('[PUT] 修改使用者', ( done ) => {
 
             let expectData = {
-                _id: uid,
+                uid: uid,
                 name: 'AndrewChen',
                 email: 'chenpoanandrew@gmail.com',
                 pwd: '456' //<- new pwd
@@ -101,35 +127,9 @@ describe('[ API unit test - users ]', () => {
 
                 //test data
                 data = JSON.parse( data );
-
-                Object.keys(expectData).map(( key, index ) => {
-                    if( key !== '_id' ) //為何沒有回傳id???
-                        data.should.have.property( key, expectData[key] );
-                })
-
-                return done();
-            });
-        });
-
-        it('[POST] 登入檢查*', ( done ) => {
-
-            request({
-                url: 'http://localhost:8080/api/users/login',
-                method: 'POST',
-                form: {
-                    email: initData.email,
-                    pwd: initData.pwd
-                }
-            }, (err, res, data) => {
-
-                //test api exist
-                should.exist(data);
-                should.not.exist(err);
-                res.statusCode.should.equal(200);
-
-                //test data
-                data = JSON.parse( data );
-                data.should.have.property( 'login', true );
+                data.should.have.property('ok', 1);
+                data.should.have.property('nModified', 1);
+                data.should.have.property('n', 1);
 
                 return done();
             });

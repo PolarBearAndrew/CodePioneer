@@ -44,9 +44,9 @@ let loginApp = React.createClass({
     //將 SignUp 兩個TextField，區分
     getInitialState() {
     return {
-         errormail: 'This field is required.',
-         errorpassword: 'This field is required.',
-         };
+        errormail: 'This field is required.',
+        errorpassword: 'This field is required.',
+        };
     },
 
 	//顯示畫面的func
