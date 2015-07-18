@@ -1,0 +1,8 @@
+@media screen and (max-width: 450px) {
+    .comments{
+        display: none;
+    }
+    .title{
+        font-size: 50;
+    }
+}

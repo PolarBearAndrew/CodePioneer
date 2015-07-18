@@ -1,8 +1,12 @@
-@media screen and (max-width: 420px) {
-    .comments{
-        display: none;
-    }
-    .title{
-        font-size: 25;
-    }
+.title {
+    font-family: 'Ubuntu', serif;
+}
+
+.article {
+    font-family: 'Open Sans', serif;
+}
+
+a {
+    text-decoration: none;
+    color: #3e3e3e;
 }
