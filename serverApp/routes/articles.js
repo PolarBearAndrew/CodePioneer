@@ -25,14 +25,13 @@ router.post('/', (req, res, next) => {
         info: req.body.info
     });
 
-    article.save( (err, result) => {
-        if (err) {
-            console.log('[TEST] create test user FAIL, err ->', err);
-            res.json(err);
-        } else {
-            res.json(result);
-        }
-    });
+    article.saveAsync()
+            .then( (result) => {
+                res.json(result[0]);
+            })
+            .catch( (err) => {
+                res.json(err);
+            });
 });
 
 /*
@@ -61,11 +60,12 @@ router.get('/', (req, res, next) => {
  * request :
  * respone :
  */
-router.get('/', (req, res, next) => {
+router.get('/news', (req, res, next) => {
 
-    debug('[GET] 查詢文章', 'req.body->', req.body );
+    debug('[GET] 查詢最新文章(10)', 'req.body->', req.body );
 
     Article.find()
+            .limit(10)
             .execAsync()
             .then( (result) => {
                 res.json( result );
@@ -81,17 +81,82 @@ router.get('/', (req, res, next) => {
  * request :
  * respone :
  */
+router.get('/news/:count', (req, res, next) => {
+
+    debug('[GET] 查詢最新文章(n)', 'req.body->', req.body );
+
+    Article.find()
+            .limit(req.params.count)
+            .execAsync()
+            .then( (result) => {
+                res.json( result );
+            })
+            .catch( (err) =>{
+                console.log('err', err);
+                res.json({err });
+            });
+});
 
 /*
- * [PUT] 修改文章
+ * [PUT] 修改文章資訊
  * request :
  * respone :
  */
+router.put('/',  function(req, res, next) {
+
+    debug('[PUT] 修改文章資訊', 'req.body->', req.body );
+
+    if(!req.body.aid){
+        res.json( { err : '資料不完全' } );
+        return;
+    }
+
+    let info = {
+        title: req.body.title,
+        url: req.body.url,
+        author: req.body.author,
+        from: req.body.from,
+        describe: req.body.describe,
+        info: req.body.info
+    };
+
+    debug('[PUT] 修改文章資訊 info', info);
+
+    Article.findOneAndUpdate( {_id: req.body.aid }, info)
+            .update()
+            .then( (result) => {
+                debug('[PUT] 修改文章資訊 success', result);
+                res.json(result);
+            })
+            .catch( (err) => {
+                debug('[PUT] 修改文章資訊 FAIL, err ->', err);
+                res.json({err});
+            });
+});
 
 /*
  * [DELETE] 刪除文章
  * request :
  * respone :
  */
+router.delete('/', function(req, res, next) {
+
+    debug('[DELETE] 刪除文章', 'req.body->', req.body );
+
+    if(!req.body.aid){
+        res.json( { err : '資料不完全' } );
+        return;
+    }
+
+    Article.findOneAndRemove( { _id: req.body.aid } )
+            .remove()
+            .then( (result) => {
+                res.json(result);
+            })
+            .catch( (err) => {
+                debug('[DELETE] 刪除文章 FAIL, err ->', err);
+                res.json({err});
+            });
+});
 
 module.exports = router;

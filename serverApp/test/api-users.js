@@ -46,7 +46,7 @@ describe('[ API unit test - users ]', () => {
 
                 Object.keys(initData).map(( key, index ) => {
                     data.should.have.property( key, initData[key] );
-                })
+                });
 
                 uid = data._id.toString();
 

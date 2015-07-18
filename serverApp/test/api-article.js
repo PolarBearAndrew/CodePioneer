@@ -123,15 +123,16 @@ describe('[ API unit test - articles ]', function() {
 
                 // //test data
                 data = JSON.parse( data );
-                data.should.with.lengthOf(5);
+                data.should.with.lengthOf(count);
 
                 return done();
             });
         });
 
-        it('[PUT] 修改文章', ( done ) => {
+        it('[PUT] 修改文章資訊', ( done ) => {
 
             let expectData = {
+                aid: aid,
                 title: 'New JavaScript in 2099 !!',
                 url: 'https://www.google.com.tw',
                 author: 'Doro',
@@ -153,9 +154,9 @@ describe('[ API unit test - articles ]', function() {
 
                 // //test data
                 data = JSON.parse( data );
-                Object.keys(expectData).map(( key, index ) => {
-                    data.should.have.property( key, expectData[key] );
-                });
+                data.should.have.property('ok', 1);
+                data.should.have.property('nModified', 1);
+                data.should.have.property('n', 1);
 
                 return done();
             });
@@ -177,6 +178,7 @@ describe('[ API unit test - articles ]', function() {
                 // //test data
                 data = JSON.parse( data );
                 data.should.have.property('ok', 1);
+                data.should.have.property('n', 1);
 
                 return done();
             });

@@ -125,7 +125,6 @@ router.delete('/', function(req, res, next) {
             debug('[DELETE] 刪除使用者 FAIL, err ->', err);
             res.json({err});
         });
-
 });
 
 /*
