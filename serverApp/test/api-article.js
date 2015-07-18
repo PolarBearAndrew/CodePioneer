@@ -152,7 +152,9 @@ describe('[ API unit test - articles ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                // //test data
+                delete expectData.aid;
+
+                //test data
                 data = JSON.parse( data );
                 data.should.have.property('ok', 1);
                 data.should.have.property('nModified', 1);

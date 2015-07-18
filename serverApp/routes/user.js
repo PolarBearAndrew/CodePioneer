@@ -2,10 +2,16 @@
 var express = require('express');
 var router = express.Router();
 
-var postMan = require('./mail.js');
-var User = require('../models/user.js');
+//debug
 var debug = require('debug')('API:user');
-//=================================================
+
+//model
+var User = require('../models/user.js');
+
+//mail sender
+var postMan = require('./mail.js');
+
+//=======================================================
 
 /*
  * [POST] 新增使用者
@@ -88,7 +94,7 @@ router.put('/',  function(req, res, next) {
     }
 
     User.findOneAndUpdate( { _id: req.body.uid }, info)
-        .execAsync()
+        .update()
         .then( (result) => {
             debug('[PUT] 修改使用者 success ->', result);
             res.json(result);
@@ -174,7 +180,7 @@ router.get('/pwd', function(req, res, next){
 
             if(result){
                 //send mail
-                var mailer = new postMan();
+                let mailer = new postMan();
                 mailer.sendTo( result.email, result.pwd );
 
                 debug('[GET] 查詢使用者 success ->', result);
