@@ -22,7 +22,7 @@ let Main = React.createClass({
         //<Container />
         //<LoginApp />
 	    return (
-	    	<LoginApp />
+	    	<Container />
 	    );
 	},
 
