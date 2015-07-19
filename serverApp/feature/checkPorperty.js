@@ -2,11 +2,11 @@
 
 let opt = 'dev';  // dev || product
 
-let checkProperty = function( data, expect ){
+let check = function( data, expect ){
 
 	let miss = null;
 
-	// //product
+	//product
 	if( opt === 'dev' ){
 
 		miss = expect.filter(( key, value ) => {
@@ -20,7 +20,6 @@ let checkProperty = function( data, expect ){
 		let limit = expect.length;
 
 		do{
-
 			if( data[expect[i]] === undefined ){
 				miss.push(expect[i]);
 				break;
@@ -29,6 +28,7 @@ let checkProperty = function( data, expect ){
 
 	}
 
+	//return
 	if( miss.length > 0 ){
 		let err = new Error('缺少必要資料:');
 		return {
@@ -41,4 +41,4 @@ let checkProperty = function( data, expect ){
 	}
 };
 
-module.exports = { checkProperty, opt };
+module.exports = { check, opt };
