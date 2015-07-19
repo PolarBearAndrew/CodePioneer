@@ -18,14 +18,15 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 
 //data
 var Store = {};
-
 var user = {
     id:'',
     name: '',
     email: '',
-}
+};
 
 var isLogin = false;
+
+var displayPage = 'LoginApp';
 
 /**
  * 建立 Store class，並且繼承 EventEMitter 以擁有廣播功能
@@ -36,15 +37,21 @@ objectAssign( Store, EventEmitter.prototype, {
      * Public API
      * 供外界取得 store 內部資料
      */
-    getUser(){
+    getUser: () => {
         return user;
     },
 
-    getIsLogin(){
-        return isLogin;
+    getIsLogin: () => {
+        return login;
     },
-    //
-    noop: function(){}
+
+    getDisplayPage: () => {
+        return displayPage;
+    },
+
+    noop: () => {
+
+    },
 });
 
 //========================================================================
@@ -69,6 +76,10 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
 
         case AppConstants.USER_LOGIN:
             isLogin = data;
+
+            if(isLogin)
+                displayPage = 'Container';
+
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
