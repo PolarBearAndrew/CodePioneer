@@ -82,20 +82,6 @@ text: 'FaceBook'
 
         
         
-    
-        let header={
-            paddingLeft:7,
-            paddingTop: 7,
-            paddingBottom: 7,
-            margin:5,
-            borderBottom: 1,
-            borderBottomColor:'#441346',
-            borderBottomStyle:'solid',
-            fontSize:15,
-            textAlign:'left',
-            color:'#ff7017',
-            letterSpacing:1.5,
-        };
 
         let title = {
             padding:0,
@@ -193,7 +179,7 @@ text: 'FaceBook'
 
             
                 <Paper zDepth={2}>
-                        <p style={header} className="article">Latest news</p>
+                    <Paper zDepth={1}>
                         <p
                             style={title}
                             className="title"
@@ -211,7 +197,8 @@ text: 'FaceBook'
                             999 likes
                           </p>
                         </div>
-            
+                    </Paper>
+                    <Paper zDepth={1}>
                         <p
                             style={title}
                             className="title"
@@ -229,6 +216,45 @@ text: 'FaceBook'
                             999 likes
                           </p>
                         </div>
+                    </Paper>
+                    <Paper zDepth={1}>
+                        <p
+                            style={title}
+                            className="title"
+                            >
+                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
+                        </p>
+                        <div style={article} className="article">
+                          <p style={contents1}>
+                            by AndrewChen <br/> In FaceBook
+                          </p>
+                          <p style={contents2}>
+                            this is the world future...
+                          </p>
+                          <p style={contents3} className="comments">
+                            999 likes
+                          </p>
+                        </div>
+                    </Paper>
+                    <Paper zDepth={1}>
+                        <p
+                            style={title}
+                            className="title"
+                            >
+                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
+                        </p>
+                        <div style={article} className="article">
+                          <p style={contents1}>
+                            by AndrewChen <br/> In FaceBook
+                          </p>
+                          <p style={contents2}>
+                            this is the world future...
+                          </p>
+                          <p style={contents3} className="comments">
+                            999 likes
+                          </p>
+                        </div>
+                    </Paper>
                     
                 </Paper>
             
