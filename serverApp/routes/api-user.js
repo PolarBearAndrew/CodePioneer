@@ -126,7 +126,7 @@ router.delete('/', (req, res, next) => {
     }
 
     User.findOneAndRemove( {_id: req.body.uid } )
-        .remove()
+        .removeAsync()
         .then( (result) => {
             debug('[DELETE] 刪除使用者 success ->', result);
             res.json(result);

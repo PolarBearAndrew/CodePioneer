@@ -88,6 +88,27 @@ app.listen(port, function(){
 
     console.log('[Server] started -> http://localhost:' + port);
 
+    let User = require('./models/user.js');
+
+    let user = new User({
+        name: '測試人員',
+        email: '123',
+        pwd: '123',
+        likeArticle: [],
+        whoLikeMe: [],
+    });
+
+    User.removeAsync({})
+        .then( () => {
+            return user.saveAsync()
+        })
+        .spread( (result) => {
+            debug('[POST] 新增使用者 success ->', result);
+        })
+        .catch( (err) => {
+            debug('[POST] 新增使用者 fail ->', err);
+        });
+
     //crawl api
     //==========================================
 
