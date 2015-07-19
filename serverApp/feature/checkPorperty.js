@@ -1,14 +1,44 @@
 
-let checkProperty = function( reality, expect, callback ){
 
-	let miss = expect.filter(( key, value) => {
-		return reality[key] === undefined
-	});
+let opt = 'dev';  // dev || product
 
-	if( miss.length >= 1 )
-		callback( new Error('缺少必要資料:'), miss);
-	else
-		callback();
+let checkProperty = function( data, expect ){
+
+	let miss = null;
+
+	// //product
+	if( opt === 'dev' ){
+
+		miss = expect.filter(( key, value ) => {
+			return data[key] === undefined
+		});
+
+	//dev
+	}else{
+
+		let i = 0;
+		let limit = expect.length;
+
+		do{
+
+			if( data[expect[i]] === undefined ){
+				miss.push(expect[i]);
+				break;
+			}
+		}while( miss.length < 1 && ++i < limit);
+
+	}
+
+	if( miss.length > 0 ){
+		let err = new Error('缺少必要資料:');
+		return {
+			check: false,
+			err: err,
+			miss: missData
+		};
+	}else{
+		return { check: true };
+	}
 };
 
-module.exports = checkProperty;
+module.exports = { checkProperty, opt };

@@ -10,7 +10,7 @@ let User = require('../models/user.js');
 
 //feature
 let postMan = require('../feature/mail.js');
-let check = require('../feature/checkPorperty.js');
+let check = require('../feature/checkPorperty.js').checkProperty;
 
 //=======================================================
 
@@ -23,9 +23,13 @@ router.post('/', (req, res, next) => {
 
     debug('[POST] 新增使用者 req.body ->', req.body );
 
-    check( req.body, ['email', 'name', 'pwd', 'id' ] );
+    let miss = check( req.body, ['name', 'email', 'pwd'] );
+    if(!miss.check){
+        debug('[POST] 新增使用者 miss data ->', miss.missData);
+        next(err);
+    }
 
-    var user = new User({
+    let user = new User({
         name: req.body.name,
         email: req.body.email,
         pwd: req.body.pwd,
