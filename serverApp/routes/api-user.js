@@ -1,15 +1,17 @@
 //express
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
 //debug
-var debug = require('debug')('API:user');
+let debug = require('debug')('API:user');
 
 //model
-var User = require('../models/user.js');
+let User = require('../models/user.js');
 
-//mail sender
-var postMan = require('../feature/mail.js');
+//feature
+let postMan = require('../feature/mail.js');
+let checkPorperty = require('../feature/checkPorperty.js');
+let check = checkPorperty.check;
 
 //=======================================================
 
@@ -22,12 +24,13 @@ router.post('/', (req, res, next) => {
 
     debug('[POST] 新增使用者 req.body ->', req.body );
 
-    if(!req.body.email || !req.body.name || !req.body.pwd){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['name', 'email', 'pwd'] );
+    if(!miss.check){
+        debug('[POST] 新增使用者 miss data ->', miss.missData);
+        return next(err);
     }
 
-    var user = new User({
+    let user = new User({
         name: req.body.name,
         email: req.body.email,
         pwd: req.body.pwd,
@@ -51,13 +54,14 @@ router.post('/', (req, res, next) => {
  * request : body.uid
  * respone : name, email, pwd
  */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
 
     debug('[GET] 查詢使用者 req.body ->', req.body );
 
-    if(!req.body.uid){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['uid'] );
+    if(!miss.check){
+        debug('[POST] 新增使用者 miss data ->', miss.missData);
+        return next(err);
     }
 
     User.findOne()
@@ -78,13 +82,14 @@ router.get('/', function(req, res, next) {
  * request : body.uid, body.name, body.email, body.pwd
  * respone : db result
  */
-router.put('/',  function(req, res, next) {
+router.put('/',  (req, res, next) => {
 
     debug('[PUT] 修改使用者 req.body ->', req.body );
 
-    if(!req.body.uid || !req.body.email || !req.body.name || !req.body.pwd){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['uid', 'name', 'email', 'pwd'] );
+    if(!miss.check){
+        debug('[PUT] 修改使用者 miss data ->', miss.missData);
+        return next(err);
     }
 
     let info = {
@@ -110,13 +115,14 @@ router.put('/',  function(req, res, next) {
  * request : body.uid
  * respone : db result
  */
-router.delete('/', function(req, res, next) {
+router.delete('/', (req, res, next) => {
 
     debug('[DELETE] 刪除使用者 req.body ->', req.body );
 
-    if(!req.body.uid){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['uid'] );
+    if(!miss.check){
+        debug('[DELETE] 刪除使用者 miss data ->', miss.missData);
+        return next(err);
     }
 
     User.findOneAndRemove( {_id: req.body.uid } )
@@ -139,6 +145,12 @@ router.delete('/', function(req, res, next) {
 router.post('/login', (req, res, next) => {
 
     debug('[POST] 登入檢查', 'req.body->', req.body );
+
+    let miss = check( req.body, ['email', 'pwd'] );
+    if(!miss.check){
+        debug('[DELETE] 刪除使用者 miss data ->', miss.missData);
+        return next(err);
+    }
 
     User.findOne()
         .where('email').equals( req.body.email )
@@ -172,6 +184,12 @@ router.post('/login', (req, res, next) => {
 router.get('/pwd', function(req, res, next){
 
     debug('[GET] 取回密碼 req.body ->', req.body );
+
+    let miss = check( req.body, ['email'] );
+    if(!miss.check){
+        debug('[DELETE] 刪除使用者 miss data ->', miss.missData);
+        return next(err);
+    }
 
     User.findOne()
         .where('email').equals( req.query.email )

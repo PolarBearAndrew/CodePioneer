@@ -27,7 +27,7 @@ var User = new mongoose.Schema({
             default: Date.now
         }
     }],
-    whoLikeMe: [{
+    followMe: [{
         uid: String
     }],
 });
