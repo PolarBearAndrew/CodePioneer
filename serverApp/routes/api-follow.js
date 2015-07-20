@@ -19,9 +19,10 @@ router.post('/', function(req, res, next) {
     debug('[POST] 新增追蹤 req.body ->', req.body );
 
     //check
-    if( !req.body.uid){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['uid'] );
+    if(!miss.check){
+        debug('[POST] 新增追蹤 miss data ->', miss.missData);
+        return next(err);
     }
 
     //tmp variable, destination info
@@ -63,9 +64,10 @@ router.get('/', function(req, res, next) {
     debug('[GET] 查詢追蹤 req.body ->', req.body );
 
     //check
-    if(!req.body.uid){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['uid'] );
+    if(!miss.check){
+        debug('[POST] 查詢追蹤 miss data ->', miss.missData);
+        return next(err);
     }
 
     //destination info
