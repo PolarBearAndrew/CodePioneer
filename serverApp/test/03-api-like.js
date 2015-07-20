@@ -102,12 +102,7 @@ describe('[ API unit test - like ]', function() {
         });
     });
 
-    after(function(){
-
-        // 任何需要在測試後刪除的資料
-        //console.log('after');
-        return User.remove({}, (err, result) => {
-
-        });
+    after( (done) => {
+        return User.removeAsync({}, done);
     });
 });

@@ -207,11 +207,7 @@ describe('[ API unit test - articles ]', function() {
         });
     });
 
-
-
-    after( () => {
-
-        // 任何需要在測試後刪除的資料
-        //console.log('after');
+    after( (done) => {
+        return Article.removeAsync({}, done);
     });
 });
