@@ -42,10 +42,11 @@ router.post('/', (req, res, next) => {
         .spread( (result) => {
             debug('[POST] 新增使用者 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
             debug('[POST] 新增使用者 fail ->', err);
-            next(err);
+            return next(err);
         });
 });
 
@@ -70,10 +71,11 @@ router.get('/', (req, res, next) => {
         .then( (result) => {
             debug('[GET] 查詢使用者 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
             debug('[GET] 查詢使用者 fail ->', err);
-            next(err);
+            return next(err);
     })
 });
 
@@ -103,10 +105,11 @@ router.put('/',  (req, res, next) => {
         .then( (result) => {
             debug('[PUT] 修改使用者 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
             debug('[PUT] 修改使用者 fail ->', err);
-            next(err);
+            return next(err);
         });
 });
 
@@ -130,10 +133,11 @@ router.delete('/', (req, res, next) => {
         .then( (result) => {
             debug('[DELETE] 刪除使用者 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
             debug('[DELETE] 刪除使用者 fail ->', err);
-            next(err)
+            return next(err);
         });
 });
 
@@ -162,16 +166,19 @@ router.post('/login', (req, res, next) => {
                 debug('[POST] 登入檢查 success', result);
                 res.json({
                     login : true,
-                    _id : result._id
-                });
+                    _id : result._id });
+                return;
+
             }else{
                 debug('[POST] 登入檢查 fail', result);
                 res.json({ login : false });
+                return;
             }
         })
         .catch( (err) => {
             debug('[POST] 登入檢查 fail', err);
             res.json({ login : false });
+            return;
         });
 });
 
@@ -203,14 +210,17 @@ router.get('/pwd', function(req, res, next){
 
                 debug('[GET] 查詢使用者 success ->', result);
                 res.json({ sendMail : true });
+                return;
 
             }else{
                 res.json({ sendMail : false });
+                return;
             }
         })
         .catch( (err) => {
             debug('[GET] 查詢使用者 fail ->', err);
             res.json({ sendMail : false });
+            return;
         });
 });
 
