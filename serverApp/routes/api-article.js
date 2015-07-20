@@ -199,7 +199,7 @@ router.put('/',  function(req, res, next) {
 /*
  * [DELETE] 刪除文章
  * request : body.aid
- * respone :
+ * respone : db result
  */
 router.delete('/', function(req, res, next) {
 
