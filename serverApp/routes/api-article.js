@@ -147,6 +147,15 @@ router.get('/news/:count', (req, res, next) => {
 });
 
 /*
+ * [GET] 接續查詢文章(10)
+ * request : body.index
+ * respone : db result
+ */
+router.get('/more', (req, res, next) => {
+
+});
+
+/*
  * [PUT] 修改文章資訊
  * request : body.aid, body.title, body.url, body.author
  *           body.from, body.describe, body.info
