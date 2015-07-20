@@ -101,7 +101,7 @@ router.get('/news', (req, res, next) => {
     //db operation
     Article.find()
             .limit(10)
-            .sort({ time: 0 })
+            .sort({ time: -1 })
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢最新文章(10) success ->', result);
@@ -133,7 +133,7 @@ router.get('/news/:count', (req, res, next) => {
     //db operation
     Article.find()
             .limit(req.params.count)
-            .sort({ time: 0 })
+            .sort({ time: -1 })
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢最新文章(n) success ->', result);

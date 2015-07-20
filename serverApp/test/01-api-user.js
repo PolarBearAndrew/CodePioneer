@@ -60,6 +60,7 @@ describe('[ API unit test - users ]', () => {
             request({
                 url: 'http://localhost:8080/api/users/login',
                 method: 'POST',
+                json: true,
                 form: {
                     email: initData.email,
                     pwd: initData.pwd
@@ -74,7 +75,6 @@ describe('[ API unit test - users ]', () => {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 data.should.have.property( 'login', true );
 
                 return done();
@@ -86,6 +86,7 @@ describe('[ API unit test - users ]', () => {
             request({
                 url: 'http://localhost:8080/api/users/',
                 method: 'GET',
+                json: true,
                 form: { uid: uid }
             }, (err, res, data) => {
 
@@ -95,8 +96,6 @@ describe('[ API unit test - users ]', () => {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
-
                 Object.keys(initData).map(( key, index ) => {
                     data.should.have.property( key, initData[key] );
                 });
@@ -117,6 +116,7 @@ describe('[ API unit test - users ]', () => {
             request({
                 url: 'http://localhost:8080/api/users/',
                 method: 'PUT',
+                json: true,
                 form: expectData
             }, (err, res, data) => {
 
@@ -126,7 +126,6 @@ describe('[ API unit test - users ]', () => {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 data.should.have.property('ok', 1);
                 data.should.have.property('nModified', 1);
                 data.should.have.property('n', 1);
@@ -140,6 +139,7 @@ describe('[ API unit test - users ]', () => {
             request({
                 url: 'http://localhost:8080/api/users/',
                 method: 'DELETE',
+                json: true,
                 form: { uid: uid }
             }, (err, res, data) => {
 
@@ -149,8 +149,6 @@ describe('[ API unit test - users ]', () => {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
-                // data._id.should.equal( uid );
                 data.should.have.property( 'ok', 1 );
 
                 return done();

@@ -9,6 +9,10 @@ var debug = require('debug')('API:follow');
 var User = require('../models/user.js');
 var Article = require('../models/article.js');
 
+//feature
+let checkPorperty = require('../feature/checkPorperty.js');
+let check = checkPorperty.check;
+
 /*
  * [POST] 新增追蹤
  * request : uid
@@ -57,7 +61,7 @@ router.post('/', function(req, res, next) {
 /*
  * [GET] 查詢追蹤
  * request : uid
- * respone : 
+ * respone :
  */
 router.get('/', function(req, res, next) {
 
@@ -89,7 +93,7 @@ router.get('/', function(req, res, next) {
 /*
  * [DELETE] 取消追蹤
  * request : uid
- * respone : 
+ * respone :
  */
 router.delete('/', function(req, res, next) {
 

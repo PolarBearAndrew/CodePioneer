@@ -34,6 +34,7 @@ describe('[ API unit test - follow ]', function() {
             request({
                 url: 'http://localhost:8080/api/follow/',
                 method: 'POST',
+                json: true,
                 form: {
                     uid: uid,
                     followFrom: followFrom
@@ -46,7 +47,6 @@ describe('[ API unit test - follow ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 data.should.have.property('ok', 1);
                 data.should.have.property('nModified', 1);
                 data.should.have.property('n', 1);
@@ -60,6 +60,7 @@ describe('[ API unit test - follow ]', function() {
             request({
                 url: 'http://localhost:8080/api/follow/',
                 method: 'GET',
+                json: true,
                 form: { uid: uid }
             }, (err, res, data) => {
 
@@ -70,7 +71,6 @@ describe('[ API unit test - follow ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 data.should.have.property('follow').with.lengthOf(1);
 
                 return done();
@@ -82,6 +82,7 @@ describe('[ API unit test - follow ]', function() {
             request({
                 url: 'http://localhost:8080/api/follow/',
                 method: 'DELETE',
+                json: true,
                 form: {
                     uid: uid,
                     followFrom: followFrom
@@ -94,7 +95,6 @@ describe('[ API unit test - follow ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 data.should.have.property('ok', 1);
 
                 return done();
@@ -102,12 +102,10 @@ describe('[ API unit test - follow ]', function() {
         });
     });
 
-    after(function(){
+    after( (done) => {
 
         // 任何需要在測試後刪除的資料
         //console.log('after');
-        return User.remove({}, (err, result) => {
-
-        });
+        return User.removeAsync({}, done);
     });
 });
