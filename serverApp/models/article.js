@@ -2,6 +2,7 @@ var link = require('./link.js');
 var mongoose = link.mongoose;
 var db = link.db;
 
+var d = new Date();
 /*
  *  Schema of Aricle
  */
@@ -24,6 +25,10 @@ var Article = new mongoose.Schema({
     rank: {
         type: Number,
         default: null
+    },
+    time: {
+        type: Number,
+        default: d.getTime()
     },
     info: {
         type: Array,
