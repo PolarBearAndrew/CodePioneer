@@ -23,6 +23,9 @@ let List = mui.List;
 let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
 
+let Checkbox=mui.Checkbox
+let FontIcon = mui.FontIcon ;
+
 //mui元件
 //範例:
 //let AppBar = mui.AppBar;
@@ -144,6 +147,12 @@ text: 'FaceBook'
             borderRightStyle:'solid',
             lineHeight:1.5,
         };
+        
+        let contents4 = {
+            margin:0,
+            padding:0,
+            size:50,
+        };
         // iconClassNameRight="muidocs-icon-navigation-expand-more"
         //<i className="material-icons">home</i>
 
@@ -153,27 +162,22 @@ text: 'FaceBook'
 
                 <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
                         iconElementRight={ <IconMenu iconButtonElement={<IconButton
-                        iconClassName="material-icons" >expand_more</IconButton>}  >
+                        iconClassName="material-icons" className="comments">person</IconButton>}  className="comments">
 
-                        <List >
-
-                            <ListItem
+                            <List className="comments">
+                                <ListItem
+                                  leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
+                                  primaryText="Setting"
+                                />
+                                <ListDivider inset={true} />
+                                <ListItem
+                                  leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
+                                  primaryText="Logout"
+                                />
+                                <ListDivider inset={true} />
+                            </List>
             
-                              leftAvatar={<Avatar  className="material-icons">stars</Avatar>}
-                              primaryText="Latest news"
-                               />
-                            <ListDivider inset={true} />
-                            <ListItem
-                              leftAvatar={<Avatar  className="material-icons">favorite</Avatar>}
-                              primaryText="Search"
-                               />
-                            <ListDivider inset={true} />
-                            <ListItem
-                              leftAvatar={<Avatar  className="material-icons">loyalty</Avatar>}
-                              primaryText="be bo"
-                               />
-                        </List>
-                                            </IconMenu> }
+                        </IconMenu> }
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
@@ -196,65 +200,17 @@ text: 'FaceBook'
                           <p style={contents3} className="comments">
                             999 likes
                           </p>
+                          <div>
+                            <Checkbox style={contents4}
+                              name="checkboxName4"
+                              value="checkboxValue4"
+                              checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons">star</FontIcon >}
+                              unCheckedIcon={<FontIcon  className="material-icons">star_border</FontIcon >}
+                            />
+                          </div>
                         </div>
                     </Paper>
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                        </div>
-                    </Paper>
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                        </div>
-                    </Paper>
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                        </div>
-                    </Paper>
+                    
                     
                 </Paper>
             
