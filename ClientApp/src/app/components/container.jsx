@@ -24,6 +24,7 @@ let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
 
 let Checkbox=mui.Checkbox
+let FontIcon = mui.FontIcon ;
 
 //mui元件
 //範例:
@@ -161,24 +162,22 @@ text: 'FaceBook'
 
                 <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
                         iconElementRight={ <IconMenu iconButtonElement={<IconButton
-                        iconClassName="material-icons" >person</IconButton>}  >
+                        iconClassName="material-icons" className="comments">person</IconButton>}  className="comments">
 
-                        <List >
-
-                            <ListItem
+                            <List className="comments">
+                                <ListItem
+                                  leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
+                                  primaryText="Setting"
+                                />
+                                <ListDivider inset={true} />
+                                <ListItem
+                                  leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
+                                  primaryText="Logout"
+                                />
+                                <ListDivider inset={true} />
+                            </List>
             
-                              leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
-                              primaryText="Setting"
-                               />
-                            <ListDivider inset={true} />
-                            <ListItem
-                              leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
-                              primaryText="Logout"
-                               />
-                            <ListDivider inset={true} />
-                            
-                        </List>
-                                            </IconMenu> }
+                        </IconMenu> }
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
@@ -205,8 +204,8 @@ text: 'FaceBook'
                             <Checkbox style={contents4}
                               name="checkboxName4"
                               value="checkboxValue4"
-                              checkedIcon={<i className="material-icons">star</i>}
-                              unCheckedIcon={<i className="material-icons">star_border</i>}
+                              checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons">star</FontIcon >}
+                              unCheckedIcon={<FontIcon  className="material-icons">star_border</FontIcon >}
                             />
                           </div>
                         </div>
