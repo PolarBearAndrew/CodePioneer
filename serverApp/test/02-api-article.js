@@ -33,7 +33,7 @@ describe('[ API unit test - articles ]', function() {
         it('[POST] 新增文章', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/article/',
                 method: 'POST',
                 form: initData
             }, (err, res, data) => {
@@ -61,7 +61,7 @@ describe('[ API unit test - articles ]', function() {
         it('[GET] 查詢文章(aid)', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/article/',
                 method: 'GET',
                 form: { aid }
             }, (err, res, data) => {
@@ -90,7 +90,7 @@ describe('[ API unit test - articles ]', function() {
         it('[GET] 查詢最新文章(10)', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/news/',
+                url: 'http://localhost:8080/api/article/news/',
                 method: 'GET'
             }, (err, res, data) => {
 
@@ -112,7 +112,7 @@ describe('[ API unit test - articles ]', function() {
             let count = 5;
 
             request({
-                url: 'http://localhost:8080/api/articles/news/' + count,
+                url: 'http://localhost:8080/api/article/news/' + count,
                 method: 'GET'
             }, (err, res, data) => {
 
@@ -142,7 +142,7 @@ describe('[ API unit test - articles ]', function() {
             };
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/article/',
                 method: 'PUT',
                 form: expectData
             }, (err, res, data) => {
@@ -167,7 +167,7 @@ describe('[ API unit test - articles ]', function() {
         it('[DELETE] 刪除文章', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/article/',
                 method: 'DELETE',
                 form: { aid }
             }, (err, res, data) => {

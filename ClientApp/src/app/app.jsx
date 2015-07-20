@@ -12,6 +12,9 @@
   //https://github.com/zilverline/react-tap-event-plugin
   injectTapEventPlugin();
 
+  let actionsArticles = require('./actions/AppActions_article.jsx');
+  actionsArticles.init();
+
   // Render the main app react component into the document body.
   // For more details see: https://facebook.github.io/react/docs/top-level-api.html#react.render
   React.render(<Main />, document.body);

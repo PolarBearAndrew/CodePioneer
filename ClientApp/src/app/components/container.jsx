@@ -23,6 +23,9 @@ let List = mui.List;
 let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
 
+//flux
+
+
 //mui元件
 //範例:
 //let AppBar = mui.AppBar;
@@ -63,25 +66,26 @@ let container = React.createClass({
             {
                 type: MenuItem.Types.LINK,
                 payload: 'https://www.facebook.com/',
-text: 'FaceBook'
+                text: 'FaceBook'
             },
             {
-             text: 'Disabled',
-             disabled: false
+                text: 'Disabled',
+                disabled: false
             },
             {
-             type: MenuItem.Types.LINK,
-             payload: 'https://www.google.com',
-             text: 'Disabled Link',
-             disabled: true
+                type: MenuItem.Types.LINK,
+                payload: 'https://www.google.com',
+                text: 'Disabled Link',
+                disabled: true
             },
-            { type: MenuItem.Types.SUBHEADER,
-            text: <TextField hintText="Search" fullWidth={true}/>
+            {
+                type: MenuItem.Types.SUBHEADER,
+                text: <TextField hintText="Search" fullWidth={true}/>
             }
         ];
 
-        
-        
+
+
 
         let title = {
             padding:0,
@@ -109,7 +113,7 @@ text: 'FaceBook'
             letterSpacing:1.5,
             color:'#656565',
         };
-        
+
         let contents1={
             paddingRight:7,
             paddingLeft:7,
@@ -119,12 +123,12 @@ text: 'FaceBook'
             lineHeight:1.5,
             textAlign:'left'
         };
-        
+
         let contents2 = {
             paddingRight:7,
             paddingbottom:4,
             paddingLeft:7,
-            paddingTop:4, 
+            paddingTop:4,
             margin:0,
             borderRight: 1,
             borderRightColor:'#656565',
@@ -134,7 +138,7 @@ text: 'FaceBook'
             borderLeftStyle:'solid',
             lineHeight:1.5,
         };
-        
+
         let contents3 = {
             paddingRight:7,
             paddingLeft:7,
@@ -147,10 +151,10 @@ text: 'FaceBook'
         // iconClassNameRight="muidocs-icon-navigation-expand-more"
         //<i className="material-icons">home</i>
 
+        console.log('articles', this.props.articles);
+
 	    return (
     		<div  style={containerStyle}>
-
-
                 <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
                         iconElementRight={ <IconMenu iconButtonElement={<IconButton
                         iconClassName="material-icons" >expand_more</IconButton>}  >
@@ -158,7 +162,7 @@ text: 'FaceBook'
                         <List >
 
                             <ListItem
-            
+
                               leftAvatar={<Avatar  className="material-icons">stars</Avatar>}
                               primaryText="Latest news"
                                />
@@ -177,14 +181,14 @@ text: 'FaceBook'
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
-            
+
                 <Paper zDepth={2}>
                     <Paper zDepth={1}>
                         <p
                             style={title}
                             className="title"
                             >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
+                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>
                         </p>
                         <div style={article} className="article">
                           <p style={contents1}>
@@ -203,7 +207,7 @@ text: 'FaceBook'
                             style={title}
                             className="title"
                             >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
+                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>
                         </p>
                         <div style={article} className="article">
                           <p style={contents1}>
@@ -222,7 +226,7 @@ text: 'FaceBook'
                             style={title}
                             className="title"
                             >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
+                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>
                         </p>
                         <div style={article} className="article">
                           <p style={contents1}>
@@ -241,7 +245,7 @@ text: 'FaceBook'
                             style={title}
                             className="title"
                             >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
+                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>
                         </p>
                         <div style={article} className="article">
                           <p style={contents1}>
@@ -255,16 +259,16 @@ text: 'FaceBook'
                           </p>
                         </div>
                     </Paper>
-                    
+
                 </Paper>
-            
+
             </div>
 	    );
 
 	},
     _leftmenu(){
         this.refs.leftNav.toggle();
-      },
+    },
 });
 
 module.exports = container;

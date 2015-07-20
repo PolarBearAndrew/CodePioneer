@@ -1,4 +1,3 @@
-
 //react 初始化
 let React = require('react');
 
@@ -17,7 +16,8 @@ let Snackbar = mui.Snackbar;
 //react 自製元件
 
 //flux 資料相關
-let Actions = require('../actions/AppActions_User.jsx');
+let actionsUser = require('../actions/AppActions_User.jsx');
+//let Actions = require('../actions/AppActions_article.jsx');
 let AppConstants = require('../constants/AppConstants.js');
 
 //main是這個元件暫時使用的名字
@@ -155,7 +155,7 @@ let loginApp = React.createClass({
     	let email = $('#email').val();
     	let pwd = $('#pwd').val();
         let loginFail = this.refs.loginFailSnackbar.show; //錯誤會有 Snackbar
-        Actions.login({ email, pwd }, loginFail);
+        actionsUser.login({ email, pwd }, loginFail);
     },
 
     _Forget(){
@@ -186,22 +186,18 @@ let loginApp = React.createClass({
         let email = $('#signUpEmail').val();
         let pwd = $('#signUpPwd').val();
         let name = $('#signUpName').val();
-
         let signupSuccess = ()=>{
             this.refs.singUpSuccessSnackbar.show();
             this.refs.SignUpDialog.dismiss();
-        }
-        Actions.signUp({ name, email, pwd }, signupSuccess);
+        };
+
+        actionsUser.signUp({ name, email, pwd }, signupSuccess);
     },
 
     _forgetPwd(){
-
         let email = $('#forgetPwdEmail').val();
-
         this.refs.ForgetDialog.dismiss();
-
-        Actions.forgetPwd({ email });
-
+        actionsUser.forgetPwd({ email });
     }
 
 });
