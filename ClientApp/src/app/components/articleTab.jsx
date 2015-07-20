@@ -125,8 +125,6 @@ let ArticleTab = React.createClass({
 
         let data = this.props.data;
 
-        console.log('new a article tab', data);
-
 	    return (
 
 	    	<Paper id={data.id} zDepth={1}>

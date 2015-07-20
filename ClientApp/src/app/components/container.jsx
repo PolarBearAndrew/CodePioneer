@@ -155,12 +155,10 @@ let container = React.createClass({
         // iconClassNameRight="muidocs-icon-navigation-expand-more"
         //<i className="material-icons">home</i>
 
-        var articleList = this.props.articles.map( (value)=>{
-
+        var articleList = this.props.articles.map((value)=>{
             return <ArticleTab
                     key={value.id}
-                    data={value}
-                    />;
+                    data={value} />;
         }, this);
 
 
