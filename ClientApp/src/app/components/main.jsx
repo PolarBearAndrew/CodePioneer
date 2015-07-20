@@ -8,6 +8,7 @@ let Container = require('./container.jsx');
 
 //flux data store
 let MainStore = require('../stores/MainStore.js');
+let ArticleStore = require('../stores/ArticleStore.js');
 let AppConstants = require('../constants/AppConstants.js');
 
 //main是這個元件暫時使用的名字
@@ -26,22 +27,20 @@ let Main = React.createClass({
 	},
 
 	render() {
-        //<Container />
-        //<LoginApp />
 
-        let displayPageCSS = {
+        let displayPage = {
         	LoginApp: false,
         	Container: false,
         };
 
-        displayPageCSS[this.state.displayPage] = true;
+        displayPage[this.state.displayPage] = true;
 
-        console.log('displayPageCSS', displayPageCSS);
+        // console.log('displayPage', displayPage);
 
 	    return (
 	    	<div id='wrapper' >
-	    		{ displayPageCSS.LoginApp ? <LoginApp /> : null }
-	    		{ displayPageCSS.Container ? <Container /> : null }
+	    		{ displayPage.LoginApp ? <LoginApp /> : null }
+	    		{ displayPage.Container ? <Container articles={ this.state.articles }/> : null }
 	    	</div>
 	    );
 	},
@@ -54,6 +53,7 @@ let Main = React.createClass({
 
         return {
         	displayPage: MainStore.getDisplayPage(),
+        	articles: ArticleStore.getArticleList(),
         };
     }
 

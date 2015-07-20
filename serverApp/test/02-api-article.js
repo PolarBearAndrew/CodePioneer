@@ -33,8 +33,9 @@ describe('[ API unit test - articles ]', function() {
         it('[POST] 新增文章', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/article/',
                 method: 'POST',
+                json: true,
                 form: initData
             }, (err, res, data) => {
 
@@ -44,7 +45,6 @@ describe('[ API unit test - articles ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 Object.keys(initData).map(( key, index ) => {
                     if( index !== 5 )
                         data.should.have.property( key, initData[key] );
@@ -61,8 +61,9 @@ describe('[ API unit test - articles ]', function() {
         it('[GET] 查詢文章(aid)', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/article/',
                 method: 'GET',
+                json: true,
                 form: { aid }
             }, (err, res, data) => {
 
@@ -72,7 +73,6 @@ describe('[ API unit test - articles ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 Object.keys(initData).map(( key, index ) => {
                     if( index !== 5 )
                         data.should.have.property( key, initData[key] );
@@ -90,7 +90,8 @@ describe('[ API unit test - articles ]', function() {
         it('[GET] 查詢最新文章(10)', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/news/',
+                url: 'http://localhost:8080/api/article/news/',
+                json: true,
                 method: 'GET'
             }, (err, res, data) => {
 
@@ -100,7 +101,6 @@ describe('[ API unit test - articles ]', function() {
                 res.statusCode.should.equal(200);
 
                 // //test data
-                data = JSON.parse( data );
                 data.should.with.lengthOf(10);
 
                 return done();
@@ -112,8 +112,9 @@ describe('[ API unit test - articles ]', function() {
             let count = 5;
 
             request({
-                url: 'http://localhost:8080/api/articles/news/' + count,
-                method: 'GET'
+                url: 'http://localhost:8080/api/article/news/' + count,
+                method: 'GET',
+                json: true,
             }, (err, res, data) => {
 
                 //test api exist
@@ -121,8 +122,27 @@ describe('[ API unit test - articles ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                // //test data
-                data = JSON.parse( data );
+                //test data
+                data.should.with.lengthOf(count);
+
+                return done();
+            });
+        });
+
+        it('[GET] 接續查詢文章(10)', ( done ) => {
+
+            request({
+                url: 'http://localhost:8080/api/article/more',
+                method: 'GET',
+                json: true,
+            }, (err, res, data) => {
+
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+
+                //test data
                 data.should.with.lengthOf(count);
 
                 return done();
@@ -142,8 +162,9 @@ describe('[ API unit test - articles ]', function() {
             };
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/article/',
                 method: 'PUT',
+                json: true,
                 form: expectData
             }, (err, res, data) => {
 
@@ -155,7 +176,6 @@ describe('[ API unit test - articles ]', function() {
                 delete expectData.aid;
 
                 //test data
-                data = JSON.parse( data );
                 data.should.have.property('ok', 1);
                 data.should.have.property('nModified', 1);
                 data.should.have.property('n', 1);
@@ -167,8 +187,9 @@ describe('[ API unit test - articles ]', function() {
         it('[DELETE] 刪除文章', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/articles/',
+                url: 'http://localhost:8080/api/article/',
                 method: 'DELETE',
+                json: true,
                 form: { aid }
             }, (err, res, data) => {
 
@@ -177,8 +198,7 @@ describe('[ API unit test - articles ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                // //test data
-                data = JSON.parse( data );
+                //test data
                 data.should.have.property('ok', 1);
                 data.should.have.property('n', 1);
 
@@ -187,11 +207,7 @@ describe('[ API unit test - articles ]', function() {
         });
     });
 
-
-
-    after( () => {
-
-        // 任何需要在測試後刪除的資料
-        //console.log('after');
+    after( (done) => {
+        return Article.removeAsync({}, done);
     });
 });

@@ -9,6 +9,11 @@ var debug = require('debug')('API:article');
 var User = require('../models/user.js');
 var	Article = require('../models/article.js');
 
+//feature
+let checkPorperty = require('../feature/checkPorperty.js');
+let check = checkPorperty.check;
+
+
 //=======================================================
 
 /*
@@ -22,6 +27,11 @@ router.post('/', (req, res, next) => {
     debug('[POST] 新增文章 req.body ->', req.body );
 
     //check
+    let miss = check( req.body, ['title', 'url', 'author', 'from', 'describe'] );
+    if(!miss.check){
+        debug('[POST] 新增文章 miss data ->', miss.missData);
+        return next(err);
+    }
 
     //db entiry
     var article = new Article({
@@ -38,10 +48,11 @@ router.post('/', (req, res, next) => {
             .spread( (result) => {
                 debug('[POST] 新增文章 success ->', result);
                 res.json(result);
+                return;
             })
             .catch( (err) => {
                 debug('[POST] 新增文章 fail ->', err);
-                next(err)
+                return next(err);
             });
 });
 
@@ -55,6 +66,11 @@ router.get('/', (req, res, next) => {
     debug('[GET] 查詢文章 req.body ->', req.body );
 
     //check
+    let miss = check( req.body, ['aid'] );
+    if(!miss.check){
+        debug('[GET] 查詢文章 miss data ->', miss.missData);
+        return next(err);
+    }
 
     //db operation
     Article.findOne()
@@ -63,10 +79,11 @@ router.get('/', (req, res, next) => {
             .then( (result) => {
                 debug('[GET] 查詢文章 success ->', result);
                 res.json( result );
+                return;
             })
             .catch( (err) =>{
                 debug('[GET] 查詢文章 fail ->', err);
-                next(err);
+                return next(err);
             });
 });
 
@@ -79,19 +96,21 @@ router.get('/news', (req, res, next) => {
 
     debug('[GET] 查詢最新文章(10) req.body ->', req.body );
 
-    //check
+    //no check
 
     //db operation
     Article.find()
             .limit(10)
+            .sort({ time: -1 })
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢最新文章(10) success ->', result);
                 res.json( result );
+                return;
             })
             .catch( (err) =>{
                 debug('[GET] 查詢最新文章(10) fail ->', err);
-                next(err);
+                return next(err);
             });
 });
 
@@ -104,18 +123,36 @@ router.get('/news/:count', (req, res, next) => {
 
     debug('[GET] 查詢最新文章(n) req.body ->', req.body );
 
+    //check
+    let miss = check( req.params, ['count'] );
+    if(!miss.check){
+        debug('[GET] 查詢最新文章(n) miss data ->', miss.missData);
+        return next(err);
+    }
+
     //db operation
     Article.find()
             .limit(req.params.count)
+            .sort({ time: -1 })
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢最新文章(n) success ->', result);
                 res.json( result );
+                return;
             })
             .catch( (err) =>{
                 debug('[GET] 查詢最新文章(n) fail ->', err);
-                next(err);
+                return next(err);
             });
+});
+
+/*
+ * [GET] 接續查詢文章(10)
+ * request : body.index
+ * respone : db result
+ */
+router.get('/more', (req, res, next) => {
+
 });
 
 /*
@@ -129,9 +166,10 @@ router.put('/',  function(req, res, next) {
     debug('[PUT] 修改文章資訊 req.body ->', req.body );
 
     //check
-    if(!req.body.aid){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['aid', 'title', 'url', 'author', 'from', 'describe', 'info'] );
+    if(!miss.check){
+        debug('[PUT] 修改文章資訊 miss data ->', miss.missData);
+        return next(err);
     }
 
     //destination info
@@ -150,10 +188,11 @@ router.put('/',  function(req, res, next) {
             .then( (result) => {
                 debug('[PUT] 修改文章資訊 success ->', result);
                 res.json(result);
+                return;
             })
             .catch( (err) => {
                 debug('[PUT] 修改文章資訊 fail ->', err);
-                next(err);
+                return next(err);
             });
 });
 
@@ -167,9 +206,10 @@ router.delete('/', function(req, res, next) {
     debug('[DELETE] 刪除文章 req.body->', req.body );
 
     //check
-    if(!req.body.aid){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['aid'] );
+    if(!miss.check){
+        debug('[PUT] 修改文章資訊 miss data ->', miss.missData);
+        return next(err);
     }
 
     //db operation
@@ -178,10 +218,11 @@ router.delete('/', function(req, res, next) {
             .then( (result) => {
                 debug('[DELETE] 刪除文章 success ->', result);
                 res.json(result);
+                return;
             })
             .catch( (err) => {
                 debug('[DELETE] 刪除文章 fial ->', err);
-                res.json({err});
+                return next(err);
             });
 });
 

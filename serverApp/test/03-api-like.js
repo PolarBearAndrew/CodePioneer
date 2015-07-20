@@ -34,6 +34,7 @@ describe('[ API unit test - like ]', function() {
             request({
                 url: 'http://localhost:8080/api/like/',
                 method: 'POST',
+                json: true,
                 form: {
                     uid: uid,
                     aid: aid
@@ -46,7 +47,6 @@ describe('[ API unit test - like ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 data.should.have.property('ok', 1);
                 data.should.have.property('nModified', 1);
                 data.should.have.property('n', 1);
@@ -60,9 +60,9 @@ describe('[ API unit test - like ]', function() {
             request({
                 url: 'http://localhost:8080/api/like/',
                 method: 'GET',
+                json: true,
                 form: { uid: uid }
             }, (err, res, data) => {
-
 
                 //test api exist
                 should.exist(data);
@@ -70,7 +70,6 @@ describe('[ API unit test - like ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 data.should.have.property('like').with.lengthOf(1);
 
                 return done();
@@ -82,6 +81,7 @@ describe('[ API unit test - like ]', function() {
             request({
                 url: 'http://localhost:8080/api/like/',
                 method: 'DELETE',
+                json: true,
                 form: {
                     uid: uid,
                     aid: aid
@@ -94,7 +94,6 @@ describe('[ API unit test - like ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data = JSON.parse( data );
                 data.should.have.property('ok', 1);
 
                 return done();
@@ -102,12 +101,7 @@ describe('[ API unit test - like ]', function() {
         });
     });
 
-    after(function(){
-
-        // 任何需要在測試後刪除的資料
-        //console.log('after');
-        return User.remove({}, (err, result) => {
-
-        });
+    after( (done) => {
+        return User.removeAsync({}, done);
     });
 });

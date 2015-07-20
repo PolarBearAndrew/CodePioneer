@@ -26,9 +26,7 @@ let ListDivider=mui.ListDivider;
 let Checkbox=mui.Checkbox
 let FontIcon = mui.FontIcon ;
 
-//mui元件
-//範例:
-//let AppBar = mui.AppBar;
+let ArticleTab = require('./articleTab.jsx');
 
 let container = React.createClass({
 
@@ -72,12 +70,12 @@ let container = React.createClass({
             { text: '', disabled: true },
             { text: '', disabled: true },
             { type: MenuItem.Types.SUBHEADER,
-                text: <TextField hintText="Search" fullWidth={true}/>
+              text: <TextField hintText="Search" fullWidth={true}/>
             }
         ];
 
-        
-        
+
+
 
         
         let title = {
@@ -105,7 +103,7 @@ let container = React.createClass({
             letterSpacing:1.5,
             color:'#656565',
         };
-        
+
         let contents1={
             paddingRight:7,
             paddingLeft:7,
@@ -115,110 +113,84 @@ let container = React.createClass({
             lineHeight:1.5,
             textAlign:'left'
         };
-        
-//        let contents2 = {
-//            paddingRight:7,
-//            paddingbottom:4,
-//            paddingLeft:7,
-//            paddingTop:4, 
-//            margin:0,
-//            lineHeight:1.5,
-//        };
-        
+
         let contents2 = {
             paddingRight:14,
             paddingLeft:7,
+            paddingTop:4,
             margin:0,
             lineHeight:1.5,
         };
         
-//        let contents3 = {
-//            margin:0,
-//            padding:0,
-//            display:'flex',
-//            alignItems:'center',
-//            justifyContent:'flex-end'
-//        };
-        
-        let starTmp={
-            left:'0px',
-           
+        let contents3 = {
+            paddingRight:7,
+            paddingLeft:7,
+            margin:0,
+            borderRight: 1,
+            borderRightColor:'#656565',
+            borderRightStyle:'solid',
+            lineHeight:1.5,
+        };
+
+        let contents4 = {
+            margin:0,
+            padding:0,
+            size:50,
         };
         
        let A ={
             display:'flex',
             justifyContent:'flex-end'
        }
-        // iconClassNameRight="muidocs-icon-navigation-expand-more"
-        //<i className="material-icons">home</i>
+       
+        var articleList = this.props.articles.map((value)=>{
+            return <ArticleTab
+                    key={value.id}
+                    data={value} />;
+        }, this);
+
 
 	    return (
     		<div  style={containerStyle}>
-            
-                <AppBar className="comments" onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
-                        iconElementRight={ <div className="comments"> <IconMenu iconButtonElement={<IconButton
-                        iconClassName="material-icons" >person</IconButton>} >
+                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
+                        iconElementRight={ <IconMenu iconButtonElement={<IconButton
+                        iconClassName="material-icons" >expand_more</IconButton>}  >
 
-                                <List>
-                                    <ListItem
-                                      leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
-                                      primaryText="Setting"
-                                    />
-                                    <ListDivider inset={true} />
-                                    <ListItem
-                                      leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
-                                      primaryText="Logout"
-                                    />
-                                    <ListDivider inset={true} />
-                                </List>
+                        <List >
 
-                            </IconMenu>  
-                        </div>}
+                            <ListItem
+
+                              leftAvatar={<Avatar  className="material-icons">stars</Avatar>}
+                              primaryText="Latest news"
+                               />
+                            <ListDivider inset={true} />
+                            <ListItem
+                              leftAvatar={<Avatar  className="material-icons">favorite</Avatar>}
+                              primaryText="Search"
+                               />
+                            <ListDivider inset={true} />
+                            <ListItem
+                              leftAvatar={<Avatar  className="material-icons">loyalty</Avatar>}
+                              primaryText="be bo"
+                               />
+                        </List>
+                                            </IconMenu> }
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
-            
+
                 <Paper zDepth={2}>
-                    <Paper zDepth={1}>
-                        <div style={articleAll}>
-                            <Avatar src="http://lorempixel.com/100/100/nature/" />
-                            <div>
-                                <p
-                                    style={title}
-                                    className="title"
-                                    >
-                                    <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
-                                </p>
-                                <div style={article} className="article">
-                                  <p style={contents1}>
-                                    by AndrewChen
-                                  </p>
-                                  <p style={contents2} className="comments">
-                                    999 likes
-                                  </p>
-                                  <div style={A}>
-                                    <Checkbox 
-                                      name="checkboxName4"
-                                      value="checkboxValue4"
-                                      checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons" style={starTmp} >star</FontIcon >}
-                                      unCheckedIcon={<FontIcon  className="material-icons" style={starTmp} >star_border</FontIcon >}
-                                    />
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    </Paper>
-                    
-                    
+
+                    { articleList }
+
                 </Paper>
-            
             </div>
 	    );
 
 	},
     _leftmenu(){
         this.refs.leftNav.toggle();
-      },
+    },
 });
 
 module.exports = container;
