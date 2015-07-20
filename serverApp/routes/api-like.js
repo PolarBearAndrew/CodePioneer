@@ -18,7 +18,7 @@ let check = checkPorperty.check;
 
 /*
  * [POST] 新增收藏文章
- * request : uid, aid
+ * request : body.uid, body.aid
  * respone : { err: false }
  */
 router.post('/', function(req, res, next) {
@@ -64,8 +64,8 @@ router.post('/', function(req, res, next) {
 
 /*
  * [GET] 查詢收藏文章
- * request : uid
- * respone : like
+ * request : body.uid
+ * respone : db result
  */
 router.get('/', function(req, res, next) {
 
@@ -97,7 +97,7 @@ router.get('/', function(req, res, next) {
 
 /*
  * [DELETE] 刪除收藏文章
- * request : aid
+ * request : body.aid
  * respone : { err: false }
  */
 router.delete('/', function(req, res, next) {
