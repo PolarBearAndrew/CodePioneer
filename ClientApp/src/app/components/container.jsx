@@ -73,10 +73,6 @@ let container = React.createClass({
               text: <TextField hintText="Search" fullWidth={true}/>
             }
         ];
-
-
-
-
         
         let title = {
             padding:0,
@@ -138,10 +134,14 @@ let container = React.createClass({
             size:50,
         };
         
-       let A ={
+        let starTmp={
+            left:'0px',
+        };
+        
+        let A ={
             display:'flex',
             justifyContent:'flex-end'
-       }
+        }
        
         var articleList = this.props.articles.map((value)=>{
             return <ArticleTab
@@ -153,31 +153,25 @@ let container = React.createClass({
 	    return (
     		<div  style={containerStyle}>
                 <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
-                        iconElementRight={ <IconMenu iconButtonElement={<IconButton
-                        iconClassName="material-icons" >expand_more</IconButton>}  >
+                        iconElementRight={ <div className="comments"><IconMenu iconButtonElement={<IconButton
+                        iconClassName="material-icons" >person</IconButton>}  >
 
-                        <List >
-
+                        <List>
                             <ListItem
-
-                              leftAvatar={<Avatar  className="material-icons">stars</Avatar>}
-                              primaryText="Latest news"
-                               />
+                              leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
+                              primaryText="Setting"
+                            />
                             <ListDivider inset={true} />
                             <ListItem
-                              leftAvatar={<Avatar  className="material-icons">favorite</Avatar>}
-                              primaryText="Search"
-                               />
+                              leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
+                              primaryText="Logout"
+                            />
                             <ListDivider inset={true} />
-                            <ListItem
-                              leftAvatar={<Avatar  className="material-icons">loyalty</Avatar>}
-                              primaryText="be bo"
-                               />
                         </List>
-                                            </IconMenu> }
+                    </IconMenu> 
+                </div>}
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
-
 
                 <Paper zDepth={2}>
 

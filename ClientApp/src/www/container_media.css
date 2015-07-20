@@ -5,4 +5,7 @@
     .title{
         font-size: 50;
     }
+    .appear{
+         display: block;
+    }
 }

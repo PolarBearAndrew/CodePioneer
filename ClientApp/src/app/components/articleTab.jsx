@@ -66,12 +66,11 @@ let ArticleTab = React.createClass({
             cursor:'point',
         };
 
-        let starBtn = {
-            width:1,
+        let articleAll = {
             display:'flex',
-            alignItems:'flex-end'
+            alignItems:'center'
         };
-
+        
         let article = {
             display:'flex',
             alignItems:'center',
@@ -93,28 +92,17 @@ let ArticleTab = React.createClass({
         };
 
         let contents2 = {
-            paddingRight:7,
-            paddingbottom:4,
+            paddingRight:14,
             paddingLeft:7,
             paddingTop:4,
             margin:0,
-            borderRight: 1,
-            borderRightColor:'#656565',
-            borderRightStyle:'solid',
-            borderLeft: 1,
-            borderLeftColor:'#656565',
-            borderLeftStyle:'solid',
             lineHeight:1.5,
         };
 
         let contents3 = {
-            paddingRight:7,
-            paddingLeft:7,
             margin:0,
-            borderRight: 1,
-            borderRightColor:'#656565',
-            borderRightStyle:'solid',
-            lineHeight:1.5,
+            padding:0,
+            size:50,
         };
 
         let contents4 = {
@@ -122,36 +110,52 @@ let ArticleTab = React.createClass({
             padding:0,
             size:50,
         };
-
+        
+        let starTmp={
+            left:'0px',
+        };
+        
+        let A ={
+            display:'flex',
+            justifyContent:'flex-end'
+        };
+        
+        let avatar={
+            
+        };
+        
         let data = this.props.data;
 
 	    return (
 
 	    	<Paper id={data.id} zDepth={1}>
-                <p
-                    style={title}
-                    className="title"
-                    >
-                    <a href="http://material-ui.com/#/" >{ data.title }</a>
-                </p>
-                <div style={article} className="article">
-                  <p style={contents1}>
-                    by { data.author } <br/> On { data.from }
-                  </p>
-                  <p style={contents2}>
-                  	{ data.describe }
-                  </p>
-                  <p style={contents3} className="comments">
-                    { data.info[0] }
-                  </p>
-                  <div>
-                    <Checkbox style={contents4}
-                      name="checkboxName4"
-                      value="checkboxValue4"
-                      checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons">star</FontIcon >}
-                      unCheckedIcon={<FontIcon  className="material-icons">star_border</FontIcon >}
-                    />
-                  </div>
+                <div style={articleAll}>
+                    <Avatar style={avatar} src="http://lorempixel.com/100/100/nature/" />
+                    <div>
+                        <p
+                            style={title}
+                            className="title"
+                            >
+                            <a href="http://material-ui.com/#/" >{ data.title }</a>
+                        </p>
+                        <div style={article} className="article">
+                          <p style={contents1}>
+                            by { data.author } 
+                          </p>
+                          
+                          <p style={contents2} className="comments">
+                            { data.info[0] }
+                          </p>
+                          <div style={A}>
+                            <Checkbox style={contents4}
+                              name="checkboxName4"
+                              value="checkboxValue4"
+                              checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons" style={starTmp}>star</FontIcon >}
+                              unCheckedIcon={<FontIcon  className="material-icons" style={starTmp}>star_border</FontIcon >}
+                            />
+                          </div>
+                        </div>
+                    </div>
                 </div>
             </Paper>
 	    );
