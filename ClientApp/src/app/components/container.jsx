@@ -23,6 +23,8 @@ let List = mui.List;
 let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
 
+let Checkbox=mui.Checkbox
+
 //mui元件
 //範例:
 //let AppBar = mui.AppBar;
@@ -144,6 +146,12 @@ text: 'FaceBook'
             borderRightStyle:'solid',
             lineHeight:1.5,
         };
+        
+        let contents4 = {
+            margin:0,
+            padding:0,
+            size:50,
+        };
         // iconClassNameRight="muidocs-icon-navigation-expand-more"
         //<i className="material-icons">home</i>
 
@@ -196,65 +204,17 @@ text: 'FaceBook'
                           <p style={contents3} className="comments">
                             999 likes
                           </p>
+                          <div>
+                            <Checkbox style={contents4}
+                              name="checkboxName4"
+                              value="checkboxValue4"
+                              checkedIcon={<i className="material-icons">star</i>}
+                              unCheckedIcon={<i className="material-icons">star_border</i>}
+                            />
+                          </div>
                         </div>
                     </Paper>
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                        </div>
-                    </Paper>
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                        </div>
-                    </Paper>
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                        </div>
-                    </Paper>
+                    
                     
                 </Paper>
             
