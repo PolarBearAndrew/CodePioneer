@@ -161,25 +161,22 @@ text: 'FaceBook'
 
                 <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
                         iconElementRight={ <IconMenu iconButtonElement={<IconButton
-                        iconClassName="material-icons" >expand_more</IconButton>}  >
+                        iconClassName="material-icons" >person</IconButton>}  >
 
                         <List >
 
                             <ListItem
             
-                              leftAvatar={<Avatar  className="material-icons">stars</Avatar>}
-                              primaryText="Latest news"
+                              leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
+                              primaryText="Setting"
                                />
                             <ListDivider inset={true} />
                             <ListItem
-                              leftAvatar={<Avatar  className="material-icons">favorite</Avatar>}
-                              primaryText="Search"
+                              leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
+                              primaryText="Logout"
                                />
                             <ListDivider inset={true} />
-                            <ListItem
-                              leftAvatar={<Avatar  className="material-icons">loyalty</Avatar>}
-                              primaryText="be bo"
-                               />
+                            
                         </List>
                                             </IconMenu> }
                 />
