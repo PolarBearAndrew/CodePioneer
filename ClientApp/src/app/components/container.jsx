@@ -58,34 +58,28 @@ let container = React.createClass({
 
         var menuItems = [
             { route: 'user',
-            text: <IconButton iconClassName="material-icons" >account_circle</IconButton>
+                text: <div className="appear"><IconButton  iconClassName="material-icons" >account_circle</IconButton></div>
+//             text: <div className="comments"><IconButton  iconClassName="material-icons" >favorite</IconButton></div>,                      
             },
             { route: 'latest news', text: 'Latest news' },
             { route: 'search', text: 'Search' },
             { route: 'components', text: 'Components' },
-            {
-                type: MenuItem.Types.LINK,
-                payload: 'https://www.facebook.com/',
-text: 'FaceBook'
-            },
-            {
-             text: 'Disabled',
-             disabled: false
-            },
-            {
-             type: MenuItem.Types.LINK,
-             payload: 'https://www.google.com',
-             text: 'Disabled Link',
-             disabled: true
-            },
+            { route: 'logout', text: <div className="appear">Logout</div> },
+            { text: '', disabled: true },
+            { text: '', disabled: true },
+            { text: '', disabled: true },
+            { text: '', disabled: true },
+            { text: '', disabled: true },
+            { text: '', disabled: true },
             { type: MenuItem.Types.SUBHEADER,
-            text: <TextField hintText="Search" fullWidth={true}/>
+                text: <TextField hintText="Search" fullWidth={true}/>
             }
         ];
 
         
         
 
+        
         let title = {
             padding:0,
             paddingLeft:7,
@@ -96,11 +90,10 @@ text: 'FaceBook'
             letterSpacing:1.5,
             cursor:'point',
         };
-
-        let starBtn = {
-            width:1,
+        
+        let articleAll = {
             display:'flex',
-            alignItems:'flex-end'
+            alignItems:'center'
         };
 
         let article = {
@@ -123,91 +116,96 @@ text: 'FaceBook'
             textAlign:'left'
         };
         
+//        let contents2 = {
+//            paddingRight:7,
+//            paddingbottom:4,
+//            paddingLeft:7,
+//            paddingTop:4, 
+//            margin:0,
+//            lineHeight:1.5,
+//        };
+        
         let contents2 = {
-            paddingRight:7,
-            paddingbottom:4,
+            paddingRight:14,
             paddingLeft:7,
-            paddingTop:4, 
             margin:0,
-            borderRight: 1,
-            borderRightColor:'#656565',
-            borderRightStyle:'solid',
-            borderLeft: 1,
-            borderLeftColor:'#656565',
-            borderLeftStyle:'solid',
             lineHeight:1.5,
         };
         
-        let contents3 = {
-            paddingRight:7,
-            paddingLeft:7,
-            margin:0,
-            borderRight: 1,
-            borderRightColor:'#656565',
-            borderRightStyle:'solid',
-            lineHeight:1.5,
+//        let contents3 = {
+//            margin:0,
+//            padding:0,
+//            display:'flex',
+//            alignItems:'center',
+//            justifyContent:'flex-end'
+//        };
+        
+        let starTmp={
+            left:'0px',
+           
         };
         
-        let contents4 = {
-            margin:0,
-            padding:0,
-            size:50,
-        };
+       let A ={
+            display:'flex',
+            justifyContent:'flex-end'
+       }
         // iconClassNameRight="muidocs-icon-navigation-expand-more"
         //<i className="material-icons">home</i>
 
 	    return (
     		<div  style={containerStyle}>
-
-
-                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
-                        iconElementRight={ <IconMenu iconButtonElement={<IconButton
-                        iconClassName="material-icons" className="comments">person</IconButton>}  className="comments">
-
-                            <List className="comments">
-                                <ListItem
-                                  leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
-                                  primaryText="Setting"
-                                />
-                                <ListDivider inset={true} />
-                                <ListItem
-                                  leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
-                                  primaryText="Logout"
-                                />
-                                <ListDivider inset={true} />
-                            </List>
             
-                        </IconMenu> }
+                <AppBar className="comments" onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
+                        iconElementRight={ <div className="comments"> <IconMenu iconButtonElement={<IconButton
+                        iconClassName="material-icons" >person</IconButton>} >
+
+                                <List>
+                                    <ListItem
+                                      leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
+                                      primaryText="Setting"
+                                    />
+                                    <ListDivider inset={true} />
+                                    <ListItem
+                                      leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
+                                      primaryText="Logout"
+                                    />
+                                    <ListDivider inset={true} />
+                                </List>
+
+                            </IconMenu>  
+                        </div>}
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
             
                 <Paper zDepth={2}>
                     <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                          <div>
-                            <Checkbox style={contents4}
-                              name="checkboxName4"
-                              value="checkboxValue4"
-                              checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons">star</FontIcon >}
-                              unCheckedIcon={<FontIcon  className="material-icons">star_border</FontIcon >}
-                            />
-                          </div>
+                        <div style={articleAll}>
+                            <Avatar src="http://lorempixel.com/100/100/nature/" />
+                            <div>
+                                <p
+                                    style={title}
+                                    className="title"
+                                    >
+                                    <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>           
+                                </p>
+                                <div style={article} className="article">
+                                  <p style={contents1}>
+                                    by AndrewChen
+                                  </p>
+                                  <p style={contents2} className="comments">
+                                    999 likes
+                                  </p>
+                                  <div style={A}>
+                                    <Checkbox 
+                                      name="checkboxName4"
+                                      value="checkboxValue4"
+                                      checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons" style={starTmp} >star</FontIcon >}
+                                      unCheckedIcon={<FontIcon  className="material-icons" style={starTmp} >star_border</FontIcon >}
+                                    />
+                                  </div>
+                                </div>
+                            </div>
                         </div>
                     </Paper>
                     
