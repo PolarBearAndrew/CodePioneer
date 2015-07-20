@@ -69,7 +69,7 @@ router.get('/', function(req, res, next) {
     }
 
     //destination info
-    var info = { follow: req.body.uid };
+    var info = { _id: req.body.uid };
 
     //db operation
     User.findOne(info)
@@ -101,7 +101,7 @@ router.delete('/', function(req, res, next) {
 
     //tmp variable, destination info
     let followAry;
-    let info = { follow: req.body.uid };
+    let info = { _id: req.body.uid };
 
     //db operation
     User.findOne(info)
@@ -110,7 +110,7 @@ router.delete('/', function(req, res, next) {
 
             if(result){
                 followAry = result.follow;
-                followAry = likeAry.filter( (item) => {
+                followAry = followAry.filter( (item) => {
                     return item.follow != req.body.follow;
                 });
             }else{
