@@ -26,9 +26,7 @@ let ListDivider=mui.ListDivider;
 let Checkbox=mui.Checkbox
 let FontIcon = mui.FontIcon ;
 
-//mui元件
-//範例:
-//let AppBar = mui.AppBar;
+let ArticleTab = require('./articleTab.jsx');
 
 let container = React.createClass({
 
@@ -157,7 +155,14 @@ let container = React.createClass({
         // iconClassNameRight="muidocs-icon-navigation-expand-more"
         //<i className="material-icons">home</i>
 
-        console.log('articles', this.props.articles);
+        var articleList = this.props.articles.map( (value)=>{
+
+            return <ArticleTab
+                    key={value.id}
+                    data={value}
+                    />;
+        }, this);
+
 
 	    return (
     		<div  style={containerStyle}>
@@ -189,93 +194,10 @@ let container = React.createClass({
 
 
                 <Paper zDepth={2}>
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                          <div>
-                            <Checkbox style={contents4}
-                              name="checkboxName4"
-                              value="checkboxValue4"
-                              checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons">star</FontIcon >}
-                              unCheckedIcon={<FontIcon  className="material-icons">star_border</FontIcon >}
-                            />
-                          </div>
-                        </div>
-                    </Paper>
 
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                        </div>
-                    </Paper>
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                        </div>
-                    </Paper>
-                    <Paper zDepth={1}>
-                        <p
-                            style={title}
-                            className="title"
-                            >
-                            <a href="http://material-ui.com/#/" >New JavaScript in 2015 !! </a>
-                        </p>
-                        <div style={article} className="article">
-                          <p style={contents1}>
-                            by AndrewChen <br/> In FaceBook
-                          </p>
-                          <p style={contents2}>
-                            this is the world future...
-                          </p>
-                          <p style={contents3} className="comments">
-                            999 likes
-                          </p>
-                        </div>
-                    </Paper>
+                    { articleList }
+
                 </Paper>
-
             </div>
 	    );
 
