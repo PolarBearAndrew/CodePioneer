@@ -15,6 +15,7 @@ var routes = require('./routes/index');
 var users = require('./routes/api-user');
 var article = require('./routes/api-like');
 var articles = require('./routes/api-article');
+var follow = require('./routes/api-follow');
 
 //feature modules
 var crawl = require('./feature/crawl.js');
@@ -47,6 +48,7 @@ app.use('/', routes);
 app.use('/api/users', users);
 app.use('/api/like', article);
 app.use('/api/articles', articles);
+app.use('/api/follow', follow);
 
 //test, need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);
