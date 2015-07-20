@@ -21,6 +21,9 @@ router.post('/', (req, res, next) => {
 
     debug('[POST] 新增文章 req.body ->', req.body );
 
+    //check
+
+    //db entiry
     var article = new Article({
         title: req.body.title,
         url: req.body.url,
@@ -30,6 +33,7 @@ router.post('/', (req, res, next) => {
         info: req.body.info
     });
 
+    //db operation
     article.saveAsync()
             .spread( (result) => {
                 debug('[POST] 新增文章 success ->', result);
@@ -50,6 +54,9 @@ router.get('/', (req, res, next) => {
 
     debug('[GET] 查詢文章 req.body ->', req.body );
 
+    //check
+
+    //db operation
     Article.findOne()
             .where('_id').equals( req.body.aid )
             .execAsync()
@@ -72,6 +79,9 @@ router.get('/news', (req, res, next) => {
 
     debug('[GET] 查詢最新文章(10) req.body ->', req.body );
 
+    //check
+
+    //db operation
     Article.find()
             .limit(10)
             .execAsync()
@@ -94,6 +104,7 @@ router.get('/news/:count', (req, res, next) => {
 
     debug('[GET] 查詢最新文章(n) req.body ->', req.body );
 
+    //db operation
     Article.find()
             .limit(req.params.count)
             .execAsync()
@@ -117,11 +128,13 @@ router.put('/',  function(req, res, next) {
 
     debug('[PUT] 修改文章資訊 req.body ->', req.body );
 
+    //check
     if(!req.body.aid){
         res.json( { err : '資料不完全' } );
         return;
     }
 
+    //destination info
     let info = {
         title: req.body.title,
         url: req.body.url,
@@ -131,6 +144,7 @@ router.put('/',  function(req, res, next) {
         info: req.body.info
     };
 
+    //db operation
     Article.findOneAndUpdate( { _id: req.body.aid }, info )
             .updateAsync()
             .then( (result) => {
@@ -152,11 +166,13 @@ router.delete('/', function(req, res, next) {
 
     debug('[DELETE] 刪除文章 req.body->', req.body );
 
+    //check
     if(!req.body.aid){
         res.json( { err : '資料不完全' } );
         return;
     }
 
+    //db operation
     Article.findOneAndRemove( { _id: req.body.aid } )
             .remove()
             .then( (result) => {
