@@ -1,13 +1,13 @@
 //express
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
 //debug
-var debug = require('debug')('API:follow');
+let debug = require('debug')('API:follow');
 
 //model
-var User = require('../models/user.js');
-var Article = require('../models/article.js');
+let User = require('../models/user.js');
+let Article = require('../models/article.js');
 
 //feature
 let checkPorperty = require('../feature/checkPorperty.js');
@@ -18,7 +18,7 @@ let check = checkPorperty.check;
  * request : uid
  * respone : { err: false }
  */
-router.post('/', function(req, res, next) {
+router.post('/', (req, res, next) => {
 
     debug('[POST] 新增追蹤 req.body ->', req.body );
 
@@ -51,10 +51,11 @@ router.post('/', function(req, res, next) {
         .then( (result) => {
             debug('[POST] 新增追蹤 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
             debug('[POST] 新增追蹤 fail ->', err);
-            next(err);
+            return next(err);
         });
 });
 
@@ -70,7 +71,7 @@ router.get('/', function(req, res, next) {
     //check
     let miss = check( req.body, ['uid'] );
     if(!miss.check){
-        debug('[POST] 查詢追蹤 miss data ->', miss.missData);
+        debug('[GET] 查詢追蹤 miss data ->', miss.missData);
         return next(err);
     }
 
@@ -81,12 +82,13 @@ router.get('/', function(req, res, next) {
     User.findOne(info)
         .execAsync()
         .then( (result) => {
-            debug('[POST] 查詢追蹤 success ->', result);
+            debug('[GET] 查詢追蹤 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
-            debug('[POST] 查詢追蹤 fail ->', err);
-            next(err);
+            debug('[GET] 查詢追蹤 fail ->', err);
+            return next(err);
         });
 });
 
@@ -100,9 +102,10 @@ router.delete('/', function(req, res, next) {
     debug('[DELETE] 取消追蹤 req.body ->', req.body );
 
     //check
-	if(!req.body.uid){
-        res.json( { err : '資料不完全' } );
-        return;
+	let miss = check( req.body, ['uid'] );
+    if(!miss.check){
+        debug('[DELETE] 取消追蹤 miss data ->', miss.missData);
+        return next(err);
     }
 
     //tmp variable, destination info
@@ -119,8 +122,6 @@ router.delete('/', function(req, res, next) {
                 followAry = followAry.filter( (item) => {
                     return item.follow != req.body.follow;
                 });
-            }else{
-               //這樣等於錯誤
             }
 
             return(
@@ -132,10 +133,11 @@ router.delete('/', function(req, res, next) {
         .then( (result) => {
             debug('[DELETE] 取消追蹤 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
             debug('[DELETE] 取消追蹤 fail ->', err);
-            next(err)
+            return next(err);
         });
 });
 

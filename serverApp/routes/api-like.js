@@ -9,6 +9,10 @@ var debug = require('debug')('API:like');
 var User = require('../models/user.js');
 var Article = require('../models/article.js');
 
+//feature
+let checkPorperty = require('../feature/checkPorperty.js');
+let check = checkPorperty.check;
+
 // bluebird.reject( new Error('xxxxxx') ); //reject : 直接讓promise物件thorw err到catch中
 // return bluebird.resolve(data); //resolve包裝一個promise物件,return到下一個then
 
@@ -22,9 +26,10 @@ router.post('/', function(req, res, next) {
     debug('[POST] 新增收藏文章 req.body ->', req.body );
 
     //check
-    if( !req.body.uid || !req.body.aid ){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['uid', 'aid'] );
+    if(!miss.check){
+        debug('[POST] 新增收藏文章 miss data ->', miss.missData);
+        return next(err);
     }
 
     //tmp variable, destination info
@@ -49,10 +54,11 @@ router.post('/', function(req, res, next) {
         .then( (result) => {
             debug('[POST] 新增收藏文章 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
             debug('[POST] 新增收藏文章 fail ->', err);
-            next(err);
+            return next(err);
         });
 });
 
@@ -66,9 +72,10 @@ router.get('/', function(req, res, next) {
     debug('[GET] 查詢收藏文章 req.body ->', req.body );
 
     //check
-    if(!req.body.uid){
-        res.json( { err : '資料不完全' } );
-        return;
+    let miss = check( req.body, ['uid'] );
+    if(!miss.check){
+        debug('[GET] 新增收藏文章 miss data ->', miss.missData);
+        return next(err);
     }
 
     //destination info
@@ -78,12 +85,13 @@ router.get('/', function(req, res, next) {
     User.findOne(info)
         .execAsync()
         .then( (result) => {
-            debug('[POST] 查詢收藏文章 success ->', result);
+            debug('[GET] 查詢收藏文章 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
-            debug('[POST] 查詢收藏文章 fail ->', err);
-            next(err);
+            debug('[GET] 查詢收藏文章 fail ->', err);
+            return next(err);
         });
 });
 
@@ -97,9 +105,10 @@ router.delete('/', function(req, res, next) {
     debug('[DELETE] 刪除收藏文章 req.body ->', req.body );
 
     //check
-	if(!req.body.uid || !req.body.aid){
-        res.json( { err : '資料不完全' } );
-        return;
+	let miss = check( req.body, ['uid', 'aid'] );
+    if(!miss.check){
+        debug('[DELETE] 新增收藏文章 miss data ->', miss.missData);
+        return next(err);
     }
 
     //tmp variable, destination info
@@ -116,23 +125,21 @@ router.delete('/', function(req, res, next) {
                 likeAry = likeAry.filter( (item) => {
                     return item.aid != req.body.aid;
                 });
-            }else{
-               //這樣等於錯誤
             }
 
             return(
                 User.findOneAndUpdate( info, { like: likeAry } )
                     .updateAsync()
             );
-
         })
         .then( (result) => {
             debug('[DELETE] 刪除收藏文章 success ->', result);
             res.json(result);
+            return;
         })
         .catch( (err) => {
             debug('[DELETE] 刪除收藏文章 fail ->', err);
-            next(err)
+            return next(err);
         });
 });
 

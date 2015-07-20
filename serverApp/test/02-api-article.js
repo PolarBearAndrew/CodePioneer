@@ -189,7 +189,7 @@ describe('[ API unit test - articles ]', function() {
             request({
                 url: 'http://localhost:8080/api/article/',
                 method: 'DELETE',
-                json: true,c
+                json: true,
                 form: { aid }
             }, (err, res, data) => {
 

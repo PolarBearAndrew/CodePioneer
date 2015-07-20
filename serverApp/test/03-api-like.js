@@ -64,7 +64,6 @@ describe('[ API unit test - like ]', function() {
                 form: { uid: uid }
             }, (err, res, data) => {
 
-
                 //test api exist
                 should.exist(data);
                 should.not.exist(err);
