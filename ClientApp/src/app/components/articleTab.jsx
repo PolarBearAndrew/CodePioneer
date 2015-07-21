@@ -38,62 +38,63 @@ let ArticleTab = React.createClass({
 	},
 
 	render() {
-
+//'px'
 
         let title = {
-            padding:0,
-            paddingLeft:7,
-            margin:5,
-            marginBottom:9,
-            fontSize:25,
+            padding:'0px',
+            paddingLeft:'7px',
+            margin:'5px',
+            marginBottom:'9px',
+            fontSize:'25px',
             textAlign:'left',
-            letterSpacing:1.5,
+            letterSpacing:'1.5px',
             cursor:'point',
         };
 
         let articleAll = {
             display:'flex',
-            alignItems:'center'
+            alignItems:'center',
+            marginBottom:'3px'
         };
 
         let article = {
             display:'flex',
             alignItems:'center',
-            margin:0,
-            padding:0,
-            fontSize:13,
-            letterSpacing:1.5,
+            margin:'0px',
+            padding:'0px',
+            fontSize:'13px',
+            letterSpacing:'1.5px',
             color:'#656565',
         };
 
         let contents1={
-            paddingRight:7,
-            paddingLeft:7,
-            margin:0,
-            marginRight:7,
-            marginLeft:7,
-            lineHeight:1.5,
+            paddingRight:'7px',
+            paddingLeft:'7px',
+            margin:'0px',
+            marginRight:'7px',
+            marginLeft:'7px',
+            lineHeight:'1.5px',
             textAlign:'left'
         };
 
         let contents2 = {
-            paddingRight:14,
-            paddingLeft:7,
-            paddingTop:4,
-            margin:0,
-            lineHeight:1.5,
+            paddingRight:'14px',
+            paddingLeft:'7px',
+            paddingTop:'4px',
+            margin:'0px',
+            lineHeight:'1.5px',
         };
 
         let contents3 = {
-            margin:0,
-            padding:0,
-            size:50,
+            margin:'0px',
+            padding:'0px',
+            size:'50px',
         };
 
         let contents4 = {
-            margin:0,
-            padding:0,
-            size:50,
+            margin:'0px',
+            padding:'0px',
+            size:'50px',
         };
 
         let starTmp={
