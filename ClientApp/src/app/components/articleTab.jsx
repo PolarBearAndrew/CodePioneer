@@ -98,14 +98,15 @@ let ArticleTab = React.createClass({
         };
 
         let starTmp={
-            left:'0px',
+            top: '-8px',
+            left:'-7px',
+            fontSize:　'40'
         };
-
-        let A ={
-            display:'flex',
-            justifyContent:'flex-end',
-
-        };
+        
+        let starPosi = {
+            star : { marginLeft: 'auto'},
+            wrapper : { width: '100%', marginBottom: '14px' }
+        }
 
         let avatar={
             maxWidth:'100%',
@@ -126,7 +127,7 @@ let ArticleTab = React.createClass({
 	    	<Paper id={data._id} zDepth={1}>
                 <div style={articleAll}>
                     <Avatar style={avatar} src="http://lorempixel.com/100/100/nature/" />
-                    <div>
+                    <div style={ starPosi.wrapper }>
                         <p
                             style={title}
                             className="title"
@@ -141,7 +142,9 @@ let ArticleTab = React.createClass({
                           <p style={contents2} className="comments">
                             { data.info[0] }
                           </p>
-                          <div style={A}>
+                        </div>
+                    </div>
+                    <div style={ starPosi.star }>
                             <Checkbox style={contents4 }
                                 // name="checkboxName4"
                                 // value="checkboxValue4"
@@ -152,8 +155,6 @@ let ArticleTab = React.createClass({
                                 unCheckedIcon={<FontIcon color={Colors.yellow600} 
                                                className="material-icons" style={starTmp}>star_border</FontIcon >}
                             />
-                          </div>
-                        </div>
                     </div>
                 </div>
             </Paper>
