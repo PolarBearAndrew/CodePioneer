@@ -61,7 +61,7 @@ function crawl(){
 		/*
 		 * Github top 10
 		 */
-//             request("https://www.kimonolabs.com/api/2wne1unk?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+//             request("https://www.kimonolabs.com/api/bsujce7y?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
 // 		    function(err, res, data) {
 
 //                 data = JSON.parse(data);
@@ -75,7 +75,7 @@ function crawl(){
 //                         //文章的url
 // 					    url: item.property2.href,
 //                         //作者
-// 					    users: item.property4.text,
+// 					    author: item.property4.text,
 //                         //來源
 //                         from: 'Githun TOP10',
 //                         //描述
