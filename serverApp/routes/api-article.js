@@ -148,7 +148,7 @@ router.get('/news/:count', (req, res, next) => {
 
 /*
  * [GET] 接續查詢文章(10)
- * request : body.finalIndex
+ * request : body.finalIndex, body.lastestTime
  * respone : db result
  */
 router.get('/more', (req, res, next) => {
@@ -165,12 +165,12 @@ router.get('/more', (req, res, next) => {
     //db operation
      Article.find()
             .limit(count)
+            .where('time <= ' + req.body.lastestTime)
             .sort({ time: -1 })
             .execAsync()
             .then( (result) => {
 
                 let data = result.filter( (value, index) => {
-                    console.log('index', index)
                     return index >= finalIndex;
                 });
 

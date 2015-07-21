@@ -11,6 +11,7 @@ var initData = {
 };
 
 var aid = null;
+var lastestTime = null;
 
 var Article = require('../models/article.js');
 
@@ -24,6 +25,7 @@ describe('[ API unit test - articles ]', function() {
             var article = new Article(initData);
             article.save((err, result) => {
                 aid = result._id.toString();
+                lastestTime = result.lastestTime;
             });
         });
     });
@@ -137,7 +139,7 @@ describe('[ API unit test - articles ]', function() {
                 url: 'http://localhost:8080/api/article/more',
                 method: 'GET',
                 json: true,
-                form: { finalIndex }
+                form: { finalIndex, lastestTime }
             }, (err, res, data) => {
 
                 //test api exist
