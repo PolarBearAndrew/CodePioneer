@@ -148,8 +148,9 @@ let ArticleTab = React.createClass({
                                 defaultChecked={ ctrlStart }
                                 onCheck={this._like}
                                 ref="star"
-                                checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons" style={starTmp}>star</FontIcon >}
-                                unCheckedIcon={<FontIcon  className="material-icons" style={starTmp}>star_border</FontIcon >}
+                                checkedIcon={<FontIcon color={Colors.yellow600} className="material-icons" style={starTmp}>star</FontIcon >}
+                                unCheckedIcon={<FontIcon color={Colors.yellow600} 
+                                               className="material-icons" style={starTmp}>star_border</FontIcon >}
                             />
                           </div>
                         </div>
