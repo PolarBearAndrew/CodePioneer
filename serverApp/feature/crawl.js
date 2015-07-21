@@ -102,6 +102,41 @@ function crawl(){
  				    });
                  });
 		 });
+        
+        /*
+		 * iThome Technology
+		 */
+             request("https://www.kimonolabs.com/api/2o2sayb4?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+ 		    function(err, res, data) {
+
+                 data = JSON.parse(data);
+                 console.log('data', data.results.ithome );
+
+                 data.results.ithome.forEach(function( item ){
+
+ 			        var article = new Article({
+                         //title
+ 				        title: item.title.text,
+                         //文章的url
+ 					    url: item.title.href,
+                         //來源
+                         from: 'iThome',
+                         //描述
+ 					    describe: item.describe,
+                         //一些小資訊
+ 					    info: [
+                             //發布的日期
+                             item.updated
+ 					    ]
+ 				    });
+
+ 				    //儲存到資料庫
+ 				    article.save(function(err, result) {
+ 				        if (err)
+ 				        	console.log('[TEST] create article FAIL, err ->', err);
+ 				    });
+                 });
+		 });
 	};
 }
 
