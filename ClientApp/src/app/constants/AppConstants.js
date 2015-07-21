@@ -2,11 +2,17 @@ var keyMirror = require('react/lib/keyMirror');
 
 module.exports = keyMirror({
 
+	//user
 	USER_LOGIN: null,
 
-	ARTICLE_INIT: null,
+	//article
+	ARTICLE_LOAD: null,
+
+	//like
+	LIKE_LOAD: null,
+	LIKE_ADD: null,
 
 
-
+	//nothing
   	noop: null
 });
