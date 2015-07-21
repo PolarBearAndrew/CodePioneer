@@ -177,8 +177,9 @@ router.post('/login', (req, res, next) => {
             if(result){
                 debug('[POST] 登入檢查 success', result);
                 res.json({
-                    login : true,
-                    _id : result._id });
+                    login: true,
+                    _id: result._id,
+                    like: result.like, });
                 return;
 
             }else{

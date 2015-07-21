@@ -5,28 +5,28 @@ let address = 'http://localhost:8080/api/like';
 
 let AppActions_Like = {
 
-	loadLike( uid ){
-		$.ajax({
-			url: address + '/',
-			type: 'GET',
-			data: { uid },
+	// load( uid ){
+	// 	$.ajax({
+	// 		url: address + '/',
+	// 		type: 'GET',
+	// 		data: { uid },
 
-			success: function(result){
+	// 		success: function(result){
 
-				AppDispatcher.handleViewAction({
-					actionType: AppConstants.LIKE_LOAD,
-					data: result
-				});
-			},
-			error: function(err){
+	// 			AppDispatcher.handleViewAction({
+	// 				actionType: AppConstants.LIKE_LOAD,
+	// 				data: result
+	// 			});
+	// 		},
+	// 		error: function(err){
 
-				AppDispatcher.handleViewAction({
-					actionType: AppConstants.noop,
-					data: null
-				});
-			}
-		});
-	},
+	// 			AppDispatcher.handleViewAction({
+	// 				actionType: AppConstants.noop,
+	// 				data: null
+	// 			});
+	// 		}
+	// 	});
+	// },
 
 	addLike( uid, aid){
 

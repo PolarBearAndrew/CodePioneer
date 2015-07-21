@@ -115,9 +115,10 @@ let ArticleTab = React.createClass({
         let data = this.props.data;
         let ctrlStart = false;
 
-        if( this.props.likes.indexOf( data._id ) !== -1  ){
-            ctrlStart = true;
-        }
+        this.props.user.like.forEach( (value) => {
+            if(value.aid === data._id)
+                ctrlStart = true;
+        });
 
 	    return (
 
@@ -141,9 +142,8 @@ let ArticleTab = React.createClass({
                           </p>
                           <div style={A}>
                             <Checkbox style={contents4 }
-                                id={data.id}
-                                name="checkboxName4"
-                                value="checkboxValue4"
+                                // name="checkboxName4"
+                                // value="checkboxValue4"
                                 defaultChecked={ ctrlStart }
                                 onCheck={this._like}
                                 ref="star"

@@ -69,24 +69,24 @@ router.post('/', function(req, res, next) {
  */
 router.get('/', function(req, res, next) {
 
-    debug('[GET] 查詢收藏文章 req.body ->', req.body );
+    debug('[GET] 查詢收藏文章 req.query ->', req.query );
 
     //check
-    let miss = check( req.body, ['uid'] );
+    let miss = check( req.query, ['uid'] );
     if(!miss.check){
         debug('[GET] 新增收藏文章 miss data ->', miss.missData);
         return next(err);
     }
 
     //destination info
-    var info = { _id: req.body.uid };
+    var info = { _id: req.query.uid };
 
     //db operation
     User.findOne(info)
         .execAsync()
         .then( (result) => {
-            debug('[GET] 查詢收藏文章 success ->', result);
-            res.json(result);
+            debug('[GET] 查詢收藏文章 success ->', result.like);
+            res.json(result.like);
             return;
         })
         .catch( (err) => {

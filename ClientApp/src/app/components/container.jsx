@@ -68,12 +68,13 @@ let container = React.createClass({
             }
         ];
 
+        console.log('this.props.user', this.props.user);
+
         var articleList = this.props.articles.map((value)=>{
             return <ArticleTab
                     key={value.id}
                     data={value}
-                    user={this.props.user}
-                    likes={this.props.likes } />;
+                    user={this.props.user} />;
         }, this);
 
 

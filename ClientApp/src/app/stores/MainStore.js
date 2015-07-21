@@ -22,6 +22,7 @@ var user = {
     id:'',
     name: '',
     email: '',
+    like: []
 };
 
 var isLogin = false;
@@ -73,12 +74,37 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
         case AppConstants.USER_LOGIN:
             isLogin = data.login;
             user.id = data._id;
+            user.like = data.like || [];
 
             if(isLogin)
                 displayPage = 'Container';
 
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
+
+        /*
+         *  載入like資料
+         */
+        // case AppConstants.LIKE_LOAD:
+        //     user.like = data;
+        //     break;
+
+        /*
+         *  add like資料
+         */
+        case AppConstants.LIKE_ADD:
+            user.like.push(data);
+            break;
+
+        /*
+         *  add like資料
+         */
+        case AppConstants.LIKE_DELETE:
+            user.like.filter( (value) => {
+                return value.aid !== data
+            });
+            break;
+
 
         /*
          *  nothing

@@ -58,7 +58,7 @@ describe('[ API unit test - like ]', function() {
         it('[GET] 查詢收藏文章', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/like/',
+                url: 'http://localhost:8080/api/like/?uid=' + uid,
                 method: 'GET',
                 json: true,
                 form: { uid: uid }
@@ -70,7 +70,7 @@ describe('[ API unit test - like ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data.should.have.property('like').with.lengthOf(1);
+                data.should.lengthOf(1);
 
                 return done();
             });

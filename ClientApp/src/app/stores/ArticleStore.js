@@ -19,7 +19,6 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 //data
 var Store = {};
 var articles = [];
-var likes = [];
 /**
  * 建立 Store class，並且繼承 EventEMitter 以擁有廣播功能
  */
@@ -31,10 +30,6 @@ objectAssign( Store, EventEmitter.prototype, {
      */
     getArticleList: () => {
         return articles;
-    },
-
-    getLike: () => {
-        return likes;
     },
 
     noop: () => {
@@ -60,29 +55,6 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          */
         case AppConstants.ARTICLE_LOAD:
             articles = data;
-            break;
-
-        /*
-         *  載入like資料
-         */
-        case AppConstants.LIKE_LOAD:
-            likes = data;
-            break;
-
-        /*
-         *  add like資料
-         */
-        case AppConstants.LIKE_ADD:
-            likes.push(data);
-            break;
-
-        /*
-         *  add like資料
-         */
-        case AppConstants.LIKE_DELETE:
-            likes.filter( (value) => {
-                return value.aid !== data
-            });
             break;
 
         default:

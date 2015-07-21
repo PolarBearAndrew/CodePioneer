@@ -11,6 +11,10 @@ let MainStore = require('../stores/MainStore.js');
 let ArticleStore = require('../stores/ArticleStore.js');
 let AppConstants = require('../constants/AppConstants.js');
 
+//actions
+let actionsLike = require('../actions/AppActions_like.jsx');
+
+
 //main是這個元件暫時使用的名字
 let Main = React.createClass({
 
@@ -35,10 +39,12 @@ let Main = React.createClass({
 
         displayPage[this.state.displayPage] = true;
 
+        // console.log('this.state.likes', this.state.likes);
+
 	    return (
 	    	<div id='wrapper' >
 	    		{ displayPage.LoginApp ? <LoginApp /> : null }
-	    		{ displayPage.Container ? <Container articles={ this.state.articles } likes={ this.state.likes } user={ this.state.user }/> : null }
+	    		{ displayPage.Container ? <Container articles={ this.state.articles } user={ this.state.user }/> : null }
 	    	</div>
 	    );
 	},
@@ -56,7 +62,6 @@ let Main = React.createClass({
 
         	//article store
         	articles: ArticleStore.getArticleList(),
-        	likes: ArticleStore.getLike(),
         };
     }
 
