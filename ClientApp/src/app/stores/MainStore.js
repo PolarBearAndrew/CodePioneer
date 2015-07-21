@@ -83,13 +83,6 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             break;
 
         /*
-         *  載入like資料
-         */
-        // case AppConstants.LIKE_LOAD:
-        //     user.like = data;
-        //     break;
-
-        /*
          *  add like資料
          */
         case AppConstants.LIKE_ADD:

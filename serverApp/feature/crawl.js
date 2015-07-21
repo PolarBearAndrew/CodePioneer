@@ -1,5 +1,7 @@
 var request = require("request");
 var Article = require('../models/article.js');
+//debug
+let debug = require('debug')('Feature:user');
 
 function crawl(){
 
@@ -44,24 +46,22 @@ function crawl(){
 					    });
 
 					    //儲存到資料庫
-					    article.save( (err, result) => {
-					        if (err)
-					        	console.log('[TEST] create article FAIL, err ->', err);
-					    	});
+					     article.saveAsync()
+					    		.then( (result) => {
+					        		debug('[crawl] Hacker News success ->', result);
+					    		})
+					    		.catch( (err) => {
+					    			debug('[crawl] Hacker News fail ->', err);
+					    		});
 	            	});
             	});
 		}
 
-		Article.removeAsync()
-				.then( ()=>{
-					getHackerNews();
-				});
-
-
 		/*
 		 * Github top 10
 		 */
-             request("https://www.kimonolabs.com/api/bsujce7y?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+        let getGithun10 = () => {
+        	request("https://www.kimonolabs.com/api/bsujce7y?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
  		    function(err, res, data) {
 
                  data = JSON.parse(data);
@@ -77,7 +77,7 @@ function crawl(){
                          //作者
  					    author: item.author.text,
                          //來源
-                         from: 'Githun TOP10',
+                        from: 'Githun TOP10',
                          //描述
  					    describe: item.describe,
                          //一些小資訊
@@ -95,13 +95,108 @@ function crawl(){
  					    ]
  				    });
 
- 				    //儲存到資料庫
- 				    article.save(function(err, result) {
- 				        if (err)
- 				        	console.log('[TEST] create article FAIL, err ->', err);
+ 				    //db operation
+ 				    article.saveAsync()
+					    		.then( (result) => {
+					        		debug('[crawl] Github top 10 success ->', result);
+					    		})
+					    		.catch( (err) => {
+					    			debug('[crawl] Github top 10 fail ->', err);
+					    		});
+                 });
+			});
+		}
+
+        /*
+		 * iThome Technology
+		 */
+        let getIThomeTech = () => {
+        	request("https://www.kimonolabs.com/api/2o2sayb4?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+ 		    function(err, res, data) {
+
+                 data = JSON.parse(data);
+//                 console.log('data', data.results.ithome );
+
+                 data.results.ithome.forEach(function( item ){
+
+ 			        var article = new Article({
+                         //title
+ 				        title: item.title.text,
+                         //文章的url
+ 					    url: item.title.href,
+                         //來源
+                         from: 'iThome',
+                         //描述
+ 					    describe: item.describe,
+                         //一些小資訊
+ 					    info: [
+                             //發布的日期
+                             item.updated
+ 					    ]
  				    });
+
+ 				    //儲存到資料庫
+ 				    article.saveAsync()
+					    		.then( (result) => {
+					        		debug('[crawl] iThome Technology success ->', result);
+					    		})
+					    		.catch( (err) => {
+					    			debug('[crawl] iThome Technology fail ->', err);
+					    		});
+                });
+			});
+        }
+        
+        /*
+		 * iThome News
+		 */
+        let getIThomeNews = () => {
+            request("https://www.kimonolabs.com/api/61ni6bdmapikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+ 		    function(err, res, data) {
+
+                 data = JSON.parse(data);
+//                 console.log('data', data.results.ithome_news );
+
+                 data.results.ithome_news.forEach(function( item ){
+
+ 			        var article = new Article({
+                         //title
+ 				        title: item.title.text,
+                         //文章的url
+ 					    url: item.title.href,
+                         //來源
+                         from: 'iThome',
+                         //描述
+ 					    describe: item.describe,
+                         //一些小資訊
+ 					    info: [
+                             //發布的日期
+                             item.updated
+ 					    ]
+ 				    });
+
+ 				    //儲存到資料庫
+ 				    article.saveAsync()
+					    		.then( (result) => {
+					        		debug('[crawl] iThome News success ->', result);
+					    		})
+					    		.catch( (err) => {
+					    			debug('[crawl] iThome News fail ->', err);
+					    		});
                  });
 		 });
+        }
+
+
+         Article.removeAsync()
+				.then( ()=>{
+					getHackerNews();
+					getGithun10();
+					getIThomeTech();
+				})
+				.catch( (err) => {
+
+				})
 	};
 }
 
