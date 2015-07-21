@@ -61,43 +61,47 @@ function crawl(){
 		/*
 		 * Github top 10
 		 */
-//             request("https://www.kimonolabs.com/api/bsujce7y?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
-// 		    function(err, res, data) {
+             request("https://www.kimonolabs.com/api/bsujce7y?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+ 		    function(err, res, data) {
 
-//                 data = JSON.parse(data);
-// //            	console.log('data', data.results.collection1 );
+                 data = JSON.parse(data);
+//             	 console.log('data', data.results.github_top10 );
 
-//                 data.results.github_top10.forEach(function( item ){
+                 data.results.github_top10.forEach(function( item ){
 
-// 			        var article = new Article({
-//                         //title
-// 				        title: item.title.text,
-//                         //文章的url
-// 					    url: item.title.href,
-//                         //作者
-// 					    author: item.author.text,
-//                         //來源
-//                         from: 'Githun TOP10',
-//                         //描述
-// 					    describe: item.describe,
-//                         //一些小資訊
-// 					    info: [
-//                             //收藏的人數
-//                             item.follow_branch.text,
-//                             //收藏連接網址
-//                             item.follow_branch.href,
-//                             //發布的日期
-//                             item.updated
-// 					    ]
-// 				    });
+ 			        var article = new Article({
+                         //title
+ 				        title: item.title.text,
+                         //文章的url
+ 					    url: item.title.href,
+                         //作者
+ 					    author: item.author.text,
+                         //來源
+                         from: 'Githun TOP10',
+                         //描述
+ 					    describe: item.describe,
+                         //一些小資訊
+ 					    info: [
+                             //收藏的人數
+                             item.follow_branch[0].text,
+                             //收藏連接網址
+                             item.follow_branch[0].href,
+                             //branch的人數
+                             item.follow_branch[1].text,
+                             //branch連接網址
+                             item.follow_branch[1].href,
+                             //發布的日期
+                             item.updated
+ 					    ]
+ 				    });
 
-// 				    //儲存到資料庫
-// 				    article.save(function(err, result) {
-// 				        if (err)
-// 				        	console.log('[TEST] create article FAIL, err ->', err);
-// 				    });
-//                 });
-		// });
+ 				    //儲存到資料庫
+ 				    article.save(function(err, result) {
+ 				        if (err)
+ 				        	console.log('[TEST] create article FAIL, err ->', err);
+ 				    });
+                 });
+		 });
 	};
 }
 
