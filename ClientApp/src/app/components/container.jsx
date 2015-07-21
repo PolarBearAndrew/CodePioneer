@@ -51,7 +51,7 @@ let container = React.createClass({
         var menuItems = [
             { route: 'user',
                 text: <div className="appear"><IconButton  iconClassName="material-icons" >account_circle</IconButton></div>
-//             text: <div className="comments"><IconButton  iconClassName="material-icons" >favorite</IconButton></div>,                      
+//             text: <div className="comments"><IconButton  iconClassName="material-icons" >favorite</IconButton></div>,
             },
             { route: 'latest news', text: 'Latest news' },
             { route: 'search', text: 'Search' },
@@ -67,11 +67,13 @@ let container = React.createClass({
               text: <TextField hintText="Search" fullWidth={true}/>
             }
         ];
-               
+
         var articleList = this.props.articles.map((value)=>{
             return <ArticleTab
                     key={value.id}
-                    data={value} />;
+                    data={value}
+                    user={this.props.user}
+                    likes={this.props.likes } />;
         }, this);
 
 
@@ -93,7 +95,7 @@ let container = React.createClass({
                             />
                             <ListDivider inset={true} />
                         </List>
-                    </IconMenu> 
+                    </IconMenu>
                 </div>}
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>

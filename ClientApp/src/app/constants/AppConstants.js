@@ -11,6 +11,7 @@ module.exports = keyMirror({
 	//like
 	LIKE_LOAD: null,
 	LIKE_ADD: null,
+	LIKE_DELETE: null,
 
 
 	//nothing

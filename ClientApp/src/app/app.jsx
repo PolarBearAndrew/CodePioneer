@@ -14,7 +14,6 @@
 
   let actionsArticles = require('./actions/AppActions_article.jsx');
   actionsArticles.load();
-  actionsArticles.loadLike();
 
   // Render the main app react component into the document body.
   // For more details see: https://facebook.github.io/react/docs/top-level-api.html#react.render

@@ -35,12 +35,10 @@ let Main = React.createClass({
 
         displayPage[this.state.displayPage] = true;
 
-        // console.log('displayPage', displayPage);
-
 	    return (
 	    	<div id='wrapper' >
 	    		{ displayPage.LoginApp ? <LoginApp /> : null }
-	    		{ displayPage.Container ? <Container articles={ this.state.articles }/> : null }
+	    		{ displayPage.Container ? <Container articles={ this.state.articles } likes={ this.state.likes } user={ this.state.user }/> : null }
 	    	</div>
 	    );
 	},
@@ -52,8 +50,13 @@ let Main = React.createClass({
     getTruth() {
 
         return {
+        	//main store
+        	user: MainStore.getUser(),
         	displayPage: MainStore.getDisplayPage(),
+
+        	//article store
         	articles: ArticleStore.getArticleList(),
+        	likes: ArticleStore.getLike(),
         };
     }
 

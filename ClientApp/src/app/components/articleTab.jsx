@@ -16,9 +16,8 @@ let Avatar = mui.Avatar;
 let Checkbox=mui.Checkbox
 let FontIcon = mui.FontIcon ;
 
-//mui元件
-//範例:
-//let AppBar = mui.AppBar;
+//flux
+let actionsLike = require('../actions/AppActions_like.jsx');
 
 let ArticleTab = React.createClass({
 
@@ -56,7 +55,7 @@ let ArticleTab = React.createClass({
             display:'flex',
             alignItems:'center'
         };
-        
+
         let article = {
             display:'flex',
             alignItems:'center',
@@ -96,28 +95,33 @@ let ArticleTab = React.createClass({
             padding:0,
             size:50,
         };
-        
+
         let starTmp={
             left:'0px',
         };
-        
+
         let A ={
             display:'flex',
             justifyContent:'flex-end',
-            
+
         };
-        
+
         let avatar={
             maxWidth:'100%',
             height:'auto',
             minWidth:'40px'
         };
-       
+
         let data = this.props.data;
+        let ctrlStart = false;
+
+        if( this.props.likes.indexOf( data._id ) !== -1  ){
+            ctrlStart = true;
+        }
 
 	    return (
 
-	    	<Paper id={data.id} zDepth={1}>
+	    	<Paper id={data._id} zDepth={1}>
                 <div style={articleAll}>
                     <Avatar style={avatar} src="http://lorempixel.com/100/100/nature/" />
                     <div>
@@ -129,18 +133,22 @@ let ArticleTab = React.createClass({
                         </p>
                         <div style={article} className="article">
                           <p style={contents1}>
-                            by { data.author } 
+                            by { data.author }
                           </p>
-                          
+
                           <p style={contents2} className="comments">
                             { data.info[0] }
                           </p>
                           <div style={A}>
-                            <Checkbox style={contents4}
-                              name="checkboxName4"
-                              value="checkboxValue4"
-                              checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons" style={starTmp}>star</FontIcon >}
-                              unCheckedIcon={<FontIcon  className="material-icons" style={starTmp}>star_border</FontIcon >}
+                            <Checkbox style={contents4 }
+                                id={data.id}
+                                name="checkboxName4"
+                                value="checkboxValue4"
+                                defaultChecked={ ctrlStart }
+                                onCheck={this._like}
+                                ref="star"
+                                checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons" style={starTmp}>star</FontIcon >}
+                                unCheckedIcon={<FontIcon  className="material-icons" style={starTmp}>star_border</FontIcon >}
                             />
                           </div>
                         </div>
@@ -150,6 +158,16 @@ let ArticleTab = React.createClass({
 	    );
 
 	},
+
+    _like (e, checked){
+
+        if( checked ){
+            actionsLike.addLike( this.props.user.id, this.props.data._id);
+        }else{
+            actionsLike.unLike( this.props.user.id, this.props.data._id);
+        }
+
+    }
 });
 
 module.exports = ArticleTab;

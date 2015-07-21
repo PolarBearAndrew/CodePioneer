@@ -71,7 +71,8 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          * 登入檢查
          */
         case AppConstants.USER_LOGIN:
-            isLogin = data;
+            isLogin = data.login;
+            user.id = data._id;
 
             if(isLogin)
                 displayPage = 'Container';
