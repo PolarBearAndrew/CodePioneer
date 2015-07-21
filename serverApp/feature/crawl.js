@@ -96,10 +96,13 @@ function crawl(){
  				    });
 
  				    //db operation
- 				    article.save(function(err, result) {
- 				        if (err)
- 				        	console.log('[TEST] create article FAIL, err ->', err);
- 				    });
+ 				    article.saveAsync()
+					    		.then( (result) => {
+					        		debug('[crawl] Github top 10 success ->', result);
+					    		})
+					    		.catch( (err) => {
+					    			debug('[crawl] Github top 10 fail ->', err);
+					    		});
                  });
 			});
 		}
@@ -133,13 +136,57 @@ function crawl(){
  				    });
 
  				    //儲存到資料庫
- 				    article.save(function(err, result) {
- 				        if (err)
- 				        	console.log('[TEST] create article FAIL, err ->', err);
- 				    });
+ 				    article.saveAsync()
+					    		.then( (result) => {
+					        		debug('[crawl] iThome Technology success ->', result);
+					    		})
+					    		.catch( (err) => {
+					    			debug('[crawl] iThome Technology fail ->', err);
+					    		});
                 });
 			});
         }
+        
+        /*
+		 * iThome News
+		 */
+        let getIThomeNews = () => {
+            request("https://www.kimonolabs.com/api/61ni6bdmapikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+ 		    function(err, res, data) {
+
+                 data = JSON.parse(data);
+                 console.log('data', data.results.ithome_news );
+
+                 data.results.ithome_news.forEach(function( item ){
+
+ 			        var article = new Article({
+                         //title
+ 				        title: item.title.text,
+                         //文章的url
+ 					    url: item.title.href,
+                         //來源
+                         from: 'iThome',
+                         //描述
+ 					    describe: item.describe,
+                         //一些小資訊
+ 					    info: [
+                             //發布的日期
+                             item.updated
+ 					    ]
+ 				    });
+
+ 				    //儲存到資料庫
+ 				    article.saveAsync()
+					    		.then( (result) => {
+					        		debug('[crawl] iThome News success ->', result);
+					    		})
+					    		.catch( (err) => {
+					    			debug('[crawl] iThome News fail ->', err);
+					    		});
+                 });
+		 });
+        }
+
 
          Article.removeAsync()
 				.then( ()=>{
