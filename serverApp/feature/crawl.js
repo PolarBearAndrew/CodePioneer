@@ -115,7 +115,7 @@ function crawl(){
  		    function(err, res, data) {
 
                  data = JSON.parse(data);
-                 console.log('data', data.results.ithome );
+//                 console.log('data', data.results.ithome );
 
                  data.results.ithome.forEach(function( item ){
 
@@ -155,7 +155,7 @@ function crawl(){
  		    function(err, res, data) {
 
                  data = JSON.parse(data);
-                 console.log('data', data.results.ithome_news );
+//                 console.log('data', data.results.ithome_news );
 
                  data.results.ithome_news.forEach(function( item ){
 
