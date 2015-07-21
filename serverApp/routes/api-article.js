@@ -187,7 +187,7 @@ router.get('/more', (req, res, next) => {
 });
 
 /*
- * [GET] 查詢喜愛文章(10)
+ * [GET] 查詢喜愛文章
  * request : body.like
  * respone : db result
  */
