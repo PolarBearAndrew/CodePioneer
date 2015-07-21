@@ -187,6 +187,36 @@ router.get('/more', (req, res, next) => {
 });
 
 /*
+ * [GET] 查詢喜愛文章(10)
+ * request : body.like
+ * respone : db result
+ */
+router.get('/like', (req, res, next) => {
+
+    let miss = check( req.body, ['like'] );
+    if(!miss.check){
+        debug('[GET] 查詢喜愛文章(10) miss data ->', miss.missData);
+        return next(err);
+    }
+
+    //db operation
+     Article.find()
+            .where('_id').in(req.body.like)
+            .sort({ time: -1 })
+            .execAsync()
+            .then( (result) => {
+
+                debug('[GET] 查詢喜愛文章(10) success ->', result);
+                res.json( result );
+                return;
+            })
+            .catch( (err) =>{
+                debug('[GET] 查詢喜愛文章(10) fail ->', err);
+                return next(err);
+            });
+});
+
+/*
  * [PUT] 修改文章資訊
  * request : body.aid, body.title, body.url, body.author
  *           body.from, body.describe, body.info
