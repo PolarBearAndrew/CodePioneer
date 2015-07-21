@@ -131,10 +131,13 @@ describe('[ API unit test - articles ]', function() {
 
         it('[GET] 接續查詢文章(10)', ( done ) => {
 
+            let finalIndex = 10;
+
             request({
                 url: 'http://localhost:8080/api/article/more',
                 method: 'GET',
                 json: true,
+                form: { finalIndex }
             }, (err, res, data) => {
 
                 //test api exist
@@ -143,7 +146,7 @@ describe('[ API unit test - articles ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data.should.with.lengthOf(count);
+                data.should.with.lengthOf(10);
 
                 return done();
             });
@@ -208,6 +211,7 @@ describe('[ API unit test - articles ]', function() {
     });
 
     after( (done) => {
-        return Article.removeAsync({}, done);
+        //return Article.removeAsync({}, done);
+        return done();
     });
 });

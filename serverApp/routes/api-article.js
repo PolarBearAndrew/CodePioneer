@@ -160,7 +160,7 @@ router.get('/more', (req, res, next) => {
     }
 
     let finalIndex = req.body.finalIndex;
-    let count = finalIndex + 10;
+    let count = ( parseInt(finalIndex) + 10 );
 
     //db operation
      Article.find()
@@ -170,10 +170,11 @@ router.get('/more', (req, res, next) => {
             .then( (result) => {
 
                 let data = result.filter( (value, index) => {
-                    return index > finalIndex;
+                    console.log('index', index)
+                    return index >= finalIndex;
                 });
 
-                debug('[GET] 接續查詢文章(10) success (result) ->', result);
+                //debug('[GET] 接續查詢文章(10) success (result) ->', result);
                 debug('[GET] 接續查詢文章(10) success (data) ->', data);
 
                 res.json( data );
@@ -244,7 +245,7 @@ router.delete('/', function(req, res, next) {
 
     //db operation
     Article.findOneAndRemove( { _id: req.body.aid } )
-            .remove()
+            .removeAsync()
             .then( (result) => {
                 debug('[DELETE] 刪除文章 success ->', result);
                 res.json(result);
