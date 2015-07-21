@@ -50,8 +50,8 @@ let container = React.createClass({
 
         var menuItems = [
             { route: 'user',
-                text: <div className="appear"><IconButton  iconClassName="material-icons" >account_circle</IconButton></div>
-//             text: <div className="comments"><IconButton  iconClassName="material-icons" >favorite</IconButton></div>,
+              text: <Avatar src="images/panda.png"/>,
+              disabled: true
             },
             { route: 'latest news', text: 'Latest news' },
             { route: 'search', text: 'Search' },
