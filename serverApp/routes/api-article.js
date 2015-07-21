@@ -148,11 +148,16 @@ router.get('/news/:count', (req, res, next) => {
 
 /*
  * [GET] 接續查詢文章(10)
- * request : body.index
+ * request : body.start
  * respone : db result
  */
 router.get('/more', (req, res, next) => {
 
+    let miss = check( req.params, [''] );
+    if(!miss.check){
+        debug('[GET] 查詢最新文章(n) miss data ->', miss.missData);
+        return next(err);
+    }
 });
 
 /*
