@@ -42,6 +42,10 @@ let container = React.createClass({
 
 	render() {
 
+        let tmp = {
+            fontSize: '72px'
+        }
+
 		let containerStyle = {
 	    	textAlign: 'center',
 	    	padding: '0px',
@@ -80,7 +84,7 @@ let container = React.createClass({
 
 	    return (
     		<div  style={containerStyle}>
-                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
+                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer' style={ tmp }
                         iconElementRight={ <div className="comments"><IconMenu iconButtonElement={<IconButton
                         iconClassName="material-icons" >person</IconButton>}  >
 

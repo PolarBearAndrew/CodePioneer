@@ -1,5 +1,7 @@
 var request = require("request");
 var Article = require('../models/article.js');
+//debug
+let debug = require('debug')('Feature:user');
 
 function crawl(){
 
@@ -44,24 +46,22 @@ function crawl(){
 					    });
 
 					    //儲存到資料庫
-					    article.save( (err, result) => {
-					        if (err)
-					        	console.log('[TEST] create article FAIL, err ->', err);
-					    	});
+					     article.saveAsync()
+					    		.then( (result) => {
+					        		debug('[crawl] Hacker News success ->', result);
+					    		})
+					    		.catch( (err) => {
+					    			debug('[crawl] Hacker News fail ->', err);
+					    		});
 	            	});
             	});
 		}
 
-		Article.removeAsync()
-				.then( ()=>{
-					getHackerNews();
-				});
-
-
 		/*
 		 * Github top 10
 		 */
-             request("https://www.kimonolabs.com/api/bsujce7y?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+        let getGithun10 = () => {
+        	request("https://www.kimonolabs.com/api/bsujce7y?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
  		    function(err, res, data) {
 
                  data = JSON.parse(data);
@@ -77,7 +77,7 @@ function crawl(){
                          //作者
  					    author: item.author.text,
                          //來源
-                         from: 'Githun TOP10',
+                        from: 'Githun TOP10',
                          //描述
  					    describe: item.describe,
                          //一些小資訊
@@ -95,18 +95,20 @@ function crawl(){
  					    ]
  				    });
 
- 				    //儲存到資料庫
+ 				    //db operation
  				    article.save(function(err, result) {
  				        if (err)
  				        	console.log('[TEST] create article FAIL, err ->', err);
  				    });
                  });
-		 });
-        
+			});
+		}
+
         /*
 		 * iThome Technology
 		 */
-             request("https://www.kimonolabs.com/api/2o2sayb4?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+        let getIThomeTech = () => {
+        	request("https://www.kimonolabs.com/api/2o2sayb4?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
  		    function(err, res, data) {
 
                  data = JSON.parse(data);
@@ -135,8 +137,19 @@ function crawl(){
  				        if (err)
  				        	console.log('[TEST] create article FAIL, err ->', err);
  				    });
-                 });
-		 });
+                });
+			});
+        }
+
+         Article.removeAsync()
+				.then( ()=>{
+					getHackerNews();
+					getGithun10();
+					getIThomeTech();
+				})
+				.catch( (err) => {
+
+				})
 	};
 }
 
