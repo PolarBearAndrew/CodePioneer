@@ -121,7 +121,9 @@ let ArticleTab = React.createClass({
         };
         
         let avatar={
-            
+            maxWidth:'100%',
+            height:'auto',
+            minWidth:'50px'
         };
         
         let data = this.props.data;
