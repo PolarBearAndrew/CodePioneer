@@ -1,6 +1,5 @@
 var request = require("request");
 var Article = require('../models/article.js');
-var debug = require('debug')('Feature:crawl');
 
 function crawl(){
 
@@ -44,21 +43,16 @@ function crawl(){
 						    ]
 					    });
 
-					    //db operation
-					     article.saveAsync()
-					    		.then( (result) => {
-					    			debug('Hacker News crawl success ->', result);
-						    	})
-						    	.catch( (err) => {
-						    		debug('Hacker News crawl fail ->', err);
-						    		return next(err);
-						    	})
+					    //儲存到資料庫
+					    article.save( (err, result) => {
+					        if (err)
+					        	console.log('[TEST] create article FAIL, err ->', err);
+					    	});
 	            	});
             	});
 		}
 
-		// db operation
-		 Article.removeAsync()
+		Article.removeAsync()
 				.then( ()=>{
 					getHackerNews();
 				});
@@ -73,27 +67,27 @@ function crawl(){
 //                 data = JSON.parse(data);
 // //            	console.log('data', data.results.collection1 );
 
-//                 data.results.collection1.forEach(function( item ){
+//                 data.results.github_top10.forEach(function( item ){
 
 // 			        var article = new Article({
 //                         //title
-// 				        title: item.property2.text,
+// 				        title: item.title.text,
 //                         //文章的url
-// 					    url: item.property2.href,
+// 					    url: item.title.href,
 //                         //作者
-// 					    author: item.property4.text,
+// 					    author: item.author.text,
 //                         //來源
 //                         from: 'Githun TOP10',
 //                         //描述
-// 					    describe: item.property5,
+// 					    describe: item.describe,
 //                         //一些小資訊
 // 					    info: [
 //                             //收藏的人數
-//                             item.property8.text,
+//                             item.follow_branch.text,
 //                             //收藏連接網址
-//                             item.property8.href,
+//                             item.follow_branch.href,
 //                             //發布的日期
-//                             item.property3
+//                             item.updated
 // 					    ]
 // 				    });
 
