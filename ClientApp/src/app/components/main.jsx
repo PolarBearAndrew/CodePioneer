@@ -39,8 +39,6 @@ let Main = React.createClass({
 
         displayPage[this.state.displayPage] = true;
 
-        // console.log('this.state.likes', this.state.likes);
-
 	    return (
 	    	<div id='wrapper' >
 	    		{ displayPage.LoginApp ? <LoginApp /> : null }
