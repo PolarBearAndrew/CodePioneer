@@ -10,14 +10,15 @@ var initData = {
     info: ["200 comments", "999 likes"]
 };
 
-var aid = null;
+var aid = null, uid = null;
 var lastestTime = null;
+var tmpAidForLike = null;
 
 var Article = require('../models/article.js');
 
 describe('[ API unit test - articles ]', function() {
 
-    before(function() {
+    before( () => {
 
         return Article.remove({ author: 'AndrewChen' }, (err, result) => {
 
@@ -84,7 +85,6 @@ describe('[ API unit test - articles ]', function() {
                 data.info[0].should.equal( initData.info[0] );
                 data.info[1].should.equal( initData.info[1] );
 
-
                 return done();
             });
         });
@@ -104,6 +104,8 @@ describe('[ API unit test - articles ]', function() {
 
                 // //test data
                 data.should.with.lengthOf(10);
+
+                tmpAidForLike = data;
 
                 return done();
             });
@@ -156,6 +158,23 @@ describe('[ API unit test - articles ]', function() {
 
         it('[GET] 查詢喜愛文章(10)', ( done ) => {
 
+            before( () => {
+
+                let initData = {
+                    name: 'AndrewChen',
+                    email: 'chenpoanandrew@gmail.com',
+                    pwd: '123',
+                    like: tmpAidForLike
+                };
+
+                return User.remove({}, (err, result) => {
+                    var user = new User(initData);
+                    user.save((err, result) => {
+                        uid = result._id;
+                    });
+                });
+            });
+
             request({
                 url: 'http://localhost:8080/api/article/like',
                 method: 'GET',
@@ -175,28 +194,28 @@ describe('[ API unit test - articles ]', function() {
             });
         });
 
-        it('[GET] 查詢喜愛文章(n)', ( done ) => {
+        // it('[GET] 查詢喜愛文章(n)', ( done ) => {
 
-            let count = 5;
+        //     let count = 5;
 
-            request({
-                url: 'http://localhost:8080/api/article/like/' + count,
-                method: 'GET',
-                json: true,
-                form: { finalIndex, lastestTime }
-            }, (err, res, data) => {
+        //     request({
+        //         url: 'http://localhost:8080/api/article/like/' + count,
+        //         method: 'GET',
+        //         json: true,
+        //         form: { uid }
+        //     }, (err, res, data) => {
 
-                //test api exist
-                should.exist(data);
-                should.not.exist(err);
-                res.statusCode.should.equal(200);
+        //         //test api exist
+        //         should.exist(data);
+        //         should.not.exist(err);
+        //         res.statusCode.should.equal(200);
 
-                //test data
-                data.should.with.lengthOf(count);
+        //         //test data
+        //         data.should.with.lengthOf(count);
 
-                return done();
-            });
-        });
+        //         return done();
+        //     });
+        // });
 
         it('[PUT] 修改文章資訊', ( done ) => {
 
