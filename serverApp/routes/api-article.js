@@ -131,7 +131,7 @@ router.get('/news/:count', (req, res, next) => {
     }
 
     //db operation
-    Article.find()
+     Article.find()
             .limit(req.params.count)
             .sort({ time: -1 })
             .execAsync()
@@ -148,16 +148,42 @@ router.get('/news/:count', (req, res, next) => {
 
 /*
  * [GET] 接續查詢文章(10)
- * request : body.start
+ * request : body.finalIndex, body.lastestTime
  * respone : db result
  */
 router.get('/more', (req, res, next) => {
 
-    let miss = check( req.params, [''] );
+    let miss = check( req.body, ['finalIndex'] );
     if(!miss.check){
-        debug('[GET] 查詢最新文章(n) miss data ->', miss.missData);
+        debug('[GET] 接續查詢文章(10) miss data ->', miss.missData);
         return next(err);
     }
+
+    let finalIndex = req.body.finalIndex;
+    let count = ( parseInt(finalIndex) + 10 );
+
+    //db operation
+     Article.find()
+            .limit(count)
+            .where('time <= ' + req.body.lastestTime)
+            .sort({ time: -1 })
+            .execAsync()
+            .then( (result) => {
+
+                let data = result.filter( (value, index) => {
+                    return index >= finalIndex;
+                });
+
+                //debug('[GET] 接續查詢文章(10) success (result) ->', result);
+                debug('[GET] 接續查詢文章(10) success (data) ->', data);
+
+                res.json( data );
+                return;
+            })
+            .catch( (err) =>{
+                debug('[GET] 接續查詢文章(10) fail ->', err);
+                return next(err);
+            });
 });
 
 /*
@@ -219,7 +245,7 @@ router.delete('/', function(req, res, next) {
 
     //db operation
     Article.findOneAndRemove( { _id: req.body.aid } )
-            .remove()
+            .removeAsync()
             .then( (result) => {
                 debug('[DELETE] 刪除文章 success ->', result);
                 res.json(result);
