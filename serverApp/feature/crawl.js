@@ -1,5 +1,6 @@
 var request = require("request");
 var Article = require('../models/article.js');
+var debug = require('debug')('Feature:crawl');
 
 function crawl(){
 
@@ -43,16 +44,21 @@ function crawl(){
 						    ]
 					    });
 
-					    //儲存到資料庫
-					    article.save( (err, result) => {
-					        if (err)
-					        	console.log('[TEST] create article FAIL, err ->', err);
-					    	});
+					    //db operation
+					     article.saveAsync()
+					    		.then( (result) => {
+					    			debug('Hacker News crawl success ->', result);
+						    	})
+						    	.catch( (err) => {
+						    		debug('Hacker News crawl fail ->', err);
+						    		return next(err);
+						    	})
 	            	});
             	});
 		}
 
-		Article.removeAsync()
+		// db operation
+		 Article.removeAsync()
 				.then( ()=>{
 					getHackerNews();
 				});
