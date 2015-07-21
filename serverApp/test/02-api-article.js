@@ -213,7 +213,7 @@ describe('[ API unit test - articles ]', function() {
     });
 
     after( (done) => {
-        //return Article.removeAsync({}, done);
+        // return Article.removeAsync({}, done);
         return done();
     });
 });
