@@ -9,22 +9,16 @@ let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
 let TextField=mui.TextField;
-
 let MenuItem = mui.MenuItem;
 let AppBar = mui.AppBar;
 let LeftNav = mui.LeftNav;
-
 let IconButton = mui.IconButton;
 let Paper = mui.Paper;
 let Avatar = mui.Avatar;
-
 let IconMenu = mui.IconMenu;
 let List = mui.List;
 let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
-
-let Checkbox=mui.Checkbox
-let FontIcon = mui.FontIcon ;
 
 let ArticleTab = require('./articleTab.jsx');
 
@@ -73,76 +67,7 @@ let container = React.createClass({
               text: <TextField hintText="Search" fullWidth={true}/>
             }
         ];
-        
-        let title = {
-            padding:0,
-            paddingLeft:7,
-            margin:5,
-            marginBottom:9,
-            fontSize:25,
-            textAlign:'left',
-            letterSpacing:1.5,
-            cursor:'point',
-        };
-        
-        let articleAll = {
-            display:'flex',
-            alignItems:'center'
-        };
-
-        let article = {
-            display:'flex',
-            alignItems:'center',
-            margin:0,
-            padding:0,
-            fontSize:13,
-            letterSpacing:1.5,
-            color:'#656565',
-        };
-
-        let contents1={
-            paddingRight:7,
-            paddingLeft:7,
-            margin:0,
-            marginRight:7,
-            marginLeft:7,
-            lineHeight:1.5,
-            textAlign:'left'
-        };
-
-        let contents2 = {
-            paddingRight:14,
-            paddingLeft:7,
-            paddingTop:4,
-            margin:0,
-            lineHeight:1.5,
-        };
-        
-        let contents3 = {
-            paddingRight:7,
-            paddingLeft:7,
-            margin:0,
-            borderRight: 1,
-            borderRightColor:'#656565',
-            borderRightStyle:'solid',
-            lineHeight:1.5,
-        };
-
-        let contents4 = {
-            margin:0,
-            padding:0,
-            size:50,
-        };
-        
-        let starTmp={
-            left:'0px',
-        };
-        
-        let A ={
-            display:'flex',
-            justifyContent:'flex-end'
-        }
-       
+               
         var articleList = this.props.articles.map((value)=>{
             return <ArticleTab
                     key={value.id}

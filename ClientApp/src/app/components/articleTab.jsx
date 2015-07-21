@@ -11,24 +11,10 @@ let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
-let TextField=mui.TextField;
-
-let MenuItem = mui.MenuItem;
-let AppBar = mui.AppBar;
-let LeftNav = mui.LeftNav;
-
-let IconButton = mui.IconButton;
 let Paper = mui.Paper;
 let Avatar = mui.Avatar;
-
-let IconMenu = mui.IconMenu;
-let List = mui.List;
-let ListItem = mui.ListItem;
-let ListDivider=mui.ListDivider;
-
 let Checkbox=mui.Checkbox
 let FontIcon = mui.FontIcon ;
-
 
 //mui元件
 //範例:
@@ -159,7 +145,6 @@ let ArticleTab = React.createClass({
                           </div>
                         </div>
                     </div>
-            
                 </div>
             </Paper>
 	    );
