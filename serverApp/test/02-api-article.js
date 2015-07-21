@@ -154,6 +154,50 @@ describe('[ API unit test - articles ]', function() {
             });
         });
 
+        it('[GET] 查詢喜愛文章(10)', ( done ) => {
+
+            request({
+                url: 'http://localhost:8080/api/article/like',
+                method: 'GET',
+                json: true,
+                form: { uid }
+            }, (err, res, data) => {
+
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+
+                //test data
+                data.should.with.lengthOf(10);
+
+                return done();
+            });
+        });
+
+        it('[GET] 查詢喜愛文章(n)', ( done ) => {
+
+            let count = 5;
+
+            request({
+                url: 'http://localhost:8080/api/article/like/' + count,
+                method: 'GET',
+                json: true,
+                form: { finalIndex, lastestTime }
+            }, (err, res, data) => {
+
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+
+                //test data
+                data.should.with.lengthOf(count);
+
+                return done();
+            });
+        });
+
         it('[PUT] 修改文章資訊', ( done ) => {
 
             let expectData = {
@@ -213,7 +257,7 @@ describe('[ API unit test - articles ]', function() {
     });
 
     after( (done) => {
-        //return Article.removeAsync({}, done);
+        // return Article.removeAsync({}, done);
         return done();
     });
 });

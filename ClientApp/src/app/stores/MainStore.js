@@ -67,13 +67,9 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
 
     switch (action.actionType) {
 
-        /**
-         *
+        /*
+         * 登入檢查
          */
-        case AppConstants.noop:
-            console.log('[MainStore] noop');
-            break;
-
         case AppConstants.USER_LOGIN:
             isLogin = data;
 
@@ -83,6 +79,12 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
+        /*
+         *  nothing
+         */
+        case AppConstants.noop:
+            console.log('[MainStore] noop');
+            break;
 
         default:
     }

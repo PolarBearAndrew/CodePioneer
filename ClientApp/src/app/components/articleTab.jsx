@@ -103,7 +103,8 @@ let ArticleTab = React.createClass({
         
         let A ={
             display:'flex',
-            justifyContent:'flex-end'
+            justifyContent:'flex-end',
+            
         };
         
         let avatar={
@@ -111,10 +112,7 @@ let ArticleTab = React.createClass({
             height:'auto',
             minWidth:'40px'
         };
-        let nothing={
-            width:'1300px'
-        }
-        
+       
         let data = this.props.data;
 
 	    return (
@@ -122,7 +120,7 @@ let ArticleTab = React.createClass({
 	    	<Paper id={data.id} zDepth={1}>
                 <div style={articleAll}>
                     <Avatar style={avatar} src="http://lorempixel.com/100/100/nature/" />
-                    <div style={nothing}>
+                    <div>
                         <p
                             style={title}
                             className="title"
@@ -137,16 +135,15 @@ let ArticleTab = React.createClass({
                           <p style={contents2} className="comments">
                             { data.info[0] }
                           </p>
-                          
-                        </div>
-                    </div>
-                    <div style={A}>
+                          <div style={A}>
                             <Checkbox style={contents4}
                               name="checkboxName4"
                               value="checkboxValue4"
                               checkedIcon={<FontIcon color={Colors.cyan500} className="material-icons" style={starTmp}>star</FontIcon >}
                               unCheckedIcon={<FontIcon  className="material-icons" style={starTmp}>star_border</FontIcon >}
                             />
+                          </div>
+                        </div>
                     </div>
                 </div>
             </Paper>
