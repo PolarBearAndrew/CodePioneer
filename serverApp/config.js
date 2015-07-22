@@ -1,7 +1,7 @@
 let config = {
 	crawlName : {
-		github10 : 'Github10',
-		hackerNews : 'HackerNews',
+		github10 : 'github10',
+		hackerNews : 'hackerNews',
 		iThomeTech : 'iThomeTech',
 		iThomeNews : 'iThomeNews',
 	}
