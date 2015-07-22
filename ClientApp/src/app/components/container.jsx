@@ -81,8 +81,8 @@ let container = React.createClass({
               disabled: true
             },
             { route: 'news', text: 'News' },
-            { route: 'filter', text: 'Filter' },
-            { route: 'components', text: 'Components' },
+            { route: 'follow', text: 'Follow' },
+            { route: 'library', text: 'Library' },
             { route: 'setting', text: <div className="appear">Setting</div> },
             { route: 'logout', text: <div className="appear">Logout</div> },
             { text: '', disabled: true },
