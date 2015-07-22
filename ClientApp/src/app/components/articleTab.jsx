@@ -129,7 +129,7 @@ let ArticleTab = React.createClass({
 
 	    	<Paper id={data._id} zDepth={1}>
                 <div style={articleAll}>
-                    <Avatar style={avatar} src="images/github.png" />
+                    <Avatar style={avatar} src="images/hackerNews.png" />
                     <div style={ starPosi.wrapper }>
                         <p
                             style={title}
