@@ -103,7 +103,7 @@ let ArticleTab = React.createClass({
             left:'-7px',
             fontSize:　'40'
         };
-        
+
         let starPosi = {
             star : { marginLeft: 'auto'},
             wrapper : { width: '100%', marginBottom: '14px' }
@@ -153,19 +153,19 @@ let ArticleTab = React.createClass({
                                 onCheck={this._like}
                                 ref="star"
                                 checkedIcon={<FontIcon color={Colors.yellow600} className="material-icons" style={starTmp}>star</FontIcon >}
-                                unCheckedIcon={<FontIcon color={Colors.yellow600} 
+                                unCheckedIcon={<FontIcon color={Colors.yellow600}
                                                className="material-icons" style={starTmp}>star_border</FontIcon >}
                             />
                     </div>
                 </div>
-            
+
                 <Snackbar
-                      ref="addStar"
-                      message="You add { data.title }/>
-            
+                      ref="like"
+                      message={ 'Like' + data.title }/>
+
                 <Snackbar
-                      ref="deleteStar"
-                      message="You delete"{ data.title } />
+                      ref="unlike"
+                      message={ 'unlike' + data.title } />
             </Paper>
 	    );
 
