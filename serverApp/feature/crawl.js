@@ -93,6 +93,8 @@ function crawl(){
  					    describe: item.describe,
                          //一些小資訊
  					    info: [
+                             //發布的日期
+                             item.updated
                              //收藏的人數
                              item.follow_branch[0].text,
                              //收藏連接網址
@@ -101,8 +103,6 @@ function crawl(){
                              item.branch.text,
                              //branch連接網址
                              item.branch.href,
-                             //發布的日期
-                             item.updated
  					    ]
  				    });
 
