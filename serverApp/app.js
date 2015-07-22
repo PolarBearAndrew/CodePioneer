@@ -120,21 +120,20 @@ app.listen(port, function(){
 
     let Article = require('./models/article.js');
 
-    Article.find()
+     Article.find()
             .execAsync()
             .then( (result) => {
-
                 //re init data
-                if(result.length > 1){
-                    debug('[crawl] 查詢爬蟲資料 empty, 開始爬蟲');
+                if(result.length == 0){
+                    console.log('[crawl] 查詢爬蟲資料 empty, 開始爬蟲');
                     let crawltick = new crawl();
                     crawltick.start();
                 }else{
-                    debug('[crawl] 查詢爬蟲資料, 已存在無需更新');
+                    console.log('[crawl] 查詢爬蟲資料, 已存在無需更新');
                 }
             })
             .catch( (err) => {
-                debug('[crawl] 查詢爬蟲資料 fail ->', err);
+                console.log('[crawl] 查詢爬蟲資料 fail ->', err);
             });
 });
 
