@@ -1,7 +1,15 @@
 var request = require("request");
+
+//models
 var Article = require('../models/article.js');
+
 //debug
-let debug = require('debug')('Feature:user');
+let debug = require('debug')('Feature:crawl');
+
+
+//config
+let config = require('../config.js');
+
 
 function crawl(){
 
@@ -31,7 +39,7 @@ function crawl(){
 	                        //作者
 						    author: item.users.text,
 	                        //來源
-	                        from: 'Hakcer News',
+	                        from: config.crawlName.hackerNews,
 	                        //描述
 						    describe: '',
 	                        //一些小資訊
@@ -77,7 +85,7 @@ function crawl(){
                          //作者
  					    author: item.author.text,
                          //來源
-                        from: 'Githun TOP10',
+                        from: config.crawlName.github10,
                          //描述
  					    describe: item.describe,
                          //一些小資訊
@@ -125,7 +133,7 @@ function crawl(){
                          //文章的url
  					    url: item.title.href,
                          //來源
-                         from: 'iThome',
+                        from: config.crawlName.iThomeTech,
                          //描述
  					    describe: item.describe,
                          //一些小資訊
@@ -135,18 +143,18 @@ function crawl(){
  					    ]
  				    });
 
- 				    //儲存到資料庫
- 				    article.saveAsync()
-					    		.then( (result) => {
-					        		debug('[crawl] iThome Technology success ->', result);
-					    		})
-					    		.catch( (err) => {
-					    			debug('[crawl] iThome Technology fail ->', err);
-					    		});
+ 				    //db operation
+ 				     article.saveAsync()
+				    		.then( (result) => {
+				        		debug('[crawl] iThome Technology success ->', result);
+				    		})
+				    		.catch( (err) => {
+				    			debug('[crawl] iThome Technology fail ->', err);
+				    		});
                 });
 			});
         }
-        
+
         /*
 		 * iThome News
 		 */
@@ -165,7 +173,7 @@ function crawl(){
                          //文章的url
  					    url: item.title.href,
                          //來源
-                         from: 'iThome',
+                        from: config.crawlName.iThomeNews,
                          //描述
  					    describe: item.describe,
                          //一些小資訊
@@ -175,14 +183,14 @@ function crawl(){
  					    ]
  				    });
 
- 				    //儲存到資料庫
+ 				    //db operation
  				    article.saveAsync()
-					    		.then( (result) => {
-					        		debug('[crawl] iThome News success ->', result);
-					    		})
-					    		.catch( (err) => {
-					    			debug('[crawl] iThome News fail ->', err);
-					    		});
+				    		.then( (result) => {
+				        		debug('[crawl] iThome News success ->', result);
+				    		})
+				    		.catch( (err) => {
+				    			debug('[crawl] iThome News fail ->', err);
+				    		});
                  });
 		 });
         }
@@ -190,9 +198,14 @@ function crawl(){
 
          Article.removeAsync()
 				.then( ()=>{
+
 					getHackerNews();
+
 					getGithun10();
+
 					getIThomeTech();
+
+					// getIThomeNews();
 				})
 				.catch( (err) => {
 

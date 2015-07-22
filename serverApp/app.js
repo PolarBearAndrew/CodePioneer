@@ -114,8 +114,8 @@ app.listen(port, function(){
     //crawl api
     //==========================================
 
-    // var crawltick = new crawl();
-    // crawltick.start();
+    var crawltick = new crawl();
+    crawltick.start();
 
 });
 
