@@ -159,11 +159,11 @@ function crawl(){
 		 * iThome News
 		 */
         let getIThomeNews = () => {
-            request("https://www.kimonolabs.com/api/61ni6bdmapikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+            request("https://www.kimonolabs.com/api/c9njd4bo?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
  		    function(err, res, data) {
 
                  data = JSON.parse(data);
-//                 console.log('data', data.results.ithome_news );
+                 console.log('data', data.results.ithome_news );
 
                  data.results.ithome_news.forEach(function( item ){
 
@@ -205,7 +205,7 @@ function crawl(){
 
 					getIThomeTech();
 
-					// getIThomeNews();
+				    getIThomeNews();
 				})
 				.catch( (err) => {
 
