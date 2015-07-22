@@ -127,7 +127,7 @@ let ArticleTab = React.createClass({
 
 	    	<Paper id={data._id} zDepth={1}>
                 <div style={articleAll}>
-                    <Avatar style={avatar} src="images/iThomeTech.png" />
+                    <Avatar style={avatar} src={ 'images/' + data.from + '.png' } />
                     <div style={ starPosi.wrapper }>
                         <p
                             style={title}
