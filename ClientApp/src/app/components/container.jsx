@@ -46,7 +46,8 @@ let container = React.createClass({
 		let containerStyle = {
 	    	textAlign: 'center',
 	    	padding: '0px',
-	    	margin: '0px'
+	    	margin: '0px',
+            paddingTop:'70px'
 	    };
 
         var menuItems = [
@@ -78,10 +79,19 @@ let container = React.createClass({
                     user={this.props.user} />;
         }, this);
 
-
+        let fixed={
+            top:0,
+            right: 0,
+            left: 0,
+            width:'100%',
+            height:'auto',
+            position: 'fixed',
+            
+        };
+        
 	    return (
     		<div  style={containerStyle}>
-                <AppBar onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
+                <AppBar style={fixed} onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
                         iconElementRight={ <div className="comments"><IconMenu iconButtonElement={<IconButton
                         iconClassName="material-icons" >person</IconButton>}  >
 

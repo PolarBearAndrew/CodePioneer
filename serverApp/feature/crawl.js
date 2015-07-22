@@ -122,14 +122,14 @@ function crawl(){
 		 * iThome Technology
 		 */
         let getIThomeTech = () => {
-        	request("https://www.kimonolabs.com/api/2o2sayb4?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+        	request("https://www.kimonolabs.com/api/d73vr5sq?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
  		    function(err, res, data) {
 
                  data = JSON.parse(data);
 
 				debug('[crawl] iThome Technology get data ->', data.results.ithome);
 
-                 data.results.ithome.forEach(function( item ){
+                 data.results.ithome_tech.forEach(function( item ){
 
  			        var article = new Article({
                          //title
@@ -161,6 +161,7 @@ function crawl(){
 
         /*
 		 * iThome News
+         * updated 1 hours
 		 */
         let getIThomeNews = () => {
             request("https://www.kimonolabs.com/api/c9njd4bo?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
