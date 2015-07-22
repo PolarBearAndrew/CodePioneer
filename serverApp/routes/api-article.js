@@ -63,10 +63,10 @@ router.post('/', (req, res, next) => {
  */
 router.get('/', (req, res, next) => {
 
-    debug('[GET] 查詢文章 req.body ->', req.body );
+    debug('[GET] 查詢文章 req.query ->', req.query );
 
     //check
-    let miss = check( req.body, ['aid'] );
+    let miss = check( req.query, ['aid'] );
     if(!miss.check){
         debug('[GET] 查詢文章 miss data ->', miss.missData);
         return next(err);
@@ -74,7 +74,7 @@ router.get('/', (req, res, next) => {
 
     //db operation
     Article.findOne()
-            .where('_id').equals( req.body.aid )
+            .where('_id').equals( req.query.aid )
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢文章 success ->', result);

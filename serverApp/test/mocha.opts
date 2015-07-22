@@ -1,4 +1,4 @@
---slow 0
+--slow 10
 --recursive
 -r entry.js
 --require test/init.js

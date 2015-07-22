@@ -64,10 +64,9 @@ describe('[ API unit test - articles ]', function() {
         it('[GET] 查詢文章(aid)', ( done ) => {
 
             request({
-                url: 'http://localhost:8080/api/article/',
+                url: 'http://localhost:8080/api/article/?aid=' + aid,
                 method: 'GET',
                 json: true,
-                form: { aid }
             }, (err, res, data) => {
 
                 //test api exist
@@ -138,10 +137,9 @@ describe('[ API unit test - articles ]', function() {
             let finalIndex = 10;
 
             request({
-                url: 'http://localhost:8080/api/article/more',
+                url: 'http://localhost:8080/api/article/more?finalIndex=' + finalIndex + '&lastestTime=' + lastestTime,
                 method: 'GET',
                 json: true,
-                form: { finalIndex, lastestTime }
             }, (err, res, data) => {
 
                 //test api exist
