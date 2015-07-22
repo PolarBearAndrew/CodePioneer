@@ -161,11 +161,11 @@ let ArticleTab = React.createClass({
 
                 <Snackbar
                       ref="like"
-                      message={ 'Like' + data.title }/>
+                      message={ 'Like  ' + data.title } />
 
                 <Snackbar
                       ref="unlike"
-                      message={ 'unlike' + data.title } />
+                      message={ 'unlike  ' + data.title } />
             </Paper>
 	    );
 
@@ -175,8 +175,15 @@ let ArticleTab = React.createClass({
 
         if( checked ){
             actionsLike.addLike( this.props.user.id, this.props.data._id);
+            this.refs.like.message = '123123123';
+            this.refs.like.show();
+
+
+            setTimeout( this.refs.like.dismiss, 2048 );
+
         }else{
             actionsLike.unLike( this.props.user.id, this.props.data._id);
+            this.refs.unlike.show();
         }
 
     }
