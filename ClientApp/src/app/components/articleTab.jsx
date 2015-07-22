@@ -137,7 +137,7 @@ let ArticleTab = React.createClass({
                         </p>
                         <div style={article} className="article">
                           <p style={contents1}>
-                            by { data.author }
+                            { data.author ? 'by ' + data.author : null }
                           </p>
 
                           <p style={contents2} className="comments">
