@@ -153,19 +153,19 @@ router.get('/news/:count', (req, res, next) => {
  */
 router.get('/more', (req, res, next) => {
 
-    let miss = check( req.body, ['finalIndex'] );
+    let miss = check( req.query, ['finalIndex', 'lastestTime'] );
     if(!miss.check){
         debug('[GET] 接續查詢文章(10) miss data ->', miss.missData);
         return next(err);
     }
 
-    let finalIndex = req.body.finalIndex;
+    let finalIndex = req.query.finalIndex;
     let count = ( parseInt(finalIndex) + 10 );
 
     //db operation
      Article.find()
             .limit(count)
-            .where('time <= ' + req.body.lastestTime)
+            .where('time <= ' + req.query.lastestTime)
             .sort({ time: -1 })
             .execAsync()
             .then( (result) => {
@@ -182,7 +182,7 @@ router.get('/more', (req, res, next) => {
             })
             .catch( (err) =>{
                 debug('[GET] 接續查詢文章(10) fail ->', err);
-                return next(err);
+                return next(err.message);
             });
 });
 

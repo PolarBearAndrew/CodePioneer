@@ -18,10 +18,10 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 
 //data
 var Store = {};
+
 var articles = [];
-/**
- * 建立 Store class，並且繼承 EventEMitter 以擁有廣播功能
- */
+var isNotLoading = true;
+
 objectAssign( Store, EventEmitter.prototype, {
 
     /**
@@ -30,6 +30,10 @@ objectAssign( Store, EventEmitter.prototype, {
      */
     getArticleList: () => {
         return articles;
+    },
+
+    getIsNotLoading(){
+        return isNotLoading;
     },
 
     noop: () => {
@@ -55,9 +59,19 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          */
         case AppConstants.ARTICLE_LOAD:
             articles = data;
+            Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
-        default:
+        /*
+         * 接續載入文章資料
+         */
+        case AppConstants.ARTICLE_LOADMORE:
+            articles = articles.concat(data);
+            //isNotLoading = true;
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
+        //default:
     }
 })
 

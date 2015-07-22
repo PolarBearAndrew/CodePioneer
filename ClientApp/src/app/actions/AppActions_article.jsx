@@ -21,7 +21,31 @@ let AppActions_Articles = {
 			error: function(err){
 
 				AppDispatcher.handleViewAction({
-					actionType: AppConstants.USER_LOGIN,
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
+	},
+
+	loadmore( finalIndex, lastestTime ){
+		$.ajax({
+			url: address + '/more?finalIndex=' + finalIndex + '&lastestTime=' + lastestTime,
+			type: 'GET',
+
+			success: function(result){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.ARTICLE_LOADMORE,
+					data: result
+				});
+			},
+			error: function(err){
+
+				console.log('err', err);
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
 					data: null
 				});
 			}

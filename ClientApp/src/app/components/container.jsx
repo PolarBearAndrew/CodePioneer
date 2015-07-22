@@ -23,7 +23,30 @@ let CircularProgress=mui.CircularProgress;
 
 let ArticleTab = require('./articleTab.jsx');
 
+let isNotLoading = true;
+
 let container = React.createClass({
+
+    getInitialState:function(){
+
+        window.addEventListener("scroll", this._handleScroll);
+        return null;
+    },
+
+    _handleScroll() {
+
+        if( isNotLoading && ( document.body.scrollTop + document.body.clientHeight ) >= document.body.scrollHeight ){
+
+            console.log('is bottom');
+
+            isNotLoading = false;
+            let articlesList = this.props.articles;
+
+            setTimeout(()=>{
+                this.props.loadmore( articlesList.length, articlesList[0].time );
+            }, 200);
+        }
+    },
 
 	childContextTypes: {
 		muiTheme: React.PropTypes.object
@@ -42,6 +65,8 @@ let container = React.createClass({
 	},
 
 	render() {
+
+        isNotLoading = true;
 
 		let containerStyle = {
 	    	textAlign: 'center',
@@ -70,14 +95,15 @@ let container = React.createClass({
             }
         ];
 
-        console.log('this.props.user', this.props.user);
-
         var articleList = this.props.articles.map((value)=>{
             return <ArticleTab
                     key={value.id}
                     data={value}
                     user={this.props.user} />;
         }, this);
+
+
+        // console.log('articleList', articleList)
 
         let fixed={
             top:0,
@@ -86,9 +112,9 @@ let container = React.createClass({
             width:'100%',
             height:'auto',
             position: 'fixed',
-            
+
         };
-        
+
 	    return (
     		<div  style={containerStyle}>
                 <AppBar style={fixed} onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
@@ -122,6 +148,7 @@ let container = React.createClass({
 	    );
 
 	},
+
     _leftmenu(){
         this.refs.leftNav.toggle();
     },

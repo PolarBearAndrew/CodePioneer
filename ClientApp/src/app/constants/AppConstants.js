@@ -7,6 +7,7 @@ module.exports = keyMirror({
 
 	//article
 	ARTICLE_LOAD: null,
+	ARTICLE_LOADMORE: null,
 
 	//like
 	LIKE_LOAD: null,
