@@ -107,19 +107,35 @@ app.listen(port, function(){
             return user.saveAsync()
         })
         .spread( (result) => {
-            debug('[POST] 新增使用者 success ->', result);
+            debug('[POST] 新增測試使用者 success ->', result);
         })
         .catch( (err) => {
-            debug('[POST] 新增使用者 fail ->', err);
+            debug('[POST] 新增測試使用者 fail ->', err);
         });
 
-    //crawl api
+
+
+    //crawl
     //==========================================
 
+    let Article = require('./models/article.js');
 
-     let crawltick = new crawl();
-     crawltick.start();
+    Article.find()
+            .execAsync()
+            .then( (result) => {
 
+                //re init data
+                if(result.length > 1){
+                    debug('[crawl] 查詢爬蟲資料 empty, 開始爬蟲');
+                    let crawltick = new crawl();
+                    crawltick.start();
+                }else{
+                    debug('[crawl] 查詢爬蟲資料, 已存在無需更新');
+                }
+            })
+            .catch( (err) => {
+                debug('[crawl] 查詢爬蟲資料 fail ->', err);
+            });
 });
 
 module.exports = app;
