@@ -55,7 +55,7 @@ let ArticleTab = React.createClass({
         let articleAll = {
             display:'flex',
             alignItems:'center',
-            marginBottom:'3px'
+            marginBottom:'3px',
         };
 
         let article = {
@@ -122,6 +122,7 @@ let ArticleTab = React.createClass({
             if(value.aid === data._id)
                 ctrlStart = true;
         });
+
 
 	    return (
 
