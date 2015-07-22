@@ -12,11 +12,11 @@ var debug = require('debug')('app.js');
 var routes = require('./routes/index');
 
 //API
-var users = require('./routes/api-user');
-var article = require('./routes/api-like');
-var articles = require('./routes/api-article');
+var user = require('./routes/api-user');
+var like = require('./routes/api-like');
 var follow = require('./routes/api-follow');
-var classify = require('./routes/api-classify-article');
+var article = require('./routes/api-article');
+var articleAssignClass = require('./routes/api-article-assignClass.js');
 
 //feature modules
 var crawl = require('./feature/crawl.js');
@@ -46,11 +46,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //router
 app.use('/', routes);
-app.use('/api/users', users);
-app.use('/api/like', article);
-app.use('/api/article', articles);
+app.use('/api/users', user);
+app.use('/api/like', like);
 app.use('/api/follow', follow);
-app.use('/api/classify-article', classify);
+app.use('/api/article', article);
+app.use('/api/article/assign', articleAssignClass);
 
 //test, need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);
@@ -116,8 +116,8 @@ app.listen(port, function(){
     //crawl api
     //==========================================
 
-    var crawltick = new crawl();
-    crawltick.start();
+    // var crawltick = new crawl();
+    // crawltick.start();
 
 });
 
