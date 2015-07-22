@@ -122,14 +122,12 @@ let ArticleTab = React.createClass({
             if(value.aid === data._id)
                 ctrlStart = true;
         });
-
-        
         
 	    return (
 
 	    	<Paper id={data._id} zDepth={1}>
                 <div style={articleAll}>
-                    <Avatar style={avatar} src="images/hackerNews.png" />
+                    <Avatar style={avatar} src="images/iThomeTech.png" />
                     <div style={ starPosi.wrapper }>
                         <p
                             style={title}
