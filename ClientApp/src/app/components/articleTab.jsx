@@ -133,7 +133,7 @@ let ArticleTab = React.createClass({
                             style={title}
                             className="title"
                             >
-                            <a href="http://material-ui.com/#/" >{ data.title }</a>
+                            <a href={ data.url } > { data.title }</a>
                         </p>
                         <div style={article} className="article">
                           <p style={contents1}>
@@ -162,7 +162,7 @@ let ArticleTab = React.createClass({
                 <Snackbar
                       ref="like"
                       action="like"
-                      message={ data.title } />    
+                      message={ data.title } />
                 <Snackbar
                       ref="unlike"
                       action="unlike"
