@@ -29,6 +29,8 @@ function crawl(){
 
 	                data = JSON.parse(data);
 
+	                debug('[crawl] Hacker News get data ->', data.results.collection1);
+
 	                data.results.collection1.forEach( (item)=>{
 
 				        var article = new Article({
@@ -73,7 +75,8 @@ function crawl(){
  		    function(err, res, data) {
 
                  data = JSON.parse(data);
-//             	 console.log('data', data.results.github_top10 );
+
+                 debug('[crawl] Github top 10 get data ->', data.results.github_top10);
 
                  data.results.github_top10.forEach(function( item ){
 
@@ -104,13 +107,13 @@ function crawl(){
  				    });
 
  				    //db operation
- 				    article.saveAsync()
-					    		.then( (result) => {
-					        		debug('[crawl] Github top 10 success ->', result);
-					    		})
-					    		.catch( (err) => {
-					    			debug('[crawl] Github top 10 fail ->', err);
-					    		});
+ 				     article.saveAsync()
+				    		.then( (result) => {
+				        		debug('[crawl] Github top 10 success ->', result);
+				    		})
+				    		.catch( (err) => {
+				    			debug('[crawl] Github top 10 fail ->', err);
+				    		});
                  });
 			});
 		}
@@ -123,7 +126,8 @@ function crawl(){
  		    function(err, res, data) {
 
                  data = JSON.parse(data);
-//                 console.log('data', data.results.ithome );
+
+				debug('[crawl] iThome Technology get data ->', data.results.ithome);
 
                  data.results.ithome.forEach(function( item ){
 
@@ -162,10 +166,11 @@ function crawl(){
             request("https://www.kimonolabs.com/api/c9njd4bo?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
  		    function(err, res, data) {
 
-                 data = JSON.parse(data);
-                 console.log('data', data.results.ithome_news );
+                data = JSON.parse(data);
 
-                 data.results.ithome_news.forEach(function( item ){
+                debug('[crawl] iThome News get data ->', data.results.ithome_news);
+
+                data.results.ithome_news.forEach(function( item ){
 
  			        var article = new Article({
                          //title
@@ -184,7 +189,7 @@ function crawl(){
  				    });
 
  				    //db operation
- 				    article.saveAsync()
+ 				     article.saveAsync()
 				    		.then( (result) => {
 				        		debug('[crawl] iThome News success ->', result);
 				    		})
