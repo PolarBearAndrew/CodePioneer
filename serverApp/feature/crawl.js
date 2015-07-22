@@ -125,7 +125,7 @@ function crawl(){
                          //文章的url
  					    url: item.title.href,
                          //來源
-                         from: 'iThome',
+                         from: 'iThome Technology',
                          //描述
  					    describe: item.describe,
                          //一些小資訊
@@ -165,7 +165,7 @@ function crawl(){
                          //文章的url
  					    url: item.title.href,
                          //來源
-                         from: 'iThome',
+                         from: 'iThome News',
                          //描述
  					    describe: item.describe,
                          //一些小資訊
