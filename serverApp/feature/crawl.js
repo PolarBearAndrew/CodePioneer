@@ -136,6 +136,8 @@ function crawl(){
  				        title: item.title.text,
                          //文章的url
  					    url: item.title.href,
+                        //作者
+ 					    author: null,
                          //來源
                         from: config.crawlName.iThomeTech,
                          //描述
@@ -178,6 +180,8 @@ function crawl(){
  				        title: item.title.text,
                          //文章的url
  					    url: item.title.href,
+                        //作者
+ 					    author: null,
                          //來源
                         from: config.crawlName.iThomeNews,
                          //描述
