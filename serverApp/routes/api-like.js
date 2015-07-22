@@ -10,7 +10,7 @@ var User = require('../models/user.js');
 var Article = require('../models/article.js');
 
 //feature
-let checkPorperty = require('../feature/checkPorperty.js');
+let checkPorperty = require('../feature/checkProperty.js');
 let check = checkPorperty.check;
 
 // bluebird.reject( new Error('xxxxxx') ); //reject : 直接讓promise物件thorw err到catch中

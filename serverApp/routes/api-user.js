@@ -10,7 +10,7 @@ let User = require('../models/user.js');
 
 //feature
 let postMan = require('../feature/mail.js');
-let checkPorperty = require('../feature/checkPorperty.js');
+let checkPorperty = require('../feature/checkProperty.js');
 let check = checkPorperty.check;
 
 //=======================================================
