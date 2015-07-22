@@ -13,8 +13,9 @@ let ThemeManager = new mui.Styles.ThemeManager();
 
 let Paper = mui.Paper;
 let Avatar = mui.Avatar;
-let Checkbox=mui.Checkbox
-let FontIcon = mui.FontIcon ;
+let Checkbox=mui.Checkbox;
+let FontIcon = mui.FontIcon;
+let Snackbar = mui.Snackbar;
 
 //flux
 let actionsLike = require('../actions/AppActions_like.jsx');
@@ -157,6 +158,14 @@ let ArticleTab = React.createClass({
                             />
                     </div>
                 </div>
+            
+                <Snackbar
+                      ref="addStar"
+                      message="You add { data.title }/>
+            
+                <Snackbar
+                      ref="deleteStar"
+                      message="You delete"{ data.title } />
             </Paper>
 	    );
 
