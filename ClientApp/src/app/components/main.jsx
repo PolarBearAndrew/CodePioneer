@@ -13,6 +13,7 @@ let AppConstants = require('../constants/AppConstants.js');
 
 //actions
 let actionsLike = require('../actions/AppActions_like.jsx');
+let actionsArticle = require('../actions/AppActions_article.jsx');
 
 
 //main是這個元件暫時使用的名字
@@ -23,7 +24,8 @@ let Main = React.createClass({
     },
 
 	componentWillMount() {
-		MainStore.addListener( AppConstants.CHANGE_EVENT, this._onChange );
+        MainStore.addListener( AppConstants.CHANGE_EVENT, this._onChange );
+		ArticleStore.addListener( AppConstants.CHANGE_EVENT, this._onChange );
 	},
 
 	shouldComponentUpdate() {
@@ -42,7 +44,7 @@ let Main = React.createClass({
 	    return (
 	    	<div id='wrapper' >
 	    		{ displayPage.LoginApp ? <LoginApp /> : null }
-	    		{ displayPage.Container ? <Container articles={ this.state.articles } user={ this.state.user }/> : null }
+	    		{ displayPage.Container ? <Container articles={ this.state.articles } user={ this.state.user } loadmore={ actionsArticle.loadmore }/> : null }
 	    	</div>
 	    );
 	},

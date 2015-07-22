@@ -86,7 +86,7 @@ function crawl(){
                          //文章的url
  					    url: item.title.href,
                          //作者
- 					    author: item.author.text,
+ 					    author: item.author,
                          //來源
                         from: config.crawlName.github10,
                          //描述
@@ -98,9 +98,9 @@ function crawl(){
                              //收藏連接網址
                              item.follow_branch[0].href,
                              //branch的人數
-                             item.follow_branch[1].text,
+                             item.branch.text,
                              //branch連接網址
-                             item.follow_branch[1].href,
+                             item.branch.href,
                              //發布的日期
                              item.updated
  					    ]
