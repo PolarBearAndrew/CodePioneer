@@ -19,6 +19,7 @@ let IconMenu = mui.IconMenu;
 let List = mui.List;
 let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
+let CircularProgress=mui.CircularProgress;
 
 let ArticleTab = require('./articleTab.jsx');
 
@@ -106,6 +107,7 @@ let container = React.createClass({
                     { articleList }
 
                 </Paper>
+            <CircularProgress mode="indeterminate" size={0.5}/>
             </div>
 	    );
 

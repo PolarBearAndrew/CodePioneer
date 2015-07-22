@@ -161,11 +161,12 @@ let ArticleTab = React.createClass({
 
                 <Snackbar
                       ref="like"
-                      message={ 'Like  ' + data.title } />
-
+                      action="like"
+                      message={ data.title } />    
                 <Snackbar
                       ref="unlike"
-                      message={ 'unlike  ' + data.title } />
+                      action="unlike"
+                      message={ data.title } />
             </Paper>
 	    );
 
