@@ -80,7 +80,13 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          * 篩選文章機制
          */
         case AppConstants.ARTICLE_FILTER:
-            filter.push(data);
+            if(filter.indexOf(data) === -1 ){
+                filter.push(data);
+            }else{
+                filter = filter.filter( (value) => {
+                    return value != data
+                });
+            }
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
