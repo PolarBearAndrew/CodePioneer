@@ -1,4 +1,5 @@
 var request = require('request');
+var queryString = require('../feature/makerQueryString.js');
 
 //init data
 var initData = {
@@ -63,8 +64,12 @@ describe('[ API unit test - articles ]', function() {
 
         it('[GET] 查詢文章(aid)', ( done ) => {
 
+            let url = queryString('http://localhost:8080/api/article/', { aid });
+            
+            console.log(url[0])
+            
             request({
-                url: 'http://localhost:8080/api/article/?aid=' + aid,
+                url: url,
                 method: 'GET',
                 json: true,
             }, (err, res, data) => {
