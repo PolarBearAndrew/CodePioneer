@@ -175,7 +175,6 @@ let ArticleTab = React.createClass({
 
         if( checked ){
             this.props.like( this.props.user.id, this.props.data._id);
-            this.refs.like.message = '123123123';
             this.refs.like.show();
 
 
