@@ -17,6 +17,7 @@ var like = require('./routes/api-like');
 var follow = require('./routes/api-follow');
 var article = require('./routes/api-article');
 var articleAssignClass = require('./routes/api-article-assignClass.js');
+var userStream = require('./routes/api-user-stream.js');
 
 //feature modules
 var crawl = require('./feature/crawl.js');
@@ -51,6 +52,7 @@ app.use('/api/like', like);
 app.use('/api/follow', follow);
 app.use('/api/article', article);
 app.use('/api/article/assign', articleAssignClass);
+app.use('/api/users/stream', userStream);
 
 //test, need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);
