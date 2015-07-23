@@ -87,33 +87,31 @@ let container = React.createClass({
 	    return (
     		<div  style={containerStyle}>
                 <AppBar style={fixed} onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
-                        iconElementRight={ <div className="comments"><IconMenu iconButtonElement={<IconButton
-                        iconClassName="material-icons" >person</IconButton>}  >
-
-                        <List>
-                            <ListItem
-                              leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
-                              primaryText="Setting"
-                            />
-                            <ListDivider inset={true} />
-                            <ListItem
-                              leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
-                              primaryText="Logout"
-                            />
-                            <ListDivider inset={true} />
-                        </List>
-                    </IconMenu>
-                </div>}
-                />
+                        iconElementRight={
+                                        <div className="comments">
+                                            <IconMenu iconButtonElement={<IconButton
+                                                                            iconClassName="material-icons" >
+                                                                            person</IconButton>} >
+                                                <List>
+                                                    <ListItem
+                                                      leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
+                                                      primaryText="Setting" />
+                                                    <ListDivider inset={true} />
+                                                    <ListItem
+                                                      leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
+                                                      primaryText="Logout"/>
+                                                    <ListDivider inset={true} />
+                                                </List>
+                                            </IconMenu>
+                                        </div>}/>
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
                 <ArticleList articles={this.props.articles}
                              user={this.props.user}
                              loadmore={actionsArticle.loadmore}
                              filter={actionsArticle.filter}
-                             filterData={this.props.filterData} />
-
-            <CircularProgress mode="indeterminate" size={0.5}/>
+                             filterData={this.props.filterData}
+                             isMoreData={this.props.isMoreData} />
             </div>
 	    );
 

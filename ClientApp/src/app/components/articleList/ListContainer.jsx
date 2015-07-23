@@ -26,6 +26,10 @@ let ListContainer = React.createClass({
 
     	window.removeEventListener("scroll", this._handleScroll);
 
+        if(!this.props.isMoreData){
+            return;
+        }
+
         if(( document.body.scrollTop + screen.height ) >= document.body.scrollHeight + 40 ){
 
             console.log('loading more...');
@@ -39,6 +43,7 @@ let ListContainer = React.createClass({
             setTimeout(()=>{
             	window.addEventListener("scroll", this._handleScroll);
             }, 700);
+
         }else{
         	window.addEventListener("scroll", this._handleScroll);
         }
@@ -74,9 +79,13 @@ let ListContainer = React.createClass({
         }, this);
 
 	    return (
-	    	<Paper zDepth={2} id="listContainer">
-		        { articleList }
-		    </Paper>
+            <div>
+    	    	<Paper zDepth={2} id="listContainer">
+    		        { articleList }
+    		    </Paper>
+
+                <CircularProgress mode="indeterminate" size={0.5}/>
+            </div>
 	    );
 
 	},

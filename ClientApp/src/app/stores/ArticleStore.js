@@ -20,31 +20,23 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 var Store = {};
 
 var articles = [];
-var isNotLoading = true;
-
 var filter = [];
+
+//ctrl
+var isNotLoading = true;
+var isMoreData = true;
 
 objectAssign( Store, EventEmitter.prototype, {
 
-    /**
-     * Public API
-     * 供外界取得 store 內部資料
-     */
-    getArticleList: () => {
-        return articles;
-    },
+    //data
+    getArticleList() { return articles; },
+    getFilter(){ return filter; },
 
-    getIsNotLoading(){
-        return isNotLoading;
-    },
+    //ctrl
+    getIsNotLoading(){ return isNotLoading; },
+    getIsMoredata() { return isMoreData },
 
-    getFilter(){
-        return filter;
-    },
-
-    noop: () => {
-
-    },
+    noop: () => {},
 });
 
 //========================================================================
@@ -53,10 +45,15 @@ objectAssign( Store, EventEmitter.prototype, {
 
 Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
 
-    // evt .action 就是 view 當時廣播出來的整包物件
-    // 它內含 actionType
     var action = evt.action;
     var data = action.data;
+
+    let setIsMoreData = (count) => {
+        if(count < 10)
+            isMoreData = false;
+        else
+            isMoreData = true;
+    }
 
     switch (action.actionType) {
 
@@ -64,7 +61,11 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          * 載入文章資料
          */
         case AppConstants.ARTICLE_LOAD:
+
             articles = data;
+
+            //set
+            setIsMoreData(data.length);
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
@@ -72,7 +73,11 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          * 接續載入文章資料
          */
         case AppConstants.ARTICLE_LOADMORE:
+
             articles = articles.concat(data);
+
+            //set
+            setIsMoreData(data.length);
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
@@ -80,6 +85,7 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          * 篩選文章機制
          */
         case AppConstants.ARTICLE_FILTER:
+
             if(filter.indexOf(data) === -1 ){
                 filter.push(data);
             }else{

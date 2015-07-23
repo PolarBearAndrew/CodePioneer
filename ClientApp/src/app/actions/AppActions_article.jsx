@@ -30,7 +30,7 @@ let AppActions_Articles = {
 
 	loadmore( finalIndex, lastestTime ){
 		$.ajax({
-			url: address + '/more?finalIndex=' + finalIndex + '&lastestTime=' + lastestTime,
+			url: address + '/stream?finalIndex=' + finalIndex + '&lastestTime=' + lastestTime,
 			type: 'GET',
 
 			success: function(result){
