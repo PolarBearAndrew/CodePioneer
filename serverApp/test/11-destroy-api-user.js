@@ -101,8 +101,4 @@ describe('[ API unit test - users ]', () => {
             });
         });
     });
-
-    after( (done) => {
-        return User.removeAsync({}, done);
-    });
 });
