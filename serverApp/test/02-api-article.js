@@ -138,7 +138,7 @@ describe('[ API unit test - articles ]', function() {
             let finalIndex = 10;
 
             request({
-                url: queryString('http://localhost:8080/api/article/more/', { finalIndex, lastestTime } ),
+                url: queryString('http://localhost:8080/api/article/stream/', { finalIndex, lastestTime } ),
                 method: 'GET',
                 json: true,
             }, (err, res, data) => {

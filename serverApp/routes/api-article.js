@@ -148,10 +148,10 @@ router.get('/news/:count', (req, res, next) => {
 
 /*
  * [GET] 接續查詢文章(10)
- * request : body.finalIndex, body.lastestTime
+ * request : query.finalIndex, query.lastestTime
  * respone : db result
  */
-router.get('/more', (req, res, next) => {
+router.get('/stream', (req, res, next) => {
 
     let miss = check( req.query, ['finalIndex', 'lastestTime'] );
     if(!miss.check){

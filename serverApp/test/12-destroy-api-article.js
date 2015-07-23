@@ -45,7 +45,7 @@ describe('[ API unit test - articles ]', function() {
             let finalIndex = 10;
 
             request({
-                url: 'http://localhost:8080/api/article/more',
+                url: 'http://localhost:8080/api/article/stream',
                 method: 'GET',
                 json: true,
             }, (err, res, data) => {
