@@ -3,12 +3,14 @@
 let React = require('react');
 
 //app
-let LoginApp = require('./loginApp.jsx');
+let Login = require('./login/login.jsx');
 let Container = require('./container.jsx');
 
-//flux data store
+//flux - store
 let MainStore = require('../stores/MainStore.js');
 let ArticleStore = require('../stores/ArticleStore.js');
+
+//flux - contant
 let AppConstants = require('../constants/AppConstants.js');
 
 //actions
@@ -35,7 +37,7 @@ let Main = React.createClass({
 	render() {
 
         let displayPage = {
-        	LoginApp: false,
+        	Login: false,
         	Container: false,
         };
 
@@ -43,7 +45,7 @@ let Main = React.createClass({
 
 	    return (
 	    	<div id='wrapper' >
-	    		{ displayPage.LoginApp ? <LoginApp /> : null }
+	    		{ displayPage.Login ? <Login /> : null }
 	    		{ displayPage.Container ? <Container articles={ this.state.articles } user={ this.state.user } loadmore={ actionsArticle.loadmore }/> : null }
 	    	</div>
 	    );

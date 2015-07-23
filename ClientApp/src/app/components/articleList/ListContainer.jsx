@@ -14,9 +14,6 @@ let ListItem = require('./ListItem.jsx');
 //flux
 let actionsLike = require('../../actions/AppActions_like.jsx');
 
-//ctrl
-let isNotLoading = true;
-
 let ListContainer = React.createClass({
 
 	getInitialState:function(){
@@ -27,9 +24,9 @@ let ListContainer = React.createClass({
 
     _handleScroll() {
 
-        if( isNotLoading && ( document.body.scrollTop + document.body.clientHeight ) >= document.body.scrollHeight ){
+    	window.removeEventListener("scroll", this._handleScroll);
 
-	        isNotLoading = false;
+        if(( document.body.scrollTop + screen.height ) >= document.body.scrollHeight + 40 ){
 
             console.log('loading more...');
 
@@ -40,9 +37,10 @@ let ListContainer = React.createClass({
             }, 200);
 
             setTimeout(()=>{
-                isNotLoading = true;
-            }, 500);
-
+            	window.addEventListener("scroll", this._handleScroll);
+            }, 700);
+        }else{
+        	window.addEventListener("scroll", this._handleScroll);
         }
     },
 
@@ -64,8 +62,6 @@ let ListContainer = React.createClass({
 
 	render() {
 
-		isNotLoading = true;
-
 		var articleList = this.props.articles.map((value)=>{
             return <ListItem
                     key={value.id}
@@ -76,8 +72,7 @@ let ListContainer = React.createClass({
         }, this);
 
 	    return (
-
-	    	<Paper zDepth={2}>
+	    	<Paper zDepth={2} id="listContainer">
 		        { articleList }
 		    </Paper>
 	    );

@@ -16,9 +16,8 @@ let Snackbar = mui.Snackbar;
 //react 自製元件
 
 //flux 資料相關
-let actionsUser = require('../actions/AppActions_User.jsx');
-//let Actions = require('../actions/AppActions_article.jsx');
-let AppConstants = require('../constants/AppConstants.js');
+let actionsUser = require('../../actions/AppActions_User.jsx');
+let AppConstants = require('../../constants/AppConstants.js');
 
 //main是這個元件暫時使用的名字
 let loginApp = React.createClass({
