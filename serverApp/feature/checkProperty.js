@@ -2,7 +2,7 @@
 
 let opt = 'dev';  // dev || product
 
-let check = function( data, expect ){
+let check = ( data, expect ) => {
 
 	let miss = null;
 
