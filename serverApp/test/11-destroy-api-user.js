@@ -15,18 +15,6 @@ var User = require('../models/user.js');
 
 describe('[ API unit test - users ]', () => {
 
-    before(function() {
-
-        return User.remove({}, (err, result) => {
-
-            //init data
-            var user = new User(initData);
-            user.save((err, result) => {
-                uid = result._id;
-            });
-        });
-    });
-
     describe('破壞性測試, 蓄意少傳參數', () => {
 
         it('[POST] (破壞性測試) 新增使用者', ( done ) => {

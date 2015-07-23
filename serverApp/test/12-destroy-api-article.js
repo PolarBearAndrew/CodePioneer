@@ -11,19 +11,6 @@ var Article = require('../models/article.js');
 
 describe('[ API unit test - articles ]', function() {
 
-    before( () => {
-
-        return Article.remove({ author: 'AndrewChen' }, (err, result) => {
-
-            //init data
-            var article = new Article(initData);
-            article.save((err, result) => {
-                aid = result._id.toString();
-                lastestTime = result.lastestTime;
-            });
-        });
-    });
-
     describe('破壞性測試, 蓄意少傳參數', () => {
 
         it('[POST] (破壞性測試) 新增文章', ( done ) => {
