@@ -80,11 +80,16 @@ let ListContainer = React.createClass({
 
 	    return (
             <div>
+
+
     	    	<Paper zDepth={2} id="listContainer">
     		        { articleList }
     		    </Paper>
 
                 <CircularProgress mode="indeterminate" size={0.5}/>
+
+
+
             </div>
 	    );
 
