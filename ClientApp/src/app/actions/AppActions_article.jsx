@@ -51,6 +51,13 @@ let AppActions_Articles = {
 			}
 		});
 	},
+
+	filter( from ){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.ARTICLE_FILTER,
+			data: from
+		});
+	},
 }
 
 module.exports = AppActions_Articles;

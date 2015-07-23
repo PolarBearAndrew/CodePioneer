@@ -68,7 +68,9 @@ let ListContainer = React.createClass({
                     data={value}
                     user={this.props.user}
                     like={actionsLike.like}
-                    unlike={actionsLike.unlike} />;
+                    unlike={actionsLike.unlike}
+                    filter={this.props.filter}
+                    filterData={this.props.filterData} />;
         }, this);
 
 	    return (

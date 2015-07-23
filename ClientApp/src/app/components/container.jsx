@@ -107,7 +107,11 @@ let container = React.createClass({
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
-                <ArticleList articles={this.props.articles} user={this.props.user} loadmore={actionsArticle.loadmore} />
+                <ArticleList articles={this.props.articles}
+                             user={this.props.user}
+                             loadmore={actionsArticle.loadmore}
+                             filter={actionsArticle.filter}
+                             filterData={this.props.filterData} />
 
             <CircularProgress mode="indeterminate" size={0.5}/>
             </div>

@@ -22,6 +22,8 @@ var Store = {};
 var articles = [];
 var isNotLoading = true;
 
+var filter = [];
+
 objectAssign( Store, EventEmitter.prototype, {
 
     /**
@@ -34,6 +36,10 @@ objectAssign( Store, EventEmitter.prototype, {
 
     getIsNotLoading(){
         return isNotLoading;
+    },
+
+    getFilter(){
+        return filter;
     },
 
     noop: () => {
@@ -67,7 +73,14 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          */
         case AppConstants.ARTICLE_LOADMORE:
             articles = articles.concat(data);
-            //isNotLoading = true;
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
+        /*
+         * 篩選文章機制
+         */
+        case AppConstants.ARTICLE_FILTER:
+            filter.push(data);
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 

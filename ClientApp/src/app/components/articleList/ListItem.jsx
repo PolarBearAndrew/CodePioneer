@@ -43,7 +43,7 @@ let ArticleTab = React.createClass({
             padding:'0px',
             paddingLeft:'7px',
             margin:'5px',
-            marginBottom:'9px',
+            marginBottom:'12px',
             fontSize:'25px',
             textAlign:'left',
             letterSpacing:'1.5px',
@@ -110,7 +110,8 @@ let ArticleTab = React.createClass({
         let avatar={
             maxWidth:'100%',
             height:'auto',
-            minWidth:'40px'
+            minWidth:'40px',
+            cursor: 'pointer',
         };
 
         let data = this.props.data;
@@ -121,11 +122,23 @@ let ArticleTab = React.createClass({
                 ctrlStart = true;
         });
 
-	    return (
+        let zDepth = 1;
+        let paperStyle = {};
 
-	    	<Paper id={data._id} zDepth={1}>
+        this.props.filterData.forEach( (value) => {
+            if(value == data.from){
+                zDepth = 3;
+                paperStyle = {
+                    marginTop:'12px',
+                    marginBottom:'18px',
+                };
+            }
+        });
+
+	    return (
+	    	<Paper id={data._id} zDepth={ zDepth } style={paperStyle}>
                 <div style={articleAll}>
-                    <Avatar style={avatar} src={ 'images/' + data.from + '.png' } />
+                    <Avatar style={avatar} src={ 'images/' + data.from + '.png' } onTouchTap={ this._filter } />
                     <div style={ starPosi.wrapper }>
                         <p
                             style={title}
@@ -139,7 +152,7 @@ let ArticleTab = React.createClass({
                           </p>
 
                           <p style={contents2} className="comments">
-                            { data.info[0] }
+                            { data.info ? data.info[0] : null }
                           </p>
                         </div>
                     </div>
@@ -183,8 +196,11 @@ let ArticleTab = React.createClass({
             this.props.unlike( this.props.user.id, this.props.data._id);
             this.refs.unlike.show();
         }
+    },
 
-    }
+    _filter(){
+        this.props.filter(this.props.data.from);
+    },
 });
 
 module.exports = ArticleTab;

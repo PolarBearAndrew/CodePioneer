@@ -6,7 +6,7 @@ var initData = {
     title: 'New JavaScript in 2015 !!',
     url: 'https://www.google.com.tw',
     author: 'AndrewChen',
-    from: 'FaceBook',
+    from: 'github10',
     describe: 'this is the world future...',
     info: ["200 comments", "999 likes"]
 };

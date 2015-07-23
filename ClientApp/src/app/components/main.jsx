@@ -46,7 +46,7 @@ let Main = React.createClass({
 	    return (
 	    	<div id='wrapper' >
 	    		{ displayPage.Login ? <Login /> : null }
-	    		{ displayPage.Container ? <Container articles={ this.state.articles } user={ this.state.user } loadmore={ actionsArticle.loadmore }/> : null }
+	    		{ displayPage.Container ? <Container articles={ this.state.articles } user={ this.state.user } loadmore={ actionsArticle.loadmore } filterData={ this.state.filterData }/> : null }
 	    	</div>
 	    );
 	},
@@ -63,7 +63,8 @@ let Main = React.createClass({
         	displayPage: MainStore.getDisplayPage(),
 
         	//article store
-        	articles: ArticleStore.getArticleList(),
+            articles: ArticleStore.getArticleList(),
+        	filterData: ArticleStore.getFilter(),
         };
     }
 
