@@ -17,8 +17,6 @@ let Checkbox=mui.Checkbox;
 let FontIcon = mui.FontIcon;
 let Snackbar = mui.Snackbar;
 
-//flux
-let actionsLike = require('../actions/AppActions_like.jsx');
 
 let ArticleTab = React.createClass({
 
@@ -176,7 +174,7 @@ let ArticleTab = React.createClass({
     _like (e, checked){
 
         if( checked ){
-            actionsLike.addLike( this.props.user.id, this.props.data._id);
+            this.props.like( this.props.user.id, this.props.data._id);
             this.refs.like.message = '123123123';
             this.refs.like.show();
 
@@ -184,7 +182,7 @@ let ArticleTab = React.createClass({
             setTimeout( this.refs.like.dismiss, 2048 );
 
         }else{
-            actionsLike.unLike( this.props.user.id, this.props.data._id);
+            this.props.unlike( this.props.user.id, this.props.data._id);
             this.refs.unlike.show();
         }
 

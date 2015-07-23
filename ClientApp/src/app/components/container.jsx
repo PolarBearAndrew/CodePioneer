@@ -21,32 +21,13 @@ let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
 let CircularProgress=mui.CircularProgress;
 
-let ArticleTab = require('./articleTab.jsx');
+//
+let ArticleList = require('./articleList/ListContainer.jsx');
 
-let isNotLoading = true;
+//flux
+let actionsArticle = require('../actions/AppActions_article.jsx');
 
 let container = React.createClass({
-
-    getInitialState:function(){
-
-        window.addEventListener("scroll", this._handleScroll);
-        return null;
-    },
-
-    _handleScroll() {
-
-        if( isNotLoading && ( document.body.scrollTop + document.body.clientHeight ) >= document.body.scrollHeight ){
-
-            console.log('is bottom');
-
-            isNotLoading = false;
-            let articlesList = this.props.articles;
-
-            setTimeout(()=>{
-                this.props.loadmore( articlesList.length, articlesList[0].time );
-            }, 200);
-        }
-    },
 
 	childContextTypes: {
 		muiTheme: React.PropTypes.object
@@ -65,8 +46,6 @@ let container = React.createClass({
 	},
 
 	render() {
-
-        isNotLoading = true;
 
 		let containerStyle = {
 	    	textAlign: 'center',
@@ -94,16 +73,6 @@ let container = React.createClass({
               text: <TextField hintText="Search" fullWidth={true}/>
             }
         ];
-
-        var articleList = this.props.articles.map((value)=>{
-            return <ArticleTab
-                    key={value.id}
-                    data={value}
-                    user={this.props.user} />;
-        }, this);
-
-
-        // console.log('articleList', articleList)
 
         let fixed={
             top:0,
@@ -138,11 +107,8 @@ let container = React.createClass({
                 />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
-                <Paper zDepth={2}>
+                <ArticleList articles={this.props.articles} user={this.props.user} loadmore={actionsArticle.loadmore} />
 
-                    { articleList }
-
-                </Paper>
             <CircularProgress mode="indeterminate" size={0.5}/>
             </div>
 	    );

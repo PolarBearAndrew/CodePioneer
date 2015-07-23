@@ -28,7 +28,7 @@ let AppActions_Like = {
 	// 	});
 	// },
 
-	addLike( uid, aid){
+	like( uid, aid){
 
 		$.ajax({
 			url: address + '/',
@@ -52,7 +52,7 @@ let AppActions_Like = {
 		});
 	},
 
-	unLike( uid, aid){
+	unlike( uid, aid){
 
 		$.ajax({
 			url: address + '/',
