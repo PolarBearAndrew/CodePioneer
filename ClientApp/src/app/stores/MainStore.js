@@ -27,7 +27,7 @@ var user = {
 
 var isLogin = false;
 
-var displayPage = 'LoginApp';
+var displayPage = 'Login';
 
 /**
  * 建立 Store class，並且繼承 EventEMitter 以擁有廣播功能
