@@ -27,7 +27,6 @@ let ListContainer = React.createClass({
 
     _handleScroll() {
 
-
         if( isNotLoading && ( document.body.scrollTop + document.body.clientHeight ) >= document.body.scrollHeight ){
 
 	        isNotLoading = false;

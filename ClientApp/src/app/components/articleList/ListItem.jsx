@@ -121,7 +121,6 @@ let ArticleTab = React.createClass({
                 ctrlStart = true;
         });
 
-
 	    return (
 
 	    	<Paper id={data._id} zDepth={1}>
