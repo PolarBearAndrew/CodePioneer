@@ -1,12 +1,16 @@
 
 let queryString = ( url, params ) => {
-   
-    return Object.keys(params).map(( key, index ) => {
+
+    Object.keys(params).map(( key, index ) => {
         if( index === 0 ){
             url += '?';
+        }else{
+        	url += '&';
         }
-        return url += key + '=' + params[key] + '&';
+        return url += key + '=' + params[key] ;
     });
+
+    return url;
 };
 
 

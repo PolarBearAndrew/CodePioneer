@@ -27,7 +27,7 @@ describe('[ API unit test - articles ]', function() {
             var article = new Article(initData);
             article.save((err, result) => {
                 aid = result._id.toString();
-                lastestTime = result.lastestTime;
+                lastestTime = result.time;
             });
         });
     });
@@ -64,12 +64,8 @@ describe('[ API unit test - articles ]', function() {
 
         it('[GET] 查詢文章(aid)', ( done ) => {
 
-            let url = queryString('http://localhost:8080/api/article/', { aid });
-            
-            console.log(url[0])
-            
             request({
-                url: url,
+                url: queryString('http://localhost:8080/api/article/', { aid }),
                 method: 'GET',
                 json: true,
             }, (err, res, data) => {
@@ -142,7 +138,7 @@ describe('[ API unit test - articles ]', function() {
             let finalIndex = 10;
 
             request({
-                url: 'http://localhost:8080/api/article/more?finalIndex=' + finalIndex + '&lastestTime=' + lastestTime,
+                url: queryString('http://localhost:8080/api/article/more/', { finalIndex, lastestTime } ),
                 method: 'GET',
                 json: true,
             }, (err, res, data) => {
