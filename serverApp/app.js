@@ -1,29 +1,29 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+let express = require('express');
+let path = require('path');
+let favicon = require('serve-favicon');
+let logger = require('morgan');
+let cookieParser = require('cookie-parser');
+let bodyParser = require('body-parser');
 
 //debug
-var debug = require('debug')('app.js');
+let debug = require('debug')('app.js');
 
 //entry
-var routes = require('./routes/index');
+let routes = require('./routes/index');
 
 //API
-var user = require('./routes/api-user');
-var like = require('./routes/api-like');
-var follow = require('./routes/api-follow');
-var article = require('./routes/api-article');
-var articleAssignClass = require('./routes/api-article-assignClass.js');
-var userStream = require('./routes/api-user-stream.js');
+let user = require('./routes/api-user');
+let like = require('./routes/api-like');
+let follow = require('./routes/api-follow');
+let article = require('./routes/api-article');
+let articleAssignClass = require('./routes/api-article-assignClass.js');
+let userStream = require('./routes/api-user-stream.js');
 
 //feature modules
-var crawl = require('./feature/crawl.js');
-var testCrawlAPI = require('./feature/test-CrawlAPI.js');
+let crawl = require('./feature/crawl.js');
+let testCrawlAPI = require('./feature/test-CrawlAPI.js');
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,7 +60,7 @@ app.use('/api/users/stream', userStream);
 app.use('/api/testCrawlAPI', testCrawlAPI);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use( (req, res, next) => {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -69,7 +69,7 @@ app.use(function(req, res, next) {
 // error handlers
 
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use( (err, req, res, next) => {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -80,7 +80,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use( (err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
@@ -90,9 +90,9 @@ app.use(function(err, req, res, next) {
 
 
 
-var port = 8080;
+let port = 8080;
 
-app.listen(port, function() {
+app.listen(port, () => {
 
     console.log('[Server] started -> http://localhost:' + port);
 
@@ -124,21 +124,23 @@ app.listen(port, function() {
 
     let Article = require('./models/article.js');
 
-    Article.find()
-        .execAsync()
-        .then((result) => {
-            //re init data¡
-            if (result.length === 0) {
-                console.log('[crawl] 查詢爬蟲資料 empty, 開始爬蟲');
-                let crawltick = new crawl();
-                crawltick.start();
-            } else {
-                console.log('[crawl] 查詢爬蟲資料, 已存在無需更新');
-            }
-        })
-        .catch((err) => {
-            console.log('[crawl] 查詢爬蟲資料 fail ->', err);
-        });
+     Article.find()
+            .execAsync()
+            .then((result) => {
+
+                if (result.length === 0) {
+                    console.log('[crawl] 查詢爬蟲資料 empty, 重新爬蟲資料');
+
+                    //re init data¡
+                    let crawltick = new crawl();
+                    crawltick.start();
+                } else {
+                    console.log('[crawl] 查詢爬蟲資料, 已存在無需更新');
+                }
+            })
+            .catch((err) => {
+                console.log('[crawl] 查詢爬蟲資料失敗 ->', err);
+            });
 });
 
 module.exports = app;
