@@ -56,7 +56,7 @@ router.get('/more/:class', (req, res, next) => {
     }
 
     let finalIndex = req.body.finalIndex;
-    let count = ( parseInt(finalIndex) + 10 );
+    let count = ( parseInt(finalIndex, 10) + 10 );
 
     //db operation
      Article.find()

@@ -82,7 +82,7 @@ let container = React.createClass({
             height:'auto',
             position: 'fixed',
 
-        };
+        };;;;;
 
 	    return (
     		<div  style={containerStyle}>

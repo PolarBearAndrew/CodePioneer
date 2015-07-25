@@ -85,7 +85,6 @@ let AppActions_User = {
 			}
 		});
 	}
-
-}
+};
 
 module.exports = AppActions_User;

@@ -76,6 +76,6 @@ let AppActions_Like = {
 		});
 	},
 
-}
+};
 
 module.exports = AppActions_Like;

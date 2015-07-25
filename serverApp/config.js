@@ -5,6 +5,6 @@ let config = {
 		iThomeTech : 'iThomeTech',
 		iThomeNews : 'iThomeNews',
 	}
-}
+};
 
 module.exports = config;

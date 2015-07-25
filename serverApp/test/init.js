@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'test';
 
-var app = require('../app.js')
+var app = require('../app.js');
 var chai = require('chai');
 var request = require('supertest');
 

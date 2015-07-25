@@ -73,7 +73,7 @@ describe('[ API unit test - users ]', () => {
                 name: 'AndrewChen',
                 email: 'chenpoanandrew@gmail.com',
                 pwd: '456' //<- new pwd
-            };;
+            };
 
             request({
                 url: 'http://localhost:8080/api/users/',

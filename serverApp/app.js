@@ -30,7 +30,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //set haeder
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -41,7 +41,9 @@ app.use(function (req, res, next) {
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); //讓req.body可以在JSON內傳送Array
+app.use(bodyParser.urlencoded({
+    extended: true
+})); //讓req.body可以在JSON內傳送Array
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -90,7 +92,7 @@ app.use(function(err, req, res, next) {
 
 var port = 8080;
 
-app.listen(port, function(){
+app.listen(port, function() {
 
     console.log('[Server] started -> http://localhost:' + port);
 
@@ -105,13 +107,13 @@ app.listen(port, function(){
     });
 
     User.removeAsync({})
-        .then( () => {
-            return user.saveAsync()
+        .then(() => {
+            return user.saveAsync();
         })
-        .spread( (result) => {
+        .spread((result) => {
             debug('[POST] 新增測試使用者 success ->', result);
         })
-        .catch( (err) => {
+        .catch((err) => {
             debug('[POST] 新增測試使用者 fail ->', err);
         });
 
@@ -122,21 +124,23 @@ app.listen(port, function(){
 
     let Article = require('./models/article.js');
 
-     Article.find()
-            .execAsync()
-            .then( (result) => {
-                //re init data
-                if(result.length == 0){
-                    console.log('[crawl] 查詢爬蟲資料 empty, 開始爬蟲');
-                    let crawltick = new crawl();
-                    crawltick.start();
-                }else{
-                    console.log('[crawl] 查詢爬蟲資料, 已存在無需更新');
-                }
-            })
-            .catch( (err) => {
-                console.log('[crawl] 查詢爬蟲資料 fail ->', err);
-            });
+    Article.find()
+        .execAsync()
+        .then((result) => {
+            //re init data¡
+            if (result.length === 0) {
+                console.log('[crawl] 查詢爬蟲資料 empty, 開始爬蟲');
+                let crawltick = new crawl();
+                crawltick.start();
+            } else {
+                console.log('[crawl] 查詢爬蟲資料, 已存在無需更新');
+            }
+        })
+        .catch((err) => {
+            console.log('[crawl] 查詢爬蟲資料 fail ->', err);
+        });
+
+        abd();
 });
 
 module.exports = app;

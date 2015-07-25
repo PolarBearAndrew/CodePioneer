@@ -58,6 +58,6 @@ let AppActions_Articles = {
 			data: from
 		});
 	},
-}
+};
 
 module.exports = AppActions_Articles;

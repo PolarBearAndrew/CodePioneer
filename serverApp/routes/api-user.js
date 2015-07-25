@@ -81,7 +81,7 @@ router.get('/', (req, res, next) => {
         .catch( (err) => {
             debug('[GET] 查詢使用者 fail ->', err);
             return next(err);
-    })
+    });
 });
 
 /*
@@ -105,7 +105,7 @@ router.put('/',  (req, res, next) => {
         name: req.body.name,
         email: req.body.email,
         pwd: req.body.pwd
-    }
+    };
 
     //db operation
     User.findOneAndUpdate( { _id: req.body.uid }, info)
