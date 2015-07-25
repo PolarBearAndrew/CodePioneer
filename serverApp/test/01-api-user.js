@@ -1,6 +1,10 @@
 // var should = require('should');
 var request = require('request');
 
+//debug
+var debug = require('debug')('TEST:user');
+
+
 
 //init data
 var initData = {
@@ -15,16 +19,19 @@ var User = require('../models/user.js');
 
 describe('[ API unit test - users ]', () => {
 
-    before(function() {
+    before( () => {
 
-        return User.remove({}, (err, result) => {
-
-            //init data
-            var user = new User(initData);
-            user.save((err, result) => {
-                uid = result._id;
-            });
-        });
+        return  User.removeAsync()
+                    .then( (result) => {
+                        let user = new User(initData);
+                        return user.saveAsync();
+                    })
+                    .then( (result) => {
+                        uid = result._id;
+                    })
+                    .catch( (err)=>{
+                        debug('[ API unit test - users ] 資料初始化錯誤');
+                    });
     });
 
     describe('正常操作測試', () => {
@@ -157,6 +164,6 @@ describe('[ API unit test - users ]', () => {
     });
 
     after( (done) => {
-        return User.removeAsync({}, done);
+        return User.removeAsync({ _id: uid }, done);
     });
 });
