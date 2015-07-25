@@ -235,6 +235,9 @@ describe('[ API unit test - articles ]', function() {
     });
 
     after( (done) => {
+
+        //要刪除這篇文章
+        //
         // return Article.removeAsync({}, done);
         return done();
     });

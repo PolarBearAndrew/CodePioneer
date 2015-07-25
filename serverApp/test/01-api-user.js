@@ -30,7 +30,7 @@ describe('[ API unit test - users ]', () => {
                         uid = result._id;
                     })
                     .catch( (err)=>{
-                        debug('[ API unit test - users ] 資料初始化錯誤');
+                        debug('[ API unit test - users ] 資料初始化錯誤', err);
                     });
     });
 
@@ -164,6 +164,14 @@ describe('[ API unit test - users ]', () => {
     });
 
     after( (done) => {
-        return User.removeAsync({ _id: uid }, done);
+
+        return  User.findOneAndRemove( {_id: uid } )
+                    .removeAsync()
+                    .then( (result) => {
+
+                    })
+                    .catch( () => {
+                        debug('[ API unit test - users ] 資料還原錯誤', err);
+                    });
     });
 });
