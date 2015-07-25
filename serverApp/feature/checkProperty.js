@@ -1,6 +1,6 @@
 
 
-let opt = 'dev';  // dev || product
+var opt = 'dev';  // dev || product
 
 let check = ( data, expect ) => {
 
@@ -30,11 +30,9 @@ let check = ( data, expect ) => {
 
 	//return
 	if( miss.length > 0 ){
-		let err = new Error('缺少必要資料:');
 		return {
 			check: false,
-			err: err,
-			miss: missData
+			miss: miss
 		};
 	}else{
 		return { check: true };
