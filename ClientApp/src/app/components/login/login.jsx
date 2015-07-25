@@ -50,6 +50,21 @@ let loginApp = React.createClass({
 	//顯示畫面的func
 	render() {
 
+        // console.log('init login');
+
+        // if(typeof(Storage) !== "undefined") {
+        //     if ( localStorage.login === 'loginBefore' ) {
+        //         console.log( 'login before', localStorage.login );
+
+
+        //     }else{
+        //         console.log( 'NEVER login before', localStorage.login );
+        //     }
+        // } else {
+        //     console.log('開啟localStorage才能使用重複登入免輸入帳密的功能');
+        // }
+
+
         //container
 	    let containerStyle = {
 	    	padding: '0px',
@@ -89,7 +104,7 @@ let loginApp = React.createClass({
                     defaultValue="Custom Child input (e.g. password)"
                     floatingLabelText="">
                     <input type="password" />
-                    </TextField>
+                </TextField>
 
                 <br/><br/>
 

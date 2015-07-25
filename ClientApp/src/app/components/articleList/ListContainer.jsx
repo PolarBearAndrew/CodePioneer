@@ -17,7 +17,7 @@ let actionsLike = require('../../actions/AppActions_like.jsx');
 
 let ListContainer = React.createClass({
 
-	getInitialState:function(){
+	getInitialState (){
 
         window.addEventListener("scroll", this._handleScroll);
         return null;
