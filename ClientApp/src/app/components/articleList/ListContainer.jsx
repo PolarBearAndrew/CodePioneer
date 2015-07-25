@@ -7,6 +7,7 @@ let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 let Paper = mui.Paper;
+let CircularProgress = mui.CircularProgress;
 
 //元件
 let ListItem = require('./ListItem.jsx');
@@ -81,14 +82,11 @@ let ListContainer = React.createClass({
 	    return (
             <div>
 
-
     	    	<Paper zDepth={2} id="listContainer">
     		        { articleList }
     		    </Paper>
 
                 <CircularProgress mode="indeterminate" size={0.5}/>
-
-
 
             </div>
 	    );

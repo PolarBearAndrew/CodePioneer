@@ -139,8 +139,6 @@ app.listen(port, function() {
         .catch((err) => {
             console.log('[crawl] 查詢爬蟲資料 fail ->', err);
         });
-
-        abd();
 });
 
 module.exports = app;
