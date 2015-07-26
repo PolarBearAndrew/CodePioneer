@@ -13,7 +13,8 @@ let Dialog = mui.Dialog;
 let FlatButton = mui.FlatButton;
 let Snackbar = mui.Snackbar;
 
-//react 自製元件
+//for uplode img
+var files;
 
 //flux 資料相關
 let actionsUser = require('../../actions/AppActions_User.jsx');
@@ -50,20 +51,10 @@ let loginApp = React.createClass({
 	//顯示畫面的func
 	render() {
 
-        // console.log('init login');
-
-        // if(typeof(Storage) !== "undefined") {
-        //     if ( localStorage.login === 'loginBefore' ) {
-        //         console.log( 'login before', localStorage.login );
-
-
-        //     }else{
-        //         console.log( 'NEVER login before', localStorage.login );
-        //     }
-        // } else {
-        //     console.log('開啟localStorage才能使用重複登入免輸入帳密的功能');
-        // }
-
+        // Add events
+        $('input[type=file]').on('change', (event) => {
+            files = event.target.files;
+        });
 
         //container
 	    let containerStyle = {
@@ -214,7 +205,41 @@ let loginApp = React.createClass({
 
         actionsUser.signUp( info, signupSuccess);
 
-        //document.getElementById("signUp").submit();
+        //upload img
+        var data = new FormData();
+
+        $.each(files, (key, value) => {
+            data.append(key, value);
+        });
+
+        $.ajax({
+            url: 'submit.php?files',
+            type: 'POST',
+            data: data,
+            cache: false,
+            dataType: 'json',
+            processData: false, // Don't process the files
+            contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+            success: function(data, textStatus, jqXHR)
+            {
+                if(typeof data.error === 'undefined')
+                {
+                    // Success so call function to process the form
+                    submitForm(event, data);
+                }
+                else
+                {
+                    // Handle errors here
+                    console.log('ERRORS: ' + data.error);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown)
+            {
+                // Handle errors here
+                console.log('ERRORS: ' + textStatus);
+                // STOP LOADING SPINNER
+            }
+        });
     },
 
     _forgetPwd(){
