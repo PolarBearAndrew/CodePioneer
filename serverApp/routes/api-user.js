@@ -240,4 +240,8 @@ router.get('/pwd', function(req, res, next){
         });
 });
 
+router.post('/img', function(req, res, next){
+    console.log('uplode img', req.files);
+});
+
 module.exports = router;

@@ -52,7 +52,7 @@ let loginApp = React.createClass({
 	render() {
 
         // Add events
-        $('input[type=file]').on('change', (event) => {
+        $('body, html').on('change', 'input[type=file]', (event) => {
             files = event.target.files;
         });
 
@@ -208,16 +208,24 @@ let loginApp = React.createClass({
         //upload img
         var data = new FormData();
 
-        $.each(files, (key, value) => {
-            data.append(key, value);
-        });
+        // $.each(files, (key, value) => {
+        //     console.log('kv', key, value)
+        //     data.append(key, value);
+        // });
+        //
+        console.log(files[0])
+
+        data.append('myImg' , files[0]);
+
+        console.log('data', data);
+
+        //dataType: 'json',
 
         $.ajax({
-            url: 'submit.php?files',
+            url: 'http://localhost:8080/api/users/img',
             type: 'POST',
             data: data,
             cache: false,
-            dataType: 'json',
             processData: false, // Don't process the files
             contentType: false, // Set content type to false as jQuery will tell the server its a query string request
             success: function(data, textStatus, jqXHR)
@@ -225,18 +233,19 @@ let loginApp = React.createClass({
                 if(typeof data.error === 'undefined')
                 {
                     // Success so call function to process the form
-                    submitForm(event, data);
+                    //submitForm(event, data);
+                    console.log('success')
                 }
                 else
                 {
                     // Handle errors here
-                    console.log('ERRORS: ' + data.error);
+                    console.log('ERRORS: 1' + data.error);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown)
             {
                 // Handle errors here
-                console.log('ERRORS: ' + textStatus);
+                console.log('ERRORS: 2' + textStatus);
                 // STOP LOADING SPINNER
             }
         });
