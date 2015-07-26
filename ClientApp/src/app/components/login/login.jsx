@@ -199,14 +199,7 @@ let loginApp = React.createClass({
 
     _onSingupSubmit(e){
 
-        let url = $('#img').val();
-
-        console.log('img', url);
-
-        this.convertImgToBase64URL(url, (img) => {
-            console.log('new img', img);
-        });
-
+        let inputImg = $('#img');
 
         let info = {
             email: $('#signUpEmail').val(),
@@ -221,7 +214,7 @@ let loginApp = React.createClass({
 
         actionsUser.signUp( info, signupSuccess);
 
-        document.getElementById("signUp").submit();
+        //document.getElementById("signUp").submit();
     },
 
     _forgetPwd(){
@@ -229,22 +222,6 @@ let loginApp = React.createClass({
         this.refs.ForgetDialog.dismiss();
         actionsUser.forgetPwd({ email });
     },
-
-    convertImgToBase64URL(url, callback, outputFormat){
-        var img = new Image();
-        img.crossOrigin = 'Anonymous';
-        img.onload = function(){
-            var canvas = document.createElement('CANVAS'),
-            ctx = canvas.getContext('2d'), dataURL;
-            canvas.height = this.height;
-            canvas.width = this.width;
-            ctx.drawImage(this, 0, 0);
-            dataURL = canvas.toDataURL(outputFormat);
-            callback(dataURL);
-            canvas = null;
-        };
-        img.src = url;
-    }
 
 });
 
