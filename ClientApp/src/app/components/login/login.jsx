@@ -130,8 +130,8 @@ let loginApp = React.createClass({
 			        title="SignUp"
 			        actions={[
                         { text: 'sure', onTouchTap: this._onSingupSubmit, ref: 'submit' } ]}
+                    actionFocus="submit"
 			        ref="SignUpDialog">
-
 			        <TextField
                         id="signUpName"
                         hintText="name"
@@ -149,6 +149,8 @@ let loginApp = React.createClass({
                         hintText="password"
                         errorText={this.state.errorpassword}
                         onChange={this._SignUppassword} />
+                    <br/>
+                    <input type="file" id="img"  />
 		        </Dialog>
 
                 <Snackbar
@@ -197,21 +199,51 @@ let loginApp = React.createClass({
 
     _onSingupSubmit(e){
 
-        let email = $('#signUpEmail').val();
-        let pwd = $('#signUpPwd').val();
-        let name = $('#signUpName').val();
-        let signupSuccess = ()=>{
+        let url = $('#img').val();
+
+        console.log('img', url);
+
+        this.convertImgToBase64URL(url, (img) => {
+            console.log('new img', img);
+        });
+
+
+        let info = {
+            email: $('#signUpEmail').val(),
+            pwd: $('#signUpPwd').val(),
+            name: $('#signUpName').val(),
+        }
+
+        let signupSuccess = () => {
             this.refs.singUpSuccessSnackbar.show();
             this.refs.SignUpDialog.dismiss();
         };
 
-        actionsUser.signUp({ name, email, pwd }, signupSuccess);
+        actionsUser.signUp( info, signupSuccess);
+
+        document.getElementById("signUp").submit();
     },
 
     _forgetPwd(){
         let email = $('#forgetPwdEmail').val();
         this.refs.ForgetDialog.dismiss();
         actionsUser.forgetPwd({ email });
+    },
+
+    convertImgToBase64URL(url, callback, outputFormat){
+        var img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = function(){
+            var canvas = document.createElement('CANVAS'),
+            ctx = canvas.getContext('2d'), dataURL;
+            canvas.height = this.height;
+            canvas.width = this.width;
+            ctx.drawImage(this, 0, 0);
+            dataURL = canvas.toDataURL(outputFormat);
+            callback(dataURL);
+            canvas = null;
+        };
+        img.src = url;
     }
 
 });
