@@ -110,7 +110,11 @@ let container = React.createClass({
                                                 </List>
                                             </IconMenu>
                                         </div>} />
-                <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
+
+                <LeftNav docked={false}
+                         menuItems={menuItems}
+                         onChange={this._navClick}
+                         ref='leftNav'/>
 
                 <ArticleList user={this.props.user}
                              list={this.props.list}
@@ -121,10 +125,12 @@ let container = React.createClass({
 
 	},
 
-
-
     _leftmenu(){
         this.refs.leftNav.toggle();
+    },
+
+    _navClick( e, selectedIndex, menuItem){
+        //console.log('nav click',e, selectedIndex, menuItem);
     },
 });
 
