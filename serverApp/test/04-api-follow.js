@@ -1,6 +1,9 @@
 // var should = require('should');
 var request = require('request');
 
+//debug
+var debug = require('debug')('TEST:user');
+
 //init data
 var initData = {
     name: 'AndrewChen(I like article)',
@@ -16,15 +19,27 @@ var User = require('../models/user.js');
 describe('[ API unit test - follow ]', function() {
 
     before(function() {
-
-        return User.remove({}, (err, result) => {
-
-            //init data
-            var user = new User(initData);
-            user.save((err, result) => {
+        
+        return User.removeAsync()
+              .then( (result) => {
+                var user = new User(initData);
+                return user.saveAsync();
+              })
+              .spread( (result) => {
                 uid = result._id.toString();
-            });
-        });
+              })
+              .catch( (err)=>{
+                debug('[ API unit test - article ] 資料初始化錯誤', err);
+              });
+
+//        return User.remove({}, (err, result) => {
+//
+//            //init data
+//            var user = new User(initData);
+//            user.save((err, result) => {
+//                uid = result._id.toString();
+//            });
+//        });
     });
 
     describe('正常操作測試', () => {
@@ -103,6 +118,6 @@ describe('[ API unit test - follow ]', function() {
     });
 
     after( (done) => {
-        return User.removeAsync({}, done);
+        return User.removeAsync({ author: 'AndrewChen' }, done);
     });
 });
