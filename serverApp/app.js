@@ -128,8 +128,8 @@ app.listen(port, () => {
             .execAsync()
             .then((result) => {
 
-                if (result.length === 0) {
-                    console.log('[crawl] 查詢爬蟲資料 empty, 重新爬蟲資料');
+                if (result.length <= 10) {
+                    console.log('[crawl] 查詢爬蟲資料, 資料不足, 重新爬蟲資料');
 
                     //re init data¡
                     let crawltick = new crawl();
