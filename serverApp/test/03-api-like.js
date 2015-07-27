@@ -20,7 +20,7 @@ describe('[ API unit test - like ]', function() {
 
     before(function() {
         
-        return User.removeAsync()
+           return User.removeAsync()
                       .then( (result) => {
                         var user = new User(initData);
                         return user.saveAsync();

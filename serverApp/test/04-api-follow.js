@@ -20,17 +20,17 @@ describe('[ API unit test - follow ]', function() {
 
     before(function() {
         
-        return User.removeAsync()
-              .then( (result) => {
-                var user = new User(initData);
-                return user.saveAsync();
-              })
-              .spread( (result) => {
-                uid = result._id.toString();
-              })
-              .catch( (err)=>{
-                debug('[ API unit test - article ] 資料初始化錯誤', err);
-              });
+         return User.removeAsync()
+                    .then( (result) => {
+                        var user = new User(initData);
+                        return user.saveAsync();
+                    })
+                    .spread( (result) => {
+                        uid = result._id.toString();
+                    })
+                    .catch( (err)=>{
+                        debug('[ API unit test - article ] 資料初始化錯誤', err);
+                    });
 
 //        return User.remove({}, (err, result) => {
 //
