@@ -10,10 +10,7 @@ let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
 //mui
-let Checkbox = mui.Checkbox;
-let FontIcon = mui.FontIcon;
 let Paper = mui.Paper;
-let Avatar = mui.Avatar;
 
 //
 let UserItem = require('./UserItem.jsx');
@@ -38,44 +35,12 @@ let userContainer = React.createClass({
 
 	render() {
 
-
-         let paperBg={
+        let paperBg={
             display:'flex',
             webkitFlexWrap: 'wrap',
             flexWrap: 'wrap',
             justifyContent:'space-around',
             alignContent: 'flex-start',
-         };
-
-        let pic={
-            display:'flex',
-            flexDirection:'row',
-            justifyContent:'center',
-            alignItems:'center',
-        };
-
-        let avatar = {
-            marginTop:'50px',
-            marginRight:'70px',
-        };
-
-        let heart={
-            left: '-37px',
-            top:'-35px',
-            fontSize:'80px',
-        };
-
-        let checkbox={
-            marginTop:'50px',
-            width:'25px'
-        };
-
-        let info ={
-            display:'flex',
-            flexDirection:'column',
-            justifyContent:'flex-start',
-            alignItems:'flex-start',
-            marginTop:'15px'
         };
 
         let nameList = ['Andrew', 'Ray', 'Doro', 'Husan'];
@@ -83,7 +48,6 @@ let userContainer = React.createClass({
         let userItems = nameList.map( (value, index) => {
             return <UserItem data={ value }/> ;
         })
-
 
 	    return (
 

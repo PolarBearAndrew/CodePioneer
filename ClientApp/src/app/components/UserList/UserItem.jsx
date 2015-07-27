@@ -33,14 +33,6 @@ let userItem = React.createClass({
 
 	render() {
 
-		 let paperBg={
-            display:'flex',
-            webkitFlexWrap: 'wrap',
-            flexWrap: 'wrap',
-            justifyContent:'space-around',
-            alignContent: 'flex-start',
-         };
-
         let pic={
             display:'flex',
             flexDirection:'row',
