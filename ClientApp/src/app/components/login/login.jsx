@@ -51,10 +51,14 @@ let loginApp = React.createClass({
 	//顯示畫面的func
 	render() {
 
-        // Add events
-        $('body, html').on('change', 'input[type=file]', (event) => {
-            files = event.target.files;
+        actionsUser.login({ email: '123', pwd: '123' }, () => {
+            console.log('auto login fail');
         });
+
+        // Add events
+        // $('body, html').on('change', 'input[type=file]', (event) => {
+        //     files = event.target.files;
+        // });
 
         //container
 	    let containerStyle = {
@@ -206,7 +210,7 @@ let loginApp = React.createClass({
         actionsUser.signUp( info, signupSuccess);
 
         //upload img
-        var data = new FormData();
+        /*var data = new FormData();
 
         // $.each(files, (key, value) => {
         //     console.log('kv', key, value)
@@ -248,7 +252,7 @@ let loginApp = React.createClass({
                 console.log('ERRORS: 2' + textStatus);
                 // STOP LOADING SPINNER
             }
-        });
+        }); */
     },
 
     _forgetPwd(){
