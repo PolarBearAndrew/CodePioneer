@@ -51,7 +51,9 @@ let loginApp = React.createClass({
 	//顯示畫面的func
 	render() {
 
-
+        actionsUser.login({ email: '123', pwd: '123' }, () => {
+            console.log('auto login fail');
+        });
 
         // Add events
         // $('body, html').on('change', 'input[type=file]', (event) => {
