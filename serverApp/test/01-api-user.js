@@ -21,7 +21,7 @@ describe('[ API unit test - users ]', () => {
 
     before( () => {
 
-        return  User.removeAsync()
+        return  User.removeAsync({name: 'AndrewChen'})
                     .then( (result) => {
                         let user = new User(initData);
                         return user.saveAsync();

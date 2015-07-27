@@ -1,5 +1,6 @@
 var request = require('request');
 var queryString = require('../feature/makerQueryString.js');
+
 //debug
 var debug = require('debug')('TEST:user');
 
@@ -22,6 +23,7 @@ var Article = require('../models/article.js');
 describe('[ API unit test - articles ]', function() {
 
     before( () => {
+        
         return Article.removeAsync({ author: 'AndrewChen' })
                       .then( (result) => {
                         let article = new Article(initData);
@@ -251,7 +253,7 @@ describe('[ API unit test - articles ]', function() {
 
         //要刪除這篇文章
         //
-        // return Article.removeAsync({}, done);
-        return done();
+        //return done();
+        return Article.removeAsync({name: 'AndrewChen'}, done);
     });
 });
