@@ -4,6 +4,7 @@ let config = {
 		hackerNews : 'hackerNews',
 		iThomeTech : 'iThomeTech',
 		iThomeNews : 'iThomeNews',
+        githubTranding : 'githubTranding',
 	},
 	path : {
 		db : 'mongodb://120.96.78.76',
