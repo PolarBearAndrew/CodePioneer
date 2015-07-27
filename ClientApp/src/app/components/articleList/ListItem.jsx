@@ -115,12 +115,13 @@ let ArticleTab = React.createClass({
         };
 
         let data = this.props.data;
-        let ctrlStart = false;
+        let ctrlStart = null;
 
-        this.props.user.like.forEach( (value) => {
-            if(value === data._id)
-                ctrlStart = true;
-        });
+        if(this.props.user.like.indexOf(data._id) !== -1){
+            ctrlStart = true;
+        }else{
+            ctrlStart = false;
+        }
 
         let zDepth = 1;
         let paperStyle = {};

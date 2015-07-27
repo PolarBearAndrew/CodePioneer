@@ -71,6 +71,12 @@ let Main = React.createClass({
                 let likeAry = this.state.user.like;
                 let likedArticles = this.state.likedArticles;
 
+                //先刪除多餘的
+                likedArticles = likedArticles.filter( ( value ) => {
+                    return likeAry.indexOf( value._id ) != -1;
+                });
+
+                //有少的話就重新載入
                 for (var i = likeAry.length - 1; i >= 0; i--) {
 
                     let ctrl = false;
@@ -90,6 +96,7 @@ let Main = React.createClass({
                     }
                 };
 
+                //丟入資料
                 list.data = likedArticles;
                 list.filter = this.state.filterData;
                 list.isMoreData = false;
