@@ -43,10 +43,75 @@ let Main = React.createClass({
 
         displayPage[this.state.displayPage] = true;
 
+        let list = {
+            data: null,         //data
+            isMoreData: null,   //ctrl
+            filter: null,       //filter ctrl
+            loadmore: null,     //func
+        };
+
+        // console.log('this.state.displayContainer', this.state.displayContainer);
+        console.log('library', this.state.likedArticles);
+        console.log('like', this.state.user.like);
+
+        switch (this.state.displayContainer) {
+
+            /*
+             * article list
+             */
+            case 'ArticleList':
+                list.data = this.state.articles;
+                list.filter = this.state.filterData;
+                list.isMoreData = this.state.isMoreData;
+                list.loadmore = actionsArticle.loadmore;
+                break;
+
+            case 'Library':
+
+                let likeAry = this.state.user.like;
+                let likedArticles = this.state.likedArticles;
+
+                //先刪除多餘的
+                likedArticles = likedArticles.filter( ( value ) => {
+                    return likeAry.indexOf( value._id ) != -1;
+                });
+
+                //有少的話就重新載入
+                for (var i = likeAry.length - 1; i >= 0; i--) {
+
+                    let ctrl = false;
+
+                    for (var listIndex = likedArticles.length - 1; listIndex >= 0; listIndex--) {
+
+                        if( likedArticles[listIndex]._id == likeAry[i] ){
+                            ctrl = true;
+                            break;
+                        }
+                    };
+
+                    if( ctrl === false ){
+                        console.log('load');
+                        actionsArticle.loadLike(likeAry.join(','));
+                        break;
+                    }
+                };
+
+                //丟入資料
+                list.data = likedArticles;
+                list.filter = this.state.filterData;
+                list.isMoreData = false;
+                list.loadmore = null;
+                break;
+        }
+
+
+
 	    return (
 	    	<div id='wrapper' >
 	    		{ displayPage.Login ? <Login /> : null }
-	    		{ displayPage.Container ? <Container articles={ this.state.articles } user={ this.state.user } loadmore={ actionsArticle.loadmore } filterData={ this.state.filterData } isMoreData={this.state.isMoreData}/> : null }
+	    		{ displayPage.Container ? <Container user={ this.state.user }
+                                                     list={ list }
+                                                     filterData={ this.state.filterData } /> : null }
 	    	</div>
 	    );
 	},
@@ -60,10 +125,14 @@ let Main = React.createClass({
         return {
         	//main store
         	user: MainStore.getUser(),
-        	displayPage: MainStore.getDisplayPage(),
+            displayPage: MainStore.getDisplayPage(),
+        	displayContainer: MainStore.getDisplayContainer(),
 
         	//article store
             articles: ArticleStore.getArticleList(),
+            likedArticles: ArticleStore.getLikedArticleList(),
+
+            //article ctrl
             filterData: ArticleStore.getFilter(),
         	isMoreData: ArticleStore.getIsMoredata(),
         };

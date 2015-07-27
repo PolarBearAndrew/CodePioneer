@@ -204,7 +204,55 @@ function crawl(){
                  });
 		 });
         }
+        
+        /*
+		 * Github Tranding
+		 */
+        let getGitTrand = () => {
+        	request("https://www.kimonolabs.com/api/2uale15w?apikey=7yjRQtS3sJ9oRobTONiJDzT1rm4Qgknt",
+ 		    function(err, res, data) {
 
+                 data = JSON.parse(data);
+
+                 debug('[crawl] Github Tranding get data ->', data.results.Github_Tranding);
+
+                 data.results.Github_Tranding.forEach(function( item ){
+
+ 			        var article = new Article({
+                         //title
+ 				        title: item.title.text,
+                         //文章的url
+ 					    url: item.title.href,
+                         //作者
+ 					    author: null,
+                         //來源
+                        from: config.crawlName.githubTranding,
+                         //描述
+ 					    describe: item.describe,
+                         //一些小資訊
+ 					    info: [
+                            //更新以及建置人
+                            item.describe2.Text,
+                            //更新以及建置人連接網址
+                            item.describe2.href,
+                            //星星
+                            item.star.text,
+                            //星星連結
+                            item.star.href,
+ 					    ]
+ 				    });
+
+ 				    //db operation
+ 				     article.saveAsync()
+				    		.then( (result) => {
+				        		debug('[crawl] Github Tranding success ->', result);
+				    		})
+				    		.catch( (err) => {
+				    			debug('[crawl] Github Tranding fail ->', err);
+				    		});
+                 });
+			});
+		}
 
          Article.removeAsync()
 				.then( ()=>{
@@ -216,6 +264,8 @@ function crawl(){
 					getIThomeTech();
 
 				    getIThomeNews();
+             
+                    getGitTrand();
 				})
 				.catch( (err) => {
 

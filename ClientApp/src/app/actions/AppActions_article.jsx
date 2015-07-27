@@ -52,6 +52,32 @@ let AppActions_Articles = {
 		});
 	},
 
+	loadLike( likeAry ){
+		$.ajax({
+			url: address + '/like',
+			type: 'POST',
+			data: { like: likeAry},
+			success: function(result){
+
+				console.log('action', result);
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.ARTICLE_LOADLIKE,
+					data: result
+				});
+			},
+			error: function(err){
+
+				console.log('err', err);
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
+	},
+
 	filter( from ){
 		AppDispatcher.handleViewAction({
 			actionType: AppConstants.ARTICLE_FILTER,

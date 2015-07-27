@@ -28,6 +28,7 @@ var user = {
 var isLogin = false;
 
 var displayPage = 'Login';
+var displayContainer = 'ArticleList';
 
 /**
  * 建立 Store class，並且繼承 EventEMitter 以擁有廣播功能
@@ -48,6 +49,10 @@ objectAssign( Store, EventEmitter.prototype, {
 
     getDisplayPage: () => {
         return displayPage;
+    },
+
+    getDisplayContainer: () => {
+        return displayContainer;
     },
 
     noop: () => {
@@ -74,7 +79,11 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
         case AppConstants.USER_LOGIN:
             isLogin = data.login;
             user.id = data._id;
-            user.like = data.like || [];
+
+            let tmp = data.like.map( (value) => {
+                return value.aid;
+            });
+            user.like = tmp || [] ;
 
             if(isLogin)
                 displayPage = 'Container';
@@ -83,20 +92,29 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             break;
 
         /*
-         *  add like資料
+         *  like
          */
         case AppConstants.LIKE_ADD:
             user.like.push(data);
             break;
 
         /*
-         *  add like資料
+         *  unlike
          */
         case AppConstants.LIKE_DELETE:
-            user.like.filter( (value) => {
-                return value.aid !== data
+            user.like = user.like.filter( (value) => {
+                return value != data
             });
             break;
+
+        /*
+         *  改變顯示頁面
+         */
+        case AppConstants.CHANGE_DISPLAY:
+            displayContainer = data;
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
 
 
         /*

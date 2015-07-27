@@ -1,6 +1,9 @@
 var request = require('request');
 var queryString = require('../feature/makerQueryString.js');
 
+//debug
+var debug = require('debug')('TEST:user');
+
 //init data
 var initData = {
     title: 'New JavaScript in 2015 !!',
@@ -20,16 +23,28 @@ var Article = require('../models/article.js');
 describe('[ API unit test - articles ]', function() {
 
     before( () => {
-
-        return Article.remove({ author: 'AndrewChen' }, (err, result) => {
-
-            //init data
-            var article = new Article(initData);
-            article.save((err, result) => {
-                aid = result._id.toString();
-                lastestTime = result.time;
-            });
-        });
+        
+        return Article.removeAsync({ author: 'AndrewChen' })
+                      .then( (result) => {
+                        let article = new Article(initData);
+                        return article.saveAsync();
+                      })
+                      .spread( (result) => {
+                        aid = result._id.toString();
+                        lastestTime = result.time;
+                      })
+                      .catch( (err)=>{
+                        debug('[ API unit test - article ] 資料初始化錯誤', err);
+                      });
+//        return Article.remove({ author: 'AndrewChen' }, (err, result) => {
+//
+//            //init data
+//            var article = new Article(initData);
+//            article.save((err, result) => {
+//                aid = result._id.toString();
+//                lastestTime = result.time;
+//            });
+//        });
     });
 
     describe('正常操作測試', () => {
@@ -238,7 +253,7 @@ describe('[ API unit test - articles ]', function() {
 
         //要刪除這篇文章
         //
-        // return Article.removeAsync({}, done);
-        return done();
+        //return done();
+        return Article.removeAsync({name: 'AndrewChen'}, done);
     });
 });

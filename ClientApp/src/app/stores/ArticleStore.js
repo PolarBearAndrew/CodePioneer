@@ -15,11 +15,13 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 
 //========================================================================
 //
-
-//data
 var Store = {};
 
+//data
 var articles = [];
+var likedArticles = [];
+
+//filter
 var filter = [];
 
 //ctrl
@@ -30,6 +32,9 @@ objectAssign( Store, EventEmitter.prototype, {
 
     //data
     getArticleList() { return articles; },
+    getLikedArticleList() { return likedArticles; },
+
+    //filter
     getFilter(){ return filter; },
 
     //ctrl
@@ -78,6 +83,15 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
 
             //set
             setIsMoreData(data.length);
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
+         /*
+          * 載入我喜歡的文章
+          */
+        case AppConstants.ARTICLE_LOADLIKE:
+            likedArticles = data;
+            //set
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 

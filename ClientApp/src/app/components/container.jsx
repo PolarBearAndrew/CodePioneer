@@ -28,6 +28,7 @@ let UserList = require('./UserList/UserContainer.jsx');
 
 //flux
 let actionsArticle = require('../actions/AppActions_article.jsx');
+let actionsUsers = require('../actions/AppActions_User.jsx');
 
 let container = React.createClass({
 
@@ -61,9 +62,9 @@ let container = React.createClass({
               text: <Avatar src="images/panda.png"/>,
               disabled: true
             },
-            { route: 'news', text: 'News' },
-            { route: 'follow', text: 'Follow' },
-            { route: 'library', text: 'Library' },
+            { route: 'ArticleList', text: 'News' },
+            { route: 'Follow', text: 'Follow' },
+            { route: 'Library', text: 'Library' },
             { route: 'setting', text: <div className="appear">Setting</div> },
             { route: 'logout', text: <div className="appear">Logout</div> },
             { text: '', disabled: true },
@@ -86,16 +87,13 @@ let container = React.createClass({
 
         };
 
-        // <ArticleList articles={this.props.articles}
-        //              user={this.props.user}
-        //              loadmore={actionsArticle.loadmore}
-        //              filter={actionsArticle.filter}
-        //              filterData={this.props.filterData}
-        //              isMoreData={this.props.isMoreData} />
+        //<UserList />
 
 	    return (
     		<div  style={containerStyle}>
-                <AppBar style={fixed} onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
+                <AppBar title='CodePioneer'
+                        style={fixed}
+                        onLeftIconButtonTouchTap={this._leftmenu}
                         iconElementRight={
                                         <div className="comments">
                                             <IconMenu iconButtonElement={<IconButton
@@ -112,20 +110,29 @@ let container = React.createClass({
                                                     <ListDivider inset={true} />
                                                 </List>
                                             </IconMenu>
-                                        </div>}/>
-                <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
+                                        </div>} />
 
-                <UserList />
+                <LeftNav docked={false}
+                         menuItems={menuItems}
+                         onChange={this._navClick}
+                         ref='leftNav'/>
+
+                <ArticleList user={this.props.user}
+                             list={this.props.list}
+                             filter={actionsArticle.filter} />
 
             </div>
 	    );
 
 	},
 
-
-
     _leftmenu(){
         this.refs.leftNav.toggle();
+    },
+
+    _navClick( e, selectedIndex, menuItem){
+        console.log('nav click',e, selectedIndex, menuItem);
+        actionsUsers.changeDisplay(menuItem.route)
     },
 });
 
