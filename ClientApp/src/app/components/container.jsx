@@ -21,6 +21,10 @@ let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
 let CircularProgress=mui.CircularProgress;
 
+/////////////////////////////////////////////
+let Checkbox = mui.Checkbox;
+let FontIcon = mui.FontIcon;
+
 //
 let ArticleList = require('./articleList/ListContainer.jsx');
 
@@ -84,6 +88,49 @@ let container = React.createClass({
 
         };;;;;
 
+            ////////////////////////////////////////////////////////////////////////
+        
+         let paperBg={
+            display:'flex',
+            webkitFlexWrap: 'wrap',
+            flexWrap: 'wrap',
+            justifyContent:'space-around',
+            alignContent: 'flex-start',
+         };
+        
+        let pic={
+            display:'flex',
+            flexDirection:'row',
+            justifyContent:'center',
+            alignItems:'center',
+        };
+        
+        let avatar = {
+            marginTop:'50px',
+            marginRight:'70px',
+        };
+        
+        let heart={
+            left: '-37px',
+            top:'-35px',
+            fontSize:'80px',
+        };
+        
+        let checkbox={
+            marginTop:'50px',
+            width:'25px'
+        };
+        
+        let info ={
+            display:'flex',
+            flexDirection:'column',
+            justifyContent:'flex-start',
+            alignItems:'flex-start',
+            marginTop:'15px'
+        };
+            ////////////////////////////////////////////////////////////////////////
+        
+        
 	    return (
     		<div  style={containerStyle}>
                 <AppBar style={fixed} onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
@@ -105,13 +152,40 @@ let container = React.createClass({
                                             </IconMenu>
                                         </div>}/>
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
-
+            
                 <ArticleList articles={this.props.articles}
                              user={this.props.user}
                              loadmore={actionsArticle.loadmore}
                              filter={actionsArticle.filter}
                              filterData={this.props.filterData}
                              isMoreData={this.props.isMoreData} />
+            ////////////////////////////////////////////////////////////////////////
+                <Paper style={paperBg} zDepth={2}>
+                    <Paper className="paperCard" zDepth={1}>
+                            <div style={pic}> 
+                                <Avatar style={avatar} src="images/github10.png" />
+                                <Checkbox 
+                                        style={checkbox}
+                                        checkedIcon={<FontIcon  className="material-icons" style={heart}
+                                        color={Colors.pink500}>favorite</FontIcon>}
+                                        unCheckedIcon={<FontIcon className="material-icons" style={heart}
+                                        color={Colors.pink500}>favorite_border</FontIcon>}
+                                />
+                            </div>
+                            <div style={info} className="article">
+                                <p 
+                                    className="infoContent">Name</p>
+                                <p
+                                    className="infoContent">Skill</p>
+                                <p
+                                    className="infoContent">Interest</p>
+                                <p
+                                    className="infoContent">other</p>
+                            </div>
+                    </Paper>
+                </Paper>
+            ////////////////////////////////////////////////////////////////////////
+            
             </div>
 	    );
 

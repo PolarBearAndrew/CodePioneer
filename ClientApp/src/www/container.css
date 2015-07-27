@@ -17,3 +17,19 @@ a {
     text-decoration: none;
     color: #3e3e3e;
 }
+
+/**/
+.paperCard {
+    margin-Top: 10px;
+    margin-Left: 20px;
+    margin-Bottom: 10px;
+    width: 400px;
+    height: auto;
+}
+
+.infoContent {
+    margin-Left: 60px;
+    margin-Top: 10px;
+    font-Size: 15px;
+}
+

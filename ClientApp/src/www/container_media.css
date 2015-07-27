@@ -9,3 +9,13 @@
          display: block;
     }
 }
+
+/**/
+@media screen and (min-width: 500px) {
+    .paperCard{
+/*        width: 330px;*/
+     }
+    .infoContent{
+        margin-Left: 30px;
+    }
+}
