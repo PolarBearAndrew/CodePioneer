@@ -95,7 +95,7 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          *  like
          */
         case AppConstants.LIKE_ADD:
-            user.like.push(data._id);
+            user.like.push(data);
             break;
 
         /*

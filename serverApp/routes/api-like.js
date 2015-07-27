@@ -53,7 +53,7 @@ router.post('/', function(req, res, next) {
         })
         .then( (result) => {
             debug('[POST] 新增收藏文章 success ->', result);
-            res.json(result);
+            res.json(req.body.uid);
             return;
         })
         .catch( (err) => {
