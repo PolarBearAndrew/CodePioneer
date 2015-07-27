@@ -118,7 +118,7 @@ let ArticleTab = React.createClass({
         let ctrlStart = false;
 
         this.props.user.like.forEach( (value) => {
-            if(value.aid === data._id)
+            if(value === data._id)
                 ctrlStart = true;
         });
 

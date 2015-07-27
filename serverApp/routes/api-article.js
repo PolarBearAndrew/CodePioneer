@@ -99,7 +99,7 @@ router.get('/news', (req, res, next) => {
     //no check
 
     //db operation
-    Article.find()
+     Article.find()
             .limit(10)
             .sort({ time: -1 })
             .execAsync()
@@ -191,7 +191,9 @@ router.get('/stream', (req, res, next) => {
  * request : body.like
  * respone : db result
  */
-router.get('/like', (req, res, next) => {
+router.post('/like', (req, res, next) => {
+
+    console.log(req.body);
 
     let miss = check( req.body, ['like'] );
     if(!miss.check){
@@ -199,9 +201,11 @@ router.get('/like', (req, res, next) => {
         return next(err);
     }
 
+    let like = req.body.like.split(',');
+
     //db operation
      Article.find()
-            .where('_id').in(req.body.like)
+            .where('_id').in(like)
             .sort({ time: -1 })
             .execAsync()
             .then( (result) => {

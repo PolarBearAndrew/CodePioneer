@@ -50,7 +50,9 @@ let Main = React.createClass({
             loadmore: null,     //func
         };
 
-        console.log('this.state.displayContainer', this.state.displayContainer);
+        // console.log('this.state.displayContainer', this.state.displayContainer);
+        console.log('library', this.state.likedArticles);
+        console.log('like', this.state.user.like);
 
         switch (this.state.displayContainer) {
 
@@ -65,10 +67,33 @@ let Main = React.createClass({
                 break;
 
             case 'Library':
-                // list.data = this.state.articles;
-                // list.filter = this.state.filterData;
-                // list.isMoreData = this.state.isMoreData;
-                // list.loadmore = actionsArticle.loadmore;
+
+                let likeAry = this.state.user.like;
+                let likedArticles = this.state.likedArticles;
+
+                for (var i = likeAry.length - 1; i >= 0; i--) {
+
+                    let ctrl = false;
+
+                    for (var listIndex = likedArticles.length - 1; listIndex >= 0; listIndex--) {
+                        console.log(likedArticles[listIndex]._id , likeAry[i])
+                        if( likedArticles[listIndex]._id == likeAry[i] ){
+                            ctrl = true;
+                            break;
+                        }
+                    };
+
+                    if( ctrl === false ){
+                        console.log('load');
+                        actionsArticle.loadLike(likeAry.join(','));
+                        break;
+                    }
+                };
+
+                list.data = likedArticles;
+                list.filter = this.state.filterData;
+                list.isMoreData = false;
+                list.loadmore = null;
                 break;
         }
 
@@ -98,6 +123,9 @@ let Main = React.createClass({
 
         	//article store
             articles: ArticleStore.getArticleList(),
+            likedArticles: ArticleStore.getLikedArticleList(),
+
+            //article ctrl
             filterData: ArticleStore.getFilter(),
         	isMoreData: ArticleStore.getIsMoredata(),
         };

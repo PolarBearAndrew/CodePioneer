@@ -86,6 +86,19 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
+         /*
+          * 載入我喜歡的文章
+          */
+        case AppConstants.ARTICLE_LOADLIKE:
+
+            console.log('data', data);
+
+            likedArticles = data;
+
+            //set
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
         /*
          * 篩選文章機制
          */

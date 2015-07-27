@@ -79,7 +79,11 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
         case AppConstants.USER_LOGIN:
             isLogin = data.login;
             user.id = data._id;
-            user.like = data.like || [];
+
+            let tmp = data.like.map( (value) => {
+                return value.aid;
+            });
+            user.like = tmp || [] ;
 
             if(isLogin)
                 displayPage = 'Container';
@@ -91,7 +95,7 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          *  like
          */
         case AppConstants.LIKE_ADD:
-            user.like.push(data);
+            user.like.push(data._id);
             break;
 
         /*
