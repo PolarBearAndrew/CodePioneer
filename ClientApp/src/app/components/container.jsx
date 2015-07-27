@@ -95,7 +95,9 @@ let container = React.createClass({
 
 	    return (
     		<div  style={containerStyle}>
-                <AppBar style={fixed} onLeftIconButtonTouchTap={this._leftmenu} title='CodePioneer'
+                <AppBar title='CodePioneer'
+                        style={fixed}
+                        onLeftIconButtonTouchTap={this._leftmenu}
                         iconElementRight={
                                         <div className="comments">
                                             <IconMenu iconButtonElement={<IconButton
@@ -112,7 +114,7 @@ let container = React.createClass({
                                                     <ListDivider inset={true} />
                                                 </List>
                                             </IconMenu>
-                                        </div>}/>
+                                        </div>} />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
                 <UserList />
