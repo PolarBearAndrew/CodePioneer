@@ -1,21 +1,47 @@
 @media screen and (max-width: 450px) {
-    .comments{
+    .comments {
         display: none;
     }
-    .title{
+    .title {
         font-size: 50;
     }
-    .appear{
-         display: block;
+    .appear {
+        display: block;
+    }
+/*
+    .paperCard:last-child {
+        margin-right: auto;
+    }
+*/
+}
+
+
+/**/
+@media screen and (min-width: 354px) {
+    .paperCard:last-child {
+        margin-right: 10px;
+        color: aqua;
     }
 }
 
-/**/
-@media screen and (min-width: 500px) {
-    .paperCard{
-/*        width: 330px;*/
-     }
-    .infoContent{
-        margin-Left: 30px;
+
+@media screen and (min-width: 700px) {
+    .paperCard:last-child {
+        margin-right: auto;
+        color: #2700ff;
+    }
+}
+
+@media screen and (min-width: 701px) {
+    .paperCard:last-child {
+        margin-right: 10px;
+        color: #ff0000;
+    }
+}
+
+@media screen and (min-width: 1037px) {
+    .paperCard:last-child {
+        margin-right: auto;
+        color: #ff0000;
     }
 }
