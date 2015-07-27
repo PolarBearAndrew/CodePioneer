@@ -28,6 +28,7 @@ let UserList = require('./UserList/UserContainer.jsx');
 
 //flux
 let actionsArticle = require('../actions/AppActions_article.jsx');
+let actionsUsers = require('../actions/AppActions_User.jsx');
 
 let container = React.createClass({
 
@@ -61,9 +62,9 @@ let container = React.createClass({
               text: <Avatar src="images/panda.png"/>,
               disabled: true
             },
-            { route: 'news', text: 'News' },
-            { route: 'follow', text: 'Follow' },
-            { route: 'library', text: 'Library' },
+            { route: 'ArticleList', text: 'News' },
+            { route: 'Follow', text: 'Follow' },
+            { route: 'Library', text: 'Library' },
             { route: 'setting', text: <div className="appear">Setting</div> },
             { route: 'logout', text: <div className="appear">Logout</div> },
             { text: '', disabled: true },
@@ -130,7 +131,8 @@ let container = React.createClass({
     },
 
     _navClick( e, selectedIndex, menuItem){
-        //console.log('nav click',e, selectedIndex, menuItem);
+        console.log('nav click',e, selectedIndex, menuItem);
+        actionsUsers.changeDisplay(menuItem.route)
     },
 });
 

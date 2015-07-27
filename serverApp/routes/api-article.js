@@ -73,7 +73,7 @@ router.get('/', (req, res, next) => {
     }
 
     //db operation
-    Article.findOne()
+     Article.findOne()
             .where('_id').equals( req.query.aid )
             .execAsync()
             .then( (result) => {

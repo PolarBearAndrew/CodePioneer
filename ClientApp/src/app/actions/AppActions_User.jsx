@@ -84,6 +84,14 @@ let AppActions_User = {
 				});
 			}
 		});
+	},
+
+	changeDisplay( page ) {
+
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.CHANGE_DISPLAY,
+			data: page
+		});
 	}
 };
 

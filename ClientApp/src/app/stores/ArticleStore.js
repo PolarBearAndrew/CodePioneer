@@ -15,11 +15,13 @@ let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 
 //========================================================================
 //
-
-//data
 var Store = {};
 
+//data
 var articles = [];
+var likedArticles = [];
+
+//filter
 var filter = [];
 
 //ctrl
@@ -30,6 +32,9 @@ objectAssign( Store, EventEmitter.prototype, {
 
     //data
     getArticleList() { return articles; },
+    getLikedArticleList() { return likedArticles; },
+
+    //filter
     getFilter(){ return filter; },
 
     //ctrl

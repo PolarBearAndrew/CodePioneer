@@ -88,20 +88,29 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             break;
 
         /*
-         *  add like資料
+         *  like
          */
         case AppConstants.LIKE_ADD:
             user.like.push(data);
             break;
 
         /*
-         *  add like資料
+         *  unlike
          */
         case AppConstants.LIKE_DELETE:
             user.like.filter( (value) => {
                 return value.aid !== data
             });
             break;
+
+        /*
+         *  改變顯示頁面
+         */
+        case AppConstants.CHANGE_DISPLAY:
+            displayContainer = data;
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
 
 
         /*

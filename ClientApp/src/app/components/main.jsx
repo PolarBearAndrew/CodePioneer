@@ -50,6 +50,8 @@ let Main = React.createClass({
             loadmore: null,     //func
         };
 
+        console.log('this.state.displayContainer', this.state.displayContainer);
+
         switch (this.state.displayContainer) {
 
             /*
@@ -60,6 +62,13 @@ let Main = React.createClass({
                 list.filter = this.state.filterData;
                 list.isMoreData = this.state.isMoreData;
                 list.loadmore = actionsArticle.loadmore;
+                break;
+
+            case 'Library':
+                // list.data = this.state.articles;
+                // list.filter = this.state.filterData;
+                // list.isMoreData = this.state.isMoreData;
+                // list.loadmore = actionsArticle.loadmore;
                 break;
         }
 
