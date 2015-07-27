@@ -53,7 +53,7 @@ router.post('/', function(req, res, next) {
         })
         .then( (result) => {
             debug('[POST] 新增收藏文章 success ->', result);
-            res.json(req.body.uid);
+            res.json(req.body.aid);
             return;
         })
         .catch( (err) => {
@@ -134,7 +134,7 @@ router.delete('/', function(req, res, next) {
         })
         .then( (result) => {
             debug('[DELETE] 刪除收藏文章 success ->', result);
-            res.json(result);
+            res.json(req.body.aid);
             return;
         })
         .catch( (err) => {

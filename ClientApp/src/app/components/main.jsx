@@ -76,7 +76,7 @@ let Main = React.createClass({
                     let ctrl = false;
 
                     for (var listIndex = likedArticles.length - 1; listIndex >= 0; listIndex--) {
-                        console.log(likedArticles[listIndex]._id , likeAry[i])
+
                         if( likedArticles[listIndex]._id == likeAry[i] ){
                             ctrl = true;
                             break;

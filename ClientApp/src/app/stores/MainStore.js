@@ -102,8 +102,8 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          *  unlike
          */
         case AppConstants.LIKE_DELETE:
-            user.like.filter( (value) => {
-                return value.aid !== data
+            user.like = user.like.filter( (value) => {
+                return value != data
             });
             break;
 
