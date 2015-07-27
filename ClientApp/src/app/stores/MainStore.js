@@ -28,6 +28,7 @@ var user = {
 var isLogin = false;
 
 var displayPage = 'Login';
+var displayContainer = 'ArticleList';
 
 /**
  * 建立 Store class，並且繼承 EventEMitter 以擁有廣播功能
@@ -48,6 +49,10 @@ objectAssign( Store, EventEmitter.prototype, {
 
     getDisplayPage: () => {
         return displayPage;
+    },
+
+    getDisplayContainer: () => {
+        return displayContainer;
     },
 
     noop: () => {
