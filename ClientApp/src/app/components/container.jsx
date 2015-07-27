@@ -88,8 +88,6 @@ let container = React.createClass({
 
         //<UserList />
 
-
-
 	    return (
     		<div  style={containerStyle}>
                 <AppBar title='CodePioneer'
@@ -114,12 +112,9 @@ let container = React.createClass({
                                         </div>} />
                 <LeftNav docked={false} menuItems={menuItems} ref='leftNav'/>
 
-                <ArticleList articles={this.props.articles}
-                             user={this.props.user}
-                             loadmore={actionsArticle.loadmore}
-                             filter={actionsArticle.filter}
-                             filterData={this.props.filterData}
-                             isMoreData={this.props.isMoreData} />
+                <ArticleList user={this.props.user}
+                             list={this.props.list}
+                             filter={actionsArticle.filter} />
 
             </div>
 	    );

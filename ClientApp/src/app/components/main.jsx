@@ -43,14 +43,34 @@ let Main = React.createClass({
 
         displayPage[this.state.displayPage] = true;
 
+        let list = {
+            data: null,         //data
+            isMoreData: null,   //ctrl
+            filter: null,       //filter ctrl
+            loadmore: null,     //func
+        };
+
+        switch (this.state.displayContainer) {
+
+            /*
+             * article list
+             */
+            case 'ArticleList':
+                list.data = this.state.articles;
+                list.filter = this.state.filterData;
+                list.isMoreData = this.state.isMoreData;
+                list.loadmore = actionsArticle.loadmore;
+                break;
+        }
+
+
+
 	    return (
 	    	<div id='wrapper' >
 	    		{ displayPage.Login ? <Login /> : null }
-	    		{ displayPage.Container ? <Container articles={ this.state.articles }
-                                                     user={ this.state.user }
-                                                     loadmore={ actionsArticle.loadmore }
-                                                     filterData={ this.state.filterData }
-                                                     isMoreData={this.state.isMoreData}/> : null }
+	    		{ displayPage.Container ? <Container user={ this.state.user }
+                                                     list={ list }
+                                                     filterData={ this.state.filterData } /> : null }
 	    	</div>
 	    );
 	},

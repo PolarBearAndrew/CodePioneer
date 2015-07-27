@@ -27,18 +27,16 @@ let ListContainer = React.createClass({
 
     	window.removeEventListener("scroll", this._handleScroll);
 
-        if(!this.props.isMoreData){
+        if(!this.props.list.isMoreData){
             return;
         }
 
         if(( document.body.scrollTop + screen.height ) >= document.body.scrollHeight + 40 ){
 
-            console.log('loading more...');
-
-            let articlesList = this.props.articles;
+            let articlesList = this.props.list.data;
 
             setTimeout(()=>{
-                this.props.loadmore( articlesList.length, articlesList[0].time );
+                this.props.list.loadmore( articlesList.length, articlesList[0].time );
             }, 200);
 
             setTimeout(()=>{
@@ -68,15 +66,17 @@ let ListContainer = React.createClass({
 
 	render() {
 
-		var articleList = this.props.articles.map((value)=>{
+		var articleList = this.props.list.data.map((value)=>{
             return <ListItem
                     key={value.id}
                     data={value}
                     user={this.props.user}
+
                     like={actionsLike.like}
                     unlike={actionsLike.unlike}
+
                     filter={this.props.filter}
-                    filterData={this.props.filterData} />;
+                    filterData={this.props.list.filter} />;
         }, this);
 
 	    return (
