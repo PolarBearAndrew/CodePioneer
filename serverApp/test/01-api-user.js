@@ -168,7 +168,7 @@ describe('[ API unit test - users ]', () => {
         return  User.findOneAndRemove( {_id: uid } )
                     .removeAsync()
                     .then( (result) => {
-
+                        done();
                     })
                     .catch( () => {
                         debug('[ API unit test - users ] 資料還原錯誤', err);
