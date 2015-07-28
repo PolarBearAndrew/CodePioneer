@@ -170,17 +170,16 @@ describe('[ API unit test - articles ]', function() {
             });
         });
 
-        it('[POST] 查詢喜愛文章', ( done ) => {
+        it('[GET] 查詢喜愛文章', ( done ) => {
 
             tmpAidForLike = tmpAidForLike.map( ( value) => {
                 return value._id;
             });
 
             request({
-                url: 'http://localhost:8080/api/article/like',
-                method: 'POSt',
+                url: queryString('http://localhost:8080/api/article/like', { like: tmpAidForLike.join(',') } ),
+                method: 'GET',
                 json: true,
-                form: { like: tmpAidForLike.join(',') }
             }, (err, res, data) => {
 
                 //test api exist

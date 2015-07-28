@@ -191,15 +191,15 @@ router.get('/stream', (req, res, next) => {
  * request : body.like
  * respone : db result
  */
-router.post('/like', (req, res, next) => {
+router.get('/like', (req, res, next) => {
 
-    let miss = check( req.body, ['like'] );
+    let miss = check( req.query, ['like'] );
     if(!miss.check){
         debug('[GET] 查詢喜愛文章(10) miss data ->', miss.missData);
         return next(err);
     }
 
-    let like = req.body.like.split(',');
+    let like = req.query.like.split(',');
 
     //db operation
      Article.find()

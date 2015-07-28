@@ -55,7 +55,7 @@ let AppActions_Articles = {
 	loadLike( likeAry ){
 		$.ajax({
 			url: address + '/like',
-			type: 'POST',
+			type: 'GET',
 			data: { like: likeAry},
 			success: function(result){
 
