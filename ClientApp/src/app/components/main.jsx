@@ -109,11 +109,13 @@ let Main = React.createClass({
                 break;
 
             case 'Pioneer':
-                if(theyLiked.length == 0 ){
+                //這有個小瑕疵 資料只會load一次
+                if(this.state.theyLiked.length == 0){
                     //重新載入
                     actionsArticle.loadTheyLiked(this.state.user.id);
+                    break;
                 }
-                list.data = theyLiked;
+                list.data = this.state.theyLiked;
                 list.filter = this.state.filterData;
                 list.isMoreData = false;
                 list.loadmore = null;

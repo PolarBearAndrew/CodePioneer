@@ -106,7 +106,6 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
-
         /*
          * 篩選文章機制
          */
