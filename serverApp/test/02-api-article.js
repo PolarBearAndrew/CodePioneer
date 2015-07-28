@@ -28,7 +28,6 @@ describe('[ API unit test - articles ]', function() {
         User.findOne()
             .where('email').equals('123')
             .then( (result) => {
-                console.log(result);
                 uid = result._id;
             })
             .catch( (err) => {
