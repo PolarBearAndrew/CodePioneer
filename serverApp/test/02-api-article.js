@@ -9,7 +9,7 @@ var initData = {
     title: 'New JavaScript in 2015 !!',
     url: 'https://www.google.com.tw',
     author: 'AndrewChen',
-    from: 'github10',
+    from: 'FaceBook',
     describe: 'this is the world future...',
     info: ["200 comments", "999 likes"]
 };
@@ -26,25 +26,16 @@ describe('[ API unit test - articles ]', function() {
 
         return Article.removeAsync({ author: 'AndrewChen' })
                       .then( (result) => {
-                        let article = new Article(initData);
-                        return article.saveAsync();
+                          let article = new Article(initData);
+                          return article.saveAsync();
                       })
                       .spread( (result) => {
-                        aid = result._id.toString();
-                        lastestTime = result.time;
+                          aid = result._id.toString();
+                          lastestTime = result.time;
                       })
                       .catch( (err)=>{
-                        debug('[ API unit test - article ] 資料初始化錯誤', err);
+                          debug('[ API unit test - article ] 資料初始化錯誤', err);
                       });
-//        return Article.remove({ author: 'AndrewChen' }, (err, result) => {
-//
-//            //init data
-//            var article = new Article(initData);
-//            article.save((err, result) => {
-//                aid = result._id.toString();
-//                lastestTime = result.time;
-//            });
-//        });
     });
 
     describe('正常操作測試', () => {
@@ -254,9 +245,10 @@ describe('[ API unit test - articles ]', function() {
 
     after( (done) => {
 
-        //要刪除這篇文章
-        //
-        //return done();
-        return Article.removeAsync({name: 'AndrewChen'}, done);
+        return Article.findOneAndRemove({ author: 'AndrewChen'})
+                      .removeAsync()
+                      .then( (result) => {
+                          return done();
+                      });
     });
 });
