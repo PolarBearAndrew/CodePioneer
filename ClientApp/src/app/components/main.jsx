@@ -1,8 +1,8 @@
 
-//react 初始化
+//react
 let React = require('react');
 
-//app
+//components
 let Login = require('./login/login.jsx');
 let Container = require('./container.jsx');
 
@@ -13,15 +13,21 @@ let ArticleStore = require('../stores/ArticleStore.js');
 //flux - contant
 let AppConstants = require('../constants/AppConstants.js');
 
-//actions
+//flux - actions
 let actionsLike = require('../actions/AppActions_like.jsx');
 let actionsArticle = require('../actions/AppActions_article.jsx');
+
+//debug
+let debug = require('debug')('app:main');
 
 
 //main是這個元件暫時使用的名字
 let Main = React.createClass({
 
 	getInitialState(){
+
+        localStorage.debug = '*';
+
 		return this.getTruth();
     },
 
@@ -36,9 +42,11 @@ let Main = React.createClass({
 
 	render() {
 
+        debug('[state]', this.state);
+
         let displayPage = {
-        	Login: false,
-        	Container: false,
+            Login: false,
+            Container: false,
         };
 
         displayPage[this.state.displayPage] = true;
@@ -50,9 +58,6 @@ let Main = React.createClass({
             loadmore: null,     //func
         };
 
-        // console.log('this.state.displayContainer', this.state.displayContainer);
-        console.log('library', this.state.likedArticles);
-        console.log('like', this.state.user.like);
 
         switch (this.state.displayContainer) {
 
@@ -101,6 +106,10 @@ let Main = React.createClass({
                 list.filter = this.state.filterData;
                 list.isMoreData = false;
                 list.loadmore = null;
+                break;
+
+            case 'Pioneer':
+                console.log('Pioneer');
                 break;
         }
 

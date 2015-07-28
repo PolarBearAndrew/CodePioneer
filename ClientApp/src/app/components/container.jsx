@@ -21,12 +21,14 @@ let ListItem = mui.ListItem;
 let ListDivider=mui.ListDivider;
 let CircularProgress=mui.CircularProgress;
 
+//debug
+let debug = require('debug')('app:container');
 
-//
+//components
 let ArticleList = require('./articleList/ListContainer.jsx');
 let UserList = require('./UserList/UserContainer.jsx');
 
-//flux
+//flux - action
 let actionsArticle = require('../actions/AppActions_article.jsx');
 let actionsUsers = require('../actions/AppActions_User.jsx');
 
@@ -50,6 +52,8 @@ let container = React.createClass({
 
 	render() {
 
+        debug('[props]', this.props)
+
 		let containerStyle = {
 	    	textAlign: 'center',
 	    	padding: '0px',
@@ -57,24 +61,39 @@ let container = React.createClass({
             paddingTop:'70px'
 	    };
 
+        let icon = () => {
+            return <Avatar src="images/panda.png"/>;
+        }();
+
+        let setting = () => {
+            return <div className="appear">Setting</div>;
+        }();
+
+        let logout = () => {
+            return <div className="appear">Logout</div>;
+        }();
+
+        let search = () => {
+            return <TextField hintText="Search" fullWidth={true}/>;
+        }();
+
         var menuItems = [
             { route: 'user',
-              text: <Avatar src="images/panda.png"/>,
+              text: icon,
               disabled: true
             },
             { route: 'ArticleList', text: 'News' },
             { route: 'Follow', text: 'Follow' },
             { route: 'Library', text: 'Library' },
-            { route: 'setting', text: <div className="appear">Setting</div> },
-            { route: 'logout', text: <div className="appear">Logout</div> },
+            { route: 'Pioneer', text: 'Pioneer Library' },
+            { route: 'setting', text: setting },
+            { route: 'logout', text: logout },
             { text: '', disabled: true },
             { text: '', disabled: true },
             { text: '', disabled: true },
             { text: '', disabled: true },
             { text: '', disabled: true },
-            { type: MenuItem.Types.SUBHEADER,
-              text: <TextField hintText="Search" fullWidth={true}/>
-            }
+            { type: MenuItem.Types.SUBHEADER, text: search }
         ];
 
         let fixed={

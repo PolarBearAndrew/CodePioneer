@@ -7,11 +7,14 @@ let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
-//mui元件
 let Checkbox = mui.Checkbox;
 let FontIcon = mui.FontIcon;
 let Paper = mui.Paper;
 let Avatar = mui.Avatar;
+
+//debug
+let debug = require('debug')('app:user');
+
 
 let userItem = React.createClass({
 
@@ -33,13 +36,15 @@ let userItem = React.createClass({
 
 	render() {
 
+        debug('[props]', this.props);
+
 //        let pic={
 //            display:'flex',
 //            flexDirection:'row',
 //            justifyContent:'center',
 //            alignItems:'center',
 //        };
-        
+
         let avatar = {
             margin:'0px',
             marginTop:'15px',
@@ -70,7 +75,7 @@ let userItem = React.createClass({
         };
 
 	    return (
-	    	<Paper className="paperCard" zDepth={1}>
+	    	<Paper className="paperCard" zDepth={1} key={ this.props.data }>
                     <Avatar style={avatar} size={70} src="images/github10.png" />
                     <div style={info} className="article">
                         <p className="infoContent">{ this.props.data } </p>
