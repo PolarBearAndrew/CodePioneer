@@ -23,7 +23,7 @@ var Article = require('../models/article.js');
 describe('[ API unit test - articles ]', function() {
 
     before( () => {
-        
+
         return Article.removeAsync({ author: 'AndrewChen' })
                       .then( (result) => {
                         let article = new Article(initData);
@@ -117,7 +117,7 @@ describe('[ API unit test - articles ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                // //test data
+                //test data
                 data.should.with.lengthOf(10);
 
                 tmpAidForLike = data;
@@ -170,13 +170,17 @@ describe('[ API unit test - articles ]', function() {
             });
         });
 
-        it('[GET] 查詢喜愛文章', ( done ) => {
+        it('[POST] 查詢喜愛文章', ( done ) => {
+
+            tmpAidForLike = tmpAidForLike.map( ( value) => {
+                return value._id;
+            });
 
             request({
                 url: 'http://localhost:8080/api/article/like',
-                method: 'GET',
+                method: 'POSt',
                 json: true,
-                form: { like: tmpAidForLike }
+                form: { like: tmpAidForLike.join(',') }
             }, (err, res, data) => {
 
                 //test api exist

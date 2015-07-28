@@ -193,8 +193,6 @@ router.get('/stream', (req, res, next) => {
  */
 router.post('/like', (req, res, next) => {
 
-    console.log(req.body);
-
     let miss = check( req.body, ['like'] );
     if(!miss.check){
         debug('[GET] 查詢喜愛文章(10) miss data ->', miss.missData);
