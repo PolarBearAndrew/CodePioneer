@@ -5,6 +5,8 @@ module.exports = keyMirror({
 	//user
 	USER_LOGIN: null,
 	USER_LOAD: null,
+	USER_FOLLOW: null,
+	USER_UNFOLLOW: null,
 	CHANGE_DISPLAY: null,
 
 	//article

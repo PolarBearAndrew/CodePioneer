@@ -75,15 +75,29 @@ let userItem = React.createClass({
 
         let data = this.props.data;
 
+        let ctrlStart = null;
+
+        if(data.follow.indexOf(this.props.user.id) !== -1){
+            ctrlStart = true;
+        }else{
+            ctrlStart = false;
+        }
+
+        if(data._id === this.props.user.id)
+            return null;
+
+
 	    return (
-	    	<Paper className="paperCard" zDepth={1} key={ this.props.key }>
-                    <Avatar style={avatar} size={70} src="images/github10.png" />
+	    	<Paper className="paperCard" zDepth={1} key={ this.props.key } >
+                    <Avatar style={avatar} size={70} src="images/github10.png"  onTouchTap={this._showLike}/>
                     <div style={info} className="article">
                         <p className="infoContent">{ data.name } </p>
                         <p className="infoContent">Skill</p>
                         <p className="infoContent">最後登入時間： { data.lastLoginTime }</p>
                         <Checkbox
                                 style={checkbox}
+                                onCheck={this._like}
+                                defaultChecked={ ctrlStart }
                                 checkedIcon={<FontIcon  className="material-icons" style={follow}
                                 color={Colors.pink500}>star</FontIcon>}
                                 unCheckedIcon={<FontIcon className="material-icons" style={follow}
@@ -93,6 +107,17 @@ let userItem = React.createClass({
 	    );
 
 	},
+
+    _showLike(){
+        console.log('show like');
+    },
+
+    _like( e, checked){
+        if( checked )
+            this.props.follow(this.props.user.id, this.props.data._id);
+        else
+            this.props.unfollow(this.props.user.id, this.props.data._id);
+    }
 });
 
 module.exports = userItem;

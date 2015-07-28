@@ -15,6 +15,9 @@ let UserItem = require('./UserItem.jsx');
 //debug
 let debug = require('debug')('app:user container');
 
+//actions
+let actionFollow = require('../../actions/AppActions_User.jsx');
+
 
 let userContainer = React.createClass({
 
@@ -49,7 +52,11 @@ let userContainer = React.createClass({
         // let nameList = ['111', '222', '333'];
 
         let userItems = nameList.map( (value, index) => {
-            return <UserItem data={ value } key={ index }/> ;
+            return <UserItem data={ value }
+            				 key={ index }
+            				 user={this.props.user}
+            				 follow={ actionFollow.follow }
+            				 unfollow={ actionFollow.unfollow } /> ;
         })
 
 	    return (

@@ -2,6 +2,7 @@ let AppDispatcher = require('../dispatcher/AppDispatcher');
 let AppConstants = require('../constants/AppConstants');
 
 let address = 'http://localhost:8080/api/users';
+let followAddress = 'http://localhost:8080/api/follow';
 let streamAaddress = 'http://localhost:8080/api/users/stream';
 
 let AppActions_User = {
@@ -115,7 +116,51 @@ let AppActions_User = {
 				});
 			}
 		});
-	}
+	},
+
+	follow( uid, him) {
+		$.ajax({
+			url: followAddress + '/',
+			type: 'POST',
+			data: { uid, him },
+			success: function(result){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.USER_FOLLOW,
+					data: him
+				});
+			},
+			error: function(err){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
+	},
+
+	unfollow( uid, him) {
+		$.ajax({
+			url: followAddress + '/',
+			type: 'DELETE',
+			data: { uid, him },
+			success: function(result){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.USER_UNFOLLOW,
+					data: him
+				});
+			},
+			error: function(err){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
+	},
 };
 
 module.exports = AppActions_User;

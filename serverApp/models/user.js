@@ -20,13 +20,7 @@ var User = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    like: [{
-        aid: String,
-        likeTime: {
-            type: Date,
-            default: Date.now
-        }
-    }],
+    like: { type: Array},
     follow: { type: Array},
 });
 

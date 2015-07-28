@@ -23,7 +23,7 @@ router.post('/', (req, res, next) => {
     debug('[POST] 新增追蹤 req.body ->', req.body );
 
     //check
-    let miss = check( req.body, ['uid'] );
+    let miss = check( req.body, ['uid', 'him'] );
     if(!miss.check){
         debug('[POST] 新增追蹤 miss data ->', miss.missData);
         return next(err);
@@ -31,7 +31,7 @@ router.post('/', (req, res, next) => {
 
     //tmp variable, destination info
     let followAry ;
-    let info = { _id: req.body.uid };
+    let info = { _id: req.body.him };
 
     //db operation
     User.findOne(info)
@@ -40,7 +40,7 @@ router.post('/', (req, res, next) => {
 
             if(result){
                 followAry = result.follow;
-                followAry.push( { follow: req.body.uid });
+                followAry.push(req.body.uid);
             }
 
             return(
@@ -64,33 +64,33 @@ router.post('/', (req, res, next) => {
  * request : body.uid
  * respone :
  */
-router.get('/', function(req, res, next) {
+// router.get('/', function(req, res, next) {
 
-    debug('[GET] 查詢追蹤 req.body ->', req.body );
+//     debug('[GET] 查詢追蹤 req.body ->', req.body );
 
-    //check
-    let miss = check( req.body, ['uid'] );
-    if(!miss.check){
-        debug('[GET] 查詢追蹤 miss data ->', miss.missData);
-        return next(err);
-    }
+//     //check
+//     let miss = check( req.body, ['uid'] );
+//     if(!miss.check){
+//         debug('[GET] 查詢追蹤 miss data ->', miss.missData);
+//         return next(err);
+//     }
 
-    //destination info
-    var info = { _id: req.body.uid };
+//     //destination info
+//     var info = { _id: req.body.uid };
 
-    //db operation
-    User.findOne(info)
-        .execAsync()
-        .then( (result) => {
-            debug('[GET] 查詢追蹤 success ->', result);
-            res.json(result);
-            return;
-        })
-        .catch( (err) => {
-            debug('[GET] 查詢追蹤 fail ->', err);
-            return next(err);
-        });
-});
+//     //db operation
+//     User.findOne(info)
+//         .execAsync()
+//         .then( (result) => {
+//             debug('[GET] 查詢追蹤 success ->', result);
+//             res.json(result);
+//             return;
+//         })
+//         .catch( (err) => {
+//             debug('[GET] 查詢追蹤 fail ->', err);
+//             return next(err);
+//         });
+// });
 
 /*
  * [DELETE] 取消追蹤
@@ -102,7 +102,7 @@ router.delete('/', function(req, res, next) {
     debug('[DELETE] 取消追蹤 req.body ->', req.body );
 
     //check
-	let miss = check( req.body, ['uid'] );
+	let miss = check( req.body, ['uid', 'him'] );
     if(!miss.check){
         debug('[DELETE] 取消追蹤 miss data ->', miss.missData);
         return next(err);
@@ -110,7 +110,7 @@ router.delete('/', function(req, res, next) {
 
     //tmp variable, destination info
     let followAry;
-    let info = { _id: req.body.uid };
+    let info = { _id: req.body.him };
 
     //db operation
     User.findOne(info)
@@ -119,8 +119,8 @@ router.delete('/', function(req, res, next) {
 
             if(result){
                 followAry = result.follow;
-                followAry = followAry.filter( (item) => {
-                    return item.follow != req.body.follow;
+                followAry = followAry.filter( (value) => {
+                    return value != req.body.uid;
                 });
             }
 

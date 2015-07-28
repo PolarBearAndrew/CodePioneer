@@ -22,7 +22,8 @@ var user = {
     id:'',
     name: '',
     email: '',
-    like: []
+    like: [],
+    follow: [],
 };
 
 var userList = null;
@@ -124,6 +125,24 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          */
         case AppConstants.USER_LOAD:
             userList = data;
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
+        /*
+         *  新增追蹤
+         */
+        case AppConstants.USER_FOLLOW:
+            user.follow.push(data);
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
+        /*
+         *  取消追蹤
+         */
+        case AppConstants.USER_UNFOLLOW:
+            user.follow = user.follow.filter( (value) => {
+                return value != data
+            });
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
