@@ -66,17 +66,10 @@ let container = React.createClass({
             return <Avatar src="images/panda.png"/>;
         }();
 
-        let setting = () => {
-            return <div className="appear">Setting</div>;
-        }();
-
-        let logout = () => {
-            return <div className="appear">Logout</div>;
-        }();
-
-        let search = () => {
-            return <TextField hintText="Search" fullWidth={true}/>;
-        }();
+        //left nav components
+        let setting = () => { return <div className="appear">Setting</div>; }();
+        let logout = () => { return <div className="appear">Logout</div>; }();
+        let search = () => { return <TextField hintText="Search" fullWidth={true}/>; }();
 
         var menuItems = [
             { route: 'user',
@@ -94,7 +87,7 @@ let container = React.createClass({
             { text: '', disabled: true },
             { text: '', disabled: true },
             { text: '', disabled: true },
-            { type: MenuItem.Types.SUBHEADER, text: search }
+            { text: search } //type: MenuItem.Types.SUBHEADER,
         ];
 
         let fixed={
