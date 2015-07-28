@@ -69,6 +69,74 @@ describe('[ DB data check - crawl ]', function() {
 
                     return done();
         });
+        
+        it('[Crawl] 爬蟲資料庫資料充足 - hackerNews', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.hackerNews)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
+                    })
+                    .catch( (err) => {
+                        //should.not.exist(err);
+                    });
+
+                    return done();
+        });
+        
+        it('[Crawl] 爬蟲資料庫資料充足 - iThomeTech', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.iThomeTech)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
+                    })
+                    .catch( (err) => {
+                        //should.not.exist(err);
+                    });
+
+                    return done();
+        });
+        
+        it('[Crawl] 爬蟲資料庫資料充足 - iThomeNews', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.iThomeNews)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
+                    })
+                    .catch( (err) => {
+                        //should.not.exist(err);
+                    });
+
+                    return done();
+        });
+        
+        it('[Crawl] 爬蟲資料庫資料充足 - githubTranding', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.githubTranding)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
+                    })
+                    .catch( (err) => {
+                        //should.not.exist(err);
+                    });
+
+                    return done();
+        });
 
         it('[Crawl] 無異質資料-from', ( done ) => {
 
