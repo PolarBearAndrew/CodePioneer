@@ -40,20 +40,22 @@ let userContainer = React.createClass({
             webkitFlexWrap: 'wrap',
             flexWrap: 'wrap',
             justifyContent:'space-around',
-            alignContent: 'flex-start',
         };
 
-        let nameList = ['Andrew', 'Ray', 'Doro', 'Husan'];
+//        let a={
+//            display:'flex',
+//            alignContent:'flex-start'
+//        };
+        let nameList = ['Andrew', 'Ray', 'Doro', 'Husan', 'Panda1', 'Panda2', 'Panda3', 'Panda4'];
 
         let userItems = nameList.map( (value, index) => {
             return <UserItem data={ value }/> ;
         })
 
 	    return (
-
-	    	<Paper style={paperBg} zDepth={2}>
-                { userItems }
-            </Paper>
+                <Paper style={paperBg} zDepth={2}>
+                    { userItems }
+                </Paper>
 	    );
 
 	},
