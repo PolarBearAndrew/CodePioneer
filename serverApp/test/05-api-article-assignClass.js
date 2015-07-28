@@ -21,7 +21,7 @@ let config = require('../config.js');
 //models
 let Article = require('../models/article.js');
 
-describe('[ API unit test - articles-assignClass ]', function() {
+describe('[ API unit test - articles-assignClass (05) ]', function() {
 
     before( () => {
 

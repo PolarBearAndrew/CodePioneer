@@ -16,10 +16,10 @@ var followFrom = '123456789';
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - follow ]', function() {
+describe('[ API unit test - follow (04) ]', function() {
 
     before(function() {
-        
+
          return User.removeAsync()
                     .then( (result) => {
                         var user = new User(initData);

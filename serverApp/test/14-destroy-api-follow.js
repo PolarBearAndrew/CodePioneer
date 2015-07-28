@@ -6,7 +6,7 @@ var initData = {};
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - follow ]', function() {
+describe('[ API unit test - follow (14) ]', function() {
 
     describe('破壞性測試, 蓄意少傳參數', () => {
 

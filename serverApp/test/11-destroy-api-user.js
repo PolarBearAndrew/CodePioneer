@@ -13,7 +13,7 @@ var uid = null;
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - users ]', () => {
+describe('[ API unit test - users (11) ]', () => {
 
     describe('破壞性測試, 蓄意少傳參數', () => {
 

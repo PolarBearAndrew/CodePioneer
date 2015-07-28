@@ -16,10 +16,10 @@ var aid = 'test-article-id';
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - like ]', function() {
+describe('[ API unit test - like (03) ]', function() {
 
     before(function() {
-        
+
            return User.removeAsync()
                       .then( (result) => {
                         var user = new User(initData);
@@ -69,7 +69,7 @@ describe('[ API unit test - like ]', function() {
         });
 
         it('[GET] 查詢收藏文章', ( done ) => {
- 
+
             request({
                 url: 'http://localhost:8080/api/like/?uid=' + uid,
                 method: 'GET',

@@ -17,7 +17,7 @@ var uid = null;
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - users ]', () => {
+describe('[ API unit test - users (01) ]', () => {
 
     before( () => {
 
