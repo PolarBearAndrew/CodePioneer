@@ -185,22 +185,24 @@ describe('[ API unit test - articles ]', function() {
             });
         });
 
-        // it('[GET] 查詢追蹤者的喜愛文章', ( done ) => {
+        it('[GET] 查詢追蹤者的喜愛文章', ( done ) => {
 
-        //     request({
-        //         url: queryString('http://localhost:8080/api/article/follow/like', uid ),
-        //         method: 'GET',
-        //         json: true,
-        //     }, (err, res, data) => {
+            request({
+                url: queryString('http://localhost:8080/api/article/follow/like', uid ),
+                method: 'GET',
+                json: true,
+            }, (err, res, data) => {
 
-        //         //test api exist
-        //         should.exist(data);
-        //         should.not.exist(err);
-        //         res.statusCode.should.equal(200);
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
 
-        //         return done();
-        //     });
-        // });
+                data.should.equal({});
+
+                return done();
+            });
+        });
 
         it('[PUT] 修改文章資訊', ( done ) => {
 
