@@ -219,6 +219,52 @@ router.get('/like', (req, res, next) => {
 });
 
 /*
+ * [GET] 查詢追蹤者的喜愛文章
+ * request : body.uid
+ * respone : db result
+ */
+router.get('/follow/like', (req, res, next) => {
+
+    let miss = check( req.query, ['uid'] );
+    if(!miss.check){
+        debug('[GET] 查詢追蹤者的喜愛文章 miss data ->', miss.missData);
+        return next(err);
+    }
+
+    //db operation
+     User.find()
+            .where('follow').exists(req.query.id)
+            .execAsync()
+            .then( (result) => {
+
+                debug('[GET] 查詢追蹤者的喜愛文章 success ->', result);
+
+                let list = []
+
+                result.forEach( ( value ) => {
+                    list.concat(value.like);
+                });
+
+                result = result.map( (value) => {
+                    return value.aid;
+                });
+
+                return Article.find()
+                              .where('_id').in(list)
+                              .sort({ time: -1 })
+                              .execAsync();
+            })
+            .then( (result) => {
+                debug('[GET] 查詢追蹤者的喜愛文章 success ->', result);
+                res.json(result);
+            })
+            .catch( (err) =>{
+                debug('[GET] 查詢追蹤者的喜愛文章 fail ->', err);
+                return next(err);
+            });
+});
+
+/*
  * [PUT] 修改文章資訊
  * request : body.aid, body.title, body.url, body.author
  *           body.from, body.describe, body.info

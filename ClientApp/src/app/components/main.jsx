@@ -109,7 +109,11 @@ let Main = React.createClass({
                 break;
 
             case 'Pioneer':
-                console.log('Pioneer');
+
+                list.data = likedArticles;
+                list.filter = this.state.filterData;
+                list.isMoreData = false;
+                list.loadmore = null;
                 break;
         }
 
