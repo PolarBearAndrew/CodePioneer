@@ -39,7 +39,7 @@ let userEdit = React.createClass({
 
 	render() {
             
-         let list={
+         let All={
             //  textAlign:'left',
                 padding: '0px',
                 display: '-webkit-flex',
@@ -47,7 +47,7 @@ let userEdit = React.createClass({
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'column',
-                marginTop:'50px',
+                marginTop:'20px',
          };
         
          let photo={
@@ -58,8 +58,6 @@ let userEdit = React.createClass({
                 alignItems: 'center',
                 justifyContent: 'center',
                 flexDirection: 'row',
-                marginTop:'50px',
-                
             };
         
           let image={
@@ -101,7 +99,7 @@ let userEdit = React.createClass({
             };
         
 	    return (
-            <div style={list}>
+            <div style={All}>
 	    	<div style={photo}>
                     <Avatar src="images/panda.png"  size={100}/>
                     
@@ -111,12 +109,12 @@ let userEdit = React.createClass({
                     </IconButton>
             </div>
             
-            
+                    <br/>
                     <TextField
                 		id="name"
                         hintText="Name"/>
                     <br/>
-                    <DropDownMenu menuItems={country} style={country_width} selectedIndex={0}/>
+                    <DropDownMenu menuItems={country} style={country_width} selectedIndex={0} />
                     <br/><br/>
                     <TextField
                 		id="skill"
