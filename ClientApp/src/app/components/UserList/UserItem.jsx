@@ -32,13 +32,6 @@ let userItem = React.createClass({
 	},
 
 	render() {
-
-//        let pic={
-//            display:'flex',
-//            flexDirection:'row',
-//            justifyContent:'center',
-//            alignItems:'center',
-//        };
         
         let avatar = {
             margin:'0px',
