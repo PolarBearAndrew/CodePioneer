@@ -25,7 +25,7 @@ let CircularProgress=mui.CircularProgress;
 //
 let ArticleList = require('./articleList/ListContainer.jsx');
 let UserList = require('./UserList/UserContainer.jsx');
-
+let UserEdit=require('./UserEdit/userEdit.jsx')
 //flux
 let actionsArticle = require('../actions/AppActions_article.jsx');
 let actionsUsers = require('../actions/AppActions_User.jsx');
@@ -86,7 +86,7 @@ let container = React.createClass({
             position: 'fixed',
 
         };
-
+        //<UserEdit />
         //<UserList />
 
 	    return (
@@ -116,7 +116,6 @@ let container = React.createClass({
                          menuItems={menuItems}
                          onChange={this._navClick}
                          ref='leftNav'/>
-
                 <ArticleList user={this.props.user}
                              list={this.props.list}
                              filter={actionsArticle.filter} />
