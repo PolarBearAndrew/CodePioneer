@@ -44,7 +44,6 @@ let userItem = React.createClass({
 //            justifyContent:'center',
 //            alignItems:'center',
 //        };
-
         let avatar = {
             margin:'0px',
             marginTop:'15px',
