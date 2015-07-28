@@ -101,7 +101,9 @@ let container = React.createClass({
         };
         //<UserEdit />
         //<UserList />
-
+//                <ArticleList user={this.props.user}
+//                             list={this.props.list}
+//                             filter={actionsArticle.filter} />
 	    return (
     		<div  style={containerStyle}>
                 <AppBar title='CodePioneer'

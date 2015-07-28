@@ -14,7 +14,7 @@ let ThemeManager = new mui.Styles.ThemeManager();
 let Avatar=mui.Avatar;
 let IconButton=mui.IconButton;
 let TextField=mui.TextField;
-let DropDownMenu=mui.DropDownMenu;
+let SelectField=mui.SelectField;
 //mui元件
 //範例:
 //let AppBar = mui.AppBar;
@@ -36,7 +36,12 @@ let userEdit = React.createClass({
 			accent1Color: Colors.lime600
 		});
 	},
-
+    
+    getInitialState() {
+    return {
+        selectValue: undefined,
+           }
+    },
 	render() {
             
          let All={
@@ -87,7 +92,6 @@ let userEdit = React.createClass({
             };
         
            let country = [
-               { text: 'Country', disabled: true   },
                { payload: '1', text: 'Taiwan' },
                { payload: '2', text: 'Japan' },
                { payload: '3', text: 'Korea ' },
@@ -114,8 +118,12 @@ let userEdit = React.createClass({
                 		id="name"
                         hintText="Name"/>
                     <br/>
-                    <DropDownMenu menuItems={country} style={country_width} selectedIndex={0} />
-                    <br/><br/>
+                    <SelectField
+                      value={this.state.selectValue}
+                      onChange={this._handleSelectValueChange.bind(null, 'selectValue')}
+                      hintText="Country"
+                      menuItems={country} />
+                    <br/>
                     <TextField
                 		id="skill"
                         hintText="Skill"
@@ -132,8 +140,12 @@ let userEdit = React.createClass({
                         multiLine={true}/>
             </div>
 	    );
-
 	},
+  _handleSelectValueChange(name, e) {
+    let change = {};
+    change[name] = e.target.value;
+    this.setState(change);
+  },
 });
 
 module.exports = userEdit;

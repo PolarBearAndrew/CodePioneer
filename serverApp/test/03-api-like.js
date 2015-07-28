@@ -62,16 +62,14 @@ describe('[ API unit test - like ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data.should.have.property('ok', 1);
-                data.should.have.property('nModified', 1);
-                data.should.have.property('n', 1);
+                data.should.have.equal(data);
 
                 return done();
             });
         });
 
         it('[GET] 查詢收藏文章', ( done ) => {
-
+ 
             request({
                 url: 'http://localhost:8080/api/like/?uid=' + uid,
                 method: 'GET',
@@ -109,7 +107,7 @@ describe('[ API unit test - like ]', function() {
                 res.statusCode.should.equal(200);
 
                 //test data
-                data.should.have.property('ok', 1);
+                data.should.have.equal(data);
 
                 return done();
             });
