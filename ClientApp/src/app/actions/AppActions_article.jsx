@@ -59,10 +59,32 @@ let AppActions_Articles = {
 			data: { like: likeAry},
 			success: function(result){
 
-				console.log('action', result);
-
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.ARTICLE_LOADLIKE,
+					data: result
+				});
+			},
+			error: function(err){
+
+				console.log('err', err);
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
+	},
+
+	loadTheyLiked( uid ){
+		$.ajax({
+			url: address + '/follow/like',
+			type: 'GET',
+			data: { uid },
+			success: function(result){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.ARTICLE_LOADTHEYLIKE,
 					data: result
 				});
 			},

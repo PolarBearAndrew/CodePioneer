@@ -19,10 +19,20 @@ var lastestTime = null;
 var tmpAidForLike = null;
 
 var Article = require('../models/article.js');
+var User = require('../models/user.js');
 
 describe('[ API unit test - articles ]', function() {
 
     before( () => {
+
+        User.findOne()
+            .where('email').equals('123')
+            .then( (result) => {
+                uid = result._id;
+            })
+            .catch( (err) => {
+                console.log('[GET] 查詢追蹤者的喜愛文章 初始化uid錯誤');
+            });
 
         return Article.removeAsync({ author: 'AndrewChen' })
                       .then( (result) => {
@@ -180,6 +190,25 @@ describe('[ API unit test - articles ]', function() {
 
                 //test data
                 data.should.with.lengthOf(10);
+
+                return done();
+            });
+        });
+
+        it('[GET] 查詢追蹤者的喜愛文章', ( done ) => {
+
+            request({
+                url: queryString('http://localhost:8080/api/article/follow/like', { uid }  ),
+                method: 'GET',
+                json: true,
+            }, (err, res, data) => {
+
+                //test api exist
+                should.exist(data);
+                should.not.exist(err);
+                res.statusCode.should.equal(200);
+
+                data.should.with.lengthOf(12);
 
                 return done();
             });

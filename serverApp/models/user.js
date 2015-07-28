@@ -27,9 +27,7 @@ var User = new mongoose.Schema({
             default: Date.now
         }
     }],
-    follow: [{
-        uid: String
-    }],
+    follow: { type: Array},
 });
 
 //exports model

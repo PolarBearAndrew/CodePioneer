@@ -96,22 +96,70 @@ app.listen(port, () => {
 
     console.log('[Server] started -> http://localhost:' + port);
 
+    //test data
+    //==========================================
+
     let User = require('./models/user.js');
+    let Article = require('./models/article.js');
 
     let user = new User({
         name: '測試人員',
         email: '123',
         pwd: '123',
-        likeArticle: [],
-        whoLikeMe: [],
+        like: [],
+        follow: [],
     });
+
+    let uid = null;
+
+    //test main user
 
     User.removeAsync({})
         .then(() => {
             return user.saveAsync();
         })
         .spread((result) => {
-            debug('[POST] 新增測試使用者 success ->', result);
+
+            //set user id
+            uid = result._id;
+
+            return Article.find()
+                          .limit(12)
+                          .execAsync();
+        })
+        .then( (result) => {
+
+
+            let likeHim = [
+                { name: '被追蹤的人1', email: '999', pwd: '999', like: [], follow: [], },
+                { name: '被追蹤的人2', email: '999', pwd: '999', like: [], follow: [], },
+                { name: '被追蹤的人3', email: '999', pwd: '999', like: [], follow: [], }
+            ];
+
+            //set articles to arr
+            let index = 0;
+            for (var i = result.length - 1; i >= 0; i--) {
+
+                //keep push data
+                likeHim[index].like.push({ aid: result[i]._id });
+
+                if( i % 4 === 0 ) {
+                    likeHim[index].follow.push(uid);
+
+                    //db operation
+                    let him = new User(likeHim[index]);
+                    him.saveAsync()
+                       .then( (result) => {
+                           debug('[POST] 新增測試使用者 success ->', result);
+                       })
+                       .catch( (err) => {
+                           debug('[POST] 新增測試使用者 fail', index, err);
+                       });
+
+                    //next
+                    index++;
+                }
+            };
         })
         .catch((err) => {
             debug('[POST] 新增測試使用者 fail ->', err);
@@ -121,8 +169,6 @@ app.listen(port, () => {
 
     //crawl
     //==========================================
-
-    let Article = require('./models/article.js');
 
      Article.find()
             .execAsync()
