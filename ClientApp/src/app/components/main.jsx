@@ -100,8 +100,8 @@ let Main = React.createClass({
                 //丟入資料
                 list.data = likedArticles;
                 list.filter = this.state.filterData;
-                list.isMoreData = false;
-                list.loadmore = null;
+                // list.isMoreData = false;
+                // list.loadmore = null;
                 break;
 
             case 'Follow':
@@ -114,7 +114,7 @@ let Main = React.createClass({
                 //這有個小瑕疵 資料只會load一次
                 if(this.state.theyLiked.length == 0){
                     //重新載入
-                    //actionsArticle.loadTheyLiked(this.state.user.id);
+                    actionsArticle.loadTheyLiked(this.state.user.id);
                     break;
                 }
                 list.data = this.state.theyLiked;

@@ -72,7 +72,9 @@ let ListContainer = React.createClass({
 
         debug('[props]', this.props);
 
-		var articleList = this.props.list.data.map((value, index)=>{
+        let data = this.props.list.data || [];
+
+		var articleList = data.map((value, index)=>{
             return <ListItem
                     key={index}
                     data={value}
