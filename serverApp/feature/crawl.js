@@ -228,7 +228,7 @@ function crawl(){
                          //來源
                         from: config.crawlName.githubTranding,
                          //描述
- 					    describe: item.describe,
+ 					    describe: item.describe.text,
                          //一些小資訊
  					    info: [
                             //更新以及建置人

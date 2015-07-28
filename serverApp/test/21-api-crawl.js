@@ -46,9 +46,8 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(20);
+                        return done();
                     });
-            
-                    return done();
         });
 
         it('[Crawl] 爬蟲資料庫資料充足 - github10', ( done ) => {
@@ -61,9 +60,8 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
+                        return done();
                     });
-
-                    return done();
         });
         
         it('[Crawl] 爬蟲資料庫資料充足 - hackerNews', ( done ) => {
@@ -76,9 +74,8 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
+                        return done();
                     });
-             
-                    return done();
         });
         
         it('[Crawl] 爬蟲資料庫資料充足 - iThomeTech', ( done ) => {
@@ -91,9 +88,8 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
+                        return done();
                     });
-
-                    return done();
         });
         
         it('[Crawl] 爬蟲資料庫資料充足 - iThomeNews', ( done ) => {
@@ -106,9 +102,8 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
+                        return done();
                     });
-             
-                    return done();
         });
         
         it('[Crawl] 爬蟲資料庫資料充足 - githubTranding', ( done ) => {
@@ -121,9 +116,8 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
+                        return done();
                     });
-
-                    return done();
         });
 
         it('[Crawl] 無異質資料-from', ( done ) => {
@@ -140,9 +134,9 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
+                        return done();
                     });
 
-                    return done();
         });
 
         it('[Crawl] 無異質資料-title', ( done ) => {
@@ -154,9 +148,8 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
+                        return done();
                     });
-
-                    return done();
         });
 
         it('[Crawl] 無異質資料-time', ( done ) => {
@@ -168,9 +161,8 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
+                        return done();
                     });
-
-                    return done();
         });
     });
 
