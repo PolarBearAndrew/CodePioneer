@@ -47,11 +47,7 @@ describe('[ DB data check - crawl ]', function() {
                         should.exist(result);
                         result.should.with.lengthOf(20);
                     });
-                    // .catch( (err) => {
-                    //     should.not.exist(err);
-                    //     return done();
-                    // });
-
+            
                     return done();
         });
 
@@ -63,14 +59,9 @@ describe('[ DB data check - crawl ]', function() {
                     .limit(5)
                     .execAsync()
                     .then( (result) => {
-                        //console.log('', result);
                         should.exist(result);
                         result.should.with.lengthOf(5);
                     });
-                    // .catch( (err) => {
-                    //     should.not.exist(err);
-
-                    // });
 
                     return done();
         });
@@ -80,15 +71,13 @@ describe('[ DB data check - crawl ]', function() {
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.hackerNews)
+                    .limit(5)
                     .execAsync()
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
-
+             
                     return done();
         });
         
@@ -97,13 +86,11 @@ describe('[ DB data check - crawl ]', function() {
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.iThomeTech)
+                    .limit(5)
                     .execAsync()
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
 
                     return done();
@@ -114,15 +101,13 @@ describe('[ DB data check - crawl ]', function() {
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.iThomeNews)
+                    .limit(5)
                     .execAsync()
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
-
+             
                     return done();
         });
         
@@ -131,13 +116,11 @@ describe('[ DB data check - crawl ]', function() {
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.githubTranding)
+                    .limit(5)
                     .execAsync()
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
 
                     return done();
@@ -171,9 +154,6 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
 
                     return done();
@@ -188,9 +168,6 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
 
                     return done();
