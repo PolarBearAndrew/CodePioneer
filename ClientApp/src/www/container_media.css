@@ -8,22 +8,15 @@
     .appear {
         display: block;
     }
-/*
-    .paperCard:last-child {
-        margin-right: auto;
-    }
-*/
 }
-
-
 /**/
+
 @media screen and (min-width: 354px) {
     .paperCard:last-child {
         margin-right: 10px;
         color: aqua;
     }
 }
-
 
 @media screen and (min-width: 700px) {
     .paperCard:last-child {
@@ -44,14 +37,37 @@
         margin-right: auto;
         color: #ff0000;
     }
-}
-
-
-/*
-@media screen and (min-width: 1038px) {
-    .paperCard:last-child {
-        margin-right: 10px;
-        color: #ffba00;
+    .editDown {
+        padding-left: 30%;
+        padding-right: 30%;
     }
 }
-*/
+/**/
+
+@media screen and (min-width: 768px) {
+    .editUp {
+        display: flex;
+        flex-direction: row;
+        justify-Content: center;
+        align-Items: center;
+        margin-top: 90px;
+        border: 2px solid red;
+    }
+    .editNC {
+        margin: 0px;
+        padding: 0px;
+        margin-left: 150px;
+    }
+    .editDown {
+        padding-left: 25%;
+        padding-right: 25%;
+        border: 2px solid blue;
+    }
+    .editAll {
+        margin-Top: 0px;
+        border: 2px solid green;
+    }
+    .tt{
+        width: 200px;
+    }
+}

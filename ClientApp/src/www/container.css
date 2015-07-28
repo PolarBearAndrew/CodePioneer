@@ -6,10 +6,9 @@
 
 .article {
     font-family: 'Open Sans', serif;
-    
 }
 
-.appear{
+.appear {
     display: none;
 }
 
@@ -17,8 +16,8 @@ a {
     text-decoration: none;
     color: #3e3e3e;
 }
-
 /**/
+
 .paperCard {
     margin-Top: 10px;
     margin-Left: 10px;
@@ -39,4 +38,37 @@ a {
     margin-Top: 8px;
     font-Size: 20px;
 }
+/**/
 
+.photo {
+    margin: 0px;
+    padding: 0px;
+}
+
+.editAll {
+    margin: 0px;
+    padding: 0px;
+    display: 'flex';
+    align-Items: 'center';
+    justify-Content: 'center';
+    flex-Direction: 'column';
+    margin-Top: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tt{
+    width:400px;
+}
