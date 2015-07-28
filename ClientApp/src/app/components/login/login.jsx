@@ -16,6 +16,9 @@ let Snackbar = mui.Snackbar;
 //for uplode img
 var files;
 
+//debug
+let debug = require('debug')('app:login');
+
 //flux 資料相關
 let actionsUser = require('../../actions/AppActions_User.jsx');
 let AppConstants = require('../../constants/AppConstants.js');
@@ -50,6 +53,8 @@ let loginApp = React.createClass({
 
 	//顯示畫面的func
 	render() {
+
+        debug('[props]', this.props);
 
         actionsUser.login({ email: '123', pwd: '123' }, () => {
             console.log('auto login fail');

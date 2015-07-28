@@ -15,6 +15,10 @@ let ListItem = require('./ListItem.jsx');
 //flux
 let actionsLike = require('../../actions/AppActions_like.jsx');
 
+//debug
+let debug = require('debug')('app:article');
+
+
 let ListContainer = React.createClass({
 
 	getInitialState (){
@@ -66,9 +70,11 @@ let ListContainer = React.createClass({
 
 	render() {
 
-		var articleList = this.props.list.data.map((value)=>{
+        debug('[props]', this.props);
+
+		var articleList = this.props.list.data.map((value, index)=>{
             return <ListItem
-                    key={value.id}
+                    key={index}
                     data={value}
                     user={this.props.user}
 

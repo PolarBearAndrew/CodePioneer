@@ -1,6 +1,4 @@
 
-//要顯示的元件或是HTML元素寫在render的return裡面
-//==========================================
 //react
 let React = require('react');
 
@@ -9,11 +7,14 @@ let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
-//mui
 let Paper = mui.Paper;
 
-//
+//componentes
 let UserItem = require('./UserItem.jsx');
+
+//debug
+let debug = require('debug')('app:user');
+
 
 let userContainer = React.createClass({
 
@@ -35,6 +36,8 @@ let userContainer = React.createClass({
 
 	render() {
 
+		debug('[props]', this.props);
+
         let paperBg={
             display:'flex',
             webkitFlexWrap: 'wrap',
@@ -49,7 +52,7 @@ let userContainer = React.createClass({
         let nameList = ['Andrew', 'Ray', 'Doro', 'Husan', 'Panda1', 'Panda2', 'Panda3', 'Panda4'];
 
         let userItems = nameList.map( (value, index) => {
-            return <UserItem data={ value }/> ;
+            return <UserItem data={ value } key={ value }/> ;
         })
 
 	    return (

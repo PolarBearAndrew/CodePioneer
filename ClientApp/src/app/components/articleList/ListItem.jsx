@@ -137,7 +137,7 @@ let ArticleTab = React.createClass({
         });
 
 	    return (
-	    	<Paper id={data._id} zDepth={ zDepth } style={paperStyle}>
+	    	<Paper id={data._id} key={data._id} zDepth={ zDepth } style={paperStyle}>
                 <div style={articleAll}>
                     <Avatar style={avatar} src={ 'images/' + data.from + '.png' } onTouchTap={ this._filter } />
                     <div style={ starPosi.wrapper }>
