@@ -11,6 +11,7 @@ let initData = {
 };
 
 //tmp variable
+let aid = null;
 let lastestTime = null;
 let tmpAidForLike = null;
 
@@ -29,6 +30,7 @@ describe('[ API unit test - articles-assignClass ]', function() {
             //init data
             var article = new Article(initData);
             article.save((err, result) => {
+                aid = result._id;
                 lastestTime = result.lastestTime;
             });
         });
@@ -104,7 +106,10 @@ describe('[ API unit test - articles-assignClass ]', function() {
     });
 
     after( (done) => {
-        // return Article.removeAsync({}, done);
-        return done();
+        return Article.findOneAndRemove({ author: 'AndrewChen'})
+                      .removeAsync()
+                      .then( (result) => {
+                          return done();
+                      });
     });
 });
