@@ -41,13 +41,86 @@ describe('[ DB data check - crawl ]', function() {
 
              //db operation
              Article.find()
+                    .limit(20)
                     .execAsync()
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(20);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
+                    });
+            
+                    return done();
+        });
+
+        it('[Crawl] 爬蟲資料庫資料充足 - github10', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.github10)
+                    .limit(5)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
+                    });
+
+                    return done();
+        });
+        
+        it('[Crawl] 爬蟲資料庫資料充足 - hackerNews', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.hackerNews)
+                    .limit(5)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
+                    });
+             
+                    return done();
+        });
+        
+        it('[Crawl] 爬蟲資料庫資料充足 - iThomeTech', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.iThomeTech)
+                    .limit(5)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
+                    });
+
+                    return done();
+        });
+        
+        it('[Crawl] 爬蟲資料庫資料充足 - iThomeNews', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.iThomeNews)
+                    .limit(5)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
+                    });
+             
+                    return done();
+        });
+        
+        it('[Crawl] 爬蟲資料庫資料充足 - githubTranding', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.githubTranding)
+                    .limit(5)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
                     });
 
                     return done();
@@ -57,20 +130,16 @@ describe('[ DB data check - crawl ]', function() {
 
             let source = [];
 
-            Object.keys(config).map( (value) => {
+            Object.keys(config.crawlName).map( (value) => {
                 source.push(value);
             });
 
              //db operation
-             Article.find()
-                    .where('from').in(source)
+             Article.find({ from: { $nin: source } })
                     .execAsync()
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
 
                     return done();
@@ -85,9 +154,6 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
 
                     return done();
@@ -102,9 +168,6 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
 
                     return done();
