@@ -25,6 +25,8 @@ var user = {
     like: []
 };
 
+var userList = null;
+
 var isLogin = false;
 
 var displayPage = 'Login';
@@ -42,6 +44,8 @@ objectAssign( Store, EventEmitter.prototype, {
     getUser: () => {
         return user;
     },
+
+    getUserList: () => { return userList; },
 
     getIsLogin: () => {
         return login;
@@ -115,7 +119,13 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
-
+        /*
+         *  取得使用者清單
+         */
+        case AppConstants.USER_LOAD:
+            userList = data;
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
 
         /*
          *  nothing

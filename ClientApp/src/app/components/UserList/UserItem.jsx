@@ -73,12 +73,15 @@ let userItem = React.createClass({
 //            marginTop:'8px',
         };
 
+        let data = this.props.data;
+
 	    return (
-	    	<Paper className="paperCard" zDepth={1} key={ this.props.data }>
+	    	<Paper className="paperCard" zDepth={1} key={ this.props.key }>
                     <Avatar style={avatar} size={70} src="images/github10.png" />
                     <div style={info} className="article">
-                        <p className="infoContent">{ this.props.data } </p>
+                        <p className="infoContent">{ data.name } </p>
                         <p className="infoContent">Skill</p>
+                        <p className="infoContent">最後登入時間： { data.lastLoginTime }</p>
                         <Checkbox
                                 style={checkbox}
                                 checkedIcon={<FontIcon  className="material-icons" style={follow}

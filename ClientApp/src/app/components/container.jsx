@@ -100,7 +100,6 @@ let container = React.createClass({
 
         };
         //<UserEdit />
-        //<UserList />
 //                <ArticleList user={this.props.user}
 //                             list={this.props.list}
 //                             filter={actionsArticle.filter} />
@@ -131,10 +130,10 @@ let container = React.createClass({
                          menuItems={menuItems}
                          onChange={this._navClick}
                          ref='leftNav'/>
-                <ArticleList user={this.props.user}
-                             list={this.props.list}
-                             filter={actionsArticle.filter} />
 
+                { this.props.list ? <ArticleList user={this.props.user}
+                                                 list={this.props.list}
+                                                 filter={actionsArticle.filter} /> : <UserList userList={this.props.userList} /> }
             </div>
 	    );
 

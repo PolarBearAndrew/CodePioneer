@@ -15,6 +15,7 @@ let AppConstants = require('../constants/AppConstants.js');
 
 //flux - actions
 let actionsLike = require('../actions/AppActions_like.jsx');
+let actionsUser = require('../actions/AppActions_User.jsx');
 let actionsArticle = require('../actions/AppActions_article.jsx');
 
 //debug
@@ -58,12 +59,8 @@ let Main = React.createClass({
             loadmore: null,     //func
         };
 
-
         switch (this.state.displayContainer) {
 
-            /*
-             * article list
-             */
             case 'ArticleList':
                 list.data = this.state.articles;
                 list.filter = this.state.filterData;
@@ -72,7 +69,6 @@ let Main = React.createClass({
                 break;
 
             case 'Library':
-
                 let likeAry = this.state.user.like;
                 let likedArticles = this.state.likedArticles;
 
@@ -108,11 +104,17 @@ let Main = React.createClass({
                 list.loadmore = null;
                 break;
 
+            case 'Follow':
+                list = false;
+                if( this.state.userList === null )
+                    actionsUser.loaduserList();
+                break;
+
             case 'Pioneer':
                 //這有個小瑕疵 資料只會load一次
                 if(this.state.theyLiked.length == 0){
                     //重新載入
-                    actionsArticle.loadTheyLiked(this.state.user.id);
+                    //actionsArticle.loadTheyLiked(this.state.user.id);
                     break;
                 }
                 list.data = this.state.theyLiked;
@@ -128,6 +130,7 @@ let Main = React.createClass({
 	    	<div id='wrapper' >
 	    		{ displayPage.Login ? <Login /> : null }
 	    		{ displayPage.Container ? <Container user={ this.state.user }
+                                                     userList={ this.state.userList }
                                                      list={ list }
                                                      filterData={ this.state.filterData } /> : null }
 	    	</div>
@@ -143,6 +146,7 @@ let Main = React.createClass({
         return {
         	//main store
         	user: MainStore.getUser(),
+            userList: MainStore.getUserList(),
             displayPage: MainStore.getDisplayPage(),
         	displayContainer: MainStore.getDisplayContainer(),
 

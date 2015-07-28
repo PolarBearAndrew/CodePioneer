@@ -2,6 +2,7 @@ let AppDispatcher = require('../dispatcher/AppDispatcher');
 let AppConstants = require('../constants/AppConstants');
 
 let address = 'http://localhost:8080/api/users';
+let streamAaddress = 'http://localhost:8080/api/users/stream';
 
 let AppActions_User = {
 
@@ -91,6 +92,28 @@ let AppActions_User = {
 		AppDispatcher.handleViewAction({
 			actionType: AppConstants.CHANGE_DISPLAY,
 			data: page
+		});
+	},
+
+	loaduserList() {
+		$.ajax({
+			url: streamAaddress + '/',
+			type: 'GET',
+
+			success: function(result){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.USER_LOAD,
+					data: result
+				});
+			},
+			error: function(err){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
 		});
 	}
 };

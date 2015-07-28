@@ -19,15 +19,15 @@ let check = checkPorperty.check;
  * respone : db result
  */
 router.get('/', (req, res, next) => {
-    
+
     debug('[GET] 查詢使用者(10) req.body ->', req.body );
-    
+
     //no check
 
     //db operation
     User.find()
-            .limit(10)
-            .sort({ time: -1 })
+            // .limit(10)
+            // .sort({ time: -1 })
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢使用者(10) success ->', result);
@@ -46,7 +46,7 @@ router.get('/', (req, res, next) => {
  * respone : db result
  */
 router.get('/stream', (req, res, next) => {
-    
+
     //check
     let miss = check( req.query, ['finalIndex', 'lastestTime'] );
     if(!miss.check){
@@ -86,7 +86,7 @@ router.get('/stream', (req, res, next) => {
  * respone : db result
  */
 router.get('/like', (req, res, next) => {
-    
+
     //check
     let miss = check( req.body, ['uid'] );
     if(!miss.check){
@@ -118,7 +118,7 @@ router.get('/like', (req, res, next) => {
  * respone : db result
  */
 router.get('/like/stream', (req, res, next) => {
-    
+
     //check
     let miss = check( req.body, ['uid'] );
     if(!miss.check){
@@ -130,7 +130,7 @@ router.get('/like/stream', (req, res, next) => {
         debug('[GET] 接續查詢喜愛使用者(10) miss data ->', miss.missData);
         return next(err);
     }
-    
+
     let finalIndex = req.query.finalIndex;
     let count = ( parseInt(finalIndex) + 10 );
 
@@ -192,7 +192,7 @@ router.get('/follow', (req, res, next) => {
  * respone : db result
  */
 router.get('/follow/stream', (req, res, next) => {
-    
+
     debug('[GET] 查詢追蹤 req.body ->', req.body );
 
     //check
@@ -206,7 +206,7 @@ router.get('/follow/stream', (req, res, next) => {
         debug('[GET] 接續查詢喜愛使用者(10) miss data ->', miss.missData);
         return next(err);
     }
-    
+
     let finalIndex = req.query.finalIndex;
     let count = ( parseInt(finalIndex) + 10 );
 

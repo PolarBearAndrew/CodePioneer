@@ -13,7 +13,7 @@ let Paper = mui.Paper;
 let UserItem = require('./UserItem.jsx');
 
 //debug
-let debug = require('debug')('app:user');
+let debug = require('debug')('app:user container');
 
 
 let userContainer = React.createClass({
@@ -45,14 +45,11 @@ let userContainer = React.createClass({
             justifyContent:'space-around',
         };
 
-//        let a={
-//            display:'flex',
-//            alignContent:'flex-start'
-//        };
-        let nameList = ['Andrew', 'Ray', 'Doro', 'Husan', 'Panda1', 'Panda2', 'Panda3', 'Panda4'];
+        let nameList = this.props.userList || [];
+        // let nameList = ['111', '222', '333'];
 
         let userItems = nameList.map( (value, index) => {
-            return <UserItem data={ value } key={ value }/> ;
+            return <UserItem data={ value } key={ index }/> ;
         })
 
 	    return (

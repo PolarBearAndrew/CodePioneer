@@ -50,11 +50,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 //router
 app.use('/', routes);
 app.use('/api/users', user);
+app.use('/api/users/stream', userStream);
 app.use('/api/like', like);
 app.use('/api/follow', follow);
 app.use('/api/article', article);
 app.use('/api/article/assign', articleAssignClass);
-app.use('/api/users/stream', userStream);
 
 //test, need to remove
 app.use('/api/testCrawlAPI', testCrawlAPI);

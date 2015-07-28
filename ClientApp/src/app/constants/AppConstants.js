@@ -4,6 +4,7 @@ module.exports = keyMirror({
 
 	//user
 	USER_LOGIN: null,
+	USER_LOAD: null,
 	CHANGE_DISPLAY: null,
 
 	//article
