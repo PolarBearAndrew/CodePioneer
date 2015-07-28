@@ -1,4 +1,4 @@
-let config = require('../config.js');
+let config = require('../config-ip.js');
 
 let path = config.path.db;
 

@@ -6,11 +6,6 @@ let config = {
 		iThomeNews : 'iThomeNews',
         githubTranding : 'githubTranding',
 	},
-	path : {
-		db : 'mongodb://127.0.0.1',
-		dblocal : 'mongodb://127.0.0.1',
-	}
-
 };
 
 module.exports = config;
