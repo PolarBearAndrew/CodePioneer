@@ -41,14 +41,16 @@ describe('[ DB data check - crawl ]', function() {
 
              //db operation
              Article.find()
+                    .limit(20)
                     .execAsync()
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(20);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
+                    // .catch( (err) => {
+                    //     should.not.exist(err);
+                    //     return done();
+                    // });
 
                     return done();
         });
@@ -58,14 +60,17 @@ describe('[ DB data check - crawl ]', function() {
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.github10)
+                    .limit(5)
                     .execAsync()
                     .then( (result) => {
+                        //console.log('', result);
                         should.exist(result);
                         result.should.with.lengthOf(5);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
+                    // .catch( (err) => {
+                    //     should.not.exist(err);
+
+                    // });
 
                     return done();
         });
@@ -152,9 +157,6 @@ describe('[ DB data check - crawl ]', function() {
                     .then( (result) => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
-                    })
-                    .catch( (err) => {
-                        //should.not.exist(err);
                     });
 
                     return done();
