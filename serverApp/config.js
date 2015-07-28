@@ -7,7 +7,7 @@ let config = {
         githubTranding : 'githubTranding',
 	},
 	path : {
-		db : 'mongodb://120.96.78.76',
+		db : 'mongodb://127.0.0.1',
 		dblocal : 'mongodb://127.0.0.1',
 	}
 
