@@ -6,7 +6,7 @@ let cookieParser = require('cookie-parser');
 let bodyParser = require('body-parser');
 
 //debug
-let debug = require('debug')('API:app.js');
+let debug = require('debug')('app.js');
 
 //entry
 let routes = require('./routes/index');
@@ -142,9 +142,9 @@ app.listen(port, () => {
 
                 //keep push data
                 likeHim[index].like.push({ aid: result[i]._id });
-                likeHim[index].follow.push({ uid });
 
                 if( i % 4 === 0 ) {
+                    likeHim[index].follow.push(uid);
 
                     //db operation
                     let him = new User(likeHim[index]);

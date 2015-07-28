@@ -20,6 +20,7 @@ var Store = {};
 //data
 var articles = [];
 var likedArticles = [];
+var theyLiked = [];
 
 //filter
 var filter = [];
@@ -33,6 +34,7 @@ objectAssign( Store, EventEmitter.prototype, {
     //data
     getArticleList() { return articles; },
     getLikedArticleList() { return likedArticles; },
+    getTheyLiked() { return theyLiked; },
 
     //filter
     getFilter(){ return filter; },
@@ -94,6 +96,16 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             //set
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
+
+        /*
+          * 載入我追蹤的人喜歡的文章
+          */
+        case AppConstants.ARTICLE_LOADTHEYLIKE:
+            theyLiked = data;
+            //set
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
 
         /*
          * 篩選文章機制

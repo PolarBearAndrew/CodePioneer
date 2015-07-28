@@ -109,8 +109,11 @@ let Main = React.createClass({
                 break;
 
             case 'Pioneer':
-
-                list.data = likedArticles;
+                if(theyLiked.length == 0 ){
+                    //重新載入
+                    actionsArticle.loadTheyLiked(this.state.user.id);
+                }
+                list.data = theyLiked;
                 list.filter = this.state.filterData;
                 list.isMoreData = false;
                 list.loadmore = null;
@@ -144,6 +147,7 @@ let Main = React.createClass({
         	//article store
             articles: ArticleStore.getArticleList(),
             likedArticles: ArticleStore.getLikedArticleList(),
+            theyLiked: ArticleStore.getTheyLiked(),
 
             //article ctrl
             filterData: ArticleStore.getFilter(),

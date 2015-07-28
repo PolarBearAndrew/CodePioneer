@@ -11,6 +11,7 @@ module.exports = keyMirror({
 	ARTICLE_LOADMORE: null,
 	ARTICLE_FILTER: null,
 	ARTICLE_LOADLIKE: null,
+	ARTICLE_LOADTHEYLIKE: null,
 
 	//like
 	LIKE_LOAD: null,

@@ -232,36 +232,37 @@ router.get('/follow/like', (req, res, next) => {
     }
 
     //db operation
-     User.find()
-            .where('follow').exists(req.query.id)
-            .execAsync()
-            .then( (result) => {
+    User.find({})
+        .execAsync()
+        .then( (result) => {
 
-                debug('[GET] 查詢追蹤者的喜愛文章 success ->', result);
+            let list = [];
 
-                let list = []
-
-                result.forEach( ( value ) => {
-                    list.concat(value.like);
-                });
-
-                result = result.map( (value) => {
-                    return value.aid;
-                });
-
-                return Article.find()
-                              .where('_id').in(list)
-                              .sort({ time: -1 })
-                              .execAsync();
-            })
-            .then( (result) => {
-                debug('[GET] 查詢追蹤者的喜愛文章 success ->', result);
-                res.json(result);
-            })
-            .catch( (err) =>{
-                debug('[GET] 查詢追蹤者的喜愛文章 fail ->', err);
-                return next(err);
+            result.forEach( (value) => {
+                if( value.follow.indexOf(req.query.uid) !== -1){
+                    list = list.concat(value.like);
+                }
             });
+
+            debug('[GET] 查詢追蹤者的喜愛文章-取得追蹤名單 success(1) ->', list);
+
+            list = list.map( (value) => {
+                return value.aid;
+            });
+
+            return Article.find()
+                          .where('_id').in(list)
+                          .sort({ time: -1 })
+                          .execAsync();
+        })
+        .then( (result) => {
+            debug('[GET] 查詢追蹤者的喜愛文章-取得文章 success(2) ->', result);
+            res.json(result);
+        })
+        .catch( (err) =>{
+            debug('[GET] 查詢追蹤者的喜愛文章 fail ->', err);
+            return next(err);
+        });
 });
 
 /*
