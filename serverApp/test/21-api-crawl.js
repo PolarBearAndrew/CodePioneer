@@ -53,17 +53,33 @@ describe('[ DB data check - crawl ]', function() {
                     return done();
         });
 
+        it('[Crawl] 爬蟲資料庫資料充足 - github10', ( done ) => {
+
+             //db operation
+             Article.find()
+                    .where('from').equals(config.crawlName.github10)
+                    .execAsync()
+                    .then( (result) => {
+                        should.exist(result);
+                        result.should.with.lengthOf(5);
+                    })
+                    .catch( (err) => {
+                        //should.not.exist(err);
+                    });
+
+                    return done();
+        });
+
         it('[Crawl] 無異質資料-from', ( done ) => {
 
             let source = [];
 
-            Object.keys(config).map( (value) => {
+            Object.keys(config.crawlName).map( (value) => {
                 source.push(value);
             });
 
              //db operation
-             Article.find()
-                    .where('from').in(source)
+             Article.find({ from: { $nin: source } })
                     .execAsync()
                     .then( (result) => {
                         should.exist(result);
