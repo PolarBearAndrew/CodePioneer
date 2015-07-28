@@ -44,100 +44,99 @@ let userEdit = React.createClass({
     },
 	render() {
             
-         let All={
-            //  textAlign:'left',
-                padding: '0px',
-                display: '-webkit-flex',
-                display:'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'column',
-                marginTop:'20px',
+//         let All={
+//             margin:'0px',
+//             padding: '0px',
+//             display:'flex',
+//             alignItems: 'center',
+//             justifyContent: 'center',
+//             flexDirection: 'column',
+//             marginTop:'20px',
+//         };
+        
+//         let photo={
+//             padding: '0px',
+//             display:'flex',
+//             alignItems: 'center',
+//             justifyContent: 'center',
+//             flexDirection: 'row',
+//         };
+        
+         let image={
+             margin:'0px',
+             padding:'0px',
+             marginTop:'-25px',
+//             marginLeft:'100px'
          };
         
-         let photo={
-//              textAlign:'left',
-                padding: '0px',
-                display: '-webkit-flex',
-                display:'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexDirection: 'row',
-            };
+         let styles = {
+             exampleImageInput: {
+                    cursor: 'pointer',
+                    position: 'absolute',
+                    top: '0',
+                    bottom: '0',
+                    right: '0',
+                    left: '0',
+                    width: '48px',
+                    opacity: '0'
+                    },
+         };
         
-          let image={
-            margin:'0px',
-            padding:'0px',
-            marginTop:'60px'
-            };
-        
-          let styles = {
-              container: {
-                  flexDirection: 'row',
-                  textAlign: 'center',
-                  margin:'0px',
-                  marginBottom: '16px',
-                  marginLeft:'100px',
-                  },
-            exampleImageInput: {
-                cursor: 'pointer',
-                position: 'absolute',
-                top: '0',
-                bottom: '0',
-                right: '0',
-                left: '0',
-                width: '48px',
-                opacity: '0'
-                },
-            };
-        
-           let country = [
+         let country = [
                { payload: '1', text: 'Taiwan' },
                { payload: '2', text: 'Japan' },
                { payload: '3', text: 'Korea ' },
                { payload: '4', text: 'America' },
-            ];
-            
-            let country_width={
-                width:'300px'
-            };
+         ];
+        
+        
+        
+//        let tt={
+//            width:'100px',
+//        };
         
 	    return (
-            <div style={All}>
-	    	<div style={photo}>
-                    <Avatar src="images/panda.png"  size={100}/>
-                    
-                    <IconButton style={image} iconClassName="material-icons" tooltipPosition="bottom-center" 
-                        tooltip="Image Upload" >file_upload
-                        <input type="file" id="imageButton" style={styles.exampleImageInput}/>
-                    </IconButton>
-            </div>
-            
-                    <br/>
-                    <TextField
-                		id="name"
-                        hintText="Name"/>
-                    <br/>
-                    <SelectField
-                      value={this.state.selectValue}
-                      onChange={this._handleSelectValueChange.bind(null, 'selectValue')}
-                      hintText="Country"
-                      menuItems={country} />
-                    <br/>
-                    <TextField
-                		id="skill"
-                        hintText="Skill"
-                        multiLine={true}/>
-                    <br/><br/>
-                    <TextField
-                		id="interest"
-                        hintText="Interest"
-                        multiLine={true}/>
-                    <br/><br/>
-                    <TextField
-                		id="introduction"
-                        hintText="Introduction"
-                        multiLine={true}/>
+            <div className="editAll">
+                <div className="editUp">
+                    <div className="editAI">
+                        <Avatar src="images/panda.png"  size={100}/>
+                        <IconButton style={image} iconClassName="material-icons" tooltipPosition="bottom-center" 
+                            tooltip="Image Upload" >file_upload
+                            <input type="file" id="imageButton" style={styles.exampleImageInput}/>
+                        </IconButton>
+                    </div>
+                    <div className="editNC">
+                        <TextField
+                            id="name"
+                            hintText="Name"/>
+                        <br/>
+                        <SelectField
+                          value={this.state.selectValue}
+                          onChange={this._handleSelectValueChange.bind(null, 'selectValue')}
+                          hintText="Country"
+                          menuItems={country} />
+                    </div>
+                </div>
+                <div className="editDown">
+                        <TextField
+                            id="skill"
+                            hintText="Skill"
+                            multiLine={true}
+                            fullWidth={true}
+                            />
+                        <br/><br/>
+                        <TextField
+                            id="interest"
+                            hintText="Interest"
+                            multiLine={true}/>
+                        <br/><br/>
+                        <TextField
+                            id="introduction"
+                            hintText="Introduction"
+                            multiLine={true}/>
+                        <br/>
+                        <textArea></textArea>
+                </div>
             </div>
 	    );
 	},
