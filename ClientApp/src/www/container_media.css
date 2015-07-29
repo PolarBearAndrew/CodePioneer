@@ -51,7 +51,7 @@
         justify-Content: center;
         align-Items: center;
         margin-top: 90px;
-        border: 2px solid red;
+/*        border: 2px solid red;*/
     }
     .editNC {
         margin: 0px;
@@ -59,15 +59,13 @@
         margin-left: 150px;
     }
     .editDown {
-        padding-left: 25%;
-        padding-right: 25%;
-        border: 2px solid blue;
+        padding-left: 15%;
+        padding-right: 15%;
+        margin-top: 20px;
+/*        border: 2px solid blue;*/
     }
     .editAll {
         margin-Top: 0px;
-        border: 2px solid green;
-    }
-    .tt{
-        width: 200px;
+/*        border: 2px solid green;*/
     }
 }
