@@ -6,7 +6,7 @@ var initData = {};
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - follow (14) ]', function() {
+describe('[ (14) API unit test - follow ]', function() {
 
     describe('破壞性測試, 蓄意少傳參數', () => {
 
@@ -24,19 +24,19 @@ describe('[ API unit test - follow (14) ]', function() {
             });
         });
 
-        it('[GET] (破壞性測試) 查詢追蹤', ( done ) => {
+        // it('[GET] (破壞性測試) 查詢追蹤', ( done ) => {
 
-            request({
-                url: 'http://localhost:8080/api/follow/',
-                method: 'GET',
-                json: true,
-                form: {}
-            }, (err, res, data) => {
+        //     request({
+        //         url: 'http://localhost:8080/api/follow/',
+        //         method: 'GET',
+        //         json: true,
+        //         form: {}
+        //     }, (err, res, data) => {
 
-                res.statusCode.should.equal(500);
-                return done();
-            });
-        });
+        //         res.statusCode.should.equal(500);
+        //         return done();
+        //     });
+        // });
 
         it('[DELETE] (破壞性測試) 取消追蹤', ( done ) => {
 
