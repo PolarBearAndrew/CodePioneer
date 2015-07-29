@@ -99,6 +99,8 @@ let container = React.createClass({
             position: 'fixed',
 
         };
+
+        console.log('this.props.setting', this.props.setting)
         //<UserEdit />
 //                <ArticleList user={this.props.user}
 //                             list={this.props.list}
@@ -132,6 +134,8 @@ let container = React.createClass({
                          onChange={this._navClick}
                          ref='leftNav'/>
 
+                { this.props.setting ? <UserEdit user={this.props.user} /> : null }
+
                 { this.props.list ? <ArticleList user={this.props.user}
                                                  list={this.props.list}
                                                  filter={actionsArticle.filter} /> : <UserList user={this.props.user}
@@ -147,11 +151,11 @@ let container = React.createClass({
 
     _navClick( e, selectedIndex, menuItem){
         //console.log('nav click',e, selectedIndex, menuItem);
-        actionsUsers.changeDisplay(menuItem.route)
+        actionsUsers.changeDisplay(menuItem.route);
     },
 
     _setting(){
-        actionsUsers.changeDisplay('Setting')
+        actionsUsers.changeDisplay('Setting');
     }
 });
 

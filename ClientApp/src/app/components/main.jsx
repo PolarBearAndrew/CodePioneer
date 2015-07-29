@@ -48,9 +48,17 @@ let Main = React.createClass({
         let displayPage = {
             Login: false,
             Container: false,
+            Setting: false,
         };
 
+        console.log('this.state.displayPage',this.state.displayPage);
+
         displayPage[this.state.displayPage] = true;
+
+        if(this.state.displayPage === 'Setting'){
+            displayPage.Container = true;
+        }
+
 
         let list = {
             data: null,         //data
@@ -130,9 +138,10 @@ let Main = React.createClass({
 	    	<div id='wrapper' >
 	    		{ displayPage.Login ? <Login /> : null }
 	    		{ displayPage.Container ? <Container user={ this.state.user }
-                                                     userList={ this.state.userList }
-                                                     list={ list }
-                                                     filterData={ this.state.filterData } /> : null }
+                                                    userList={ this.state.userList }
+                                                    setting={ displayPage.Setting }
+                                                    list={ list }
+                                                    filterData={ this.state.filterData } /> : null }
 	    	</div>
 	    );
 	},

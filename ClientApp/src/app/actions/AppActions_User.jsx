@@ -90,6 +90,8 @@ let AppActions_User = {
 
 	changeDisplay( page ) {
 
+		//conosle.log('page', )
+
 		AppDispatcher.handleViewAction({
 			actionType: AppConstants.CHANGE_DISPLAY,
 			data: page
