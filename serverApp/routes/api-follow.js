@@ -15,7 +15,7 @@ let check = checkPorperty.check;
 
 /*
  * [POST] 新增追蹤
- * request : body.uid
+ * request : body.uid, body.him
  * respone : { err: false }
  */
 router.post('/', (req, res, next) => {
@@ -94,7 +94,7 @@ router.post('/', (req, res, next) => {
 
 /*
  * [DELETE] 取消追蹤
- * request : body.uid
+ * request : body.uid, body.him
  * respone :
  */
 router.delete('/', function(req, res, next) {

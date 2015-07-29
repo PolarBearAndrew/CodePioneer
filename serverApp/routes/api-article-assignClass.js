@@ -49,7 +49,7 @@ router.get('/news/:class', (req, res, next) => {
  */
 router.get('/more/:class', (req, res, next) => {
 
-    let miss = check( req.body, ['finalIndex'] );
+    let miss = check( req.body, ['finalIndex', 'lastestTime'] );
     if(!miss.check){
         debug('[GET] 接續查詢文章(10)(指定分類) miss data ->', miss.missData);
         return next(err);
