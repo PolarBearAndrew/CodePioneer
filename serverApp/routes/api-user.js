@@ -179,7 +179,9 @@ router.post('/login', (req, res, next) => {
                 res.json({
                     login: true,
                     _id: result._id,
-                    like: result.like, });
+                    like: result.like,
+                    imgUrl: result.imgUrl
+                });
                 return;
 
             }else{

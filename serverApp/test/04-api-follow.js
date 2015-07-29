@@ -12,11 +12,11 @@ var initData = {
 };
 
 var uid = null;
-var followFrom = '123456789';
+var him = '123456789';
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - follow (04) ]', function() {
+describe('[ (04) API unit test - follow ]', function() {
 
     before(function() {
 
@@ -31,15 +31,6 @@ describe('[ API unit test - follow (04) ]', function() {
                     .catch( (err)=>{
                         debug('[ API unit test - article ] 資料初始化錯誤', err);
                     });
-
-//        return User.remove({}, (err, result) => {
-//
-//            //init data
-//            var user = new User(initData);
-//            user.save((err, result) => {
-//                uid = result._id.toString();
-//            });
-//        });
     });
 
     describe('正常操作測試', () => {
@@ -51,8 +42,9 @@ describe('[ API unit test - follow (04) ]', function() {
                 method: 'POST',
                 json: true,
                 form: {
-                    uid: uid,
-                    followFrom: followFrom
+                    //註：這邊交錯放置是因為him是不寸在得使用者,因此讓him來追蹤uid
+                    uid: him,
+                    him: uid,
                 }
             }, (err, res, data) => {
 
@@ -70,27 +62,27 @@ describe('[ API unit test - follow (04) ]', function() {
             });
         });
 
-        it('[GET] 查詢追蹤', ( done ) => {
+        // it('[GET] 查詢追蹤', ( done ) => {
 
-            request({
-                url: 'http://localhost:8080/api/follow/',
-                method: 'GET',
-                json: true,
-                form: { uid: uid }
-            }, (err, res, data) => {
+        //     request({
+        //         url: 'http://localhost:8080/api/follow/',
+        //         method: 'GET',
+        //         json: true,
+        //         form: { uid: uid }
+        //     }, (err, res, data) => {
 
 
-                //test api exist
-                should.exist(data);
-                should.not.exist(err);
-                res.statusCode.should.equal(200);
+        //         //test api exist
+        //         should.exist(data);
+        //         should.not.exist(err);
+        //         res.statusCode.should.equal(200);
 
-                //test data
-                data.should.have.property('follow').with.lengthOf(1);
+        //         //test data
+        //         data.should.have.property('follow').with.lengthOf(1);
 
-                return done();
-            });
-        });
+        //         return done();
+        //     });
+        // });
 
         it('[DELETE] 取消追蹤', ( done ) => {
 
@@ -99,8 +91,8 @@ describe('[ API unit test - follow (04) ]', function() {
                 method: 'DELETE',
                 json: true,
                 form: {
-                    uid: uid,
-                    followFrom: followFrom
+                    uid: him,
+                    him: uid,
                 }
             }, (err, res, data) => {
 

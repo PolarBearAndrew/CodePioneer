@@ -21,7 +21,7 @@ var tmpAidForLike = null;
 var Article = require('../models/article.js');
 var User = require('../models/user.js');
 
-describe('[ API unit test - articles (02) ]', function() {
+describe('[ (02) API unit test - articles ]', function() {
 
     before( () => {
 

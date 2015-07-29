@@ -16,12 +16,20 @@ var User = new mongoose.Schema({
     pwd: {
         type: String
     },
+    like: {
+        type: Array
+    },
+    follow: {
+        type: Array
+    },
     lastLoginTime: {
         type: Date,
         default: Date.now
     },
-    like: { type: Array},
-    follow: { type: Array},
+    imgUrl: {
+        type: String,
+        default: 'images/default.png'
+    },
 });
 
 //exports model
