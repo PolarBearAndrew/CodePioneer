@@ -208,7 +208,7 @@ describe('[ (02) API unit test - articles ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                data.should.with.lengthOf(12);
+                data.should.with.lengthOf(13);
 
                 return done();
             });
