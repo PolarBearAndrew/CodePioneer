@@ -97,6 +97,13 @@ let userEdit = React.createClass({
             ctrl = false;
         };
 
+        
+        
+        
+        let textArea={
+            width:'300px',
+            height:'100px'
+        };
         return (
             <div className="editAll">
                 <div className="editUp">
@@ -138,7 +145,9 @@ let userEdit = React.createClass({
                             id="introduction"
                             hintText="Introduction"
                             multiLine={true}
-                            fullWidth={ctrl}/>                        
+                            fullWidth={ctrl}/>   
+                        <br/><br/>
+                        <textArea style={textArea}></textArea>
                 </div>
             </div>
 	    );
