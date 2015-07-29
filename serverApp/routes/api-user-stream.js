@@ -27,7 +27,7 @@ router.get('/', (req, res, next) => {
     //db operation
     User.find()
             // .limit(10)
-            // .sort({ time: -1 })
+            .sort({ lastLoginTime: -1 })
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢使用者(10) success ->', result);
