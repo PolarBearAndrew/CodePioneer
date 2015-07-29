@@ -11,7 +11,9 @@ let Checkbox = mui.Checkbox;
 let FontIcon = mui.FontIcon;
 let Paper = mui.Paper;
 let Avatar = mui.Avatar;
-
+let IconButton=mui.IconButton;
+let Dialog=mui.Dialog;
+let TextField=mui.TextField;
 //debug
 let debug = require('debug')('app:user');
 
@@ -72,6 +74,12 @@ let userItem = React.createClass({
             alignItems:'flex-start',
 //            marginTop:'8px',
         };
+        
+        let more={
+            margin:'0px',
+            padding:'0px',
+            marginLeft:'200px'
+        };
 
         let data = this.props.data;
 
@@ -94,6 +102,8 @@ let userItem = React.createClass({
                         <p className="infoContent">{ data.name } </p>
                         <p className="infoContent">Skill</p>
                         <p className="infoContent">最後登入時間： { data.lastLoginTime }</p>
+                        <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center" 
+                        tooltip="more.." onTouchTap={this._Profiles}>more_horiz</IconButton>
                         <Checkbox
                                 style={checkbox}
                                 onCheck={this._like}
@@ -103,6 +113,40 @@ let userItem = React.createClass({
                                 unCheckedIcon={<FontIcon className="material-icons" style={follow}
                                 color={Colors.pink500}>star_border</FontIcon>} />
                     </div>
+            
+            
+            
+                    <Dialog
+			        title="Profiles"
+			        actions={[
+                        { text: 'sure', onTouchTap: this._onSingupSubmit, ref: 'submit' } ]}
+                    actionFocus="submit"
+			        ref="ProfilesDialog">
+                    <TextField
+                        defaultValue={data.name}
+                        disabled={false} />
+                    <br/>
+                    <TextField
+                        defaultValue="Taiwan"
+                        disabled={false} />
+                    <br/>
+                    <TextField
+                        defaultValue={ data.lastLoginTime }
+                        disabled={false} />
+                    <br/>
+                    <TextField
+                        defaultValue="Skill"
+                        disabled={false} />
+                    <br/>
+                    <TextField
+                        defaultValue="Interest"
+                        disabled={false} />
+                    <br/>
+                    <TextField
+                        defaultValue="Introduction"
+                        disabled={false} />
+                    <br/>
+		        </Dialog>
             </Paper>
 	    );
 
@@ -117,7 +161,10 @@ let userItem = React.createClass({
             this.props.follow(this.props.user.id, this.props.data._id);
         else
             this.props.unfollow(this.props.user.id, this.props.data._id);
-    }
+    },
+    _Profiles(){
+   	    this.refs.ProfilesDialog.show();
+    },
 });
 
 module.exports = userItem;
