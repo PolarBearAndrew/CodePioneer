@@ -100,8 +100,8 @@ let Main = React.createClass({
                 //丟入資料
                 list.data = likedArticles;
                 list.filter = this.state.filterData;
-                // list.isMoreData = false;
-                // list.loadmore = null;
+                list.isMoreData = false;
+                list.loadmore = null;
                 break;
 
             case 'Follow':
