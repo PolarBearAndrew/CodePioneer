@@ -97,7 +97,7 @@ router.get('/', function(req, res, next) {
 
 /*
  * [DELETE] 刪除收藏文章
- * request : body.aid
+ * request : body.aid, body.uid
  * respone : { err: false }
  */
 router.delete('/', function(req, res, next) {

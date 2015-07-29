@@ -13,16 +13,18 @@ var uid = null;
 describe('[ (06) API unit test - user-stream ]', () => {
 
     before( () => {
-
-        return User.remove({ author: 'AndrewChen' }, (err, result) => {
-
-            //init data
-            var user = new Article(initData);
-            user.save((err, result) => {
-                uid = result._id;
-                lastestTime = result.lastestTime;
-            });
-        });
+        
+        return  User.removeAsync({name: '測試人員'})
+                    .then( (result) => {
+                        let user = new User(initData);
+                        return user.saveAsync();
+                    })
+                    .then( (result) => {
+                        uid = result._id;
+                    })
+                    .catch( (err)=>{
+                        debug('[ API unit test - users ] 資料初始化錯誤', err);
+                    });
     });
 
     describe('正常操作測試', () => {
@@ -74,9 +76,10 @@ describe('[ (06) API unit test - user-stream ]', () => {
             
             
             request({
-                url: queryString('http://localhost:8080/api/users/stream/like', {  } ),
+                url: queryString('http://localhost:8080/api/users/stream/like'),
                 method: 'GET',
                 json: true,
+                form: { uid: uid }
             }, (err, res, data) => {
                 
                 //test api exist

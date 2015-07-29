@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
 
     //db operation
     User.find()
-            // .limit(10)
+            .limit(10)
             .sort({ lastLoginTime: -1 })
             .execAsync()
             .then( (result) => {
@@ -120,14 +120,9 @@ router.get('/like', (req, res, next) => {
 router.get('/like/stream', (req, res, next) => {
 
     //check
-    let miss = check( req.body, ['uid'] );
+    let miss = check( req.body, ['uid', 'finalIndex', 'lastestTime'] );
     if(!miss.check){
         debug('[GET] 接續查詢喜愛使用者(10) miss data ->', miss.missData);
-        return next(err);
-    }
-    let mis = check( req.query, ['finalIndex', 'lastestTime'] );
-    if(!mis.check){
-        debug('[GET] 接續查詢喜愛使用者(10) miss data ->', mis.missData);
         return next(err);
     }
 
