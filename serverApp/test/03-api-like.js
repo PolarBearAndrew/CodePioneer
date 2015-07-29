@@ -16,7 +16,7 @@ var aid = 'test-article-id';
 
 var User = require('../models/user.js');
 
-describe('[ API unit test - like (03) ]', function() {
+describe('[ (03) API unit test - like ]', function() {
 
     before(function() {
 

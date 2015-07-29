@@ -96,8 +96,8 @@ router.get('/like', (req, res, next) => {
 
     //db operation
      User.find()
-            .limit(10)
             .where('_id').in(req.body.uid)
+            .limit(10)
             .sort({ time: -1 })
             .execAsync()
             .then( (result) => {
