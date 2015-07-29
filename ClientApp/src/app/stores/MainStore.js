@@ -24,6 +24,7 @@ var user = {
     email: '',
     like: [],
     follow: [],
+    imgUrl: '',
 };
 
 var userList = null;
@@ -84,6 +85,7 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
         case AppConstants.USER_LOGIN:
             isLogin = data.login;
             user.id = data._id;
+            user.imgUrl = data.imgUrl;
 
             let tmp = data.like.map( (value) => {
                 return value.aid;

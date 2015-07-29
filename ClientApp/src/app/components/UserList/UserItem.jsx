@@ -89,7 +89,7 @@ let userItem = React.createClass({
 
 	    return (
 	    	<Paper className="paperCard" zDepth={1} key={ this.props.key } >
-                    <Avatar style={avatar} size={70} src="images/github10.png"  onTouchTap={this._showLike}/>
+                    <Avatar style={avatar} size={70} src={ data.imgUrl }  onTouchTap={this._showLike}/>
                     <div style={info} className="article">
                         <p className="infoContent">{ data.name } </p>
                         <p className="infoContent">Skill</p>

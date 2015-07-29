@@ -108,11 +108,10 @@ app.listen(port, () => {
         pwd: '123',
         like: [],
         follow: [],
+        imgUrl: 'images/andrew.png'
     });
 
     let uid = null;
-
-    //test main user
 
     User.removeAsync({})
         .then(() => {
@@ -131,9 +130,9 @@ app.listen(port, () => {
 
 
             let likeHim = [
-                { name: '被追蹤的人1', email: '999', pwd: '999', like: [], follow: [], },
-                { name: '被追蹤的人2', email: '999', pwd: '999', like: [], follow: [], },
-                { name: '被追蹤的人3', email: '999', pwd: '999', like: [], follow: [], }
+                { name: '雷尚話', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/ray.png' },
+                { name: '洪于雅', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/doro.png' },
+                { name: '陳思璇', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/hsuan.png' }
             ];
 
             //set articles to arr
