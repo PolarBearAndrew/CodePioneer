@@ -58,26 +58,26 @@ router.get('/stream', (req, res, next) => {
     let count = ( parseInt(finalIndex) + 10 );//
 
     //db operation
-     User.find()
-            .limit(count)
-            .where('time <= ' + req.query.lastestTime)
-            .sort({ time: -1 })
-            .execAsync()
-            .then( (result) => {
+    User.find()
+        .limit(count)
+        .where('time <= ' + req.query.lastestTime)
+        .sort({ time: -1 })
+        .execAsync()
+        .then( (result) => {
 
-                let data = result.filter( (value, index) => {
-                    return index >= finalIndex;
-                });
-
-                debug('接續查詢使用者(10) success (data) ->', data);
-
-                res.json( data );
-                return;
-            })
-            .catch( (err) =>{
-                debug('接續查詢使用者(10) fail ->', err);
-                return next(err.message);
+            let data = result.filter( (value, index) => {
+                return index >= finalIndex;
             });
+
+            debug('接續查詢使用者(10) success (data) ->', data);
+
+            res.json( data );
+            return;
+        })
+        .catch( (err) =>{
+            debug('接續查詢使用者(10) fail ->', err);
+            return next(err.message);
+        });
 });
 
 /*
@@ -86,38 +86,6 @@ router.get('/stream', (req, res, next) => {
  * respone : db result
  */
 router.get('/like', (req, res, next) => {
-
-    //check
-    let miss = check( req.body, ['uid'] );
-    if(!miss.check){
-        debug('[GET] 查詢喜愛使用者(10) miss data ->', miss.missData);
-        return next(err);
-    }
-
-    //db operation
-     User.find()
-            .where('_id').in(req.body.uid)
-            .limit(10)
-            .sort({ time: -1 })
-            .execAsync()
-            .then( (result) => {
-
-                debug('[GET] 查詢喜愛使用者(10) success ->', result);
-                res.json( result );
-                return;
-            })
-            .catch( (err) =>{
-                debug('[GET] 查詢喜愛使用者(10) fail ->', err);
-                return next(err);
-            });
-});
-
-/*
- * [GET] 接續查詢喜愛使用者(10)
- * request : body.uid, query.finalIndex, query.lastestTime
- * respone : db result
- */
-router.get('/like/stream', (req, res, next) => {
 
     //check
     let miss = check( req.body, ['uid', 'finalIndex', 'lastestTime'] );
@@ -130,22 +98,24 @@ router.get('/like/stream', (req, res, next) => {
     let count = ( parseInt(finalIndex) + 10 );
 
     //db operation
-     User.find()
-            .limit(count)
-            .where('_id').in(req.body.uid)
-            .where('time <= ' + req.query.lastestTime)
-            .sort({ time: -1 })
-            .execAsync()
-            .then( (result) => {
+    // User.find()
+    //     .where('_id').in(req.query.uid)
+    //     .limit(10)
+    //     .sort({ time: -1 })
+    //     .execAsync()
+    //     .then( (result) => {
 
-                debug('[GET] 接續查詢喜愛使用者(10) success ->', result);
-                res.json( result );
-                return;
-            })
-            .catch( (err) =>{
-                debug('[GET] 接續查詢喜愛使用者(10) fail ->', err);
-                return next(err);
-            });
+    //         console.log('hiiii!!!');
+
+    //         debug('[GET] 查詢喜愛使用者(10) success ->', result);
+    //         res.json( result );
+    //         return;
+    //     })
+    //     .catch( (err) =>{
+    //         debug('[GET] 查詢喜愛使用者(10) fail ->', err);
+    //         return next(err);
+    //     });
 });
+
 
 module.exports = router;

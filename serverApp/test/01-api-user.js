@@ -4,8 +4,6 @@ var request = require('request');
 //debug
 var debug = require('debug')('TEST:user');
 
-
-
 //init data
 var initData = {
     name: 'AndrewChen',
@@ -26,7 +24,7 @@ describe('[ (01) API unit test - users ]', () => {
                         let user = new User(initData);
                         return user.saveAsync();
                     })
-                    .then( (result) => {
+                    .spread( (result) => {
                         uid = result._id;
                     })
                     .catch( (err)=>{
