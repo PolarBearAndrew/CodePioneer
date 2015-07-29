@@ -115,11 +115,11 @@ let container = React.createClass({
                                                                             person</IconButton>} >
                                                 <List>
                                                     <ListItem
-                                                      leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
+                                                      leftAvatar={<Avatar  className="material-icons">Setting</Avatar>}
                                                       primaryText="Setting" />
                                                     <ListDivider inset={true} />
                                                     <ListItem
-                                                      leftAvatar={<Avatar  className="material-icons">person_outline</Avatar>}
+                                                      leftAvatar={<Avatar  className="material-icons">Logout</Avatar>}
                                                       primaryText="Logout"/>
                                                     <ListDivider inset={true} />
                                                 </List>
