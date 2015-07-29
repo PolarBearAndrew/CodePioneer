@@ -116,6 +116,7 @@ let container = React.createClass({
                                                 <List>
                                                     <ListItem
                                                       leftAvatar={<Avatar  className="material-icons">settings</Avatar>}
+                                                      onTouchTap={ this._setting }
                                                       primaryText="Setting" />
                                                     <ListDivider inset={true} />
                                                     <ListItem
@@ -145,9 +146,13 @@ let container = React.createClass({
     },
 
     _navClick( e, selectedIndex, menuItem){
-        console.log('nav click',e, selectedIndex, menuItem);
+        //console.log('nav click',e, selectedIndex, menuItem);
         actionsUsers.changeDisplay(menuItem.route)
     },
+
+    _setting(){
+        actionsUsers.changeDisplay('Setting')
+    }
 });
 
 module.exports = container;
