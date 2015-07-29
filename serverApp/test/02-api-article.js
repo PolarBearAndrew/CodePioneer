@@ -21,7 +21,7 @@ var tmpAidForLike = null;
 var Article = require('../models/article.js');
 var User = require('../models/user.js');
 
-describe('[ API unit test - articles (02) ]', function() {
+describe('[ (02) API unit test - articles ]', function() {
 
     before( () => {
 
@@ -208,7 +208,7 @@ describe('[ API unit test - articles (02) ]', function() {
                 should.not.exist(err);
                 res.statusCode.should.equal(200);
 
-                data.should.with.lengthOf(12);
+                data.should.with.lengthOf(13);
 
                 return done();
             });

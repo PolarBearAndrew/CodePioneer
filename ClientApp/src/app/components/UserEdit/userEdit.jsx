@@ -88,14 +88,16 @@ let userEdit = React.createClass({
                { payload: '3', text: 'Korea ' },
                { payload: '4', text: 'America' },
          ];
+    
+//        let screenWidth = screen.width;
+        let screenWidth = document.body.scrollWidth;
+        let ctrl = true;
         
-        
-        
-//        let tt={
-//            width:'100px',
-//        };
-        
-	    return (
+        if(screenWidth <= 768 ){
+            ctrl = false;
+        };
+
+        return (
             <div className="editAll">
                 <div className="editUp">
                     <div className="editAI">
@@ -105,11 +107,12 @@ let userEdit = React.createClass({
                             <input type="file" id="imageButton" style={styles.exampleImageInput}/>
                         </IconButton>
                     </div>
+                    <br/><br/>
                     <div className="editNC">
                         <TextField
                             id="name"
-                            hintText="Name"/>
-                        <br/>
+                            hintText="Name" />
+                        <br/><br/>
                         <SelectField
                           value={this.state.selectValue}
                           onChange={this._handleSelectValueChange.bind(null, 'selectValue')}
@@ -118,24 +121,24 @@ let userEdit = React.createClass({
                     </div>
                 </div>
                 <div className="editDown">
+                        <br/>
                         <TextField
                             id="skill"
                             hintText="Skill"
                             multiLine={true}
-                            fullWidth={true}
-                            />
+                            fullWidth={ctrl}/>
                         <br/><br/>
                         <TextField
                             id="interest"
                             hintText="Interest"
-                            multiLine={true}/>
+                            multiLine={true}
+                            fullWidth={ctrl}/>
                         <br/><br/>
                         <TextField
                             id="introduction"
                             hintText="Introduction"
-                            multiLine={true}/>
-                        <br/>
-                        <textArea></textArea>
+                            multiLine={true}
+                            fullWidth={ctrl}/>                        
                 </div>
             </div>
 	    );
