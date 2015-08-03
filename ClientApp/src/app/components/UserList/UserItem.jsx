@@ -99,19 +99,21 @@ let userItem = React.createClass({
             return null;   
         
         
+        //Dialog，放文章資料設定
+//        { userArticle }
         
-        var userArticle = data.map((value, index)=>{
-            return <UserArticle
-                    key={index}
-                    data={value}
-                    user={this.props.user}
-
-                    like={actionsLike.like}
-                    unlike={actionsLike.unlike}
-
-                    filter={this.props.filter}
-                    filterData={this.props.list.filter} />;
-        }, this);
+//        var userArticle = data.map((value, index)=>{
+//            return <UserArticle
+//                    key={index}
+//                    data={value}
+//                    user={this.props.user}
+//
+//                    like={actionsLike.like}
+//                    unlike={actionsLike.unlike}
+//
+//                    filter={this.props.filter}
+//                    filterData={this.props.list.filter} />;
+//        }, this);
 
 	    return (
 	    	<Paper className="paperCard" zDepth={1} key={ this.props.key } >
@@ -135,13 +137,9 @@ let userItem = React.createClass({
                     </div>
                     <Dialog
                         title="Article"
-                        actions={[
-                            { text: 'sure', onTouchTap: this._onSingupSubmit, ref: 'submit' } ]}
                         actionFocus="submit"
                         ref="ProfilesDialog">
 
-                        { userArticle }
-            
 		            </Dialog>
             </Paper>
 	    );

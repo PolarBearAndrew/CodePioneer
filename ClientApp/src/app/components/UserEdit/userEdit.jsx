@@ -61,6 +61,9 @@ let userEdit = React.createClass({
 //             justifyContent: 'center',
 //             flexDirection: 'row',
 //         };
+        let title={
+            fontSize:'30px',
+        };
         
          let image={
              margin:'0px',
@@ -88,7 +91,8 @@ let userEdit = React.createClass({
                { payload: '3', text: 'Korea ' },
                { payload: '4', text: 'America' },
          ];
-    
+//          用來判斷rwd的另一種方法
+        
 //        let screenWidth = screen.width;
         let screenWidth = document.body.scrollWidth;
         let ctrl = true;
@@ -96,9 +100,6 @@ let userEdit = React.createClass({
         if(screenWidth <= 768 ){
             ctrl = false;
         };
-
-        
-        
         
         let textArea={
             width:'250px',
@@ -106,9 +107,10 @@ let userEdit = React.createClass({
         };
         return (
             <div className="editAll">
+            <p style={title} className="title">Edit profile</p>
                 <div className="editUp">
                     <div className="editAI">
-                        <Avatar src="images/panda.png"  size={100}/>
+                        <Avatar src="images/default.png"  size={100}/>
                         <IconButton style={image} iconClassName="material-icons" tooltipPosition="bottom-center" 
                             tooltip="Image Upload" >file_upload
                             <input type="file" id="imageButton" style={styles.exampleImageInput}/>

@@ -92,6 +92,7 @@ let ArticleTab = React.createClass({
 
         let contents4 = {
             margin:'0px',
+            marginLeft:'15px',
             padding:'0px',
             size:'50px',
         };
@@ -104,7 +105,8 @@ let ArticleTab = React.createClass({
 
         let starPosi = {
             star : { marginLeft: 'auto'},
-            wrapper : { width: '100%', marginBottom: '14px' }
+            wrapper : { margin:'0px',width: '100%', marginBottom: '14px'},
+            
         }
 
         let avatar={
@@ -135,6 +137,10 @@ let ArticleTab = React.createClass({
                 };
             }
         });
+        
+        let avatarAuthor={
+            marginLeft:'auto',
+        };
 
 	    return (
 	    	<Paper id={data._id} key={data._id} zDepth={ zDepth } style={paperStyle}>
@@ -155,8 +161,13 @@ let ArticleTab = React.createClass({
                           <p style={contents2} className="comments">
                             { data.info ? data.info[0] : null }
                           </p>
+                            <Avatar style={avatarAuthor} src="images/panda.png"  size={24}/>
+                            <Avatar  src="images/panda.png"  size={24}/>
+                            <Avatar  src="images/panda.png"  size={24}/>
+                            <Avatar  src="images/panda.png"  size={24}/>
+                            <Avatar  src="images/panda.png"  size={24}/>
                         </div>
-                    </div>
+                    </div>    
                     <div style={ starPosi.star }>
                             <Checkbox style={contents4 }
                                 // name="checkboxName4"
