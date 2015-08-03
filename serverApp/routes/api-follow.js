@@ -32,29 +32,45 @@ router.post('/', (req, res, next) => {
     //tmp variable, destination info
     let followAry ;
     let info = { _id: req.body.him };
+    let likeData = null;
 
     //db operation
     User.findOne(info)
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             if(result){
+
+                //push to follow array
                 followAry = result.follow;
                 followAry.push(req.body.uid);
+
+                //get like data
+                likeData = result.like;
             }
 
-            return(
-                User.findOneAndUpdate( info, { follow: followAry } )
-                    .updateAsync()
-            );
+            return User.findOneAndUpdate( info, { follow: followAry } )
+                       .updateAsync();
         })
-        .then( (result) => {
+        .then( result => {
             debug('[POST] 新增追蹤 success ->', result);
             res.json(result);
-            return;
+
+            //all he like rank add 1
+            return Article.find().execAsync();
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[POST] 新增追蹤 fail ->', err);
+            return next(err);
+        })
+        .then( result => {
+            likeData.forEach( val => {
+                Article.findOneAndUpdate(val, { $inc: { rank: +1 }} )
+                       .updateAsync();
+            });
+        })
+        .catch( err => {
+            debug('[POST] 新增追蹤-領頭羊演算法 fail ->', err);
             return next(err);
         });
 });

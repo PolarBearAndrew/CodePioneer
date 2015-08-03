@@ -130,7 +130,7 @@ app.listen(port, () => {
 
 
             let likeHim = [
-                { name: '雷尚話', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/ray.png' },
+                { name: '雷尚樺', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/ray.png' },
                 { name: '洪于雅', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/doro.png' },
                 { name: '陳思璇', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/hsuan.png' },
                 { name: '蔡鄭欽', email: '999', pwd: '999', like: [], follow: [], },
