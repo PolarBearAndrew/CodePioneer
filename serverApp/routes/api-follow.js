@@ -32,29 +32,39 @@ router.post('/', (req, res, next) => {
     //tmp variable, destination info
     let followAry ;
     let info = { _id: req.body.him };
+    let likeData = null;
 
     //db operation
     User.findOne(info)
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             if(result){
                 followAry = result.follow;
                 followAry.push(req.body.uid);
+                likeData = result.like = [];
             }
 
-            return(
-                User.findOneAndUpdate( info, { follow: followAry } )
-                    .updateAsync()
-            );
+            return User.findOneAndUpdate( info, { follow: followAry } )
+                       .updateAsync();
         })
-        .then( (result) => {
+        .then( result => {
             debug('[POST] 新增追蹤 success ->', result);
             res.json(result);
-            return;
+            return Promise.resolve(likeData);
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[POST] 新增追蹤 fail ->', err);
+            return next(err);
+        })
+        .then( result => {
+            result.forEach( val => {
+                Article.findOneAndUpdate( { _id: val }, { $inc: { rank: +1 }} )
+                       .updateAsync();
+            });
+        })
+        .catch( err => {
+            debug('[POST] 新增追蹤-領頭羊演算法 fail ->', err);
             return next(err);
         });
 });
@@ -111,6 +121,7 @@ router.delete('/', function(req, res, next) {
     //tmp variable, destination info
     let followAry;
     let info = { _id: req.body.him };
+    let likeData = null;
 
     //db operation
     User.findOne(info)
@@ -122,6 +133,8 @@ router.delete('/', function(req, res, next) {
                 followAry = followAry.filter( (value) => {
                     return value != req.body.uid;
                 });
+
+                likeData = result.like || [];
             }
 
             return(
@@ -133,10 +146,20 @@ router.delete('/', function(req, res, next) {
         .then( (result) => {
             debug('[DELETE] 取消追蹤 success ->', result);
             res.json(result);
-            return;
+            return Promise.resolve(likeData);
         })
         .catch( (err) => {
             debug('[DELETE] 取消追蹤 fail ->', err);
+            return next(err);
+        })
+        .then( result => {
+            result.forEach( val => {
+                Article.findOneAndUpdate({ _id: val}, { $inc: { rank: -1 }} )
+                       .updateAsync();
+            });
+        })
+        .catch( err => {
+            debug('[POST] 新增追蹤-領頭羊演算法 fail ->', err);
             return next(err);
         });
 });

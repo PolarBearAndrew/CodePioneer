@@ -246,10 +246,6 @@ router.get('/follow/like', (req, res, next) => {
 
             debug('[GET] 查詢追蹤者的喜愛文章-取得追蹤名單 success(1) ->', list);
 
-            list = list.map( (value) => {
-                return value.aid;
-            });
-
             return Article.find()
                           .where('_id').in(list)
                           .sort({ time: -1 })

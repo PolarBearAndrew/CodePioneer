@@ -24,7 +24,7 @@ var Article = new mongoose.Schema({
     },
     rank: {
         type: Number,
-        default: null
+        default: 0
     },
     time: {
         type: Number,

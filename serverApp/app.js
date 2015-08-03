@@ -130,7 +130,7 @@ app.listen(port, () => {
 
 
             let likeHim = [
-                { name: '雷尚話', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/ray.png' },
+                { name: '雷尚樺', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/ray.png' },
                 { name: '洪于雅', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/doro.png' },
                 { name: '陳思璇', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/hsuan.png' },
                 { name: '蔡鄭欽', email: '999', pwd: '999', like: [], follow: [], },
@@ -141,7 +141,7 @@ app.listen(port, () => {
             for (var i = result.length - 1; i >= 0; i--) {
 
                 //keep push data
-                likeHim[index].like.push({ aid: result[i]._id });
+                likeHim[index].like.push(result[i]._id);
 
                 if( i % 4 === 0 ) {
                     likeHim[index].follow.push(uid);

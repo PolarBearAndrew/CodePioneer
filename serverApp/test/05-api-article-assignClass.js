@@ -1,4 +1,5 @@
-let request = require('request');
+import request from 'request';
+import queryString from '../feature/makerQueryString.js';
 
 //init data
 let initData = {
@@ -65,10 +66,9 @@ describe('[ (05) API unit test - articles-assignClass ]', function() {
             let finalIndex = 10;
 
             request({
-                url: 'http://localhost:8080/api/article/assign/more/' + config.crawlName.github10,
+                url: queryString( 'http://localhost:8080/api/article/assign/more/' + config.crawlName.github10, { finalIndex, lastestTime }),
                 method: 'GET',
                 json: true,
-                form: { finalIndex, lastestTime }
             }, (err, res, data) => {
 
                 //test api exist
