@@ -14,6 +14,10 @@ let Avatar = mui.Avatar;
 let IconButton=mui.IconButton;
 let Dialog=mui.Dialog;
 let TextField=mui.TextField;
+
+//元件
+let UserArticle = require('./UserArticle.jsx');
+
 //debug
 let debug = require('debug')('app:user');
 
@@ -92,16 +96,32 @@ let userItem = React.createClass({
         }
 
         if(data._id === this.props.user.id)
-            return null;
+            return null;   
+        
+        
+        
+        var userArticle = data.map((value, index)=>{
+            return <UserArticle
+                    key={index}
+                    data={value}
+                    user={this.props.user}
 
+                    like={actionsLike.like}
+                    unlike={actionsLike.unlike}
+
+                    filter={this.props.filter}
+                    filterData={this.props.list.filter} />;
+        }, this);
 
 	    return (
 	    	<Paper className="paperCard" zDepth={1} key={ this.props.key } >
                     <Avatar style={avatar} size={70} src={ data.imgUrl }  onTouchTap={this._showLike}/>
                     <div style={info} className="article">
                         <p className="infoContent">{ data.name } </p>
+                        <p className="infoContent">Taiwan</p>
+                        <p className="infoContent">{ data.lastLoginTime }</p>
                         <p className="infoContent">Skill</p>
-                        <p className="infoContent">最後登入時間： { data.lastLoginTime }</p>
+                        <p className="infoContent">Introduction</p>
                         <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center" 
                         tooltip="more.." onTouchTap={this._Profiles}>more_horiz</IconButton>
                         <Checkbox
@@ -113,40 +133,16 @@ let userItem = React.createClass({
                                 unCheckedIcon={<FontIcon className="material-icons" style={follow}
                                 color={Colors.pink500}>star_border</FontIcon>} />
                     </div>
-            
-            
-            
                     <Dialog
-			        title="Profiles"
-			        actions={[
-                        { text: 'sure', onTouchTap: this._onSingupSubmit, ref: 'submit' } ]}
-                    actionFocus="submit"
-			        ref="ProfilesDialog">
-                    <TextField
-                        defaultValue={data.name}
-                        disabled={false} />
-                    <br/>
-                    <TextField
-                        defaultValue="Taiwan"
-                        disabled={false} />
-                    <br/>
-                    <TextField
-                        defaultValue={ data.lastLoginTime }
-                        disabled={false} />
-                    <br/>
-                    <TextField
-                        defaultValue="Skill"
-                        disabled={false} />
-                    <br/>
-                    <TextField
-                        defaultValue="Interest"
-                        disabled={false} />
-                    <br/>
-                    <TextField
-                        defaultValue="Introduction"
-                        disabled={false} />
-                    <br/>
-		        </Dialog>
+                        title="Article"
+                        actions={[
+                            { text: 'sure', onTouchTap: this._onSingupSubmit, ref: 'submit' } ]}
+                        actionFocus="submit"
+                        ref="ProfilesDialog">
+
+                        { userArticle }
+            
+		            </Dialog>
             </Paper>
 	    );
 
