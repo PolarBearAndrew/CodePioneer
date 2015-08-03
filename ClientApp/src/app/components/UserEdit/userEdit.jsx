@@ -101,7 +101,7 @@ let userEdit = React.createClass({
         
         
         let textArea={
-            width:'300px',
+            width:'250px',
             height:'100px'
         };
         return (
@@ -136,18 +136,11 @@ let userEdit = React.createClass({
                             fullWidth={ctrl}/>
                         <br/><br/>
                         <TextField
-                            id="interest"
-                            hintText="Interest"
-                            multiLine={true}
-                            fullWidth={ctrl}/>
-                        <br/><br/>
-                        <TextField
                             id="introduction"
                             hintText="Introduction"
                             multiLine={true}
                             fullWidth={ctrl}/>   
                         <br/><br/>
-                        <textArea style={textArea}></textArea>
                 </div>
             </div>
 	    );
