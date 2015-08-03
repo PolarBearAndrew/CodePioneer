@@ -44,7 +44,7 @@ router.post('/', (req, res, next) => {
     });
 
     //db operation
-    article.saveAsync()
+     article.saveAsync()
             .spread( (result) => {
                 debug('[POST] 新增文章 success ->', result);
                 res.json(result);
