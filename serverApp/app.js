@@ -141,7 +141,7 @@ app.listen(port, () => {
             for (var i = result.length - 1; i >= 0; i--) {
 
                 //keep push data
-                likeHim[index].like.push({ aid: result[i]._id });
+                likeHim[index].like.push(result[i]._id);
 
                 if( i % 4 === 0 ) {
                     likeHim[index].follow.push(uid);

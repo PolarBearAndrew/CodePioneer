@@ -49,19 +49,19 @@ router.get('/news/:class', (req, res, next) => {
  */
 router.get('/more/:class', (req, res, next) => {
 
-    let miss = check( req.body, ['finalIndex', 'lastestTime'] );
+    let miss = check( req.query, ['finalIndex', 'lastestTime'] );
     if(!miss.check){
         debug('[GET] 接續查詢文章(10)(指定分類) miss data ->', miss.missData);
         return next(err);
     }
 
-    let finalIndex = req.body.finalIndex;
+    let finalIndex = req.query.finalIndex;
     let count = ( parseInt(finalIndex, 10) + 10 );
 
     //db operation
      Article.find()
             .limit(count)
-            .where('time <= ' + req.body.lastestTime)
+            .where('time <= ' + req.query.lastestTime)
             .sort({ time: -1 })
             .execAsync()
             .then( (result) => {

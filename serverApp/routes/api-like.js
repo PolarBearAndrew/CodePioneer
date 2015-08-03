@@ -35,29 +35,34 @@ router.post('/', function(req, res, next) {
     //tmp variable, destination info
     let likeAry ;
     let info = { _id: req.body.uid };
+    let followerCount = 0;
 
     //db operation
     User.findOne(info)
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             if(result){
                 likeAry = result.like;
-                likeAry.push( { aid: req.body.aid });
+                likeAry.push(req.body.aid);
+                followerCount = parseInt(result.follow.length) || 0;
             }
-
-            return(
-                User.findOneAndUpdate( info, { like: likeAry } )
-                    .updateAsync()
-            );
+            return User.findOneAndUpdate( info, { like: likeAry } )
+                       .updateAsync();
         })
-        .then( (result) => {
+        .then( result => {
             debug('[POST] 新增收藏文章 success ->', result);
             res.json(req.body.aid);
-            return;
+            return Article.findOneAndUpdate( { _id: req.body.aid }, { $inc: { rank: followerCount }} )
+                          .updateAsync();
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[POST] 新增收藏文章 fail ->', err);
+            return next(err);
+        })
+        .then( result => {})
+        .catch( err => {
+            debug('[POST] 新增收藏文章-領頭羊演算法 fail ->', err);
             return next(err);
         });
 });
@@ -135,10 +140,16 @@ router.delete('/', function(req, res, next) {
         .then( (result) => {
             debug('[DELETE] 刪除收藏文章 success ->', result);
             res.json(req.body.aid);
-            return;
+            return Article.findOneAndUpdate( { _id: req.body.aid }, { $inc: { rank: followerCount * -1 }} )
+                          .updateAsync();
         })
         .catch( (err) => {
             debug('[DELETE] 刪除收藏文章 fail ->', err);
+            return next(err);
+        })
+        .then( result => {})
+        .catch( err => {
+            debug('[DELETE] 刪除收藏文章-領頭羊演算法 fail ->', err);
             return next(err);
         });
 });
