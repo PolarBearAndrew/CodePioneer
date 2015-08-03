@@ -13,6 +13,7 @@ var	Article = require('../models/article.js');
 let checkPorperty = require('../feature/checkProperty.js');
 let check = checkPorperty.check;
 
+//sort
 
 //=======================================================
 
@@ -101,7 +102,7 @@ router.get('/news', (req, res, next) => {
     //db operation
      Article.find()
             .limit(10)
-            .sort({ time: -1 })
+            .sort({ rank: -1 })
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢最新文章(10) success ->', result);
@@ -133,7 +134,7 @@ router.get('/news/:count', (req, res, next) => {
     //db operation
      Article.find()
             .limit(req.params.count)
-            .sort({ time: -1 })
+            .sort({ rank: -1 })
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢最新文章(n) success ->', result);
@@ -166,7 +167,7 @@ router.get('/stream', (req, res, next) => {
      Article.find()
             .limit(count)
             .where('time <= ' + req.query.lastestTime)
-            .sort({ time: -1 })
+            .sort({ rank: -1 })
             .execAsync()
             .then( (result) => {
 
@@ -204,7 +205,7 @@ router.get('/like', (req, res, next) => {
     //db operation
      Article.find()
             .where('_id').in(like)
-            .sort({ time: -1 })
+            .sort({ rank: -1 })
             .execAsync()
             .then( (result) => {
 
@@ -248,7 +249,7 @@ router.get('/follow/like', (req, res, next) => {
 
             return Article.find()
                           .where('_id').in(list)
-                          .sort({ time: -1 })
+                          .sort({ rank: -1 })
                           .execAsync();
         })
         .then( (result) => {

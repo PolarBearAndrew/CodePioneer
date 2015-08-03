@@ -53,14 +53,16 @@ router.post('/', function(req, res, next) {
         .then( result => {
             debug('[POST] 新增收藏文章 success ->', result);
             res.json(req.body.aid);
-            return Article.findOneAndUpdate( { _id: req.body.aid }, { $inc: { rank: followerCount }} )
+            return Article.findOneAndUpdate( { _id: req.body.aid }, { $inc: { rank: followerCount + 1 }} )
                           .updateAsync();
         })
         .catch( err => {
             debug('[POST] 新增收藏文章 fail ->', err);
             return next(err);
         })
-        .then( result => {})
+        .then( result => {
+            console.log('finish 領頭羊演算法');
+        })
         .catch( err => {
             debug('[POST] 新增收藏文章-領頭羊演算法 fail ->', err);
             return next(err);
@@ -119,6 +121,7 @@ router.delete('/', function(req, res, next) {
     //tmp variable, destination info
     let likeAry;
     let info = { _id: req.body.uid };
+    let followerCount = 0;
 
     //db operation
     User.findOne(info)
@@ -127,8 +130,8 @@ router.delete('/', function(req, res, next) {
 
             if(result){
                 likeAry = result.like;
-                likeAry = likeAry.filter( (item) => {
-                    return item.aid != req.body.aid;
+                likeAry = likeAry.filter( val => {
+                    return val != req.body.aid;
                 });
             }
 
@@ -140,7 +143,7 @@ router.delete('/', function(req, res, next) {
         .then( (result) => {
             debug('[DELETE] 刪除收藏文章 success ->', result);
             res.json(req.body.aid);
-            return Article.findOneAndUpdate( { _id: req.body.aid }, { $inc: { rank: followerCount * -1 }} )
+            return Article.findOneAndUpdate( { _id: req.body.aid }, { $inc: { rank: (followerCount + 1) * -1 }} )
                           .updateAsync();
         })
         .catch( (err) => {
