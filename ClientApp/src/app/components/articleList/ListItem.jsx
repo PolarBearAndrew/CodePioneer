@@ -119,6 +119,8 @@ let ArticleTab = React.createClass({
         let data = this.props.data;
         let ctrlStart = null;
 
+        console.log('user.like', this.props.user.like);
+
         if(this.props.user.like.indexOf(data._id) !== -1){
             ctrlStart = true;
         }else{

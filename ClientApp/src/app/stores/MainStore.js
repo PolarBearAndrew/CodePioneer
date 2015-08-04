@@ -88,10 +88,7 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             user.id = data._id;
             user.imgUrl = data.imgUrl;
 
-            let tmp = data.like.map( (value) => {
-                return value.aid;
-            });
-            user.like = tmp || [] ;
+            user.like = data.like || [] ;
 
             if(isLogin)
                 displayPage = 'Container';
@@ -104,14 +101,6 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          */
         case AppConstants.LIKE_ADD:
             user.like.push(data);
-            // article.articles = article.articles.map( val => {
-            //     if(val._id = data){
-            //         val.like.push(user.imgUrl);
-            //         return val;
-            //     }
-            //     return val;
-            // });
-            //Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
         /*
