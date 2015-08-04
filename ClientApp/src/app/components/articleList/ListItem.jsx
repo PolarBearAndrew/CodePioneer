@@ -138,11 +138,19 @@ let ArticleTab = React.createClass({
             }
         });
 
-        let avatarAuthor={
-            marginLeft:'auto',
-        };
+        let likeImg = data.like.map( (val, index) => {
 
-        console.log('data like', data.like);
+            let avatarAuthor = null;
+
+            if(index === 1)
+                avatarAuthor = { marginLeft:'auto',};
+
+            if(val)
+                return <Avatar style={avatarAuthor} src={val}  size={24}/>;
+            else
+                return;
+        });
+
 
 	    return (
 	    	<Paper id={data._id} key={data._id} zDepth={ zDepth } style={paperStyle}>
@@ -163,11 +171,7 @@ let ArticleTab = React.createClass({
                           <p style={contents2} className="comments">
                             { data.info ? data.info[0] : null }
                           </p>
-                            <Avatar style={avatarAuthor} src="images/panda.png"  size={24}/>
-                            <Avatar  src="images/panda.png"  size={24}/>
-                            <Avatar  src="images/panda.png"  size={24}/>
-                            <Avatar  src="images/panda.png"  size={24}/>
-                            <Avatar  src="images/panda.png"  size={24}/>
+                            { likeImg }
                         </div>
                     </div>
                     <div style={ starPosi.star }>
