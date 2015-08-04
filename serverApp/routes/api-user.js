@@ -246,4 +246,13 @@ router.post('/img', function(req, res, next){
     console.log('uplode img', req.files);
 });
 
+router.get('/test/email', function(req, res, next){
+    //send mail
+    let mailer = new postMan();
+    mailer.sendTo( '在這裡打你的email', '' );
+
+    res.json({ sendMail : true });
+    return;
+});
+
 module.exports = router;
