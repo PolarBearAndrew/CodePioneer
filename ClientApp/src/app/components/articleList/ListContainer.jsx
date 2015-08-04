@@ -68,6 +68,7 @@ let ListContainer = React.createClass({
 		});
 	},
 
+    
 	render() {
 
         debug('[props]', this.props);
@@ -87,9 +88,24 @@ let ListContainer = React.createClass({
                     filterData={this.props.list.filter} />;
         }, this);
 
+        let allTitle={
+            fontSize:'35px',
+            letterSpacing:'4px',
+	    	margin: '0px',
+            padding: '0px',
+            marginLeft:'10px',
+            marginBottom:'8px',
+            display:'flex',
+            flexDirection:'row',
+        };
+        
 	    return (
             <div>
-
+                <p style={allTitle} className="title">News</p>
+                <p className="followTitle">Follow</p>
+                <p style={allTitle} className="title">Library</p>
+                <p style={allTitle} className="title">Pioneer Library</p>
+               
     	    	<Paper zDepth={2} id="listContainer">
     		        { articleList }
     		    </Paper>

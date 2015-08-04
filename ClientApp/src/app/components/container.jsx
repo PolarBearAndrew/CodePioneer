@@ -116,10 +116,11 @@ let container = React.createClass({
 //                <ArticleList user={this.props.user}
 //                             list={this.props.list}
 //                             filter={actionsArticle.filter} />
-        
-//        <p style={allTitle} className="title">News</p>
-//                <p style={allTitle} className="title">Follow</p>
+
+//                <p style={allTitle} className="title">News</p>
+//                <p className="followTitle">Follow</p>
 //                <p style={allTitle} className="title">Library</p>
+//                <p style={allTitle} className="title">Pioneer Library</p>
 	    return (
     		<div  style={containerStyle}>
                 <AppBar title='CodePioneer'
@@ -149,9 +150,6 @@ let container = React.createClass({
                          onChange={this._navClick}
                          ref='leftNav'/>
             
-                <p style={allTitle} className="title">News</p>
-                <p className="followTitle">Follow</p>
-                <p style={allTitle} className="title">Library</p>
             
                 { this.props.setting ? <UserEdit user={this.props.user} /> : null }
 

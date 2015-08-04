@@ -30,6 +30,15 @@
         align-Items: flex-start;
         justify-Content: flex-start;
     }
+    .loginAll {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+    }
+    .allLoginTitle {
+        margin-top: 20px;
+        margin-left: 7px;
+    }
 }
 
 @media screen and (min-width: 701px) {

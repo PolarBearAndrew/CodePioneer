@@ -15,15 +15,41 @@ body {
     position: absolute;
     top: calc(50% - 150px);
     left: calc(50% - 150px);
-    margin-top: 50px;
+    margin-top: 60px;
+}
+
+.allLoginTitle {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+    padding: 0px;
+    margin-top: 100px;
+    /*    flex-direction: row;*/
 }
 
 .loginTitle {
     font-family: 'Ubuntu', serif;
+    font-size: 50px;
+    letter-spacing: 4px;
     margin: 0px;
     padding: 0px;
-    font-size: 50px;
-    margin-top: 100px;
+}
+
+.loginLogo {
+    max-width: 100%;
+    height: auto;
+    margin: 10px;
+    padding: 0px;
+    margin-right: 30px;
+}
+
+.loginAll {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: '2px solid black',
 }
 
 .material-icons {
