@@ -13,6 +13,9 @@ let actions = require('../actions/AppActions_User.jsx');
 let objectAssign = require('object-assign');
 let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣播器
 
+//dangerout
+let main = require('./MainStore.js');
+
 //========================================================================
 //
 var Store = {};
@@ -118,6 +121,37 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
                     return value != data
                 });
             }
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
+        /*
+         * add like
+         */
+        case AppConstants.LIKE_ADD:
+            articles = articles.map( val => {
+                if(val._id === data){
+                    let user = main.getUser();
+                    val.like.push(user.imgUrl);
+                    return val;
+                }
+                return val;
+            });
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
+        case AppConstants.LIKE_DELETE:
+            articles = articles.map( val => {
+
+                if(val._id === data){
+
+                    val.like = val.like.filter( url => {
+                        let user = main.getUser();
+                        return url != user.imgUrl;
+                    });
+                    return val;
+                }
+                return val;
+            });
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 

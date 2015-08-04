@@ -3,42 +3,53 @@ html {
 }
 
 body {
-
     font-size: 13px;
     padding: 0px;
     margin: 0px;
-/*    background-color: rgb(159, 189, 255);*/
+    /*    background-color: rgb(159, 189, 255);*/
 }
 
-.loginTab{
-
+.loginTab {
     /* dirty */
-	position: absolute;
-	top :calc(50% - 150px);
-	left:calc(50% - 150px);
+    
+    position: absolute;
+    top: calc(50% - 150px);
+    left: calc(50% - 150px);
+    margin-top: 50px;
+}
+
+.loginTitle {
+    font-family: 'Ubuntu', serif;
+    margin: 0px;
+    padding: 0px;
+    font-size: 50px;
+    margin-top: 100px;
 }
 
 .material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    /* Support for all WebKit browsers. */
+    
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    
+    text-rendering: optimizeLegibility;
+    /* Support for Firefox. */
+    
+    -moz-osx-font-smoothing: grayscale;
+    /* Support for IE. */
+    
+    font-feature-settings: 'liga';
 }
