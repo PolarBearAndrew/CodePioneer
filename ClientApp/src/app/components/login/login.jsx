@@ -91,18 +91,22 @@ let loginApp = React.createClass({
 	    	{ text: 'Submit', onTouchTap: this._forgetPwd }
 	    ];
         
-        let loginAll={
-            display: '-webkit-flex',
-            display:'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-        };
+//        let loginAll={
+//            display: '-webkit-flex',
+//            display:'flex',
+//            alignItems: 'center',
+//            justifyContent: 'center',
+//            flexDirection: 'column',
+//            border:'2px solid black',
+//        };
         
 //className="loginAll" style={loginAll}
 	    return (
-            <div style={loginAll}>
-                <p className="loginTitle">CodePioneer</p>
+            <div className="loginAll">
+                <div className="allLoginTitle">
+                    <img src="../../../www/images/panda.png" className="loginLogo"/>
+                    <p className="loginTitle">CodePioneer</p>
+                </div>
                 <div className="loginTab" style={containerStyle}>
                     <TextField
                             id="email"
