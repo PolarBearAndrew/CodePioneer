@@ -55,20 +55,18 @@ a {
     margin-Top: 50px;
 }
 
+.SettingTitle {
+    font-size: 40px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-.tt{
-    width:400px;
+.followTitle {
+    margin: 0px;
+    padding: 0p;
+    margin-Left: 10px;
+    margin-Bottom: 8px;
+    font-size: 40px;
+    display: flex;
+    align-Items: center;
+    justify-Content: center;
+    font-family: 'Ubuntu', serif;
 }

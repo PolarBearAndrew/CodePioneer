@@ -43,7 +43,8 @@ let ArticleTab = React.createClass({
             padding:'0px',
             paddingLeft:'7px',
             margin:'5px',
-            marginBottom:'12px',
+            marginTop:'5px',
+//            marginBottom:'8px',
             fontSize:'25px',
             textAlign:'left',
             letterSpacing:'1.5px',
@@ -57,19 +58,19 @@ let ArticleTab = React.createClass({
         };
 
         let article = {
-            display:'flex',
-            alignItems:'center',
             margin:'0px',
             padding:'0px',
+            display:'flex',
+            alignItems:'center',
             fontSize:'13px',
             letterSpacing:'1.5px',
             color:'#656565',
         };
 
         let contents1={
+            margin:'0px',
             paddingRight:'7px',
             paddingLeft:'7px',
-            margin:'0px',
             marginRight:'7px',
             marginLeft:'7px',
             lineHeight:'1.5px',
@@ -77,10 +78,9 @@ let ArticleTab = React.createClass({
         };
 
         let contents2 = {
+            margin:'0px',
             paddingRight:'14px',
             paddingLeft:'7px',
-            paddingTop:'4px',
-            margin:'0px',
             lineHeight:'1.5px',
         };
 

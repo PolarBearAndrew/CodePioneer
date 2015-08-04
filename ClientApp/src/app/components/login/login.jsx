@@ -75,6 +75,7 @@ let loginApp = React.createClass({
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
+//            border:'2px solid black', 
 	    };
 
         //Login 和 SignUp的按鈕設定
@@ -89,79 +90,90 @@ let loginApp = React.createClass({
 	    	{ text: 'Cancel' },
 	    	{ text: 'Submit', onTouchTap: this._forgetPwd }
 	    ];
-
+        
+        let loginAll={
+            display: '-webkit-flex',
+            display:'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexDirection: 'column',
+        };
+        
+//className="loginAll" style={loginAll}
 	    return (
-	    	<div className="loginTab" style={containerStyle}>
-
-                <TextField
-                		id="email"
-                        hintText="e-mail address"
-                        />
-
-                <TextField
-                	id="pwd"
-                    hintText="password"
-                    defaultValue="Custom Child input (e.g. password)"
-                    floatingLabelText="">
-                    <input type="password" />
-                </TextField>
-
-                <br/><br/>
-
-                <div style={btn}>
-                    <RaisedButton label="SignUp" primary={false} onTouchTap={this._SignUp}/>
-                    <RaisedButton label="Login" primary={true} onTouchTap={this._Login} />
-                </div>
-
-                <br/>
-
-                <FlatButton label="Forget password" primary={true} onTouchTap={this._Forget}/>
-
-                <Dialog
-			        title="Forget your password ?"
-                    actions={emailPwdActions}
-			        ref="ForgetDialog">
-			        <TextField
-                		id="forgetPwdEmail"
-                        hintText="e-mail address" />
-		        </Dialog>
-
-                <Dialog
-			        title="SignUp"
-			        actions={[
-                        { text: 'sure', onTouchTap: this._onSingupSubmit, ref: 'submit' } ]}
-                    actionFocus="submit"
-			        ref="SignUpDialog">
-			        <TextField
-                        id="signUpName"
-                        hintText="name"
-                        errorText={this.state.errormail}
-                        onChange={this._SignUpmail} />
-                    <br/>
+            <div style={loginAll}>
+                <p className="loginTitle">CodePioneer</p>
+                <div className="loginTab" style={containerStyle}>
                     <TextField
-                        id="signUpEmail"
-                        hintText="email address"
-                        errorText={this.state.errormail}
-                        onChange={this._SignUpmail} />
-                    <br/>
+                            id="email"
+                            hintText="e-mail address"
+                            />
+
                     <TextField
-                        id="signUpPwd"
+                        id="pwd"
                         hintText="password"
-                        errorText={this.state.errorpassword}
-                        onChange={this._SignUppassword} />
+                        defaultValue="Custom Child input (e.g. password)"
+                        floatingLabelText="">
+                        <input type="password" />
+                    </TextField>
+
+                    <br/><br/>
+
+                    <div style={btn}>
+                        <RaisedButton label="SignUp" primary={false} onTouchTap={this._SignUp}/>
+                        <RaisedButton label="Login" primary={true} onTouchTap={this._Login} />
+                    </div>
+
                     <br/>
-                    <input type="file" id="img"  />
-		        </Dialog>
 
-                <Snackbar
-                      ref="loginFailSnackbar"
-                      message="Login fail, please try again or use email to retrieve your password." />
+                    <FlatButton label="Forget password" primary={true} onTouchTap={this._Forget}/>
 
-                <Snackbar
-                      ref="singUpSuccessSnackbar"
-                      message="Sign up success, please login in."
-                      autoHideDuration={this.state.autoHideDuration} />
+                    <Dialog
+                        title="Forget your password ?"
+                        actions={emailPwdActions}
+                        ref="ForgetDialog">
+                        <TextField
+                            id="forgetPwdEmail"
+                            hintText="e-mail address" />
+                    </Dialog>
 
+                    <Dialog
+                        title="SignUp"
+                        actions={[
+                            { text: 'sure', onTouchTap: this._onSingupSubmit, ref: 'submit' } ]}
+                        actionFocus="submit"
+                        ref="SignUpDialog">
+                        <TextField
+                            id="signUpName"
+                            hintText="name"
+                            errorText={this.state.errormail}
+                            onChange={this._SignUpmail} />
+                        <br/>
+                        <TextField
+                            id="signUpEmail"
+                            hintText="email address"
+                            errorText={this.state.errormail}
+                            onChange={this._SignUpmail} />
+                        <br/>
+                        <TextField
+                            id="signUpPwd"
+                            hintText="password"
+                            errorText={this.state.errorpassword}
+                            onChange={this._SignUppassword} />
+                        <br/>
+                        <input type="file" id="img"  />
+                    </Dialog>
+
+                    <Snackbar
+                          ref="loginFailSnackbar"
+                          message="Login fail, please try again or use email to retrieve your password." />
+
+                    <Snackbar
+                          ref="singUpSuccessSnackbar"
+                          message="Sign up success, please login in."
+                          autoHideDuration={this.state.autoHideDuration} />
+
+                </div>
             </div>
 	    );
 	},
