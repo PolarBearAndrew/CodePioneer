@@ -100,7 +100,7 @@ let container = React.createClass({
 
         };
 
-        console.log('this.props.setting', this.props.setting)
+        //console.log('this.props.setting', this.props.setting)
         //<UserEdit />
 //                <ArticleList user={this.props.user}
 //                             list={this.props.list}
