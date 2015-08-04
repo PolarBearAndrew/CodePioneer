@@ -34,6 +34,10 @@ var Article = new mongoose.Schema({
         type: Array,
         default: null
     },
+    like: {
+        type: Array,
+        default: null
+    }
 });
 
 //exports model

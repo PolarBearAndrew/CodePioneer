@@ -51,7 +51,7 @@ let Main = React.createClass({
             Setting: false,
         };
 
-        console.log('this.state.displayPage',this.state.displayPage);
+        // console.log('this.state.displayPage',this.state.displayPage);
 
         displayPage[this.state.displayPage] = true;
 

@@ -13,6 +13,7 @@ let actions = require('../actions/AppActions_User.jsx');
 let objectAssign = require('object-assign');
 let EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣播器
 
+
 //========================================================================
 //
 
@@ -103,6 +104,14 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          */
         case AppConstants.LIKE_ADD:
             user.like.push(data);
+            // article.articles = article.articles.map( val => {
+            //     if(val._id = data){
+            //         val.like.push(user.imgUrl);
+            //         return val;
+            //     }
+            //     return val;
+            // });
+            //Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
         /*
@@ -112,6 +121,7 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             user.like = user.like.filter( (value) => {
                 return value != data
             });
+            // Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
         /*
