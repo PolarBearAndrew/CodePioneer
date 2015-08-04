@@ -23,6 +23,13 @@
         margin-right: auto;
         color: #2700ff;
     }
+    .followTitle {
+        font-Size: 35px;
+        display: flex;
+        flex-Direction: row;
+        align-Items: flex-start;
+        justify-Content: flex-start;
+    }
 }
 
 @media screen and (min-width: 701px) {
@@ -45,17 +52,16 @@
 /**/
 
 @media screen and (min-width: 768px) {
-    .SettingTitle{
+    .SettingTitle {
         font-size: 50px;
     }
-    
     .editUp {
         display: flex;
         flex-direction: row;
         justify-Content: center;
         align-Items: center;
         margin-top: 60px;
-/*        border: 2px solid red;*/
+        /*        border: 2px solid red;*/
     }
     .editNC {
         margin: 0px;
@@ -66,10 +72,10 @@
         padding-left: 15%;
         padding-right: 15%;
         margin-top: 20px;
-/*        border: 2px solid blue;*/
+        /*        border: 2px solid blue;*/
     }
     .editAll {
-/*        margin-Top: 0px;*/
-/*        border: 2px solid green;*/
+        /*        margin-Top: 0px;*/
+        /*        border: 2px solid green;*/
     }
 }

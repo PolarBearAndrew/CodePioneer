@@ -99,12 +99,27 @@ let container = React.createClass({
             position: 'fixed',
 
         };
-
+//////////////////////////////////////
+        let allTitle={
+	    	margin: '0px',
+            padding: '0px',
+            fontSize:'35px',
+            marginLeft:'10px',
+            marginBottom:'8px',
+            display:'flex',
+            flexDirection:'row',
+        };
+//////////////////////////////////////
+                            
         console.log('this.props.setting', this.props.setting)
         //<UserEdit />
 //                <ArticleList user={this.props.user}
 //                             list={this.props.list}
 //                             filter={actionsArticle.filter} />
+        
+//        <p style={allTitle} className="title">News</p>
+//                <p style={allTitle} className="title">Follow</p>
+//                <p style={allTitle} className="title">Library</p>
 	    return (
     		<div  style={containerStyle}>
                 <AppBar title='CodePioneer'
@@ -133,7 +148,11 @@ let container = React.createClass({
                          menuItems={menuItems}
                          onChange={this._navClick}
                          ref='leftNav'/>
-
+            
+                <p style={allTitle} className="title">News</p>
+                <p className="followTitle">Follow</p>
+                <p style={allTitle} className="title">Library</p>
+            
                 { this.props.setting ? <UserEdit user={this.props.user} /> : null }
 
                 { this.props.list ? <ArticleList user={this.props.user}
