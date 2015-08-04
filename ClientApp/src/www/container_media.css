@@ -45,12 +45,16 @@
 /**/
 
 @media screen and (min-width: 768px) {
+    .SettingTitle{
+        font-size: 50px;
+    }
+    
     .editUp {
         display: flex;
         flex-direction: row;
         justify-Content: center;
         align-Items: center;
-        margin-top: 90px;
+        margin-top: 60px;
 /*        border: 2px solid red;*/
     }
     .editNC {
@@ -65,7 +69,7 @@
 /*        border: 2px solid blue;*/
     }
     .editAll {
-        margin-Top: 0px;
+/*        margin-Top: 0px;*/
 /*        border: 2px solid green;*/
     }
 }

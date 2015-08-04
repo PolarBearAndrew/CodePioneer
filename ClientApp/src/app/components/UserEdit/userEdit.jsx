@@ -61,8 +61,11 @@ let userEdit = React.createClass({
 //             justifyContent: 'center',
 //             flexDirection: 'row',
 //         };
-        let title={
-            fontSize:'30px',
+        let settingTitle={
+            margin:'0px',
+            display: 'block',
+            marginRight:'10px',
+            marginBottom:'30px'
         };
         
          let image={
@@ -101,21 +104,17 @@ let userEdit = React.createClass({
             ctrl = false;
         };
         
-        let textArea={
-            width:'250px',
-            height:'100px'
-        };
         return (
             <div className="editAll">
-            <p style={title} className="title">Edit profile</p>
+                <p style={settingTitle} className="SettingTitle">Setting</p>
                 <div className="editUp">
-                    <div className="editAI">
+                    
                         <Avatar src="images/default.png"  size={100}/>
                         <IconButton style={image} iconClassName="material-icons" tooltipPosition="bottom-center" 
                             tooltip="Image Upload" >file_upload
                             <input type="file" id="imageButton" style={styles.exampleImageInput}/>
                         </IconButton>
-                    </div>
+                    
                     <br/><br/>
                     <div className="editNC">
                         <TextField
