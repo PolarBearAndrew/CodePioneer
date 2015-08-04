@@ -97,7 +97,7 @@ router.get('/news', (req, res, next) => {
 
     debug('[GET] 查詢最新文章(10) req.body ->', req.body );
 
-    //no check
+    let data = null; //temp data for article list
 
     //db operation
      Article.find()
@@ -106,10 +106,28 @@ router.get('/news', (req, res, next) => {
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢最新文章(10) success ->', result);
-                res.json( result );
+                data = result.map( val => {
+                    val.like = [];
+                    return val;
+                });
+                return User.find({}).execAsync();
+            })
+            .then( user => {
+                 return user.forEach( val => {
+                            val.like.forEach( like => {
+                                data.forEach( aid => {
+                                    if( aid === like )
+                                        data.like.push(val.imgUrl);
+                                });
+                            });
+                        });
+            })
+            .then( () => {
+
+                res.json(data);
                 return;
             })
-            .catch( (err) =>{
+            .catch( err =>{
                 debug('[GET] 查詢最新文章(10) fail ->', err);
                 return next(err);
             });
@@ -131,6 +149,8 @@ router.get('/news/:count', (req, res, next) => {
         return next(err);
     }
 
+    let data = null; //temp data for article list
+
     //db operation
      Article.find()
             .limit(req.params.count)
@@ -138,10 +158,28 @@ router.get('/news/:count', (req, res, next) => {
             .execAsync()
             .then( (result) => {
                 debug('[GET] 查詢最新文章(n) success ->', result);
-                res.json( result );
+                data = result.map( val => {
+                    val.like = [];
+                    return val;
+                });
+                return User.find({}).execAsync();
+            })
+            .then( user => {
+                 return user.forEach( val => {
+                            val.like.forEach( like => {
+                                data.forEach( aid => {
+                                    if( aid === like )
+                                        data.like.push(val.imgUrl);
+                                });
+                            });
+                        });
+            })
+            .then( () => {
+
+                res.json(data);
                 return;
             })
-            .catch( (err) =>{
+            .catch( err =>{
                 debug('[GET] 查詢最新文章(n) fail ->', err);
                 return next(err);
             });
@@ -162,6 +200,7 @@ router.get('/stream', (req, res, next) => {
 
     let finalIndex = req.query.finalIndex;
     let count = ( parseInt(finalIndex) + 10 );
+    let data = null; //temp data for article list
 
     //db operation
      Article.find()
@@ -171,19 +210,35 @@ router.get('/stream', (req, res, next) => {
             .execAsync()
             .then( (result) => {
 
-                let data = result.filter( (value, index) => {
+                data = result.filter( (value, index) => {
                     return index >= finalIndex;
+                }).map( val => {
+                    val.like = [];
+                    return val;
                 });
 
                 //debug('[GET] 接續查詢文章(10) success (result) ->', result);
                 debug('[GET] 接續查詢文章(10) success (data) ->', data);
+                return User.find({}).execAsync();
+            })
+            .then( user => {
+                 return user.forEach( val => {
+                            val.like.forEach( like => {
+                                data.forEach( aid => {
+                                    if( aid === like )
+                                        data.like.push(val.imgUrl);
+                                });
+                            });
+                        });
+            })
+            .then( () => {
 
-                res.json( data );
+                res.json(data);
                 return;
             })
-            .catch( (err) =>{
-                debug('[GET] 接續查詢文章(10) fail ->', err);
-                return next(err.message);
+            .catch( err =>{
+                debug('[GET] 查詢最新文章(n) fail ->', err);
+                return next(err);
             });
 });
 
