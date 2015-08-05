@@ -20,21 +20,21 @@ describe('[ (01) API unit test - users ]', () => {
     before( () => {
 
         return  User.removeAsync({name: 'AndrewChen'})
-                    .then( (result) => {
+                    .then( result => {
                         let user = new User(initData);
                         return user.saveAsync();
                     })
-                    .spread( (result) => {
+                    .spread( result => {
                         uid = result._id;
                     })
-                    .catch( (err)=>{
+                    .catch( err=>{
                         debug('[ API unit test - users ] 資料初始化錯誤', err);
                     });
     });
 
     describe('正常操作測試', () => {
 
-        it('[POST] 新增使用者', ( done ) => {
+        it('[POST] 新增使用者', done => {
 
             request({
                 url: 'http://localhost:8080/api/users/',
@@ -60,7 +60,7 @@ describe('[ (01) API unit test - users ]', () => {
             });
         });
 
-        it('[POST] 登入檢查*', ( done ) => {
+        it('[POST] 登入檢查*', done => {
 
             request({
                 url: 'http://localhost:8080/api/users/login',
@@ -86,7 +86,7 @@ describe('[ (01) API unit test - users ]', () => {
             });
         });
 
-        it('[GET] 查詢使用者', ( done ) => {
+        it('[GET] 查詢使用者', done => {
 
             request({
                 url: 'http://localhost:8080/api/users/',
@@ -109,7 +109,7 @@ describe('[ (01) API unit test - users ]', () => {
             });
         });
 
-        it('[PUT] 修改使用者', ( done ) => {
+        it('[PUT] 修改使用者', done => {
 
             let expectData = {
                 uid: uid,
@@ -139,7 +139,7 @@ describe('[ (01) API unit test - users ]', () => {
             });
         });
 
-        it('[DELETE] 刪除使用者', ( done ) => {
+        it('[DELETE] 刪除使用者', done => {
 
             request({
                 url: 'http://localhost:8080/api/users/',
@@ -161,11 +161,11 @@ describe('[ (01) API unit test - users ]', () => {
         });
     });
 
-    after( (done) => {
+    after( done => {
 
         return  User.findOneAndRemove( {_id: uid } )
                     .removeAsync()
-                    .then( (result) => {
+                    .then( result => {
                         done();
                     })
                     .catch( () => {

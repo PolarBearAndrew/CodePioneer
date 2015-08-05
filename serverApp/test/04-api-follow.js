@@ -21,21 +21,21 @@ describe('[ (04) API unit test - follow ]', function() {
     before(function() {
 
          return User.removeAsync()
-                    .then( (result) => {
+                    .then( result => {
                         var user = new User(initData);
                         return user.saveAsync();
                     })
-                    .spread( (result) => {
+                    .spread( result => {
                         uid = result._id.toString();
                     })
-                    .catch( (err)=>{
+                    .catch( err =>{
                         debug('[ API unit test - article ] 資料初始化錯誤', err);
                     });
     });
 
     describe('正常操作測試', () => {
 
-        it('[POST] 新增追蹤', ( done ) => {
+        it('[POST] 新增追蹤', done => {
 
             request({
                 url: 'http://localhost:8080/api/follow/',
@@ -62,7 +62,7 @@ describe('[ (04) API unit test - follow ]', function() {
             });
         });
 
-        // it('[GET] 查詢追蹤', ( done ) => {
+        // it('[GET] 查詢追蹤', done => {
 
         //     request({
         //         url: 'http://localhost:8080/api/follow/',
@@ -84,7 +84,7 @@ describe('[ (04) API unit test - follow ]', function() {
         //     });
         // });
 
-        it('[DELETE] 取消追蹤', ( done ) => {
+        it('[DELETE] 取消追蹤', done => {
 
             request({
                 url: 'http://localhost:8080/api/follow/',
@@ -109,7 +109,7 @@ describe('[ (04) API unit test - follow ]', function() {
         });
     });
 
-    after( (done) => {
+    after( done => {
         return User.removeAsync({ author: 'AndrewChen' }, done);
     });
 });

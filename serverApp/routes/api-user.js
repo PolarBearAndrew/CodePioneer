@@ -42,12 +42,12 @@ router.post('/', (req, res, next) => {
 
     //db operation
     user.saveAsync()
-        .spread( (result) => {
+        .spread( result => {
             debug('[POST] 新增使用者 success ->', result);
             res.json(result);
             return;
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[POST] 新增使用者 fail ->', err);
             return next(err);
         });
@@ -73,12 +73,12 @@ router.get('/', (req, res, next) => {
     User.findOne()
         .where('_id').equals( req.body.uid )
         .execAsync()
-        .then( (result) => {
+        .then( result => {
             debug('[GET] 查詢使用者 success ->', result);
             res.json(result);
             return;
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[GET] 查詢使用者 fail ->', err);
             return next(err);
     });
@@ -110,12 +110,12 @@ router.put('/',  (req, res, next) => {
     //db operation
     User.findOneAndUpdate( { _id: req.body.uid }, info)
         .updateAsync()
-        .then( (result) => {
+        .then( result => {
             debug('[PUT] 修改使用者 success ->', result);
             res.json(result);
             return;
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[PUT] 修改使用者 fail ->', err);
             return next(err);
         });
@@ -140,12 +140,12 @@ router.delete('/', (req, res, next) => {
     //db operation
     User.findOneAndRemove( {_id: req.body.uid } )
         .removeAsync()
-        .then( (result) => {
+        .then( result => {
             debug('[DELETE] 刪除使用者 success ->', result);
             res.json(result);
             return;
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[DELETE] 刪除使用者 fail ->', err);
             return next(err);
         });
@@ -172,7 +172,7 @@ router.post('/login', (req, res, next) => {
         .where('email').equals( req.body.email )
         .where('pwd').equals( req.body.pwd )
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             if(result){
                 debug('[POST] 登入檢查 success', result);
@@ -190,7 +190,7 @@ router.post('/login', (req, res, next) => {
                 return;
             }
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[POST] 登入檢查 fail', err);
             res.json({ login : false });
             return;
@@ -218,7 +218,7 @@ router.get('/pwd', function(req, res, next){
     User.findOne()
         .where('email').equals( req.query.email )
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             if(result){
                 debug('[GET] 查詢使用者 success ->', result);
@@ -235,7 +235,7 @@ router.get('/pwd', function(req, res, next){
                 return;
             }
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[GET] 查詢使用者 fail ->', err);
             res.json({ sendMail : false });
             return;

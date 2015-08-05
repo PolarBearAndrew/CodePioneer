@@ -27,30 +27,30 @@ describe('[ (02) API unit test - articles ]', function() {
 
         User.findOne()
             .where('email').equals('123')
-            .then( (result) => {
+            .then( result => {
                 uid = result._id;
             })
-            .catch( (err) => {
+            .catch( err => {
                 console.log('[GET] 查詢追蹤者的喜愛文章 初始化uid錯誤');
             });
 
         return Article.removeAsync({ author: 'AndrewChen' })
-                      .then( (result) => {
+                      .then( result => {
                           let article = new Article(initData);
                           return article.saveAsync();
                       })
-                      .spread( (result) => {
+                      .spread( result => {
                           aid = result._id.toString();
                           lastestTime = result.time;
                       })
-                      .catch( (err)=>{
+                      .catch( err=>{
                           debug('[ API unit test - article ] 資料初始化錯誤', err);
                       });
     });
 
     describe('正常操作測試', () => {
 
-        it('[POST] 新增文章', ( done ) => {
+        it('[POST] 新增文章', done => {
 
             request({
                 url: 'http://localhost:8080/api/article/',
@@ -78,7 +78,7 @@ describe('[ (02) API unit test - articles ]', function() {
             });
         });
 
-        it('[GET] 查詢文章(aid)', ( done ) => {
+        it('[GET] 查詢文章(aid)', done => {
 
             request({
                 url: queryString('http://localhost:8080/api/article/', { aid }),
@@ -105,7 +105,7 @@ describe('[ (02) API unit test - articles ]', function() {
             });
         });
 
-        it('[GET] 查詢最新文章(10)', ( done ) => {
+        it('[GET] 查詢最新文章(10)', done => {
 
             request({
                 url: 'http://localhost:8080/api/article/news/',
@@ -127,7 +127,7 @@ describe('[ (02) API unit test - articles ]', function() {
             });
         });
 
-        it('[GET] 查詢最新文章(n)', ( done ) => {
+        it('[GET] 查詢最新文章(n)', done => {
 
             let count = 5;
 
@@ -149,7 +149,7 @@ describe('[ (02) API unit test - articles ]', function() {
             });
         });
 
-        it('[GET] 接續查詢文章(10)', ( done ) => {
+        it('[GET] 接續查詢文章(10)', done => {
 
             let finalIndex = 10;
 
@@ -171,9 +171,9 @@ describe('[ (02) API unit test - articles ]', function() {
             });
         });
 
-        it('[GET] 查詢喜愛文章', ( done ) => {
+        it('[GET] 查詢喜愛文章', done => {
 
-            tmpAidForLike = tmpAidForLike.map( ( value) => {
+            tmpAidForLike = tmpAidForLike.map( value => {
                 return value._id;
             });
 
@@ -195,7 +195,7 @@ describe('[ (02) API unit test - articles ]', function() {
             });
         });
 
-        it('[GET] 查詢追蹤者的喜愛文章', ( done ) => {
+        it('[GET] 查詢追蹤者的喜愛文章', done => {
 
             request({
                 url: queryString('http://localhost:8080/api/article/follow/like', { uid }  ),
@@ -214,7 +214,7 @@ describe('[ (02) API unit test - articles ]', function() {
             });
         });
 
-        it('[PUT] 修改文章資訊', ( done ) => {
+        it('[PUT] 修改文章資訊', done => {
 
             let expectData = {
                 aid: aid,
@@ -249,7 +249,7 @@ describe('[ (02) API unit test - articles ]', function() {
             });
         });
 
-        it('[DELETE] 刪除文章', ( done ) => {
+        it('[DELETE] 刪除文章', done => {
 
             request({
                 url: 'http://localhost:8080/api/article/',
@@ -272,11 +272,11 @@ describe('[ (02) API unit test - articles ]', function() {
         });
     });
 
-    after( (done) => {
+    after( done => {
 
         return Article.findOneAndRemove({ author: 'AndrewChen'})
                       .removeAsync()
-                      .then( (result) => {
+                      .then( result => {
                           return done();
                       });
     });

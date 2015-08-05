@@ -91,12 +91,12 @@ router.get('/', function(req, res, next) {
     //db operation
     User.findOne(info)
         .execAsync()
-        .then( (result) => {
+        .then( result => {
             debug('[GET] 查詢收藏文章 success ->', result.like);
             res.json(result.like);
             return;
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[GET] 查詢收藏文章 fail ->', err);
             return next(err);
         });
@@ -126,7 +126,7 @@ router.delete('/', function(req, res, next) {
     //db operation
     User.findOne(info)
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             if(result){
                 likeAry = result.like;
@@ -140,13 +140,13 @@ router.delete('/', function(req, res, next) {
                     .updateAsync()
             );
         })
-        .then( (result) => {
+        .then( result => {
             debug('[DELETE] 刪除收藏文章 success ->', result);
             res.json(req.body.aid);
             return Article.findOneAndUpdate( { _id: req.body.aid }, { $inc: { rank: (followerCount + 1) * -1 }} )
                           .updateAsync();
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[DELETE] 刪除收藏文章 fail ->', err);
             return next(err);
         })
