@@ -21,14 +21,14 @@ describe('[ (03) API unit test - like ]', function() {
     before(function() {
 
            return User.removeAsync()
-                      .then( (result) => {
+                      .then( result => {
                         var user = new User(initData);
                         return user.saveAsync();
                       })
-                      .spread( (result) => {
+                      .spread( result => {
                         uid = result._id.toString();
                       })
-                      .catch( (err)=>{
+                      .catch( err =>{
                         debug('[ API unit test - article ] 資料初始化錯誤', err);
                       });
 
@@ -44,7 +44,7 @@ describe('[ (03) API unit test - like ]', function() {
 
     describe('正常操作測試', () => {
 
-        it('[POST] 新增收藏', ( done ) => {
+        it('[POST] 新增收藏', done => {
 
             request({
                 url: 'http://localhost:8080/api/like/',
@@ -68,7 +68,7 @@ describe('[ (03) API unit test - like ]', function() {
             });
         });
 
-        it('[GET] 查詢收藏文章', ( done ) => {
+        it('[GET] 查詢收藏文章', done => {
 
             request({
                 url: 'http://localhost:8080/api/like/?uid=' + uid,
@@ -89,7 +89,7 @@ describe('[ (03) API unit test - like ]', function() {
             });
         });
 
-        it('[DELETE] 刪除收藏文章', ( done ) => {
+        it('[DELETE] 刪除收藏文章', done => {
 
             request({
                 url: 'http://localhost:8080/api/like/',
@@ -114,7 +114,7 @@ describe('[ (03) API unit test - like ]', function() {
         });
     });
 
-    after( (done) => {
+    after( done => {
         return User.removeAsync({ author: 'AndrewChen' }, done);
     });
 });
