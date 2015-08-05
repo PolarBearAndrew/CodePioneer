@@ -8,7 +8,6 @@ let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 let Paper = mui.Paper;
 let CircularProgress = mui.CircularProgress;
-let ToolbarTitle=mui.ToolbarTitle;
 
 //元件
 let ListItem = require('./ListItem.jsx');
@@ -99,6 +98,7 @@ let ListContainer = React.createClass({
             display:'flex',
             flexDirection:'row',
         };
+        
         let textEnd={
             width:'80px',
             height:'40px',
