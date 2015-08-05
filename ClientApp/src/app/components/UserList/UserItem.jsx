@@ -16,7 +16,7 @@ let Dialog=mui.Dialog;
 let TextField=mui.TextField;
 
 //元件
-let UserArticle = require('./UserArticle.jsx');
+let ListContainer = require('../articleList/ListContainer.jsx');
 
 //debug
 let debug = require('debug')('app:user');
@@ -78,7 +78,7 @@ let userItem = React.createClass({
             alignItems:'flex-start',
 //            marginTop:'8px',
         };
-        
+
         let more={
             margin:'0px',
             padding:'0px',
@@ -96,24 +96,23 @@ let userItem = React.createClass({
         }
 
         if(data._id === this.props.user.id)
-            return null;   
-        
-        
-        //Dialog，放文章資料設定
-//        { userArticle }
-        
-//        var userArticle = data.map((value, index)=>{
-//            return <UserArticle
-//                    key={index}
-//                    data={value}
-//                    user={this.props.user}
-//
-//                    like={actionsLike.like}
-//                    unlike={actionsLike.unlike}
-//
-//                    filter={this.props.filter}
-//                    filterData={this.props.list.filter} />;
-//        }, this);
+            return null;
+
+        // like={actionsLike.like}
+        //             unlike={actionsLike.unlike}
+
+
+        this.props.helike = this.props.helike.map( val => {
+            val.info = [];
+            return val;
+        });
+
+        let listData = {
+            data : this.props.helike,
+            filter: [],
+        } ;
+
+        let dialogHeigth = screen.height * 0.5 + 'px';
 
 	    return (
 	    	<Paper className="paperCard" zDepth={1} key={ this.props.key } >
@@ -124,7 +123,7 @@ let userItem = React.createClass({
                         <p className="infoContent">{ data.lastLoginTime }</p>
                         <p className="infoContent">Skill</p>
                         <p className="infoContent">Introduction</p>
-                        <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center" 
+                        <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center"
                         tooltip="more.." onTouchTap={this._Profiles}>more_horiz</IconButton>
                         <Checkbox
                                 style={checkbox}
@@ -138,8 +137,17 @@ let userItem = React.createClass({
                     <Dialog
                         title="Article"
                         actionFocus="submit"
-                        ref="ProfilesDialog">
+                        ref="ProfilesDialog"
+                        autoDetectWindowHeight={true}
+                        autoScrollBodyContent={true}
+                        >
+                        <div style={{ height: dialogHeigth, overflow: 'auto' }} >
+                            <ListContainer
+                                user={this.props.user}
+                                list={listData}
+                                filter={this.props.filter}/>
 
+                        </div>
 		            </Dialog>
             </Paper>
 	    );
@@ -158,6 +166,9 @@ let userItem = React.createClass({
     },
     _Profiles(){
    	    this.refs.ProfilesDialog.show();
+
+        let id = this.props.data._id;
+        this.props.loadlike(id);
     },
 });
 

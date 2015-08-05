@@ -5,29 +5,6 @@ let address = 'http://localhost:8080/api/like';
 
 let AppActions_Like = {
 
-	// load( uid ){
-	// 	$.ajax({
-	// 		url: address + '/',
-	// 		type: 'GET',
-	// 		data: { uid },
-
-	// 		success: function(result){
-
-	// 			AppDispatcher.handleViewAction({
-	// 				actionType: AppConstants.LIKE_LOAD,
-	// 				data: result
-	// 			});
-	// 		},
-	// 		error: function(err){
-
-	// 			AppDispatcher.handleViewAction({
-	// 				actionType: AppConstants.noop,
-	// 				data: null
-	// 			});
-	// 		}
-	// 	});
-	// },
-
 	like( uid, aid){
 
 		$.ajax({
@@ -75,6 +52,34 @@ let AppActions_Like = {
 			}
 		});
 	},
+
+	loadlike( uid ){
+		console.log('load like', uid);
+
+		$.ajax({
+			url: address + '/',
+			type: 'GET',
+			data: { uid },
+
+			success: function(result){
+
+//				console.log('success(result)', result);
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.LIKE_LOAD,
+					data: result
+				});
+			},
+			error: function(err){
+
+				console.log('err(result)', err);
+				// AppDispatcher.handleViewAction({
+				// 	actionType: AppConstants.noop,
+				// 	data: null
+				// });
+			}
+		});
+	}
 
 };
 

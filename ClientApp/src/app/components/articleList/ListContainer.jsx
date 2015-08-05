@@ -68,7 +68,7 @@ let ListContainer = React.createClass({
 		});
 	},
 
-    
+
 	render() {
 
         debug('[props]', this.props);
@@ -98,14 +98,16 @@ let ListContainer = React.createClass({
             display:'flex',
             flexDirection:'row',
         };
-        
+
+        // <p style={allTitle} className="title">News</p>
+        //         <p className="followTitle">Follow</p>
+        //         <p style={allTitle} className="title">Library</p>
+        //         <p style={allTitle} className="title">Pioneer Library</p>
+
 	    return (
             <div>
-                <p style={allTitle} className="title">News</p>
-                <p className="followTitle">Follow</p>
-                <p style={allTitle} className="title">Library</p>
-                <p style={allTitle} className="title">Pioneer Library</p>
-               
+
+
     	    	<Paper zDepth={2} id="listContainer">
     		        { articleList }
     		    </Paper>

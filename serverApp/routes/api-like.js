@@ -91,12 +91,17 @@ router.get('/', function(req, res, next) {
     //db operation
     User.findOne(info)
         .execAsync()
-        .then( (result) => {
-            debug('[GET] 查詢收藏文章 success ->', result.like);
-            res.json(result.like);
-            return;
+        .then( result => {
+
+            return Article.find()
+                          .where('_id').in(result.like)
+                          .execAsync();
         })
-        .catch( (err) => {
+        .then( result => {
+            debug('[GET] 查詢收藏文章 success ->', result);
+            res.json(result);
+        })
+        .catch( err => {
             debug('[GET] 查詢收藏文章 fail ->', err);
             return next(err);
         });
