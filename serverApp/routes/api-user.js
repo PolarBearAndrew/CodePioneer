@@ -42,7 +42,7 @@ router.post('/', (req, res, next) => {
 
     //db operation
     user.saveAsync()
-        .spread( (result) => {
+        .spread( result => {
             debug('[POST] 新增使用者 success ->', result);
             res.json(result);
             return;

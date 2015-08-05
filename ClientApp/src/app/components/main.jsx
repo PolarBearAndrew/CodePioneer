@@ -156,12 +156,12 @@ let Main = React.createClass({
         return {
         	//main store
         	user: MainStore.getUser(),
-            helike: MainStore.gethelike(),
             userList: MainStore.getUserList(),
             displayPage: MainStore.getDisplayPage(),
             displayContainer: MainStore.getDisplayContainer(),
 
-        	//article store
+            //article store
+            helike: ArticleStore.gethelike(),
             articles: ArticleStore.getArticleList(),
             likedArticles: ArticleStore.getLikedArticleList(),
             theyLiked: ArticleStore.getTheyLiked(),

@@ -10,6 +10,7 @@ module.exports = keyMirror({
 	CHANGE_DISPLAY: null,
 
 	//article
+	HELIKE_LOAD: null,
 	ARTICLE_LOAD: null,
 	ARTICLE_LOADMORE: null,
 	ARTICLE_FILTER: null,
@@ -17,7 +18,6 @@ module.exports = keyMirror({
 	ARTICLE_LOADTHEYLIKE: null,
 
 	//like
-	LIKE_LOAD: null,
 	LIKE_ADD: null,
 	LIKE_DELETE: null,
 

@@ -76,6 +76,33 @@ let AppActions_Articles = {
 		});
 	},
 
+	loadhelike( uid ){
+		console.log('load like', uid);
+
+		$.ajax({
+			url: 'http://localhost:8080/api/like/',
+			type: 'GET',
+			data: { uid },
+
+			success: function(result){
+
+//				console.log('success(result)', result);
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.HELIKE_LOAD,
+					data: result
+				});
+			},
+			error: function(err){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
+	},
+
 	loadTheyLiked( uid ){
 		$.ajax({
 			url: address + '/follow/like',

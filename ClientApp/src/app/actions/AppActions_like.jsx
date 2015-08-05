@@ -52,35 +52,6 @@ let AppActions_Like = {
 			}
 		});
 	},
-
-	loadlike( uid ){
-		console.log('load like', uid);
-
-		$.ajax({
-			url: address + '/',
-			type: 'GET',
-			data: { uid },
-
-			success: function(result){
-
-//				console.log('success(result)', result);
-
-				AppDispatcher.handleViewAction({
-					actionType: AppConstants.LIKE_LOAD,
-					data: result
-				});
-			},
-			error: function(err){
-
-				console.log('err(result)', err);
-				// AppDispatcher.handleViewAction({
-				// 	actionType: AppConstants.noop,
-				// 	data: null
-				// });
-			}
-		});
-	}
-
 };
 
 module.exports = AppActions_Like;

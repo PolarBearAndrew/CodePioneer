@@ -32,12 +32,15 @@ var filter = [];
 var isNotLoading = true;
 var isMoreData = true;
 
+var helike = null;
+
 objectAssign( Store, EventEmitter.prototype, {
 
     //data
     getArticleList() { return articles; },
     getLikedArticleList() { return likedArticles; },
     getTheyLiked() { return theyLiked; },
+    gethelike: () => { return helike || []; },
 
     //filter
     getFilter(){ return filter; },
@@ -136,6 +139,14 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
                 }
                 return val;
             });
+            helike = helike.map( val => {
+                if(val._id === data){
+                    let user = main.getUser();
+                    val.like.push(user.imgUrl);
+                    return val;
+                }
+                return val;
+            });
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
@@ -152,6 +163,26 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
                 }
                 return val;
             });
+            helike = helike.map( val => {
+
+                if(val._id === data){
+
+                    val.like = val.like.filter( url => {
+                        let user = main.getUser();
+                        return url != user.imgUrl;
+                    });
+                    return val;
+                }
+                return val;
+            });
+            Store.emit( AppConstants.CHANGE_EVENT );
+            break;
+
+        /*
+         *  載入其他使用者喜歡的文章
+         */
+        case AppConstants.HELIKE_LOAD:
+            helike = data;
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 

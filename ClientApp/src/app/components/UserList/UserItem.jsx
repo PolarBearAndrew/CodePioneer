@@ -165,7 +165,7 @@ let userItem = React.createClass({
    	    this.refs.ProfilesDialog.show();
 
         let id = this.props.data._id;
-        this.props.loadlike(id);
+        this.props.loadhelike(id);
     },
 });
 

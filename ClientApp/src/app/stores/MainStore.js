@@ -35,8 +35,6 @@ var isLogin = false;
 var displayPage = 'Login';
 var displayContainer = 'ArticleList';
 
-var helike = null;
-
 /**
  * 建立 Store class，並且繼承 EventEMitter 以擁有廣播功能
  */
@@ -49,7 +47,6 @@ objectAssign( Store, EventEmitter.prototype, {
     getUser: () => { return user; },
     getIsLogin: () => { return login; },
     getUserList: () => { return userList; },
-    gethelike: () => { return helike || []; },
     getDisplayPage: () => { return displayPage; },
     getDisplayContainer: () => { return displayContainer; },
     noop: () => { },
@@ -132,14 +129,6 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
             user.follow = user.follow.filter( (value) => {
                 return value != data
             });
-            Store.emit( AppConstants.CHANGE_EVENT );
-            break;
-
-        /*
-         *  載入其他使用者喜歡的文章
-         */
-        case AppConstants.LIKE_LOAD:
-            helike = data;
             Store.emit( AppConstants.CHANGE_EVENT );
             break;
 
