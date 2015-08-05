@@ -137,10 +137,7 @@ let userItem = React.createClass({
                     <Dialog
                         title="Article"
                         actionFocus="submit"
-                        ref="ProfilesDialog"
-                        autoDetectWindowHeight={true}
-                        autoScrollBodyContent={true}
-                        >
+                        ref="ProfilesDialog" >
                         <div style={{ height: dialogHeigth, overflow: 'auto' }} >
                             <ListContainer
                                 user={this.props.user}

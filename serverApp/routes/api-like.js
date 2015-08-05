@@ -87,6 +87,7 @@ router.get('/', function(req, res, next) {
 
     //destination info
     var info = { _id: req.query.uid };
+    let data = [];
 
     //db operation
     User.findOne(info)
@@ -98,8 +99,28 @@ router.get('/', function(req, res, next) {
                           .execAsync();
         })
         .then( result => {
-            debug('[GET] 查詢收藏文章 success ->', result);
-            res.json(result);
+            data = result;
+            return User.find({}).execAsync();
+        })
+        .then( user => {
+            data = data.map( art => {
+
+                for (var i = user.length - 1; i >= 0; i--) {
+                    for (var j = user[i].like.length - 1; j >= 0; j--) {
+                        if( user[i].like[j].toString() === art._id.toString() ){
+                            art.like.push(user[i].imgUrl.toString());
+                        }
+                    };
+                };
+                return art;
+            })
+
+            return Promise.resolve('');
+        })
+        .then( () => {
+            debug('[GET] 查詢收藏文章 success ->', data);
+            res.json(data);
+            return;
         })
         .catch( err => {
             debug('[GET] 查詢收藏文章 fail ->', err);
