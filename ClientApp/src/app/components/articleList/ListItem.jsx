@@ -1,8 +1,4 @@
 
-//步驟
-//重新命名myName,命名成這個元件名稱,共有兩個地方需要修改
-//要顯示的元件或是HTML元素寫在render的return裡面
-//==========================================
 //react
 let React = require('react');
 
@@ -118,6 +114,8 @@ let ArticleTab = React.createClass({
 
         let data = this.props.data;
         let ctrlStart = null;
+
+        console.log('user.like', this.props.user.like);
 
         if(this.props.user.like.indexOf(data._id) !== -1){
             ctrlStart = true;

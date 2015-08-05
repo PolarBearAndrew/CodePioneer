@@ -157,7 +157,9 @@ let container = React.createClass({
                 { this.props.list ? <ArticleList user={this.props.user}
                                                  list={this.props.list}
                                                  filter={actionsArticle.filter} /> : <UserList user={this.props.user}
-                                                                                               userList={this.props.userList} /> }
+                                                                                               filter={actionsArticle.filter}
+                                                                                               userList={this.props.userList}
+                                                                                               helike={this.props.helike} /> }
             </div>
 	    );
 

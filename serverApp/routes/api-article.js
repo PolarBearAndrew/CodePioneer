@@ -112,30 +112,6 @@ router.get('/news', (req, res, next) => {
             .then( user => {
                 data = data.map( art => {
 
-                    //art.like.push('000');
-
-                    // user = user.map( val => {
-
-                    //     val.like = val.like.map( aid => {
-
-                    //         // console.log('compair---', art._id + '---', aid + '---',  art._id.toString() === aid.toString())
-                    //         if( art._id.toString() === aid.toString() ){
-
-                    //             console.log('push',art._id, val.imgUrl);
-                    //             // console.log('art~~1', art.like);
-                    //             art.like = art.like.push(val.imgUrl.toString());
-                    //             //art.like[0] =  val.imgUrl.toString();
-
-                    //             // console.log('art~~2', art.like);
-                    //             // console.log('art', art, art.like);
-                    //         }
-                    //         return aid;
-                    //     });
-                    //     return val;
-                    // });
-
-                    console.log('hi, I am here');
-
                     for (var i = user.length - 1; i >= 0; i--) {
 
                         for (var j = user[i].like.length - 1; j >= 0; j--) {

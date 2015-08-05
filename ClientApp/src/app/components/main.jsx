@@ -141,6 +141,7 @@ let Main = React.createClass({
                                                     userList={ this.state.userList }
                                                     setting={ displayPage.Setting }
                                                     list={ list }
+                                                    helike = { this.state.helike }
                                                     filterData={ this.state.filterData } /> : null }
 	    	</div>
 	    );
@@ -157,9 +158,10 @@ let Main = React.createClass({
         	user: MainStore.getUser(),
             userList: MainStore.getUserList(),
             displayPage: MainStore.getDisplayPage(),
-        	displayContainer: MainStore.getDisplayContainer(),
+            displayContainer: MainStore.getDisplayContainer(),
 
-        	//article store
+            //article store
+            helike: ArticleStore.gethelike(),
             articles: ArticleStore.getArticleList(),
             likedArticles: ArticleStore.getLikedArticleList(),
             theyLiked: ArticleStore.getTheyLiked(),

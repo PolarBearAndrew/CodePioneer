@@ -68,7 +68,7 @@ let ListContainer = React.createClass({
 		});
 	},
 
-    
+
 	render() {
 
         debug('[props]', this.props);
@@ -98,26 +98,27 @@ let ListContainer = React.createClass({
             display:'flex',
             flexDirection:'row',
         };
-        
+        // <p style={allTitle} className="title">News</p>
+        //         <p className="followTitle">Follow</p>
+        //         <p style={allTitle} className="title">Library</p>
+        //         <p style={allTitle} className="title">Pioneer Library</p>
+
         let textEnd={
             width:'80px',
             height:'40px',
             textalign:'center',
         }
-        
+
 //        <CircularProgress mode="indeterminate" size={0.5}/>
 
 	    return (
             <div>
-                <p style={allTitle} className="title">News</p>
-                <p className="followTitle">Follow</p>
-                <p style={allTitle} className="title">Library</p>
-                <p style={allTitle} className="title">Pioneer Library</p>
-               
+
+
     	    	<Paper zDepth={2} id="listContainer">
     		        { articleList }
     		    </Paper>
-            
+
                 <img src="../../../www/images/end.png" style={textEnd}/>
 
             </div>
