@@ -13,7 +13,7 @@ describe('[ API unit test - articles (12) ]', function() {
 
     describe('破壞性測試, 蓄意少傳參數', () => {
 
-        it('[POST] (破壞性測試) 新增文章', ( done ) => {
+        it('[POST] (破壞性測試) 新增文章', done => {
 
             request({
                 url: 'http://localhost:8080/api/article/',
@@ -27,7 +27,7 @@ describe('[ API unit test - articles (12) ]', function() {
             });
         });
 
-        it('[GET] (破壞性測試) 查詢文章(aid)', ( done ) => {
+        it('[GET] (破壞性測試) 查詢文章(aid)', done => {
 
             request({
                 url: 'http://localhost:8080/api/article/',
@@ -40,7 +40,7 @@ describe('[ API unit test - articles (12) ]', function() {
             });
         });
 
-        it('[GET] (破壞性測試) 接續查詢文章(10)', ( done ) => {
+        it('[GET] (破壞性測試) 接續查詢文章(10)', done => {
 
             let finalIndex = 10;
 
@@ -55,7 +55,7 @@ describe('[ API unit test - articles (12) ]', function() {
             });
         });
 
-        it('[GET] (破壞性測試) 查詢喜愛文章', ( done ) => {
+        it('[GET] (破壞性測試) 查詢喜愛文章', done => {
 
             request({
                 url: 'http://localhost:8080/api/article/like',
@@ -69,7 +69,7 @@ describe('[ API unit test - articles (12) ]', function() {
             });
         });
 
-        it('[PUT] (破壞性測試) 修改文章資訊', ( done ) => {
+        it('[PUT] (破壞性測試) 修改文章資訊', done => {
 
             let expectData = {};
 

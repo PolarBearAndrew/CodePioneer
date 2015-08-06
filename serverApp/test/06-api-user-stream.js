@@ -23,21 +23,21 @@
 //     before( () => {
 
 //         return  User.removeAsync({name: 'AndrewChen'})
-//                     .then( (result) => {
+//                     .then( result => {
 //                         let user = new User(initData);
 //                         return user.saveAsync();
 //                     })
-//                     .spread( (result) => {
+//                     .spread( result => {
 //                         uid = result._id;
 //                     })
-//                     .catch( (err)=>{
+//                     .catch( err => {
 //                         debug('[ API unit test - users ] 資料初始化錯誤', err);
 //                     });
 //     });
 
 //     describe('正常操作測試', () => {
 
-// //        it('[GET] 查詢使用者(10)', ( done ) => {
+// //        it('[GET] 查詢使用者(10)', done => {
 // //
 // //            request({
 // //                url: 'http://localhost:8080/api/users/stream/',
@@ -59,7 +59,7 @@
 // //            });
 // //        });
 // //
-// //        it('[GET] 接續查詢使用者(10)', ( done ) => {
+// //        it('[GET] 接續查詢使用者(10)', done => {
 // //            let finalIndex = 10;
 // //
 // //            request({
@@ -80,7 +80,7 @@
 // //            });
 // //        });
 
-//         // it('[GET] 查詢喜愛使用者(10)', ( done ) => {
+//         // it('[GET] 查詢喜愛使用者(10)', done => {
 
 
 //         //     request({
@@ -103,7 +103,7 @@
 //         //     });
 //         // });
 
-//         // it('[GET] 接續查詢喜愛使用者(10)', ( done ) => {
+//         // it('[GET] 接續查詢喜愛使用者(10)', done => {
 // //            request({
 // //                url: queryString('http://localhost:8080/api/users/stream/like/stream', { finalIndex, lastestTime } ),
 // //                method: 'GET',
@@ -118,7 +118,7 @@
 //         });
 //     });
 
-//     after( (done) => {
+//     after( done => {
 //         return done();
 //     });
 // });

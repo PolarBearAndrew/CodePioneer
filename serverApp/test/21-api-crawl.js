@@ -25,101 +25,101 @@ describe('[ DB data check - crawl (21) ]', function() {
 
     describe('正常操作測試', () => {
 
-        it('[Crawl] 爬蟲資料庫資料充足', ( done ) => {
+        it('[Crawl] 爬蟲資料庫資料充足', done => {
 
              //db operation
              Article.find()
                     .limit(20)
                     .execAsync()
-                    .then( (result) => {
+                    .then( result => {
                         should.exist(result);
                         result.should.with.lengthOf(20);
                         return done();
                     });
         });
 
-        it('[Crawl] 爬蟲資料庫資料充足 - github10', ( done ) => {
+        it('[Crawl] 爬蟲資料庫資料充足 - github10', done => {
 
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.github10)
                     .limit(5)
                     .execAsync()
-                    .then( (result) => {
+                    .then( result => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
                         return done();
                     });
         });
 
-        it('[Crawl] 爬蟲資料庫資料充足 - hackerNews', ( done ) => {
+        it('[Crawl] 爬蟲資料庫資料充足 - hackerNews', done => {
 
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.hackerNews)
                     .limit(5)
                     .execAsync()
-                    .then( (result) => {
+                    .then( result => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
                         return done();
                     });
         });
 
-        it('[Crawl] 爬蟲資料庫資料充足 - iThomeTech', ( done ) => {
+        it('[Crawl] 爬蟲資料庫資料充足 - iThomeTech', done => {
 
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.iThomeTech)
                     .limit(5)
                     .execAsync()
-                    .then( (result) => {
+                    .then( result => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
                         return done();
                     });
         });
 
-        it('[Crawl] 爬蟲資料庫資料充足 - iThomeNews', ( done ) => {
+        it('[Crawl] 爬蟲資料庫資料充足 - iThomeNews', done => {
 
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.iThomeNews)
                     .limit(5)
                     .execAsync()
-                    .then( (result) => {
+                    .then( result => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
                         return done();
                     });
         });
 
-        it('[Crawl] 爬蟲資料庫資料充足 - githubTranding', ( done ) => {
+        it('[Crawl] 爬蟲資料庫資料充足 - githubTranding', done => {
 
              //db operation
              Article.find()
                     .where('from').equals(config.crawlName.githubTranding)
                     .limit(5)
                     .execAsync()
-                    .then( (result) => {
+                    .then( result => {
                         should.exist(result);
                         result.should.with.lengthOf(5);
                         return done();
                     });
         });
 
-        it('[Crawl] 無異質資料-from', ( done ) => {
+        it('[Crawl] 無異質資料-from', done => {
 
             let source = [];
 
-            Object.keys(config.crawlName).map( (value) => {
+            Object.keys(config.crawlName).map( value => {
                 source.push(value);
             });
 
              //db operation
              Article.find({ from: { $nin: source } })
                     .execAsync()
-                    .then( (result) => {
+                    .then( result => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
                         return done();
@@ -127,26 +127,26 @@ describe('[ DB data check - crawl (21) ]', function() {
 
         });
 
-        it('[Crawl] 無異質資料-title', ( done ) => {
+        it('[Crawl] 無異質資料-title', done => {
 
              //db operation
              Article.find()
                     .where('title').equals('')
                     .execAsync()
-                    .then( (result) => {
+                    .then( result => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
                         return done();
                     });
         });
 
-        it('[Crawl] 無異質資料-time', ( done ) => {
+        it('[Crawl] 無異質資料-time', done => {
 
              //db operation
              Article.find()
                     .where('time').equals('')
                     .execAsync()
-                    .then( (result) => {
+                    .then( result => {
                         should.exist(result);
                         result.should.with.lengthOf(0);
                         return done();
