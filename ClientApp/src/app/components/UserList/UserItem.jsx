@@ -1,26 +1,25 @@
-
 //react
 let React = require('react');
 
-//mui
+//material 初始化(套件引入)
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
+//mui元件
 let Checkbox = mui.Checkbox;
 let FontIcon = mui.FontIcon;
 let Paper = mui.Paper;
 let Avatar = mui.Avatar;
-let IconButton=mui.IconButton;
-let Dialog=mui.Dialog;
-let TextField=mui.TextField;
+let IconButton = mui.IconButton;
+let Dialog = mui.Dialog;
+let TextField = mui.TextField;
 
 //元件
 let UserArticle = require('./UserArticle.jsx');
 
 //debug
 let debug = require('debug')('app:user');
-
 
 let userItem = React.createClass({
 
@@ -44,24 +43,18 @@ let userItem = React.createClass({
 
         debug('[props]', this.props);
 
-//        let pic={
-//            display:'flex',
-//            flexDirection:'row',
-//            justifyContent:'center',
-//            alignItems:'center',
-//        };
         let avatar = {
             margin:'0px',
             marginTop:'15px',
         };
 
-        let follow={
+        let follow = {
             left: '-7px',
             top:'-8px',
             fontSize:'40px',
         };
 
-        let checkbox={
+        let checkbox = {
             margin:'0px',
             padding:'0px',
             marginBottom:'15px',
@@ -69,17 +62,16 @@ let userItem = React.createClass({
             width:'25px',
         };
 
-        let info ={
+        let info = {
             padding:'0px',
             margin:'0px',
             display:'flex',
             flexDirection:'column',
             justifyContent:'flex-start',
             alignItems:'flex-start',
-//            marginTop:'8px',
         };
         
-        let more={
+        let more = {
             margin:'0px',
             padding:'0px',
             marginLeft:'200px'
@@ -96,9 +88,7 @@ let userItem = React.createClass({
         }
 
         if(data._id === this.props.user.id)
-            return null;   
-        
-        
+            return null;           
         //Dialog，放文章資料設定
 //        { userArticle }
         
@@ -116,34 +106,33 @@ let userItem = React.createClass({
 //        }, this);
 
 	    return (
-	    	<Paper className="paperCard" zDepth={1} key={ this.props.key } >
-                    <Avatar style={avatar} size={70} src={ data.imgUrl }  onTouchTap={this._showLike}/>
-                    <div style={info} className="article">
-                        <p className="infoContent">{ data.name } </p>
-                        <p className="infoContent">Taiwan</p>
-                        <p className="infoContent">{ data.lastLoginTime }</p>
-                        <p className="infoContent">Skill</p>
-                        <p className="infoContent">Introduction</p>
-                        <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center" 
+	    	<Paper className="paperCard" zDepth={1} key={ this.props.key }>
+                <Avatar style={avatar} size={70} src={ data.imgUrl }  onTouchTap={this._showLike}/>
+                <div style={info} className="article">
+                    <p className="infoContent">{ data.name }</p>
+                    <p className="infoContent">Taiwan</p>
+                    <p className="infoContent">{ data.lastLoginTime }</p>
+                    <p className="infoContent">Skill</p>
+                    <p className="infoContent">Introduction</p>
+                    <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center" 
                         tooltip="more.." onTouchTap={this._Profiles}>more_horiz</IconButton>
-                        <Checkbox
-                                style={checkbox}
-                                onCheck={this._like}
-                                defaultChecked={ ctrlStart }
-                                checkedIcon={<FontIcon  className="material-icons" style={follow}
-                                color={Colors.pink500}>star</FontIcon>}
-                                unCheckedIcon={<FontIcon className="material-icons" style={follow}
-                                color={Colors.pink500}>star_border</FontIcon>} />
-                    </div>
-                    <Dialog
-                        title="Article"
-                        actionFocus="submit"
-                        ref="ProfilesDialog">
+                    <Checkbox
+                            style={checkbox}
+                            onCheck={this._like}
+                            defaultChecked={ ctrlStart }
+                            checkedIcon={<FontIcon  className="material-icons" style={follow}
+                            color={Colors.pink500}>star</FontIcon>}
+                            unCheckedIcon={<FontIcon className="material-icons" style={follow}
+                            color={Colors.pink500}>star_border</FontIcon>} />
+                </div>
+                <Dialog
+                    title="Article"
+                    actionFocus="submit"
+                    ref="ProfilesDialog">
 
-		            </Dialog>
+                </Dialog>
             </Paper>
 	    );
-
 	},
 
     _showLike(){
@@ -156,6 +145,7 @@ let userItem = React.createClass({
         else
             this.props.unfollow(this.props.user.id, this.props.data._id);
     },
+    
     _Profiles(){
    	    this.refs.ProfilesDialog.show();
     },

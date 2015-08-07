@@ -1,12 +1,12 @@
-
 //react
 let React = require('react');
 
-//mui
+//material 初始化(套件引入)
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
+//mui元件
 let Paper = mui.Paper;
 
 //componentes
@@ -17,7 +17,6 @@ let debug = require('debug')('app:user container');
 
 //actions
 let actionFollow = require('../../actions/AppActions_User.jsx');
-
 
 let userContainer = React.createClass({
 
@@ -41,7 +40,7 @@ let userContainer = React.createClass({
 
 		debug('[props]', this.props);
 
-        let paperBg={
+        let paperBg = {
             display:'flex',
             webkitFlexWrap: 'wrap',
             flexWrap: 'wrap',
@@ -64,7 +63,6 @@ let userContainer = React.createClass({
                     { userItems }
                 </Paper>
 	    );
-
 	},
 });
 

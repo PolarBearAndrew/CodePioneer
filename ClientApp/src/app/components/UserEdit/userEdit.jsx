@@ -1,23 +1,16 @@
-
-//步驟
-//重新命名myName,命名成這個元件名稱,共有兩個地方需要修改
-//要顯示的元件或是HTML元素寫在render的return裡面
-//==========================================
 //react
 let React = require('react');
 
-//mui
+//material 初始化(套件引入)
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
-let Avatar=mui.Avatar;
-let IconButton=mui.IconButton;
-let TextField=mui.TextField;
-let SelectField=mui.SelectField;
-//mui元件
-//範例:
-//let AppBar = mui.AppBar;
+//mui 元件
+let Avatar = mui.Avatar;
+let IconButton = mui.IconButton;
+let TextField = mui.TextField;
+let SelectField = mui.SelectField;
 
 let userEdit = React.createClass({
 
@@ -44,48 +37,30 @@ let userEdit = React.createClass({
     },
 	render() {
             
-//         let All={
-//             margin:'0px',
-//             padding: '0px',
-//             display:'flex',
-//             alignItems: 'center',
-//             justifyContent: 'center',
-//             flexDirection: 'column',
-//             marginTop:'20px',
-//         };
-        
-//         let photo={
-//             padding: '0px',
-//             display:'flex',
-//             alignItems: 'center',
-//             justifyContent: 'center',
-//             flexDirection: 'row',
-//         };
-        let settingTitle={
+        let settingTitle = {
             margin:'0px',
             display: 'block',
             marginRight:'10px',
             marginBottom:'30px'
         };
         
-         let image={
+         let image = {
              margin:'0px',
              padding:'0px',
              marginTop:'-25px',
-//             marginLeft:'100px'
          };
         
          let styles = {
              exampleImageInput: {
-                    cursor: 'pointer',
-                    position: 'absolute',
-                    top: '0',
-                    bottom: '0',
-                    right: '0',
-                    left: '0',
-                    width: '48px',
-                    opacity: '0'
-                    },
+                cursor: 'pointer',
+                position: 'absolute',
+                top: '0',
+                bottom: '0',
+                right: '0',
+                left: '0',
+                width: '48px',
+                opacity: '0'
+                },
          };
         
          let country = [
@@ -94,12 +69,10 @@ let userEdit = React.createClass({
                { payload: '3', text: 'Korea ' },
                { payload: '4', text: 'America' },
          ];
-//          用來判斷rwd的另一種方法
         
-//        let screenWidth = screen.width;
+//          用來判斷rwd的另一種方法
         let screenWidth = document.body.scrollWidth;
         let ctrl = true;
-        
         if(screenWidth <= 768 ){
             ctrl = false;
         };
@@ -108,7 +81,6 @@ let userEdit = React.createClass({
             <div className="editAll">
                 <p style={settingTitle} className="SettingTitle">Setting</p>
                 <div className="editUp">
-                    
                         <Avatar src="images/default.png"  size={100}/>
                         <IconButton style={image} iconClassName="material-icons" tooltipPosition="bottom-center" 
                             tooltip="Image Upload" >file_upload
@@ -116,11 +88,14 @@ let userEdit = React.createClass({
                         </IconButton>
                     
                     <br/><br/>
+            
                     <div className="editNC">
                         <TextField
                             id="name"
                             hintText="Name" />
+            
                         <br/><br/>
+            
                         <SelectField
                           value={this.state.selectValue}
                           onChange={this._handleSelectValueChange.bind(null, 'selectValue')}
@@ -130,22 +105,25 @@ let userEdit = React.createClass({
                 </div>
                 <div className="editDown">
                         <br/>
+                                 
                         <TextField
                             id="skill"
                             hintText="Skill"
                             multiLine={true}
                             fullWidth={ctrl}/>
+                                 
                         <br/><br/>
+                                 
                         <TextField
                             id="introduction"
                             hintText="Introduction"
                             multiLine={true}
-                            fullWidth={ctrl}/>   
-                        <br/><br/>
+                            fullWidth={ctrl}/>
                 </div>
             </div>
 	    );
 	},
+        
   _handleSelectValueChange(name, e) {
     let change = {};
     change[name] = e.target.value;

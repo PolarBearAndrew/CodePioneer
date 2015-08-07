@@ -1,0 +1,13 @@
+.editAll {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    align-Items: center;
+    justify-Content: center;
+    flex-Direction: column;
+    margin-Top: 50px;
+}
+
+.SettingTitle {
+    font-size: 40px;
+}
