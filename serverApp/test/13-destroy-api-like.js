@@ -10,7 +10,7 @@ describe('[ API unit test - like (13) ]', function() {
 
     describe('破壞性測試, 蓄意少傳參數', () => {
 
-        it('[POST] (破壞性測試) 新增收藏', ( done ) => {
+        it('[POST] (破壞性測試) 新增收藏', done => {
 
             request({
                 url: 'http://localhost:8080/api/like/',
@@ -24,7 +24,7 @@ describe('[ API unit test - like (13) ]', function() {
             });
         });
 
-        it('[GET] (破壞性測試) 查詢收藏文章', ( done ) => {
+        it('[GET] (破壞性測試) 查詢收藏文章', done => {
 
             request({
                 url: 'http://localhost:8080/api/like/',
@@ -38,7 +38,7 @@ describe('[ API unit test - like (13) ]', function() {
             });
         });
 
-        it('[DELETE] (破壞性測試) 刪除收藏文章', ( done ) => {
+        it('[DELETE] (破壞性測試) 刪除收藏文章', done => {
 
             request({
                 url: 'http://localhost:8080/api/like/',

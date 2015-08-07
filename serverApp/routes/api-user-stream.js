@@ -29,12 +29,12 @@ router.get('/', (req, res, next) => {
             .limit(10)
             .sort({ lastLoginTime: -1 })
             .execAsync()
-            .then( (result) => {
+            .then( result => {
                 debug('[GET] 查詢使用者(10) success ->', result);
                 res.json( result );
                 return;
             })
-            .catch( (err) =>{
+            .catch( err =>{
                 debug('[GET] 查詢使用者(10) fail ->', err);
                 return next(err);
             });
@@ -63,7 +63,7 @@ router.get('/stream', (req, res, next) => {
         .where('time <= ' + req.query.lastestTime)
         .sort({ time: -1 })
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             let data = result.filter( (value, index) => {
                 return index >= finalIndex;
@@ -74,7 +74,7 @@ router.get('/stream', (req, res, next) => {
             res.json( data );
             return;
         })
-        .catch( (err) =>{
+        .catch( err =>{
             debug('接續查詢使用者(10) fail ->', err);
             return next(err.message);
         });
@@ -103,7 +103,7 @@ router.get('/like', (req, res, next) => {
     //     .limit(10)
     //     .sort({ time: -1 })
     //     .execAsync()
-    //     .then( (result) => {
+    //     .then( result => {
 
     //         console.log('hiiii!!!');
 
@@ -111,7 +111,7 @@ router.get('/like', (req, res, next) => {
     //         res.json( result );
     //         return;
     //     })
-    //     .catch( (err) =>{
+    //     .catch( err =>{
     //         debug('[GET] 查詢喜愛使用者(10) fail ->', err);
     //         return next(err);
     //     });

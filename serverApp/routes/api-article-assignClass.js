@@ -31,12 +31,12 @@ router.get('/news/:class', (req, res, next) => {
             .limit(10)
             .sort({ time: -1 })
             .execAsync()
-            .then( (result) => {
+            .then( result => {
                 debug('[GET] 查詢最新文章(10)(指定分類) success ->', result);
                 res.json( result );
                 return;
             })
-            .catch( (err) =>{
+            .catch( err =>{
                 debug('[GET] 查詢最新文章(10)(指定分類) fail ->', err);
                 return next(err);
             });
@@ -64,7 +64,7 @@ router.get('/more/:class', (req, res, next) => {
             .where('time <= ' + req.query.lastestTime)
             .sort({ time: -1 })
             .execAsync()
-            .then( (result) => {
+            .then( result => {
 
                 let data = result.filter( (value, index) => {
                     return index >= finalIndex;
@@ -76,7 +76,7 @@ router.get('/more/:class', (req, res, next) => {
                 res.json( data );
                 return;
             })
-            .catch( (err) =>{
+            .catch( err =>{
                 debug('[GET] 接續查詢文章(10) fail ->', err);
                 return next(err);
             });
@@ -100,13 +100,13 @@ router.get('/like/:class', (req, res, next) => {
             .where('_id').in(req.body.like)
             .sort({ time: -1 })
             .execAsync()
-            .then( (result) => {
+            .then( result => {
 
                 debug('[GET] 查詢喜愛文章(指定分類) success ->', result);
                 res.json( result );
                 return;
             })
-            .catch( (err) =>{
+            .catch( err =>{
                 debug('[GET] 查詢喜愛文章(指定分類) fail ->', err);
                 return next(err);
             });

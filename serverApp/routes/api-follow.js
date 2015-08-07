@@ -91,12 +91,12 @@ router.post('/', (req, res, next) => {
 //     //db operation
 //     User.findOne(info)
 //         .execAsync()
-//         .then( (result) => {
+//         .then( result => {
 //             debug('[GET] 查詢追蹤 success ->', result);
 //             res.json(result);
 //             return;
 //         })
-//         .catch( (err) => {
+//         .catch( err => {
 //             debug('[GET] 查詢追蹤 fail ->', err);
 //             return next(err);
 //         });
@@ -126,7 +126,7 @@ router.delete('/', function(req, res, next) {
     //db operation
     User.findOne(info)
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             if(result){
                 followAry = result.follow;
@@ -143,12 +143,12 @@ router.delete('/', function(req, res, next) {
             );
 
         })
-        .then( (result) => {
+        .then( result => {
             debug('[DELETE] 取消追蹤 success ->', result);
             res.json(result);
             return Promise.resolve(likeData);
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[DELETE] 取消追蹤 fail ->', err);
             return next(err);
         })

@@ -87,16 +87,41 @@ router.get('/', function(req, res, next) {
 
     //destination info
     var info = { _id: req.query.uid };
+    let data = [];
 
     //db operation
     User.findOne(info)
         .execAsync()
-        .then( (result) => {
-            debug('[GET] 查詢收藏文章 success ->', result.like);
-            res.json(result.like);
+        .then( result => {
+            return Article.find()
+                          .where('_id').in(result.like)
+                          .execAsync();
+        })
+        .then( result => {
+            data = result;
+            return User.find({}).execAsync();
+        })
+        .then( user => {
+            data = data.map( art => {
+
+                for (var i = user.length - 1; i >= 0; i--) {
+                    for (var j = user[i].like.length - 1; j >= 0; j--) {
+                        if( user[i].like[j].toString() === art._id.toString() ){
+                            art.like.push(user[i].imgUrl.toString());
+                        }
+                    };
+                };
+                return art;
+            })
+
+            return Promise.resolve('');
+        })
+        .then( () => {
+            debug('[GET] 查詢收藏文章 success ->', data);
+            res.json(data);
             return;
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[GET] 查詢收藏文章 fail ->', err);
             return next(err);
         });
@@ -126,7 +151,7 @@ router.delete('/', function(req, res, next) {
     //db operation
     User.findOne(info)
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             if(result){
                 likeAry = result.like;
@@ -140,13 +165,13 @@ router.delete('/', function(req, res, next) {
                     .updateAsync()
             );
         })
-        .then( (result) => {
+        .then( result => {
             debug('[DELETE] 刪除收藏文章 success ->', result);
             res.json(req.body.aid);
             return Article.findOneAndUpdate( { _id: req.body.aid }, { $inc: { rank: (followerCount + 1) * -1 }} )
                           .updateAsync();
         })
-        .catch( (err) => {
+        .catch( err => {
             debug('[DELETE] 刪除收藏文章 fail ->', err);
             return next(err);
         })

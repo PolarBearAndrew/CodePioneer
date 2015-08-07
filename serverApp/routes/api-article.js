@@ -46,12 +46,12 @@ router.post('/', (req, res, next) => {
 
     //db operation
      article.saveAsync()
-            .spread( (result) => {
+            .spread( result => {
                 debug('[POST] 新增文章 success ->', result);
                 res.json(result);
                 return;
             })
-            .catch( (err) => {
+            .catch( err => {
                 debug('[POST] 新增文章 fail ->', err);
                 return next(err);
             });
@@ -77,12 +77,12 @@ router.get('/', (req, res, next) => {
      Article.findOne()
             .where('_id').equals( req.query.aid )
             .execAsync()
-            .then( (result) => {
+            .then( result => {
                 debug('[GET] 查詢文章 success ->', result);
                 res.json( result );
                 return;
             })
-            .catch( (err) =>{
+            .catch( err =>{
                 debug('[GET] 查詢文章 fail ->', err);
                 return next(err);
             });
@@ -104,37 +104,13 @@ router.get('/news', (req, res, next) => {
             .limit(10)
             .sort({ rank: -1 })
             .execAsync()
-            .then( (result) => {
+            .then( result => {
                 // debug('[GET] 查詢最新文章(10) success ->', result);
                 data = result;
                 return User.find({}).execAsync();
             })
             .then( user => {
                 data = data.map( art => {
-
-                    //art.like.push('000');
-
-                    // user = user.map( val => {
-
-                    //     val.like = val.like.map( aid => {
-
-                    //         // console.log('compair---', art._id + '---', aid + '---',  art._id.toString() === aid.toString())
-                    //         if( art._id.toString() === aid.toString() ){
-
-                    //             console.log('push',art._id, val.imgUrl);
-                    //             // console.log('art~~1', art.like);
-                    //             art.like = art.like.push(val.imgUrl.toString());
-                    //             //art.like[0] =  val.imgUrl.toString();
-
-                    //             // console.log('art~~2', art.like);
-                    //             // console.log('art', art, art.like);
-                    //         }
-                    //         return aid;
-                    //     });
-                    //     return val;
-                    // });
-
-                    console.log('hi, I am here');
 
                     for (var i = user.length - 1; i >= 0; i--) {
 
@@ -186,7 +162,7 @@ router.get('/news/:count', (req, res, next) => {
             .limit(req.params.count)
             .sort({ rank: -1 })
             .execAsync()
-            .then( (result) => {
+            .then( result => {
                 debug('[GET] 查詢最新文章(n) success ->', result);
                 data = result.map( val => {
                     val.like = [];
@@ -238,7 +214,7 @@ router.get('/stream', (req, res, next) => {
             .where('time <= ' + req.query.lastestTime)
             .sort({ rank: -1 })
             .execAsync()
-            .then( (result) => {
+            .then( result => {
 
                 data = result.filter( (value, index) => {
                     return index >= finalIndex;
@@ -292,13 +268,13 @@ router.get('/like', (req, res, next) => {
             .where('_id').in(like)
             .sort({ rank: -1 })
             .execAsync()
-            .then( (result) => {
+            .then( result => {
 
                 debug('[GET] 查詢喜愛文章(10) success ->', result);
                 res.json( result );
                 return;
             })
-            .catch( (err) =>{
+            .catch( err =>{
                 debug('[GET] 查詢喜愛文章(10) fail ->', err);
                 return next(err);
             });
@@ -320,11 +296,11 @@ router.get('/follow/like', (req, res, next) => {
     //db operation
     User.find({})
         .execAsync()
-        .then( (result) => {
+        .then( result => {
 
             let list = [];
 
-            result.forEach( (value) => {
+            result.forEach( value => {
                 if( value.follow.indexOf(req.query.uid) !== -1){
                     list = list.concat(value.like);
                 }
@@ -337,11 +313,11 @@ router.get('/follow/like', (req, res, next) => {
                           .sort({ rank: -1 })
                           .execAsync();
         })
-        .then( (result) => {
+        .then( result => {
             debug('[GET] 查詢追蹤者的喜愛文章-取得文章 success(2) ->', result);
             res.json(result);
         })
-        .catch( (err) =>{
+        .catch( err =>{
             debug('[GET] 查詢追蹤者的喜愛文章 fail ->', err);
             return next(err);
         });
@@ -377,12 +353,12 @@ router.put('/',  function(req, res, next) {
     //db operation
     Article.findOneAndUpdate( { _id: req.body.aid }, info )
             .updateAsync()
-            .then( (result) => {
+            .then( result => {
                 debug('[PUT] 修改文章資訊 success ->', result);
                 res.json(result);
                 return;
             })
-            .catch( (err) => {
+            .catch( err => {
                 debug('[PUT] 修改文章資訊 fail ->', err);
                 return next(err);
             });
@@ -407,12 +383,12 @@ router.delete('/', function(req, res, next) {
     //db operation
     Article.findOneAndRemove( { _id: req.body.aid } )
             .removeAsync()
-            .then( (result) => {
+            .then( result => {
                 debug('[DELETE] 刪除文章 success ->', result);
                 res.json(result);
                 return;
             })
-            .catch( (err) => {
+            .catch( err => {
                 debug('[DELETE] 刪除文章 fial ->', err);
                 return next(err);
             });

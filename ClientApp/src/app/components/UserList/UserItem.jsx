@@ -16,7 +16,7 @@ let Dialog = mui.Dialog;
 let TextField = mui.TextField;
 
 //元件
-let UserArticle = require('./UserArticle.jsx');
+let ListContainer = require('../articleList/ListContainer.jsx');
 
 //debug
 let debug = require('debug')('app:user');
@@ -70,8 +70,9 @@ let userItem = React.createClass({
             justifyContent:'flex-start',
             alignItems:'flex-start',
         };
-        
-        let more = {
+
+
+        let more={
             margin:'0px',
             padding:'0px',
             marginLeft:'200px'
@@ -88,6 +89,7 @@ let userItem = React.createClass({
         }
 
         if(data._id === this.props.user.id)
+
             return null;           
         //Dialog，放文章資料設定
 //        { userArticle }
@@ -105,32 +107,84 @@ let userItem = React.createClass({
 //                    filterData={this.props.list.filter} />;
 //        }, this);
 
-	    return (
-	    	<Paper className="paperCard" zDepth={1} key={ this.props.key }>
-                <Avatar style={avatar} size={70} src={ data.imgUrl }  onTouchTap={this._showLike}/>
-                <div style={info} className="article">
-                    <p className="infoContent">{ data.name }</p>
-                    <p className="infoContent">Taiwan</p>
-                    <p className="infoContent">{ data.lastLoginTime }</p>
-                    <p className="infoContent">Skill</p>
-                    <p className="infoContent">Introduction</p>
-                    <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center" 
-                        tooltip="more.." onTouchTap={this._Profiles}>more_horiz</IconButton>
-                    <Checkbox
-                            style={checkbox}
-                            onCheck={this._like}
-                            defaultChecked={ ctrlStart }
-                            checkedIcon={<FontIcon  className="material-icons" style={follow}
-                            color={Colors.pink500}>star</FontIcon>}
-                            unCheckedIcon={<FontIcon className="material-icons" style={follow}
-                            color={Colors.pink500}>star_border</FontIcon>} />
-                </div>
-                <Dialog
-                    title="Article"
-                    actionFocus="submit"
-                    ref="ProfilesDialog">
+//	    return (
+//	    	<Paper className="paperCard" zDepth={1} key={ this.props.key }>
+//                <Avatar style={avatar} size={70} src={ data.imgUrl }  onTouchTap={this._showLike}/>
+//                <div style={info} className="article">
+//                    <p className="infoContent">{ data.name }</p>
+//                    <p className="infoContent">Taiwan</p>
+//                    <p className="infoContent">{ data.lastLoginTime }</p>
+//                    <p className="infoContent">Skill</p>
+//                    <p className="infoContent">Introduction</p>
+//                    <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center" 
+//                        tooltip="more.." onTouchTap={this._Profiles}>more_horiz</IconButton>
+//                    <Checkbox
+//                            style={checkbox}
+//                            onCheck={this._like}
+//                            defaultChecked={ ctrlStart }
+//                            checkedIcon={<FontIcon  className="material-icons" style={follow}
+//                            color={Colors.pink500}>star</FontIcon>}
+//                            unCheckedIcon={<FontIcon className="material-icons" style={follow}
+//                            color={Colors.pink500}>star_border</FontIcon>} />
+//                </div>
+//                <Dialog
+//                    title="Article"
+//                    actionFocus="submit"
+//                    ref="ProfilesDialog">
+//
+//                </Dialog>
 
-                </Dialog>
+            return null;
+
+        // like={actionsLike.like}
+        //             unlike={actionsLike.unlike}
+
+
+        this.props.helike = this.props.helike.map( val => {
+            val.info = [];
+            return val;
+        });
+
+        let listData = {
+            data : this.props.helike,
+            filter: [],
+        } ;
+
+        let dialogHeigth = screen.height * 0.5 + 'px';
+
+	    return (
+	    	<Paper className="paperCard" zDepth={1} key={ this.props.key } >
+                    <Avatar style={avatar} size={70} src={ data.imgUrl }  onTouchTap={this._showLike}/>
+                    <div style={info} className="article">
+                        <p className="infoContent">{ data.name } </p>
+                        <p className="infoContent">Taiwan</p>
+                        <p className="infoContent">{ data.lastLoginTime }</p>
+                        <p className="infoContent">Skill</p>
+                        <p className="infoContent">Introduction</p>
+                        <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center"
+                        tooltip="more.." onTouchTap={this._Profiles}>more_horiz</IconButton>
+                        <Checkbox
+                                style={checkbox}
+                                onCheck={this._like}
+                                defaultChecked={ ctrlStart }
+                                checkedIcon={<FontIcon  className="material-icons" style={follow}
+                                color={Colors.pink500}>star</FontIcon>}
+                                unCheckedIcon={<FontIcon className="material-icons" style={follow}
+                                color={Colors.pink500}>star_border</FontIcon>} />
+                    </div>
+                    <Dialog
+                        title="Article"
+                        actionFocus="submit"
+                        ref="ProfilesDialog" >
+                        <div style={{ height: dialogHeigth, overflow: 'auto' }} >
+                            <ListContainer
+                                user={this.props.user}
+                                list={listData}
+                                filter={this.props.filter}/>
+
+                        </div>
+		            </Dialog>
+
             </Paper>
 	    );
 	},
@@ -148,6 +202,9 @@ let userItem = React.createClass({
     
     _Profiles(){
    	    this.refs.ProfilesDialog.show();
+
+        let id = this.props.data._id;
+        this.props.loadhelike(id);
     },
 });
 

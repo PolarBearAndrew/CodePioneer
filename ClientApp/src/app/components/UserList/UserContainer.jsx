@@ -17,6 +17,7 @@ let debug = require('debug')('app:user container');
 
 //actions
 let actionFollow = require('../../actions/AppActions_User.jsx');
+let actionArticle = require('../../actions/AppActions_article.jsx');
 
 let userContainer = React.createClass({
 
@@ -55,7 +56,9 @@ let userContainer = React.createClass({
             				 key={ index }
             				 user={this.props.user}
             				 follow={ actionFollow.follow }
-            				 unfollow={ actionFollow.unfollow } /> ;
+            				 unfollow={ actionFollow.unfollow }
+                             helike={this.props.helike}
+            				 loadhelike={ actionArticle.loadhelike } /> ;
         })
 
 	    return (
