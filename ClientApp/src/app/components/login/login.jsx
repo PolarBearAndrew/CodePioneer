@@ -21,6 +21,7 @@ let debug = require('debug')('app:login');
 
 //flux 資料相關
 let actionsUser = require('../../actions/AppActions_User.jsx');
+//***是否要刪***
 let AppConstants = require('../../constants/AppConstants.js');
 
 //main是這個元件暫時使用的名字
