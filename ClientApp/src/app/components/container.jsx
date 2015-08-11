@@ -94,6 +94,7 @@ let container = React.createClass({
             width:'100%',
             height:'auto',
             position: 'fixed',
+//            fontFamily:'Ubuntu', serif,
         };
 
         let allTitle = {
@@ -112,13 +113,6 @@ let container = React.createClass({
 //                <ArticleList user={this.props.user}
 //                             list={this.props.list}
 //                             filter={actionsArticle.filter} />
-
-
-//        <p style={allTitle} className="title">News</p>
-//                <p style={allTitle} className="title">Follow</p>
-
-//                <p style={allTitle} className="title">Library</p>
-//                <p style={allTitle} className="title">Pioneer Library</p>
 	    return (
     		<div  style={containerStyle}>
                 <AppBar title='CodePioneer'
@@ -127,7 +121,7 @@ let container = React.createClass({
                         iconElementRight={
                                         <div className="comments">
                                             <IconMenu iconButtonElement={<IconButton
-                                                                            iconClassName="material-icons" >
+                                                                            iconClassName="material-icons">
                                                                             person</IconButton>} >
                                                 <List>
                                                     <ListItem

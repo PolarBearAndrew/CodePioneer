@@ -71,7 +71,7 @@ router.post('/', function(req, res, next) {
 
 /*
  * [GET] 查詢收藏文章
- * request : body.uid
+ * request : query.uid
  * respone : db result
  */
 router.get('/', function(req, res, next) {
@@ -81,7 +81,7 @@ router.get('/', function(req, res, next) {
     //check
     let miss = check( req.query, ['uid'] );
     if(!miss.check){
-        debug('[GET] 新增收藏文章 miss data ->', miss.missData);
+        debug('[GET] 查詢收藏文章 miss data ->', miss.missData);
         return next(err);
     }
 
@@ -139,7 +139,7 @@ router.delete('/', function(req, res, next) {
     //check
 	let miss = check( req.body, ['uid', 'aid'] );
     if(!miss.check){
-        debug('[DELETE] 新增收藏文章 miss data ->', miss.missData);
+        debug('[DELETE] 刪除收藏文章 miss data ->', miss.missData);
         return next(err);
     }
 
