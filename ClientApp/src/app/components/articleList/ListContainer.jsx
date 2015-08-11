@@ -5,10 +5,10 @@ let React = require('react');
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
-let Paper = mui.Paper;
-let CircularProgress = mui.CircularProgress;
 
 //元件
+let Paper = mui.Paper;
+let CircularProgress = mui.CircularProgress;
 let ListItem = require('./ListItem.jsx');
 
 //flux
@@ -95,10 +95,7 @@ let ListContainer = React.createClass({
             display:'flex',
             flexDirection:'row',
         };
-        // <p style={allTitle} className="title">News</p>
-        //         <p className="followTitle">Follow</p>
-        //         <p style={allTitle} className="title">Library</p>
-        //         <p style={allTitle} className="title">Pioneer Library</p>
+        
 
         let textEnd={
             width:'80px',
@@ -106,8 +103,15 @@ let ListContainer = React.createClass({
             textalign:'center',
         }
 
-//        <CircularProgress mode="indeterminate" size={0.5}/>
+//        1.每篇內容title
+//         <p style={allTitle} className="title">News</p>
+//         <p className="followTitle">Follow</p>
+//         <p style={allTitle} className="title">Library</p>
+//         <p style={allTitle} className="title">Pioneer Library</p>
 
+//        2.loading的圖
+//        <CircularProgress mode="indeterminate" size={0.5}/>
+        
 	    return (
             <div>
     	    	<Paper zDepth={2} id="listContainer">
