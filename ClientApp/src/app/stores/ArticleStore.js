@@ -32,7 +32,7 @@ var filter = [];
 var isNotLoading = true;
 var isMoreData = true;
 
-var helike = null;
+var helike = [];
 
 objectAssign( Store, EventEmitter.prototype, {
 

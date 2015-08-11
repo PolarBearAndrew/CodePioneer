@@ -131,17 +131,19 @@ let ArticleTab = React.createClass({
             }
         });
 
-        let likeImg = data.like.map( (val, index) => {
+        let likeImg = data.like
+        .filter( val => {
+            return val;
+        })
+        .map( (val, index) => {
 
             let avatarAuthor = null;
 
-            if(index === 1)
+            if(index === 0){
                 avatarAuthor = { marginLeft:'auto',};
+            }
 
-            if(val)
-                return <Avatar style={avatarAuthor} src={val}  size={24}/>;
-            else
-                return;
+            return <Avatar style={avatarAuthor} src={val}  size={24}/>;
         });
 
 	    return (
@@ -149,8 +151,7 @@ let ArticleTab = React.createClass({
                 <div style={articleAll}>
                     <Avatar style={avatar} src={ 'images/' + data.from + '.png' } onTouchTap={ this._filter } />
                     <div style={ starPosi.wrapper }>
-                        <p
-                            style={title}
+                        <p  style={title}
                             className="title">
                             <a href={ data.url } > { data.title }</a></p>
                         <div style={article} className="article">
@@ -166,13 +167,13 @@ let ArticleTab = React.createClass({
                             defaultChecked={ ctrlStart }
                             onCheck={this._like}
                             ref="star"
-                            checkedIcon={<FontIcon color={Colors.yellow600} 
+                            checkedIcon={<FontIcon color={Colors.yellow600}
                                             className="material-icons" style={starPicPosi}>star</FontIcon >}
                             unCheckedIcon={<FontIcon color={Colors.yellow600}
                                            className="material-icons" style={starPicPosi}>star_border</FontIcon >}/>
                     </div>
                 </div>
-            
+
                 <Snackbar
                   ref="like"
                   action="like"
