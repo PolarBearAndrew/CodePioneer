@@ -13,7 +13,6 @@ let Paper = mui.Paper;
 let Avatar = mui.Avatar;
 let IconButton = mui.IconButton;
 let Dialog = mui.Dialog;
-let TextField = mui.TextField;
 
 //元件
 let ListContainer = require('../articleList/ListContainer.jsx');
@@ -90,7 +89,6 @@ let userItem = React.createClass({
         if(data._id === this.props.user.id)
 
             return null;           
-        
         // like={actionsLike.like}
         //             unlike={actionsLike.unlike}
 
