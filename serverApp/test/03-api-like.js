@@ -12,34 +12,31 @@ var initData = {
 };
 
 var uid = null;
-var aid = 'test-article-id';
+var aid = null;
 
 var User = require('../models/user.js');
+var Article = require('../models/article.js');
 
 describe('[ (03) API unit test - like ]', function() {
 
     before(function() {
 
-           return User.removeAsync()
-                      .then( result => {
-                        var user = new User(initData);
-                        return user.saveAsync();
-                      })
-                      .spread( result => {
-                        uid = result._id.toString();
-                      })
-                      .catch( err =>{
-                        debug('[ API unit test - article ] 資料初始化錯誤', err);
-                      });
-
-//        return User.remove({}, (err, result) => {
-//
-//            //init data
-//            var user = new User(initData);
-//            user.save((err, result) => {
-//                uid = result._id.toString();
-//            });
-//        });
+          return Article.findOne()
+                        .execAsync()
+                        .then( result => {
+                            aid = result._id;
+                            return User.removeAsync();
+                        })
+                        .then( result => {
+                            var user = new User(initData);
+                            return user.saveAsync();
+                        })
+                        .spread( result => {
+                            uid = result._id.toString();
+                        })
+                        .catch( err =>{
+                            debug('[ API unit test - article ] 資料初始化錯誤', err);
+                        });
     });
 
     describe('正常操作測試', () => {

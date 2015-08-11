@@ -2,16 +2,16 @@
 let React = require('react');
 
 //material 初始化(套件引入)
-let mui = require('material-ui');
-let Colors = mui.Styles.Colors;
+let mui          = require('material-ui');
+let Colors       = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
 //mui 元件
-let TextField = mui.TextField;
+let Dialog       = mui.Dialog;
+let Snackbar     = mui.Snackbar;
+let TextField    = mui.TextField;
+let FlatButton   = mui.FlatButton;
 let RaisedButton = mui.RaisedButton;
-let Dialog = mui.Dialog;
-let FlatButton = mui.FlatButton;
-let Snackbar = mui.Snackbar;
 
 //for uplode img
 var files;
@@ -21,8 +21,8 @@ let debug = require('debug')('app:login');
 
 //flux 資料相關
 let actionsUser = require('../../actions/AppActions_User.jsx');
-//***是否要刪***
-let AppConstants = require('../../constants/AppConstants.js');
+// //***是否要刪***
+// let AppConstants = require('../../constants/AppConstants.js');
 
 //main是這個元件暫時使用的名字
 let loginApp = React.createClass({
@@ -61,11 +61,6 @@ let loginApp = React.createClass({
             console.log('auto login fail');
         });
 
-        // Add events
-        // $('body, html').on('change', 'input[type=file]', (event) => {
-        //     files = event.target.files;
-        // });
-
 	    let containerStyle = {
 	    	padding: '0px',
             height : '300px',
@@ -89,7 +84,7 @@ let loginApp = React.createClass({
 	    	{ text: 'Cancel' },
 	    	{ text: 'Submit', onTouchTap: this._forgetPwd }
 	    ];
-        
+
 	    return (
             <div className="loginAll">
                 <div className="allLoginTitle">
@@ -138,27 +133,27 @@ let loginApp = React.createClass({
                             hintText="name"
                             errorText={this.state.errormail}
                             onChange={this._SignUpmail} />
-            
+
                         <br/>
-            
+
                         <TextField
                             id="signUpEmail"
                             hintText="email address"
                             errorText={this.state.errormail}
                             onChange={this._SignUpmail} />
-            
+
                         <br/>
-            
+
                         <TextField
                             id="signUpPwd"
                             hintText="password"
                             errorText={this.state.errorpassword}
                             onChange={this._SignUppassword} />
-            
+
                         <br/>
-            
+
                         <input type="file" id="img"  />
-            
+
                     </Dialog>
 
                     <Snackbar
@@ -214,51 +209,6 @@ let loginApp = React.createClass({
             this.refs.SignUpDialog.dismiss();
         };
         actionsUser.signUp( info, signupSuccess);
-
-        //upload img
-        /*var data = new FormData();
-
-        // $.each(files, (key, value) => {
-        //     console.log('kv', key, value)
-        //     data.append(key, value);
-        // });
-        //
-        console.log(files[0])
-
-        data.append('myImg' , files[0]);
-
-        console.log('data', data);
-
-        //dataType: 'json',
-
-        $.ajax({
-            url: 'http://localhost:8080/api/users/img',
-            type: 'POST',
-            data: data,
-            cache: false,
-            processData: false, // Don't process the files
-            contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-            success: function(data, textStatus, jqXHR)
-            {
-                if(typeof data.error === 'undefined')
-                {
-                    // Success so call function to process the form
-                    //submitForm(event, data);
-                    console.log('success')
-                }
-                else
-                {
-                    // Handle errors here
-                    console.log('ERRORS: 1' + data.error);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown)
-            {
-                // Handle errors here
-                console.log('ERRORS: 2' + textStatus);
-                // STOP LOADING SPINNER
-            }
-        }); */
     },
 
     _forgetPwd(){
