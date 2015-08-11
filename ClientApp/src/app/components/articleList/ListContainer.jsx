@@ -1,4 +1,3 @@
-
 //react
 let React = require('react');
 
@@ -17,7 +16,6 @@ let actionsLike = require('../../actions/AppActions_like.jsx');
 
 //debug
 let debug = require('debug')('app:article');
-
 
 let ListContainer = React.createClass({
 
@@ -67,8 +65,7 @@ let ListContainer = React.createClass({
 			accent1Color: Colors.lime600
 		});
 	},
-
-
+    
 	render() {
 
         debug('[props]', this.props);
@@ -77,18 +74,18 @@ let ListContainer = React.createClass({
 
 		var articleList = data.map((value, index)=>{
             return <ListItem
-                    key={index}
-                    data={value}
-                    user={this.props.user}
+                        key={index}
+                        data={value}
+                        user={this.props.user}
 
-                    like={actionsLike.like}
-                    unlike={actionsLike.unlike}
+                        like={actionsLike.like}
+                        unlike={actionsLike.unlike}
 
-                    filter={this.props.filter}
-                    filterData={this.props.list.filter} />;
+                        filter={this.props.filter}
+                        filterData={this.props.list.filter} />;
         }, this);
 
-        let allTitle={
+        let allTitle = {
             fontSize:'35px',
             letterSpacing:'4px',
 	    	margin: '0px',
@@ -113,17 +110,12 @@ let ListContainer = React.createClass({
 
 	    return (
             <div>
-
-
     	    	<Paper zDepth={2} id="listContainer">
     		        { articleList }
     		    </Paper>
-
                 <img src="../../../www/images/end.png" style={textEnd}/>
-
             </div>
 	    );
-
 	},
 });
 

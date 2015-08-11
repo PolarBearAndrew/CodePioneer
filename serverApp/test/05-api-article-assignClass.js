@@ -39,7 +39,7 @@ describe('[ (05) API unit test - articles-assignClass ]', function() {
 
     describe('正常操作測試', () => {
 
-        it('[GET] 查詢最新文章(10)(指定分類)', ( done ) => {
+        it('[GET] 查詢最新文章(10)(指定分類)', done => {
 
             request({
                 url: 'http://localhost:8080/api/article/assign/news/' + config.crawlName.github10,
@@ -61,7 +61,7 @@ describe('[ (05) API unit test - articles-assignClass ]', function() {
             });
         });
 
-        it('[GET] 接續查詢文章(10)(指定分類)', ( done ) => {
+        it('[GET] 接續查詢文章(10)(指定分類)', done => {
 
             let finalIndex = 10;
 
@@ -83,7 +83,7 @@ describe('[ (05) API unit test - articles-assignClass ]', function() {
             });
         });
 
-        it('[GET] 查詢喜愛文章(指定分類)', ( done ) => {
+        it('[GET] 查詢喜愛文章(指定分類)', done => {
 
             request({
                 url: 'http://localhost:8080/api/article/assign/like/' + config.crawlName.github10,
@@ -105,10 +105,10 @@ describe('[ (05) API unit test - articles-assignClass ]', function() {
         });
     });
 
-    after( (done) => {
+    after( done => {
         return Article.findOneAndRemove({ author: 'AndrewChen'})
                       .removeAsync()
-                      .then( (result) => {
+                      .then( result => {
                           return done();
                       });
     });

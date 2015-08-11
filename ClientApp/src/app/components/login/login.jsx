@@ -65,7 +65,6 @@ let loginApp = React.createClass({
         //     files = event.target.files;
         // });
 
-        //container
 	    let containerStyle = {
 	    	padding: '0px',
             height : '300px',
@@ -75,11 +74,10 @@ let loginApp = React.createClass({
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
-//            border:'2px solid black', 
 	    };
 
         //Login 和 SignUp的按鈕設定
-        let btn={
+        let btnSL = {
             display:'flex',
             justifyContent:'space-between',
             width : '200px'
@@ -91,16 +89,6 @@ let loginApp = React.createClass({
 	    	{ text: 'Submit', onTouchTap: this._forgetPwd }
 	    ];
         
-//        let loginAll={
-//            display: '-webkit-flex',
-//            display:'flex',
-//            alignItems: 'center',
-//            justifyContent: 'center',
-//            flexDirection: 'column',
-//            border:'2px solid black',
-//        };
-        
-//className="loginAll" style={loginAll}
 	    return (
             <div className="loginAll">
                 <div className="allLoginTitle">
@@ -110,9 +98,7 @@ let loginApp = React.createClass({
                 <div className="loginTab" style={containerStyle}>
                     <TextField
                             id="email"
-                            hintText="e-mail address"
-                            />
-
+                            hintText="e-mail address"/>
                     <TextField
                         id="pwd"
                         hintText="password"
@@ -123,7 +109,7 @@ let loginApp = React.createClass({
 
                     <br/><br/>
 
-                    <div style={btn}>
+                    <div style={btnSL}>
                         <RaisedButton label="SignUp" primary={false} onTouchTap={this._SignUp}/>
                         <RaisedButton label="Login" primary={true} onTouchTap={this._Login} />
                     </div>
@@ -131,7 +117,6 @@ let loginApp = React.createClass({
                     <br/>
 
                     <FlatButton label="Forget password" primary={true} onTouchTap={this._Forget}/>
-
                     <Dialog
                         title="Forget your password ?"
                         actions={emailPwdActions}
@@ -152,31 +137,36 @@ let loginApp = React.createClass({
                             hintText="name"
                             errorText={this.state.errormail}
                             onChange={this._SignUpmail} />
+            
                         <br/>
+            
                         <TextField
                             id="signUpEmail"
                             hintText="email address"
                             errorText={this.state.errormail}
                             onChange={this._SignUpmail} />
+            
                         <br/>
+            
                         <TextField
                             id="signUpPwd"
                             hintText="password"
                             errorText={this.state.errorpassword}
                             onChange={this._SignUppassword} />
+            
                         <br/>
+            
                         <input type="file" id="img"  />
+            
                     </Dialog>
 
                     <Snackbar
                           ref="loginFailSnackbar"
                           message="Login fail, please try again or use email to retrieve your password." />
-
                     <Snackbar
                           ref="singUpSuccessSnackbar"
                           message="Sign up success, please login in."
                           autoHideDuration={this.state.autoHideDuration} />
-
                 </div>
             </div>
 	    );
@@ -199,9 +189,7 @@ let loginApp = React.createClass({
     },
 
     _SignUpmail(e) {
-
         //這邊可以塞email正規演算
-
         this.setState({
           errormail: e.target.value ? '' : 'This field is required.'
         });
@@ -214,20 +202,16 @@ let loginApp = React.createClass({
     },
 
     _onSingupSubmit(e){
-
         let inputImg = $('#img');
-
         let info = {
             email: $('#signUpEmail').val(),
             pwd: $('#signUpPwd').val(),
             name: $('#signUpName').val(),
         }
-
         let signupSuccess = () => {
             this.refs.singUpSuccessSnackbar.show();
             this.refs.SignUpDialog.dismiss();
         };
-
         actionsUser.signUp( info, signupSuccess);
 
         //upload img
@@ -281,7 +265,6 @@ let loginApp = React.createClass({
         this.refs.ForgetDialog.dismiss();
         actionsUser.forgetPwd({ email });
     },
-
 });
 
 module.exports = loginApp;

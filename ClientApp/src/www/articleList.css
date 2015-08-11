@@ -1,0 +1,12 @@
+.followTitle {
+    font-size: 50px;
+    letter-spacing: 4px;
+    margin: 0px;
+    padding: 0p;
+    margin-Left: 10px;
+    margin-Bottom: 8px;
+    display: flex;
+    align-Items: center;
+    justify-Content: center;
+    font-family: 'Ubuntu', serif;
+}

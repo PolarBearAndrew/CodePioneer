@@ -1,25 +1,22 @@
-//要顯示的元件或是HTML元素寫在render的return裡面
-//==========================================
 //react
 let React = require('react');
 
-//mui
+//material 初始化(套件引入)
 let mui = require('material-ui');
 let Colors = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
-let TextField=mui.TextField;
+//mui 元件
+let TextField = mui.TextField;
 let MenuItem = mui.MenuItem;
 let AppBar = mui.AppBar;
 let LeftNav = mui.LeftNav;
 let IconButton = mui.IconButton;
-let Paper = mui.Paper;
 let Avatar = mui.Avatar;
 let IconMenu = mui.IconMenu;
 let List = mui.List;
 let ListItem = mui.ListItem;
-let ListDivider=mui.ListDivider;
-let CircularProgress=mui.CircularProgress;
+let ListDivider = mui.ListDivider;
 
 //debug
 let debug = require('debug')('app:container');
@@ -27,7 +24,7 @@ let debug = require('debug')('app:container');
 //components
 let ArticleList = require('./articleList/ListContainer.jsx');
 let UserList = require('./UserList/UserContainer.jsx');
-let UserEdit=require('./UserEdit/userEdit.jsx')
+let UserEdit = require('./UserEdit/userEdit.jsx')
 
 //flux - action
 let actionsArticle = require('../actions/AppActions_article.jsx');
@@ -90,17 +87,16 @@ let container = React.createClass({
             { text: search } //type: MenuItem.Types.SUBHEADER,
         ];
 
-        let fixed={
+        let fixed = {
             top:0,
             right: 0,
             left: 0,
             width:'100%',
             height:'auto',
             position: 'fixed',
-
         };
 
-        let allTitle={
+        let allTitle = {
 	    	margin: '0px',
             padding: '0px',
             fontSize:'35px',
@@ -162,7 +158,6 @@ let container = React.createClass({
                                                                                                helike={this.props.helike} /> }
             </div>
 	    );
-
 	},
 
     _leftmenu(){

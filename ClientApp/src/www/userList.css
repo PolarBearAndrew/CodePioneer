@@ -1,0 +1,20 @@
+.paperCard {
+    margin-Top: 10px;
+    margin-Left: 10px;
+    margin-right: 10px;
+    margin-Bottom: 10px;
+    width: 320px;
+    height: auto;
+}
+
+.paperCard:last-child {
+    margin-right: auto;
+}
+
+.infoContent {
+    margin: 0px;
+    padding: 0px;
+    margin-Left: 25px;
+    margin-Top: 8px;
+    font-Size: 20px;
+}
