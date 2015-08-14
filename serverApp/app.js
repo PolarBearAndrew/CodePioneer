@@ -60,7 +60,7 @@ app.use('/api/article/assign', articleAssignClass);
 app.use('/api/testCrawlAPI', testCrawlAPI);
 
 // catch 404 and forward to error handler
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -69,7 +69,7 @@ app.use( (req, res, next) => {
 // error handlers
 
 if (app.get('env') === 'development') {
-    app.use( (err, req, res, next) => {
+    app.use((err, req, res, next) => {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -80,7 +80,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use( (err, req, res, next) => {
+app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
@@ -123,18 +123,40 @@ app.listen(port, () => {
             uid = result._id;
 
             return Article.find()
-                          .limit(13)
-                          .execAsync();
+                .limit(13)
+                .execAsync();
         })
-        .then( (result) => {
+        .then((result) => {
 
 
-            let likeHim = [
-                { name: '雷尚樺', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/ray.png' },
-                { name: '洪于雅', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/doro.png' },
-                { name: '陳思璇', email: '999', pwd: '999', like: [], follow: [], imgUrl: 'images/hsuan.png' },
-                { name: '蔡鄭欽', email: '999', pwd: '999', like: [], follow: [], },
-            ];
+            let likeHim = [{
+                name: '雷尚樺',
+                email: '999',
+                pwd: '999',
+                like: [],
+                follow: [],
+                imgUrl: 'images/ray.png'
+            }, {
+                name: '洪于雅',
+                email: '999',
+                pwd: '999',
+                like: [],
+                follow: [],
+                imgUrl: 'images/doro.png'
+            }, {
+                name: '陳思璇',
+                email: '999',
+                pwd: '999',
+                like: [],
+                follow: [],
+                imgUrl: 'images/hsuan.png'
+            }, {
+                name: '蔡鄭欽',
+                email: '999',
+                pwd: '999',
+                like: [],
+                follow: [],
+            }, ];
 
             //set articles to arr
             let index = 0;
@@ -143,18 +165,18 @@ app.listen(port, () => {
                 //keep push data
                 likeHim[index].like.push(result[i]._id);
 
-                if( i % 4 === 0 ) {
+                if (i % 4 === 0) {
                     likeHim[index].follow.push(uid);
 
                     //db operation
                     let him = new User(likeHim[index]);
                     him.saveAsync()
-                       .then( (result) => {
-                           debug('[POST] 新增測試使用者 success ->', result);
-                       })
-                       .catch( (err) => {
-                           debug('[POST] 新增測試使用者 fail', index, err);
-                       });
+                        .then((result) => {
+                            debug('[POST] 新增測試使用者 success ->', result);
+                        })
+                        .catch((err) => {
+                            debug('[POST] 新增測試使用者 fail', index, err);
+                        });
 
                     //next
                     index++;
@@ -170,23 +192,23 @@ app.listen(port, () => {
     //crawl
     //==========================================
 
-     Article.find()
-            .execAsync()
-            .then((result) => {
+    Article.find()
+        .execAsync()
+        .then((result) => {
 
-                if (result.length <= 10) {
-                    console.log('[crawl] 查詢爬蟲資料, 資料不足, 重新爬蟲資料');
+            if (result.length <= 10) {
+                console.log('[crawl] 查詢爬蟲資料, 資料不足, 重新爬蟲資料');
 
-                    //re init data¡
-                    let crawltick = new crawl();
-                    crawltick.start();
-                } else {
-                    console.log('[crawl] 查詢爬蟲資料, 已存在無需更新');
-                }
-            })
-            .catch((err) => {
-                console.log('[crawl] 查詢爬蟲資料失敗 ->', err);
-            });
+                //re init data¡
+                let crawltick = new crawl();
+                crawltick.start();
+            } else {
+                console.log('[crawl] 查詢爬蟲資料, 已存在無需更新');
+            }
+        })
+        .catch((err) => {
+            console.log('[crawl] 查詢爬蟲資料失敗 ->', err);
+        });
 });
 
 module.exports = app;

@@ -24,7 +24,7 @@ let debug = require('debug')('app:container');
 //components
 let ArticleList = require('./articleList/ListContainer.jsx');
 let UserList = require('./UserList/UserContainer.jsx');
-let UserEdit = require('./UserEdit/userEdit.jsx')
+let UserEdit = require('./UserEdit/userEdit.jsx');
 
 //flux - action
 let actionsArticle = require('../actions/AppActions_article.jsx');
@@ -50,7 +50,7 @@ let container = React.createClass({
 
 	render() {
 
-        debug('[props]', this.props)
+        debug('[props]', this.props);
 
 		let containerStyle = {
 	    	textAlign: 'center',
@@ -60,8 +60,8 @@ let container = React.createClass({
 	    };
 
         let icon = () => {
-            return <Avatar src="images/panda.png"/>;
-        }();
+            return <Avatar src="images/panda.png"/> ;
+        }();;;;
 
         //left nav components
         let setting = () => { return <div className="appear">Setting</div>; }();

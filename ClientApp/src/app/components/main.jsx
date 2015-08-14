@@ -95,14 +95,14 @@ let Main = React.createClass({
                             ctrl = true;
                             break;
                         }
-                    };
+                    }
 
                     if( ctrl === false ){
                         console.log('load');
                         actionsArticle.loadLike(likeAry.join(','));
                         break;
                     }
-                };
+                }
 
                 //丟入資料
                 list.data = likedArticles;
@@ -119,7 +119,7 @@ let Main = React.createClass({
 
             case 'Pioneer':
                 //這有個小瑕疵 資料只會load一次
-                if(this.state.theyLiked.length == 0){
+                if(this.state.theyLiked.length === 0){
                     //重新載入
                     actionsArticle.loadTheyLiked(this.state.user.id);
                     break;

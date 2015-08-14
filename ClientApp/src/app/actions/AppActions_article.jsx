@@ -1,11 +1,9 @@
 let AppDispatcher = require('../dispatcher/AppDispatcher');
 let AppConstants = require('../constants/AppConstants');
 
-let address = 'http://localhost:8080/api/article';
+let address = 'http://localhost:8080/api/article'
 
 let AppActions_Articles = {
-
-
 	load(){
 		$.ajax({
 			url: address + '/news',
