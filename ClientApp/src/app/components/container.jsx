@@ -102,7 +102,7 @@ let container = React.createClass({
             padding: '0px',
             fontSize:'35px',
             marginLeft:'10px',
-            marginBottom:'8px',
+            marginBottom:'7px',
             display:'flex',
             flexDirection:'row',
         };
@@ -136,6 +136,11 @@ let container = React.createClass({
                                                 </List>
                                             </IconMenu>
                                         </div>} />
+          
+                <p style={allTitle} className="title">News</p>
+                <p className="followTitle">Follow</p>
+                <p style={allTitle} className="title">Library</p>
+                <p style={allTitle} className="title">Pioneer Library</p>
 
                 <LeftNav docked={false}
                          menuItems={menuItems}

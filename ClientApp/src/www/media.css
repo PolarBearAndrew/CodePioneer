@@ -31,6 +31,7 @@
     /*articleList*/
     .followTitle {
         font-Size: 35px;
+        margin-Left: 10px;
         display: flex;
         flex-Direction: row;
         align-Items: flex-start;
@@ -45,7 +46,7 @@
     }
     .allLoginTitle {
         margin-top: 20px;
-        margin-left: 7px;
+        margin-left: 10px;
     }
 }
 
