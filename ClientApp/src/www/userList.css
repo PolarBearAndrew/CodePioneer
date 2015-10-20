@@ -1,8 +1,11 @@
 .paperCard {
+/*
     margin-Top: 10px;
     margin-Left: 10px;
     margin-right: 10px;
     margin-Bottom: 10px;
+*/
+    margin: 10px;
     width: 320px;
     height: auto;
 }
