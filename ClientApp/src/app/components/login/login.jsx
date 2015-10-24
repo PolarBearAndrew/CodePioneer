@@ -57,9 +57,9 @@ let loginApp = React.createClass({
 
         debug('[props]', this.props);
 
-        actionsUser.login({ email: '123', pwd: '123' }, () => {
-            console.log('auto login fail');
-        });
+        // actionsUser.login({ email: '123', pwd: '123' }, () => {
+        //     console.log('auto login fail');
+        // });
 
 	    let containerStyle = {
 	    	padding: '0px',
