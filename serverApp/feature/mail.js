@@ -22,6 +22,8 @@ function postMan (){
 
     this.sendTo = function( address, pwd ){
 
+        console.log('myEmail :', address)
+
         this.mailOptions.to = address;
         this.mailOptions.html += pwd + '</p>';
 
