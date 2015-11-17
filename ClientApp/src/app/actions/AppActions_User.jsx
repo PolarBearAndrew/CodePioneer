@@ -5,65 +5,144 @@ let address = 'http://localhost:8080/api/users';
 let followAddress = 'http://localhost:8080/api/follow';
 let streamAaddress = 'http://localhost:8080/api/users/stream';
 
-let dispatcher = function(type, data){
-	AppDispatcher.handleViewAction({
-		actionType: AppConstants[type],
-		data: data
-	});
-};
-
 let AppActions_User = {
 
 	login( data, loginFail ){
-		let url = address + '/login';
-		fetch(url, {
-			method: 'POST',
-			body: data
-		})
-		.then( res => res.json())
-		.then( result => dispatcher('USER_LOGIN', result))
-		.catch( err => dispatcher('USER_LOGIN', false));
+		$.ajax({
+			url: address + '/login',
+			type: 'POST',
+			data: data,
+
+			success: function(result){
+
+				let login = false;
+
+				if( result.login === true ){
+					login = true;
+				}else{
+					loginFail(); //show dialog
+				}
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.USER_LOGIN,
+					data: result
+				});
+			},
+			error: function(err){
+
+				loginFail(); //show dialog
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.USER_LOGIN,
+					data: false
+				});
+			}
+		});
 	},
 
 	signUp( data, loginSuccess ){
-		let url = address + '/';
-		fetch(url, {
-			metod: 'POST'
-		})
-		.then( res => res.json())
-		.then( result => {
-			loginSuccess();
-			return dispatcher('noop', null);
-		})
-		.catch( err => dispatcher('noop', null));
+		$.ajax({
+			url: address + '/',
+			type: 'POST',
+			data: data,
+
+			success: function(result){
+
+				loginSuccess();
+
+				console.log('result', result);
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			},
+			error: function(err){
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
 	},
 
 	forgetPwd( data ) {
-		let url = address + '/pwd?email=' + data.email;
-		fetch(url)
-		.then( res => res.json())
-		.then( result => dispatcher('noop', null))
-		.catch( err => dispatcher('noop', null));
+		$.ajax({
+			url: address + '/pwd?email=' + data.email,
+			type: 'GET',
+
+			success: function(result){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			},
+			error: function(err){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
 	},
 
+
+
+
 	changeDisplay( page ) {
-		dispatcher('CHANGE_DISPLAY', page);
+
+		//conosle.log('page', )
+
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.CHANGE_DISPLAY,
+			data: page
+		});
 	},
 
 	loaduserList() {
-		let url = streamAaddress + '/';
-		fetch(url)
-		.then( res => res.json())
-		.then( result => dispatcher('USER_LOAD', result))
-		.catch( err => dispatcher('noop', null));
+		$.ajax({
+			url: streamAaddress + '/',
+			type: 'GET',
+
+			success: function(result){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.USER_LOAD,
+					data: result
+				});
+			},
+			error: function(err){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
 	},
 
 	follow( uid, him) {
-		let url = followAddress + '/';
-		fetch(url)
-		.then( res => res.json())
-		.then( result => dispatcher('USER_FOLLOW', result))
-		.catch( err => dispatcher('noop', null));
+		$.ajax({
+			url: followAddress + '/',
+			type: 'POST',
+			data: { uid, him },
+			success: function(result){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.USER_FOLLOW,
+					data: him
+				});
+			},
+			error: function(err){
+
+				AppDispatcher.handleViewAction({
+					actionType: AppConstants.noop,
+					data: null
+				});
+			}
+		});
 	},
 
 	unfollow( uid, him) {
@@ -72,12 +151,14 @@ let AppActions_User = {
 			type: 'DELETE',
 			data: { uid, him },
 			success: function(result){
+
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.USER_UNFOLLOW,
 					data: him
 				});
 			},
 			error: function(err){
+
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.noop,
 					data: null
