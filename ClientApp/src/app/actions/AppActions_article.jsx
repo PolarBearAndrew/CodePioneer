@@ -1,29 +1,21 @@
 let AppDispatcher = require('../dispatcher/AppDispatcher');
 let AppConstants = require('../constants/AppConstants');
 
-let address = 'http://localhost:8080/api/article'
+let address = 'http://localhost:8080/api/article';
+
+let dispatcher = function(type, data){
+	AppDispatcher.handleViewAction({
+		actionType: AppConstants[type],
+		data: data
+	});
+};
 
 let AppActions_Articles = {
 	load(){
-		$.ajax({
-			url: address + '/news',
-			type: 'GET',
-
-			success: function(result){
-
-				AppDispatcher.handleViewAction({
-					actionType: AppConstants.ARTICLE_LOAD,
-					data: result
-				});
-			},
-			error: function(err){
-
-				AppDispatcher.handleViewAction({
-					actionType: AppConstants.noop,
-					data: null
-				});
-			}
-		});
+		fetch(address + '/news')
+			.then( response => response.json())
+			.then( result => dispatcher( ARTICLE_LOAD, result) )
+			.catch( err => dispatcher( noop, null) );
 	},
 
 	loadmore( finalIndex, lastestTime ){
