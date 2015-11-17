@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fetch Test</title>
+
+  <style>
+    body{
+      padding: 24px;
+      background-color: #d7d7d7;
+    }
+  </style>
+</head>
+<body>
+  <div id="show"></div>
+</body>
+
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script>
+    $(document).ready(function(){
+
+      var url = 'http://localhost:8080/api/article/news';
+
+      function appendData(data){
+        var tmp = '';
+        data.forEach(function(val){
+          tmp += val.title + '<br/>';
+        });
+        $('div#show').append(tmp);
+      }
+
+      // ajax demo
+      // $.ajax({
+      //   methon: 'POST',
+      //   url: url,
+      //   success: function(data){
+      //     console.log('success', data);
+      //     return appendData(data);
+      //   },
+      //   error: function(err){
+      //     console.log('err', err);
+      //   }
+      // });
+
+      fetch(url).then(function(response){
+        return response.json();
+      }).then(function(data){
+        return appendData(data);
+      }).catch(function(err){
+        console.log ('err', err);
+      });
+
+
+
+    });
+  </script>
+
+</html>
