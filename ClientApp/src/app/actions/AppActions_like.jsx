@@ -3,54 +3,35 @@ let AppConstants = require('../constants/AppConstants');
 
 let address = 'http://localhost:8080/api/like';
 
+let dispatcher = function(type, data){
+	AppDispatcher.handleViewAction({
+		actionType: AppConstants[type],
+		data: data
+	});
+};
+
 let AppActions_Like = {
 
 	like( uid, aid){
-
-		$.ajax({
-			url: address + '/',
-			type: 'POST',
-			data: { uid, aid },
-
-			success: function(result){
-
-				AppDispatcher.handleViewAction({
-					actionType: AppConstants.LIKE_ADD,
-					data: result
-				});
-			},
-			error: function(err){
-
-				AppDispatcher.handleViewAction({
-					actionType: AppConstants.noop,
-					data: null
-				});
-			}
-		});
+		let url = address + '/';
+		fetch(url, {
+			method: 'POST',
+			body: { uid, aid },
+		})
+		.then( res => res.json())
+		.then( result => dispatcher('LIKE_ADD', result))
+		.catch( err => dispatcher('noop', null));
 	},
 
 	unlike( uid, aid){
-
-		$.ajax({
-			url: address + '/',
-			type: 'DELETE',
-			data: { uid, aid },
-
-			success: function(result){
-
-				AppDispatcher.handleViewAction({
-					actionType: AppConstants.LIKE_DELETE,
-					data: aid
-				});
-			},
-			error: function(err){
-
-				AppDispatcher.handleViewAction({
-					actionType: AppConstants.noop,
-					data: null
-				});
-			}
-		});
+		let url = address + '/';
+		fetch(url, {
+			method: 'DELETE',
+			body: { uid, aid },
+		})
+		.then( res => res.json())
+		.then( result => dispatcher('LIKE_DELETE', result))
+		.catch( err => dispatcher('noop', null));
 	},
 };
 
