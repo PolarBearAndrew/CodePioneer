@@ -72,14 +72,12 @@ let AppActions_User = {
 			type: 'DELETE',
 			data: { uid, him },
 			success: function(result){
-
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.USER_UNFOLLOW,
 					data: him
 				});
 			},
 			error: function(err){
-
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.noop,
 					data: null
