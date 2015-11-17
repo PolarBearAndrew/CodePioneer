@@ -14,8 +14,8 @@ let AppActions_Articles = {
 	load(){
 		fetch(address + '/news')
 			.then( response => response.json())
-			.then( result => dispatcher( ARTICLE_LOAD, result) )
-			.catch( err => dispatcher( noop, null) );
+			.then( result => dispatcher('ARTICLE_LOAD', result) )
+			.catch( err => dispatcher('noop', null) );
 	},
 
 	loadmore( finalIndex, lastestTime ){
