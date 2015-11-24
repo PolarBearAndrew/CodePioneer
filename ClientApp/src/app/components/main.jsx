@@ -141,6 +141,7 @@ let Main = React.createClass({
                                                     setting={ displayPage.Setting }
                                                     list={ list }
                                                     helike = { this.state.helike }
+																										display = { this.state.displayContainer }
                                                     filterData={ this.state.filterData } /> : null }
 	    	</div>
 	    );

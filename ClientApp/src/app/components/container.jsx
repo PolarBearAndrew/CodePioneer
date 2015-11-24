@@ -59,11 +59,8 @@ let container = React.createClass({
             paddingTop:'70px'
 	    };
 
-        let icon = () => {
-            return <Avatar src="images/panda.png"/> ;
-        }();;;;
-
         //left nav components
+        let icon = () => { return <Avatar src="images/panda.png"/>; }();
         let setting = () => { return <div className="appear">Setting</div>; }();
         let logout = () => { return <div className="appear">Logout</div>; }();
         let search = () => { return <TextField hintText="Search" fullWidth={true}/>; }();
@@ -136,12 +133,8 @@ let container = React.createClass({
                                                 </List>
                                             </IconMenu>
                                         </div>} />
-          
-                <p style={allTitle} className="title">News</p>
-                <p className="followTitle">Follow</p>
-                <p style={allTitle} className="title">Library</p>
-                <p style={allTitle} className="title">Pioneer Library</p>
 
+                <p style={allTitle} className="title">{ this.props.display }</p>
                 <LeftNav docked={false}
                          menuItems={menuItems}
                          onChange={this._navClick}
@@ -159,18 +152,23 @@ let container = React.createClass({
 	    );
 	},
 
-    _leftmenu(){
-        this.refs.leftNav.toggle();
-    },
+  _leftmenu(){
+      this.refs.leftNav.toggle();
+  },
 
-    _navClick( e, selectedIndex, menuItem){
-        //console.log('nav click',e, selectedIndex, menuItem);
-        actionsUsers.changeDisplay(menuItem.route);
-    },
+  _navClick( e, selectedIndex, menuItem){
+      //console.log('nav click',e, selectedIndex, menuItem);
+      actionsUsers.changeDisplay(menuItem.route);
+  },
 
-    _setting(){
-        actionsUsers.changeDisplay('Setting');
-    }
+  _setting(){
+      actionsUsers.changeDisplay('Setting');
+  }
 });
 
 module.exports = container;
+
+
+	// <p className="followTitle">Follow</p>
+	// <p style={allTitle} className="title">Library</p>
+	// <p style={allTitle} className="title">Pioneer Library</p>

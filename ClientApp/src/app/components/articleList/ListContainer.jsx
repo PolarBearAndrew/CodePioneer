@@ -65,7 +65,7 @@ let ListContainer = React.createClass({
 			accent1Color: Colors.lime600
 		});
 	},
-    
+
 	render() {
 
         debug('[props]', this.props);
@@ -95,13 +95,13 @@ let ListContainer = React.createClass({
             display:'flex',
             flexDirection:'row',
         };
-        
+
 
         let textEnd={
             width:'80px',
             height:'40px',
             textalign:'center',
-        }
+        };
 
 //        1.每篇內容title
 //         <p style={allTitle} className="title">News</p>
@@ -111,13 +111,13 @@ let ListContainer = React.createClass({
 
 //        2.loading的圖
 //        <CircularProgress mode="indeterminate" size={0.5}/>
-        
+
 	    return (
             <div>
     	    	<Paper zDepth={2} id="listContainer">
     		        { articleList }
     		    </Paper>
-                <img src="../../../www/images/end.png" style={textEnd}/>
+                <img src="./images/end.png" style={textEnd}/>
             </div>
 	    );
 	},
