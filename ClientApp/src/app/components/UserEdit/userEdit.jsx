@@ -29,27 +29,27 @@ let userEdit = React.createClass({
 			accent1Color: Colors.lime600
 		});
 	},
-    
+
     getInitialState() {
     return {
         selectValue: undefined,
-           }
+			};
     },
 	render() {
-            
+
         let settingTitle = {
             margin:'0px',
             display: 'block',
             marginRight:'10px',
             marginBottom:'30px'
         };
-        
+
          let image = {
              margin:'0px',
              padding:'0px',
              marginTop:'-25px',
          };
-        
+
          let styles = {
              exampleImageInput: {
                 cursor: 'pointer',
@@ -62,40 +62,40 @@ let userEdit = React.createClass({
                 opacity: '0'
                 },
          };
-        
+
          let country = [
                { payload: '1', text: 'Taiwan' },
                { payload: '2', text: 'Japan' },
                { payload: '3', text: 'Korea ' },
                { payload: '4', text: 'America' },
          ];
-        
+
 //          用來判斷rwd的另一種方法
         let screenWidth = document.body.scrollWidth;
         let ctrl = true;
         if(screenWidth <= 768 ){
             ctrl = false;
         };
-        
+
         return (
             <div className="editAll">
                 <p style={settingTitle} className="SettingTitle">Setting</p>
                 <div className="editUp">
                         <Avatar src="images/default.png"  size={100}/>
-                        <IconButton style={image} iconClassName="material-icons" tooltipPosition="bottom-center" 
+                        <IconButton style={image} iconClassName="material-icons" tooltipPosition="bottom-center"
                             tooltip="Image Upload" >file_upload
                             <input type="file" id="imageButton" style={styles.exampleImageInput}/>
                         </IconButton>
-                    
+
                     <br/><br/>
-            
+
                     <div className="editNC">
                         <TextField
                             id="name"
                             hintText="Name" />
-            
+
                         <br/><br/>
-            
+
                         <SelectField
                           value={this.state.selectValue}
                           onChange={this._handleSelectValueChange.bind(null, 'selectValue')}
@@ -105,15 +105,15 @@ let userEdit = React.createClass({
                 </div>
                 <div className="editDown">
                         <br/>
-                                 
+
                         <TextField
                             id="skill"
                             hintText="Skill"
                             multiLine={true}
                             fullWidth={ctrl}/>
-                                 
+
                         <br/><br/>
-                                 
+
                         <TextField
                             id="introduction"
                             hintText="Introduction"
@@ -123,7 +123,7 @@ let userEdit = React.createClass({
             </div>
 	    );
 	},
-        
+
   _handleSelectValueChange(name, e) {
     let change = {};
     change[name] = e.target.value;
