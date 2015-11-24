@@ -77,11 +77,14 @@ let userEdit = React.createClass({
             ctrl = false;
         };
 
+				let user = this.props.user;
+
+				console.log('user', this.props.user);
+
         return (
             <div className="editAll">
-                <p style={settingTitle} className="SettingTitle">Setting</p>
                 <div className="editUp">
-                        <Avatar src="images/default.png"  size={100}/>
+                        <Avatar src={ user.imgUrl }  size={100}/>
                         <IconButton style={image} iconClassName="material-icons" tooltipPosition="bottom-center"
                             tooltip="Image Upload" >file_upload
                             <input type="file" id="imageButton" style={styles.exampleImageInput}/>
@@ -92,14 +95,14 @@ let userEdit = React.createClass({
                     <div className="editNC">
                         <TextField
                             id="name"
-                            hintText="Name" />
+                            hintText="Name"
+														defaultValue={ user.name || 'AndrewChen'} />
 
                         <br/><br/>
 
                         <SelectField
-                          value={this.state.selectValue}
+                          valueMember={1}
                           onChange={this._handleSelectValueChange.bind(null, 'selectValue')}
-                          hintText="Country"
                           menuItems={country} />
                     </div>
                 </div>
@@ -110,6 +113,7 @@ let userEdit = React.createClass({
                             id="skill"
                             hintText="Skill"
                             multiLine={true}
+														defaultValue='JavaScript, TDD'
                             fullWidth={ctrl}/>
 
                         <br/><br/>
@@ -117,6 +121,7 @@ let userEdit = React.createClass({
                         <TextField
                             id="introduction"
                             hintText="Introduction"
+														defaultValue='Hi, my name is Andrew...'
                             multiLine={true}
                             fullWidth={ctrl}/>
                 </div>

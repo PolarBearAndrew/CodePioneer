@@ -106,7 +106,7 @@ let container = React.createClass({
 
         console.log('this.props.setting', this.props.setting)
 
-        //<UserEdit />
+        //
 //                <ArticleList user={this.props.user}
 //                             list={this.props.list}
 //                             filter={actionsArticle.filter} />
@@ -142,7 +142,8 @@ let container = React.createClass({
 
                 { this.props.setting ? <UserEdit user={this.props.user} /> : null }
 
-                { this.props.list ? <ArticleList user={this.props.user}
+                { this.props.list && ! this.props.setting ?
+																		<ArticleList user={this.props.user}
                                                  list={this.props.list}
                                                  filter={actionsArticle.filter} /> : <UserList user={this.props.user}
                                                                                                filter={actionsArticle.filter}

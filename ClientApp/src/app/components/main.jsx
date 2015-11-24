@@ -4,6 +4,7 @@ let React = require('react');
 //components
 let Login = require('./login/login.jsx');
 let Container = require('./container.jsx');
+let UserEdit = require('./UserEdit/userEdit.jsx');
 
 //flux - store
 let MainStore = require('../stores/MainStore.js');
@@ -54,8 +55,10 @@ let Main = React.createClass({
 
         displayPage[this.state.displayPage] = true;
 
-        if(this.state.displayPage === 'Setting'){
-            displayPage.Container = true;
+        if(this.state.displayContainer == 'Setting'){
+					// console.log('HI setting');
+          displayPage.Container = true;
+					displayPage.Setting = true;
         }
 
 
@@ -129,6 +132,7 @@ let Main = React.createClass({
                 list.isMoreData = false;
                 list.loadmore = null;
                 break;
+
         }
 
 
