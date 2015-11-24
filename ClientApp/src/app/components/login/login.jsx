@@ -88,7 +88,7 @@ let loginApp = React.createClass({
 	    return (
             <div className="loginAll">
                 <div className="allLoginTitle">
-                    <img src="../../../www/images/panda.png" className="loginLogo"/>
+                    <img src="./images/panda.png" className="loginLogo"/>
                     <p className="loginTitle">CodePioneer</p>
                 </div>
                 <div className="loginTab" style={containerStyle}>
@@ -203,7 +203,7 @@ let loginApp = React.createClass({
             email: $('#signUpEmail').val(),
             pwd: $('#signUpPwd').val(),
             name: $('#signUpName').val(),
-        }
+        };
         let signupSuccess = () => {
             this.refs.singUpSuccessSnackbar.show();
             this.refs.SignUpDialog.dismiss();
