@@ -56,7 +56,7 @@ let Main = React.createClass({
         displayPage[this.state.displayPage] = true;
 
         if(this.state.displayContainer == 'Setting'){
-					// console.log('HI setting');
+					this.state.userList = null;
           displayPage.Container = true;
 					displayPage.Setting = true;
         }

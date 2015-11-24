@@ -74,7 +74,7 @@ let container = React.createClass({
             { route: 'Follow', text: 'Follow' },
             { route: 'Library', text: 'Library' },
             { route: 'Pioneer', text: 'Pioneer Library' },
-            { route: 'setting', text: setting },
+            { route: 'Setting', text: setting },
             { route: 'logout', text: logout },
             { text: '', disabled: true },
             { text: '', disabled: true },
