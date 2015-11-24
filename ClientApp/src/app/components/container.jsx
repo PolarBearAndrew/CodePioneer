@@ -103,6 +103,29 @@ let container = React.createClass({
             display:'flex',
             flexDirection:'row',
         };
+														
+				let followTitle = {
+						fontSize: '40px',
+						letterSpacing: '4px',
+						margin: '0px',
+						padding: '0px',
+						marginBottom: '7px',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						fontfamily: 'Ubuntu, serif',
+				};
+														
+				if(this.props.display == 'ArticleList'){
+					this.props.display = 'News';
+				}else if(this.props.display == 'Follow'){
+					allTitle = followTitle;
+				}else if(this.props.display == 'setting'){
+					this.props.display = 'Setting';
+					allTitle = followTitle;
+				}else if(this.props.display == 'Pioneer'){
+					this.props.display = 'Pioneer Library';
+				}
 
         console.log('this.props.setting', this.props.setting)
 

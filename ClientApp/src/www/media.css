@@ -10,13 +10,14 @@
     .title {
         font-size: 50;
     }
-    
+}
+
+@media screen and (max-width: 600px) {
     /*login*/
     .appear {
         display: block;
     }
-    
-    .comments {
+		.comments {
         display: none;
     }
 }

@@ -37,12 +37,12 @@ let userEdit = React.createClass({
     },
 	render() {
 
-        let settingTitle = {
+        /*let settingTitle = {
             margin:'0px',
             display: 'block',
             marginRight:'10px',
             marginBottom:'30px'
-        };
+        };*/
 
          let image = {
              margin:'0px',
