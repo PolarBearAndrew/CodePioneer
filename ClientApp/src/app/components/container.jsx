@@ -94,7 +94,7 @@ let container = React.createClass({
 //            fontFamily:'Ubuntu', serif,
         };
 
-        let allTitle = {
+        /*let allTitle = {
 	    	margin: '0px',
             padding: '0px',
             fontSize:'35px',
@@ -102,10 +102,10 @@ let container = React.createClass({
             marginBottom:'7px',
             display:'flex',
             flexDirection:'row',
-        };
+        };*/
 														
 				let followTitle = {
-						fontSize: '40px',
+						fontSize: '35px',
 						letterSpacing: '4px',
 						margin: '0px',
 						padding: '0px',
@@ -116,13 +116,21 @@ let container = React.createClass({
 						fontfamily: 'Ubuntu, serif',
 				};
 														
-				if(this.props.display == 'ArticleList'){
+				/*if(this.props.display == 'ArticleList'){
 					this.props.display = 'News';
 				}else if(this.props.display == 'Follow'){
 					allTitle = followTitle;
-				}else if(this.props.display == 'setting'){
+				}else if(this.props.display == 'Setting'){
 					this.props.display = 'Setting';
 					allTitle = followTitle;
+				}else if(this.props.display == 'Pioneer'){
+					this.props.display = 'Pioneer Library';
+				}*/
+														
+				if(this.props.display == 'ArticleList'){
+					this.props.display = 'News';
+				}else if(this.props.display == 'Setting'){
+					this.props.display = 'Setting';
 				}else if(this.props.display == 'Pioneer'){
 					this.props.display = 'Pioneer Library';
 				}
@@ -157,7 +165,8 @@ let container = React.createClass({
                                             </IconMenu>
                                         </div>} />
 
-                <p style={allTitle} className="title">{ this.props.display }</p>
+                <p style={followTitle} className="title">{ this.props.display }</p>
+				
                 <LeftNav docked={false}
                          menuItems={menuItems}
                          onChange={this._navClick}

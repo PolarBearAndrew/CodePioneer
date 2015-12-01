@@ -101,11 +101,16 @@ let userItem = React.createClass({
             data : this.props.helike,
             filter: [],
         } ;
+		
+				let paperback = {
+					//新加的
+					backgroundColor: '#98ccff',
+				} ;
 
         let dialogHeigth = screen.height * 0.5 + 'px';
 
 	    return (
-	    	<Paper className="paperCard" zDepth={1} key={ this.props.key }>
+	    	<Paper style={paperback} className="paperCard" zDepth={1} key={ this.props.key }>
                     <Avatar style={avatar} size={70} src={ data.imgUrl }  onTouchTap={this._showLike}/>
                     <div style={info} className="article">
                         <p className="infoContent">{ data.name }</p>
