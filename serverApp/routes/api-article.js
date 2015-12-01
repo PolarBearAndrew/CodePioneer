@@ -59,7 +59,7 @@ router.post('/', (req, res, next) => {
 
 /*
  * [GET] 查詢文章
- * request : body.aid
+ * request : query.aid
  * respone : db result
  */
 router.get('/', (req, res, next) => {
@@ -250,7 +250,7 @@ router.get('/stream', (req, res, next) => {
 
 /*
  * [GET] 查詢喜愛文章
- * request : body.like
+ * request : query.like
  * respone : db result
  */
 router.get('/like', (req, res, next) => {
@@ -282,7 +282,7 @@ router.get('/like', (req, res, next) => {
 
 /*
  * [GET] 查詢追蹤者的喜愛文章
- * request : body.uid
+ * request : query.uid
  * respone : db result
  */
 router.get('/follow/like', (req, res, next) => {
