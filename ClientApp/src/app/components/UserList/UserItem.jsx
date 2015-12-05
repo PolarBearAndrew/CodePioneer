@@ -13,6 +13,7 @@ let Paper = mui.Paper;
 let Avatar = mui.Avatar;
 let IconButton = mui.IconButton;
 let Dialog = mui.Dialog;
+let FlatButton = mui.FlatButton;
 
 //元件
 let ListContainer = require('../articleList/ListContainer.jsx');
@@ -88,7 +89,7 @@ let userItem = React.createClass({
 
         if(data._id === this.props.user.id)
 
-            return null;           
+            return null;
         // like={actionsLike.like}
         //             unlike={actionsLike.unlike}
 
@@ -101,16 +102,11 @@ let userItem = React.createClass({
             data : this.props.helike,
             filter: [],
         } ;
-		
-				let paperback = {
-					//新加的
-					backgroundColor: '#98ccff',
-				} ;
 
         let dialogHeigth = screen.height * 0.5 + 'px';
 
 	    return (
-	    	<Paper style={paperback} className="paperCard" zDepth={1} key={ this.props.key }>
+	    	<Paper className="paperCard" zDepth={1} key={ this.props.key }>
                     <Avatar style={avatar} size={70} src={ data.imgUrl }  onTouchTap={this._showLike}/>
                     <div style={info} className="article">
                         <p className="infoContent">{ data.name }</p>
@@ -118,6 +114,13 @@ let userItem = React.createClass({
                         <p className="infoContent">{ data.lastLoginTime }</p>
                         <p className="infoContent">Skill</p>
                         <p className="infoContent">Introduction</p>
+												<FlatButton secondary={true} label="More Info ..." labelPosition="after">
+												  <FontIcon
+														style={more}
+														className="muidocs-icon-custom-github"
+														tooltip="more.."
+														onTouchTap={this._Profiles} />
+												</FlatButton>
                         <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center"
                         tooltip="more.." onTouchTap={this._Profiles}>more_horiz</IconButton>
                         <Checkbox
@@ -154,7 +157,7 @@ let userItem = React.createClass({
         else
             this.props.unfollow(this.props.user.id, this.props.data._id);
     },
-    
+
     _Profiles(){
    	    this.refs.ProfilesDialog.show();
 
