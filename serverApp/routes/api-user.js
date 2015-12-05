@@ -208,7 +208,7 @@ router.get('/pwd', function(req, res, next){
     debug('[GET] 取回密碼 req.body ->', req.body );
 
     //check
-    let miss = check( req.body, ['email'] );
+    let miss = check( req.query, ['email'] );
     if(!miss.check){
         debug('[DELETE] 刪除使用者 miss data ->', miss.missData);
         return next(err);
@@ -226,7 +226,7 @@ router.get('/pwd', function(req, res, next){
                 //send mail
                 let mailer = new postMan();
                 mailer.sendTo( result.email, result.pwd );
-
+                console.log(result.email, result.pwd);
                 res.json({ sendMail : true });
                 return;
 
