@@ -2,8 +2,8 @@
 let React = require('react');
 
 //material 初始化(套件引入)
-let mui = require('material-ui');
-let Colors = mui.Styles.Colors;
+let mui          = require('material-ui');
+let Colors       = mui.Styles.Colors;
 let ThemeManager = new mui.Styles.ThemeManager();
 
 //mui元件
@@ -16,7 +16,7 @@ let UserItem = require('./UserItem.jsx');
 let debug = require('debug')('app:user container');
 
 //actions
-let actionFollow = require('../../actions/AppActions_User.jsx');
+let actionFollow  = require('../../actions/AppActions_User.jsx');
 let actionArticle = require('../../actions/AppActions_article.jsx');
 
 let userContainer = React.createClass({
@@ -41,31 +41,31 @@ let userContainer = React.createClass({
 
 		debug('[props]', this.props);
 
-        let paperBg = {
-            display:'flex',
-            webkitFlexWrap: 'wrap',
-            flexWrap: 'wrap',
-            justifyContent:'space-around',
-        };
+		let paperBg = {
+			display:'flex',
+			webkitFlexWrap: 'wrap',
+			flexWrap: 'wrap',
+			justifyContent:'space-around',
+		};
 
-        let nameList = this.props.userList || [];
-        // let nameList = ['111', '222', '333'];
+		let nameList = this.props.userList || [];
+		// let nameList = ['111', '222', '333'];
 
-        let userItems = nameList.map( (value, index) => {
-            return <UserItem data={ value }
-            				 key={ index }
-            				 user={this.props.user}
-            				 follow={ actionFollow.follow }
-            				 unfollow={ actionFollow.unfollow }
-                             helike={this.props.helike}
-            				 loadhelike={ actionArticle.loadhelike } /> ;
-        })
+		let userItems = nameList.map( (value, index) => {
+			return <UserItem data={ value }
+							 key={ index }
+							 user={this.props.user}
+							 follow={ actionFollow.follow }
+							 unfollow={ actionFollow.unfollow }
+											 helike={this.props.helike}
+							 loadhelike={ actionArticle.loadhelike } /> ;
+		})
 
-	    return (
-                <Paper style={paperBg} zDepth={2}>
-                    { userItems }
-                </Paper>
-	    );
+		return (
+			<Paper style={paperBg} zDepth={2}>
+				{ userItems }
+			</Paper>
+		);
 	},
 });
 

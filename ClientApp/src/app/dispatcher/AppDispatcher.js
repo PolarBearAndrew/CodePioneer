@@ -1,4 +1,4 @@
-﻿var AppConstants = require('../constants/AppConstants');
+var AppConstants = require('../constants/AppConstants');
 var Dispatcher = require('flux').Dispatcher;
 
 

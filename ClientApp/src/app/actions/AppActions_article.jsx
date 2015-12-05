@@ -1,5 +1,5 @@
+let AppConstants  = require('../constants/AppConstants');
 let AppDispatcher = require('../dispatcher/AppDispatcher');
-let AppConstants = require('../constants/AppConstants');
 
 let address = 'http://localhost:8080/api/article';
 
@@ -24,16 +24,13 @@ let AppActions_Articles = {
 			type: 'GET',
 
 			success: function(result){
-
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.ARTICLE_LOADMORE,
 					data: result
 				});
 			},
 			error: function(err){
-
 				console.log('err', err);
-
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.noop,
 					data: null
@@ -55,9 +52,7 @@ let AppActions_Articles = {
 				});
 			},
 			error: function(err){
-
 				console.log('err', err);
-
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.noop,
 					data: null
@@ -68,23 +63,18 @@ let AppActions_Articles = {
 
 	loadhelike( uid ){
 		console.log('load like', uid);
-
 		$.ajax({
 			url: 'http://localhost:8080/api/like/',
 			type: 'GET',
 			data: { uid },
-
 			success: function(result){
-
-//				console.log('success(result)', result);
-
+				//console.log('success(result)', result);
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.HELIKE_LOAD,
 					data: result
 				});
 			},
 			error: function(err){
-
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.noop,
 					data: null
@@ -99,16 +89,13 @@ let AppActions_Articles = {
 			type: 'GET',
 			data: { uid },
 			success: function(result){
-
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.ARTICLE_LOADTHEYLIKE,
 					data: result
 				});
 			},
 			error: function(err){
-
 				console.log('err', err);
-
 				AppDispatcher.handleViewAction({
 					actionType: AppConstants.noop,
 					data: null

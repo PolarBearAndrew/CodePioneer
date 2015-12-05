@@ -2,20 +2,20 @@
 let React = require('react');
 
 //components
-let Login = require('./login/login.jsx');
+let Login     = require('./login/login.jsx');
+let UserEdit  = require('./UserEdit/userEdit.jsx');
 let Container = require('./container.jsx');
-let UserEdit = require('./UserEdit/userEdit.jsx');
 
 //flux - store
-let MainStore = require('../stores/MainStore.js');
+let MainStore    = require('../stores/MainStore.js');
 let ArticleStore = require('../stores/ArticleStore.js');
 
 //flux - contant
 let AppConstants = require('../constants/AppConstants.js');
 
 //flux - actions
-let actionsLike = require('../actions/AppActions_like.jsx');
-let actionsUser = require('../actions/AppActions_User.jsx');
+let actionsLike    = require('../actions/AppActions_like.jsx');
+let actionsUser    = require('../actions/AppActions_User.jsx');
 let actionsArticle = require('../actions/AppActions_article.jsx');
 
 //debug
@@ -26,14 +26,12 @@ let debug = require('debug')('app:main');
 let Main = React.createClass({
 
 	getInitialState(){
-
-        localStorage.debug = '*';
-
+		localStorage.debug = '*';
 		return this.getTruth();
-    },
+	},
 
 	componentWillMount() {
-        MainStore.addListener( AppConstants.CHANGE_EVENT, this._onChange );
+		MainStore.addListener( AppConstants.CHANGE_EVENT, this._onChange );
 		ArticleStore.addListener( AppConstants.CHANGE_EVENT, this._onChange );
 	},
 
@@ -43,139 +41,129 @@ let Main = React.createClass({
 
 	render() {
 
-        debug('[state]', this.state);
+		debug('[state]', this.state);
 
-        let displayPage = {
-            Login: false,
-            Container: false,
-            Setting: false,
-        };
+		let displayPage = {
+			Login: false,
+			Container: false,
+			Setting: false,
+		};
 
-        // console.log('this.state.displayPage',this.state.displayPage);
+		// console.log('this.state.displayPage',this.state.displayPage);
 
-        displayPage[this.state.displayPage] = true;
+		displayPage[this.state.displayPage] = true;
 
-        if(this.state.displayContainer == 'Setting'){
-					this.state.userList = null;
-          displayPage.Container = true;
-					displayPage.Setting = true;
-        }
+		if(this.state.displayContainer == 'Setting'){
+			this.state.userList = null;
+			displayPage.Container = true;
+			displayPage.Setting = true;
+		}
 
+		let list = {
+			data: null,         //data
+			isMoreData: null,   //ctrl
+			filter: null,       //filter ctrl
+			loadmore: null,     //func
+		};
 
-        let list = {
-            data: null,         //data
-            isMoreData: null,   //ctrl
-            filter: null,       //filter ctrl
-            loadmore: null,     //func
-        };
+		switch (this.state.displayContainer) {
+			case 'ArticleList':
+				list.data = this.state.articles;
+				list.filter = this.state.filterData;
+				list.isMoreData = this.state.isMoreData;
+				list.loadmore = actionsArticle.loadmore;
+				break;
 
-        switch (this.state.displayContainer) {
+			case 'Library':
+				let likeAry = this.state.user.like;
+				let likedArticles = this.state.likedArticles;
 
-            case 'ArticleList':
-                list.data = this.state.articles;
-                list.filter = this.state.filterData;
-                list.isMoreData = this.state.isMoreData;
-                list.loadmore = actionsArticle.loadmore;
-                break;
+				//先刪除多餘的
+				likedArticles = likedArticles.filter( ( value ) => {
+						return likeAry.indexOf( value._id ) != -1;
+				});
 
-            case 'Library':
-                let likeAry = this.state.user.like;
-                let likedArticles = this.state.likedArticles;
+				//有少的話就重新載入
+				for (var i = likeAry.length - 1; i >= 0; i--) {
+					let ctrl = false;
+					for (var listIndex = likedArticles.length - 1; listIndex >= 0; listIndex--) {
 
-                //先刪除多餘的
-                likedArticles = likedArticles.filter( ( value ) => {
-                    return likeAry.indexOf( value._id ) != -1;
-                });
+							if( likedArticles[listIndex]._id == likeAry[i] ){
+									ctrl = true;
+									break;
+							}
+					}
+					if( ctrl === false ){
+							console.log('load');
+							actionsArticle.loadLike(likeAry.join(','));
+							break;
+					}
+				}
 
-                //有少的話就重新載入
-                for (var i = likeAry.length - 1; i >= 0; i--) {
+				//丟入資料
+				list.data = likedArticles;
+				list.filter = this.state.filterData;
+				list.isMoreData = false;
+				list.loadmore = null;
+				break;
 
-                    let ctrl = false;
+			case 'Follow':
+				list = false;
+				if( this.state.userList === null )
+						actionsUser.loaduserList();
+				break;
 
-                    for (var listIndex = likedArticles.length - 1; listIndex >= 0; listIndex--) {
+			case 'Pioneer':
+				//這有個小瑕疵 資料只會load一次
+				if(this.state.theyLiked.length === 0){
+						//重新載入
+						actionsArticle.loadTheyLiked(this.state.user.id);
+						break;
+				}
+				list.data = this.state.theyLiked;
+				list.filter = this.state.filterData;
+				list.isMoreData = false;
+				list.loadmore = null;
+				break;
+		}
 
-                        if( likedArticles[listIndex]._id == likeAry[i] ){
-                            ctrl = true;
-                            break;
-                        }
-                    }
-
-                    if( ctrl === false ){
-                        console.log('load');
-                        actionsArticle.loadLike(likeAry.join(','));
-                        break;
-                    }
-                }
-
-                //丟入資料
-                list.data = likedArticles;
-                list.filter = this.state.filterData;
-                list.isMoreData = false;
-                list.loadmore = null;
-                break;
-
-            case 'Follow':
-                list = false;
-                if( this.state.userList === null )
-                    actionsUser.loaduserList();
-                break;
-
-            case 'Pioneer':
-                //這有個小瑕疵 資料只會load一次
-                if(this.state.theyLiked.length === 0){
-                    //重新載入
-                    actionsArticle.loadTheyLiked(this.state.user.id);
-                    break;
-                }
-                list.data = this.state.theyLiked;
-                list.filter = this.state.filterData;
-                list.isMoreData = false;
-                list.loadmore = null;
-                break;
-
-        }
-
-
-
-	    return (
-	    	<div id='wrapper' >
-	    		{ displayPage.Login ? <Login /> : null }
-	    		{ displayPage.Container ? <Container user={ this.state.user }
-                                                    userList={ this.state.userList }
-                                                    setting={ displayPage.Setting }
-                                                    list={ list }
-                                                    helike = { this.state.helike }
-																										display = { this.state.displayContainer }
-                                                    filterData={ this.state.filterData } /> : null }
-	    	</div>
-	    );
+		return (
+			<div id='wrapper' >
+				{ displayPage.Login ? <Login /> : null }
+				{ displayPage.Container ? <Container user={ this.state.user }
+																		userList={ this.state.userList }
+																		setting={ displayPage.Setting }
+																		list={ list }
+																		helike = { this.state.helike }
+																		display = { this.state.displayContainer }
+																		filterData={ this.state.filterData } /> : null }
+			</div>
+		);
 	},
 
 	_onChange() {
-        this.setState( this.getTruth() );
+		this.setState( this.getTruth() );
     },
 
-    getTruth() {
+	getTruth() {
+		return {
+			//main store
+			user: MainStore.getUser(),
+			userList: MainStore.getUserList(),
+			displayPage: MainStore.getDisplayPage(),
+			displayContainer: MainStore.getDisplayContainer(),
 
-        return {
-        	//main store
-        	user: MainStore.getUser(),
-            userList: MainStore.getUserList(),
-            displayPage: MainStore.getDisplayPage(),
-            displayContainer: MainStore.getDisplayContainer(),
+			//article store
+			helike: ArticleStore.gethelike(),
+			articles: ArticleStore.getArticleList(),
+			likedArticles: ArticleStore.getLikedArticleList(),
+			theyLiked: ArticleStore.getTheyLiked(),
 
-            //article store
-            helike: ArticleStore.gethelike(),
-            articles: ArticleStore.getArticleList(),
-            likedArticles: ArticleStore.getLikedArticleList(),
-            theyLiked: ArticleStore.getTheyLiked(),
-
-            //article ctrl
-            filterData: ArticleStore.getFilter(),
-        	isMoreData: ArticleStore.getIsMoredata(),
-        };
-    }
-
+			//article ctrl
+			filterData: ArticleStore.getFilter(),
+			isMoreData: ArticleStore.getIsMoredata(),
+		};
+	}
 });
 
 module.exports = Main;
