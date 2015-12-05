@@ -114,12 +114,15 @@ let userItem = React.createClass({
                         <p className="infoContent">{ data.lastLoginTime }</p>
                         <p className="infoContent">Skill</p>
                         <p className="infoContent">Introduction</p>
-												<FlatButton secondary={true} label="More Info ..." labelPosition="after">
+												<FlatButton
+													secondary={true}
+													label="More Info ..."
+													onTouchTap={this._Profiles}
+													labelPosition="after">
 												  <FontIcon
 														style={more}
 														className="muidocs-icon-custom-github"
-														tooltip="more.."
-														onTouchTap={this._Profiles} />
+														tooltip="more.." />
 												</FlatButton>
                         <Checkbox
                                 style={checkbox}
@@ -157,8 +160,8 @@ let userItem = React.createClass({
     },
 
     _Profiles(){
+				console.log('test');
    	    this.refs.ProfilesDialog.show();
-
         let id = this.props.data._id;
         this.props.loadhelike(id);
     },
