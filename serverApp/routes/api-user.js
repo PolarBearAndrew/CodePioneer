@@ -205,7 +205,7 @@ router.post('/login', (req, res, next) => {
  */
 router.get('/pwd', function(req, res, next){
 
-    debug('[GET] 取回密碼 req.body ->', req.body );
+    debug('[GET] 取回密碼 req.query ->', req.query );
 
     //check
     let miss = check( req.query, ['email'] );
@@ -213,6 +213,7 @@ router.get('/pwd', function(req, res, next){
         debug('[DELETE] 刪除使用者 miss data ->', miss.missData);
         return next(err);
     }
+    console.log('!!! -- test -- !!!');
 
     //db operation
     User.findOne()
@@ -226,11 +227,12 @@ router.get('/pwd', function(req, res, next){
                 //send mail
                 let mailer = new postMan();
                 mailer.sendTo( result.email, result.pwd );
-                console.log(result.email, result.pwd);
+                // console.log(result.email, result.pwd)
                 res.json({ sendMail : true });
                 return;
 
             }else{
+              console.log('no user exist');
                 res.json({ sendMail : false });
                 return;
             }

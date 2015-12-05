@@ -151,11 +151,12 @@ app.listen(port, () => {
                 follow: [],
                 imgUrl: 'images/hsuan.png'
             }, {
-                name: '蔡鄭欽',
-                email: '999',
-                pwd: '999',
+                name: 'AndrewChen',
+                email: 'chenpoanandrew@gmail.com',
+                pwd: 'DFK4L3JW',
                 like: [],
                 follow: [],
+                imgUrl: 'images/andrew.png'
             }, ];
 
             //set articles to arr
@@ -186,8 +187,6 @@ app.listen(port, () => {
         .catch((err) => {
             debug('[POST] 新增測試使用者 fail ->', err);
         });
-
-
 
     //crawl
     //==========================================

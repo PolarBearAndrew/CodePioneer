@@ -29,8 +29,12 @@ function postMan (){
 
       console.log('myEmail :', address);
 
+      if(pwd){
+         data.title =  '取回您的密碼';
+      }
+
       this.mailOptions.to = address;
-      this.mailOptions.html = this.mailOptions.html.replace(/@title/, pwd ? '取回您的密碼' : data.title );
+      this.mailOptions.html = this.mailOptions.html.replace(/@title/, data.title );
       this.mailOptions.html = this.mailOptions.html.replace(/@content/, pwd || data.content );
 
       this.transporter.sendMail(this.mailOptions, function(error, info) {
