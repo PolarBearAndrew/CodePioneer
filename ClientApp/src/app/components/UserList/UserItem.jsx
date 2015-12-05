@@ -121,8 +121,6 @@ let userItem = React.createClass({
 														tooltip="more.."
 														onTouchTap={this._Profiles} />
 												</FlatButton>
-                        <IconButton style={more} iconClassName="material-icons" tooltipPosition="bottom-center"
-                        tooltip="more.." onTouchTap={this._Profiles}>more_horiz</IconButton>
                         <Checkbox
                                 style={checkbox}
                                 onCheck={this._like}
