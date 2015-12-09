@@ -145,7 +145,7 @@ app.listen(port, () => {
                 imgUrl: 'images/doro.png'
             }, {
                 name: '陳思璇',
-                email: '999',
+                email: 'keami326@gmail.com',
                 pwd: '999',
                 like: [],
                 follow: [],
