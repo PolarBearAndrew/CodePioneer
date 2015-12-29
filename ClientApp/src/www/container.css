@@ -1,5 +1,3 @@
-/*Raleway Montserrat*/
-
 /*font*/
 .title {
     font-family: 'Ubuntu', serif;
@@ -13,57 +11,3 @@ a {
     text-decoration: none;
     color: #3e3e3e;
 }
-
-/*
-userList
-.paperCard {
-    margin-Top: 10px;
-    margin-Left: 10px;
-    margin-right: 10px;
-    margin-Bottom: 10px;
-    width: 320px;
-    height: auto;
-}
-
-.paperCard:last-child {
-    margin-right: auto;
-}
-
-.infoContent {
-    margin: 0px;
-    padding: 0px;
-    margin-Left: 25px;
-    margin-Top: 8px;
-    font-Size: 20px;
-}
-
-userEdit
-.editAll {
-    margin: 0px;
-    padding: 0px;
-    display: 'flex';
-    align-Items: 'center';
-    justify-Content: 'center';
-    flex-Direction: 'column';
-    margin-Top: 50px;
-}
-
-.SettingTitle {
-    font-size: 40px;
-}
-
-articleList
-
-.followTitle {
-    font-size: 50px;
-    letter-spacing: 4px;
-    margin: 0px;
-    padding: 0p;
-    margin-Left: 10px;
-    margin-Bottom: 8px;
-    display: flex;
-    align-Items: center;
-    justify-Content: center;
-    font-family: 'Ubuntu', serif;
-}
-*/

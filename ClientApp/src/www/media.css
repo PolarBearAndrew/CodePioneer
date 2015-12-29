@@ -10,7 +10,6 @@
     .title {
         font-size: 50;
     }
-	
 }
 
 @media screen and (max-width: 600px) {
@@ -29,7 +28,6 @@
     .paperCard:last-child {
         margin-right: auto;
     }
-    
     /*articleList*/
     .followTitle {
         font-Size: 35px;
@@ -39,7 +37,6 @@
         align-Items: flex-start;
         justify-Content: flex-start;
     }
-    
     /*login*/
     .loginAll {
         display: flex;
@@ -81,12 +78,6 @@
         padding-right: 15%;
         margin-top: 20px;
     }
-/*
-    .editAll {
-                margin-Top: 0px;
-                border: 2px solid green;
-    }
-*/
 }
 
 @media screen and (min-width: 1037px) {
@@ -94,7 +85,6 @@
     .paperCard:last-child {
         margin-right: auto;
     }
-    
     /*userEdit*/
     .editDown {
         padding-left: 30%;
